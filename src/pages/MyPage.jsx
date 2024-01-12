@@ -4,9 +4,38 @@ import doraImage from "../assets/dora.png";
 //상단바+메뉴바까지 같이 생각해서 마진 설정
 export const MyPage = () => {
   return (
-    <div className="grid place-items-center bg-custom-pink/50">
+    <div className="grid place-items-center relative">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920 378"
+        fill="none"
+        className="absolute top-0 left-0 z-0"
+      >
+        <path
+          d="M823.828 300.073C312.306 445.708 60.6947 349.085 -4 314.076V0H2080V74.518C2000.78 234.957 1687.5 249 1540.5 240C1266.07 211.993 1010.93 217.553 823.828 300.073Z"
+          fill="url(#paint0_linear_674_49507)"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_674_49507"
+            x1="291.412"
+            y1="154.636"
+            x2="2324.09"
+            y2="324.75"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#FF0068" />
+            <stop offset="0.508842" stopColor="#FF4D27" />
+            <stop offset="0.734375" stopColor="#FF7A01" />
+            <stop offset="1" stopColor="#FFD600" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <div className="flex justify-center items-center relative mt-[6.315rem] w-[95.4375rem] h-[24.0625rem] rounded-[1.125rem] shadow-[0_0_45px_0_rgba(0,0,0,0.2)] backdrop-sepia-74.99999237060547 bg-white/70 ">
-      <div className="absolute top-[-3.12rem] left-0 text-[1.25rem] font-bold">마이페이지</div>
+        <div className="absolute text-white top-[-3.12rem] left-0 text-[1.25rem] font-bold">
+          마이페이지
+        </div>
 
         <div className="flex flex-col items-center">
           <div className="rounded-full overflow-hidden">
@@ -21,7 +50,14 @@ export const MyPage = () => {
           </div>
         </div>
 
-        <div className="h-[18.23438rem] ml-[3.54rem] pr-[4.94rem] border-r-[1.5px] border-[#000000]/30" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div
+          className="h-[18.23438rem] ml-[3.54rem] pr-[4.94rem] border-r-[1.5px] border-[#000000]/30"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
           <div className="flex mb-[2.43rem] ">
             <div style={{ fontSize: "1.875rem", marginRight: "0.5rem" }}>
               안녕하세요,{" "}
@@ -37,7 +73,6 @@ export const MyPage = () => {
                 whiteSpace: "nowrap",
                 paddingLeft: "3.75rem",
                 fontWeight: "normal",
-                
               }}
             >
               {" "}
