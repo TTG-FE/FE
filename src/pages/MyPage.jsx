@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import doraImage from "../assets/dora.png";
 
 //상단바+메뉴바까지 같이 생각해서 마진 설정
 export const MyPage = () => {
+  const ongoingRef = useRef(null);
+  const rejectedRef = useRef(null);
+  const completedRef = useRef(null);
+
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div className="grid place-items-center relative">
       <svg
@@ -101,18 +108,34 @@ export const MyPage = () => {
           <div className="w-[9.625rem] mb-[1.25rem] pl-[0.25rem] pb-[0.88rem] border-[#000000]/30 border-b text=[1.25rem] font-bold">
             리뷰 관리
           </div>
-          <div className="text-[#000000]/70 text=[1rem] mb-[1.25rem]">
+
+          <div
+            onClick={() => scrollToSection(ongoingRef)}
+            className="text-[#000000]/70 text=[1rem] mb-[1.25rem] cursor-pointer"
+          >
+            {" "}
             나의 리뷰 현황
           </div>
-          <div className="text-[#000000]/70 text=[1rem] mb-[1.25rem]">
+          <div
+            onClick={() => scrollToSection(rejectedRef)}
+            className="text-[#000000]/70 text=[1rem] mb-[1.25rem] cursor-pointer"
+          >
+            {" "}
             탈락한 리뷰
           </div>
-          <div className="text-[#000000]/70 text=[1rem]">완료된 리뷰</div>
+          <div
+            onClick={() => scrollToSection(completedRef)}
+            className="text-[#000000]/70 text=[1rem] cursor-pointer"
+          >
+            완료된 리뷰
+          </div>
         </div>
 
         <div className="mt-[3.31rem] ml-[9.5rem]">
-          <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
-            진행중인 리뷰
+          <div ref={ongoingRef}>
+            <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+              진행중인 리뷰
+            </div>
           </div>
 
           <div className="flex items-center mb-[0.94rem]  pt-[1.06rem] pb-[1.25rem] border-[#545454] border-b w-[74.625rem] pl-[8.44rem] pr-[8.44rem]">
@@ -167,30 +190,49 @@ export const MyPage = () => {
               </div>
             </div>
           </div>
-
-          <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
-            탈락된 리뷰
+          <div ref={rejectedRef}>
+            <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
+              탈락된 리뷰
+            </div>
           </div>
           <div className="flex justify-between border-b pb-[1rem] border-[#D9D9D9]">
             <div>
-              <div className="mb-[1.44rem] text=[1.125rem]">[강북] 또먹고싶어 곱창</div>
+              <div className="mb-[1.44rem] text=[1.125rem]">
+                [강북] 또먹고싶어 곱창
+              </div>
               <div className="text=[1rem]">탈락사유: 글자수 미충족</div>
             </div>
             <div>
-              <div className="text=[1rem] mb-[1.19rem]">신청일자: 2023.11.29</div>
-              <button className="w-[9.8125rem] h-[2.4375rem] border rounded-[0.44rem] border-[#FF0069] text-[#FF0069]">다시 신청하기</button>
+              <div className="text=[1rem] mb-[1.19rem]">
+                신청일자: 2023.11.29
+              </div>
+              <button className="w-[9.8125rem] h-[2.4375rem] border rounded-[0.44rem] border-[#FF0069] text-[#FF0069]">
+                다시 신청하기
+              </button>
             </div>
           </div>
-
-          <div className="w-[74.625rem] mt-[5.82rem] mb-[1.06rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
-            완료된 리뷰
+          <div ref={completedRef}>
+            <div className="w-[74.625rem] mt-[5.82rem] mb-[1.06rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+              완료된 리뷰
+            </div>
           </div>
           <div className="w-[14.4125rem] h-[20.1875rem] mb-[9.71rem] p-[0.44rem] rounded-[0.19538rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]">
-              <div className="rounded-[0.19538rem] mb-[0.95rem] w-[13.36881rem] h-[11.23306rem] bg-[#FFEDED]">이미지</div>
-              <div  style={{ fontSize: "0.9375rem" }} className="text-[#545454] leading-[1.17238rem] mb-[0.5rem] w-[12.9375rem] h-[4.8125rem] font-bold">데이트 코스로 딱! 여의도역 5분 거리 스끼다시 맛있는 집!!</div>
-              <div style={{ fontSize: "0.62525rem" }} className="text-[#FF0069] leading-[1.17238rem]">여의도 또가횟집</div>
+            <div className="rounded-[0.19538rem] mb-[0.95rem] w-[13.36881rem] h-[11.23306rem] bg-[#FFEDED]">
+              이미지
+            </div>
+            <div
+              style={{ fontSize: "0.9375rem" }}
+              className="text-[#545454] leading-[1.17238rem] mb-[0.5rem] w-[12.9375rem] h-[4.8125rem] font-bold"
+            >
+              데이트 코스로 딱! 여의도역 5분 거리 스끼다시 맛있는 집!!
+            </div>
+            <div
+              style={{ fontSize: "0.62525rem" }}
+              className="text-[#FF0069] leading-[1.17238rem]"
+            >
+              여의도 또가횟집
+            </div>
           </div>
-
         </div>
       </div>
     </div>
