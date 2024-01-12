@@ -4,9 +4,8 @@ import doraImage from "../assets/dora.png";
 //상단바+메뉴바까지 같이 생각해서 마진 설정
 export const MyPage = () => {
   return (
-    <div className="grid place-items-center ">
-
-      <div className="flex justify-center items-center relative mt-[6.315rem] w-[95.4375rem] h-[24.0625rem] rounded-[1.125rem] shadow-[0_0_45px_0_rgba(0,0,0,0.2)] backdrop-sepia-74.99999237060547 bg-white-500/70 ">
+    <div className="grid place-items-center bg-custom-pink/50">
+      <div className="flex justify-center items-center relative mt-[6.315rem] w-[95.4375rem] h-[24.0625rem] rounded-[1.125rem] shadow-[0_0_45px_0_rgba(0,0,0,0.2)] backdrop-sepia-74.99999237060547 bg-white/70 ">
       <div className="absolute top-[-3.12rem] left-0 text-[1.25rem] font-bold">마이페이지</div>
 
         <div className="flex flex-col items-center">
