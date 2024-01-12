@@ -96,6 +96,31 @@ export const MyPage = () => {
           </div>
         </div>
       </div>
+      <div className="flex">
+        <div className="ml-[13.7rem] mt-[3.31rem] mr-[9.5rem] w-[9.625rem] h-[33.375rem] pb-[23.6875rem]">
+          <div className="w-[9.625rem] mb-[1.25rem] pl-[0.25rem] pb-[0.88rem] border-[#000000]/30 border-b text=[1.25rem] font-bold">
+            리뷰 관리
+          </div>
+          <div className="text-[#000000]/70 text=[1rem] mb-[1.25rem]">
+            나의 리뷰 현황
+          </div>
+          <div className="text-[#000000]/70 text=[1rem] mb-[1.25rem]">
+            탈락한 리뷰
+          </div>
+          <div className="text-[#000000]/70 text=[1rem]">완료된 리뷰</div>
+        </div>
+        <div className="mt-[3.31rem]">
+          <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+            진행중인 리뷰
+          </div>
+          <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+            탈락된 리뷰
+          </div>
+          <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+            완료된 리뷰
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
