@@ -97,7 +97,7 @@ export const MyPage = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="ml-[13.7rem] mt-[3.31rem] mr-[9.5rem] w-[9.625rem] h-[33.375rem] pb-[23.6875rem]">
+        <div className="mt-[3.31rem] w-[9.625rem] h-[33.375rem] pb-[23.6875rem]">
           <div className="w-[9.625rem] mb-[1.25rem] pl-[0.25rem] pb-[0.88rem] border-[#000000]/30 border-b text=[1.25rem] font-bold">
             리뷰 관리
           </div>
@@ -109,13 +109,14 @@ export const MyPage = () => {
           </div>
           <div className="text-[#000000]/70 text=[1rem]">완료된 리뷰</div>
         </div>
-        <div className="mt-[3.31rem]">
+
+        <div className="mt-[3.31rem] ml-[9.5rem]">
           <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
             진행중인 리뷰
           </div>
 
-          <div className="flex items-center whitespace-nowrap pt-[1.06rem] pb-[1.25rem] border-[#545454] border-b w-[74.625rem] pl-[8.44rem] pr-[8.44rem]">
-            <div className="mr-[11.06rem]">신청</div>
+          <div className="flex items-center mb-[0.94rem]  pt-[1.06rem] pb-[1.25rem] border-[#545454] border-b w-[74.625rem] pl-[8.44rem] pr-[8.44rem]">
+            <div className="w-[3.5625rem]  mr-[11.06rem]">신청</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="8"
@@ -128,7 +129,9 @@ export const MyPage = () => {
                 fill="#545454"
               />
             </svg>
-            <div className="mr-[11.06rem] ml-[11.06rem]">리뷰 유지 기간</div>
+            <div className="mr-[9.44rem] flex-shrink-0 ml-[9.44rem]">
+              리뷰 유지 기간
+            </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="8"
@@ -141,11 +144,44 @@ export const MyPage = () => {
                 fill="#545454"
               />
             </svg>
-            <div className="ml-[11.06rem]">쿠폰 발급 완료</div>
+            <div className="ml-[11.06rem] flex-shrink-0">쿠폰 발급 완료</div>
           </div>
-          <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+
+          <div className="flex space-x-[1.12rem]">
+            <div>
+              <div className="w-[13.97756rem] h-[13.97756rem] bg-[#FFEDED] rounded-[0.59481rem]"></div>
+              <div
+                style={{ fontSize: "0.9375rem" }}
+                className="w-[13.97756rem] text-[0.9375rem] flex items-center h-[2.26019rem] text-[#545454] font-bold"
+              >
+                [강북] 또먹고싶어 곱창
+              </div>
+              <div
+                style={{ fontSize: "0.8125rem" }}
+                className="mb-[0.58rem] text-[#FF0069]"
+              >
+                주먹밥+캔음료 1개
+              </div>
+              <div style={{ fontSize: "0.8125rem", color: "#898989" }}>
+                신청일자: 2023.11.29
+              </div>
+            </div>
+          </div>
+
+          <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
             탈락된 리뷰
           </div>
+          <div className="flex">
+            <div>
+              <div>[강북] 또먹고싶어 곱창</div>
+              <div>탈락사유: 글자수 미충족</div>
+            </div>
+            <div>
+              <div>신청일자: 2023.11.29</div>
+              <button>다시 신청하기</button>
+            </div>
+          </div>
+
           <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
             완료된 리뷰
           </div>
