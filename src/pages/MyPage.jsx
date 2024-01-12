@@ -168,21 +168,21 @@ export const MyPage = () => {
             </div>
           </div>
 
-          <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+          <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
             탈락된 리뷰
           </div>
-          <div className="flex">
+          <div className="flex justify-between border-b pb-[1rem] border-[#D9D9D9]">
             <div>
-              <div>[강북] 또먹고싶어 곱창</div>
-              <div>탈락사유: 글자수 미충족</div>
+              <div className="mb-[1.44rem] text=[1.125rem]">[강북] 또먹고싶어 곱창</div>
+              <div className="text=[1rem]">탈락사유: 글자수 미충족</div>
             </div>
             <div>
-              <div>신청일자: 2023.11.29</div>
-              <button>다시 신청하기</button>
+              <div className="text=[1rem] mb-[1.19rem]">신청일자: 2023.11.29</div>
+              <button className="w-[9.8125rem] h-[2.4375rem] border rounded-[0.44rem] border-[#FF0069] text-[#FF0069]">다시 신청하기</button>
             </div>
           </div>
 
-          <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+          <div className="w-[74.625rem] mt-[5.82rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
             완료된 리뷰
           </div>
         </div>
