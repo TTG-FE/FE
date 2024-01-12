@@ -1,8 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// PAGES
+import Store from "./pages/Store";
+
+
 function App() {
   return (
-    <div className="App">
-      <div className="bg-red-400 text-white">Tailwind CSS</div>
-    </div>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/store" element={<Store />} />
+        </Routes>
+    </BrowserRouter>
   );
 }
 

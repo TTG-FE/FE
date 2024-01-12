@@ -16,6 +16,9 @@ module.exports = {
         "custom-gray-300": "#C1C1C1",
         "custom-gray-400": "#D9D9D9",
       },
+      fontFamily: {
+        inter: ["Noto Sans KR", "sans-serif"],
+      },
     },
   },
   plugins: [],
