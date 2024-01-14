@@ -1,5 +1,8 @@
 import React, { useRef } from "react";
 import doraImage from "../assets/dora.png";
+import FinishReview from "./FinishReview";
+import OngoingReview from "./OngoingReview";
+import FailReview from "./FailReview";
 
 //상단바+메뉴바까지 같이 생각해서 마진 설정
 export const MyPage = () => {
@@ -170,69 +173,21 @@ export const MyPage = () => {
             <div className="ml-[11.06rem] flex-shrink-0">쿠폰 발급 완료</div>
           </div>
 
-          <div className="flex space-x-[1.12rem]">
-            <div>
-              <div className="w-[13.97756rem] h-[13.97756rem] bg-[#FFEDED] rounded-[0.59481rem]"></div>
-              <div
-                style={{ fontSize: "0.9375rem" }}
-                className="w-[13.97756rem] text-[0.9375rem] flex items-center h-[2.26019rem] text-[#545454] font-bold"
-              >
-                [강북] 또먹고싶어 곱창
-              </div>
-              <div
-                style={{ fontSize: "0.8125rem" }}
-                className="mb-[0.58rem] text-[#FF0069]"
-              >
-                주먹밥+캔음료 1개
-              </div>
-              <div style={{ fontSize: "0.8125rem", color: "#898989" }}>
-                신청일자: 2023.11.29
-              </div>
-            </div>
-          </div>
+          <OngoingReview />
           <div ref={rejectedRef}>
             <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
               탈락된 리뷰
             </div>
           </div>
-          <div className="flex justify-between border-b pb-[1rem] border-[#D9D9D9]">
-            <div>
-              <div className="mb-[1.44rem] text=[1.125rem]">
-                [강북] 또먹고싶어 곱창
-              </div>
-              <div className="text=[1rem]">탈락사유: 글자수 미충족</div>
-            </div>
-            <div>
-              <div className="text=[1rem] mb-[1.19rem]">
-                신청일자: 2023.11.29
-              </div>
-              <button className="w-[9.8125rem] h-[2.4375rem] border rounded-[0.44rem] border-[#FF0069] text-[#FF0069]">
-                다시 신청하기
-              </button>
-            </div>
-          </div>
+          <FailReview />
+
           <div ref={completedRef}>
             <div className="w-[74.625rem] mt-[5.82rem] mb-[1.06rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
               완료된 리뷰
             </div>
           </div>
-          <div className="w-[14.4125rem] h-[20.1875rem] mb-[9.71rem] p-[0.44rem] rounded-[0.19538rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]">
-            <div className="rounded-[0.19538rem] mb-[0.95rem] w-[13.36881rem] h-[11.23306rem] bg-[#FFEDED]">
-              이미지
-            </div>
-            <div
-              style={{ fontSize: "0.9375rem" }}
-              className="text-[#545454] leading-[1.17238rem] mb-[0.5rem] w-[12.9375rem] h-[4.8125rem] font-bold"
-            >
-              데이트 코스로 딱! 여의도역 5분 거리 스끼다시 맛있는 집!!
-            </div>
-            <div
-              style={{ fontSize: "0.62525rem" }}
-              className="text-[#FF0069] leading-[1.17238rem]"
-            >
-              여의도 또가횟집
-            </div>
-          </div>
+
+          <FinishReview />
         </div>
       </div>
     </div>
