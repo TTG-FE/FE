@@ -1,7 +1,11 @@
+import Main from "./pages/Home/Main/Main";
+import LocalRestaurant from "./pages/Home/LocalRestaurant/LocalRestaurant";
+import MenuRestaurant from "./pages/Home/MenuRestaurant/MenuRestaurant";
+import UserGuide from "./pages/Home/UserGruide/UserGuide";
 function App() {
   return (
     <div className="App">
-      <div className="bg-red-400 text-white">Tailwind CSS</div>
+      <Main />
     </div>
   );
 }
