@@ -16,6 +16,9 @@ module.exports = {
         "custom-gray-300": "#C1C1C1",
         "custom-gray-400": "#D9D9D9",
       },
+      fontFamily: {
+        inter: ["Noto Sans KR", "sans-serif"],
+      },
       boxShadow: {
         "custom-box-shadow": "0px 0px 10px 0px rgba(0, 0, 0, 0.25)",
         "custom-box-shadow-pink": "0px 0px 10px 0px #FF0069",

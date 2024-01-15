@@ -5,7 +5,7 @@ import { useState } from "react";
  * 'isRegionSelected' 상태 변수는 모달 종류를 의미(지역 선택, 메뉴 선택)
  */
 const Modal = () => {
-  const [isRegionSelected, setIsRegionSelected] = useState(false); // 모달 종류 선택(지역, 메뉴)
+  const [isRegionSelected, setIsRegionSelected] = useState(true); // 모달 종류 선택(지역, 메뉴)
   const [isModalVisible, setIsModalVisible] = useState(true); // 모달 가시성 상태 관리
 
   /** 모달 닫기 함수 */
@@ -81,7 +81,7 @@ const MenuSelector = ({ closeModal }) => {
       </div>
       <div className="w-full h-0.5 bg-[#0000001A]"></div>
 
-      {/* 선택 리스트 */}
+      {/* 메뉴 선택 리스트 */}
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
           <li className="w-1/4 cursor-pointer" key={menu.id}>
@@ -177,7 +177,7 @@ const RegionSelector = ({ closeModal }) => {
         </button>
       </div>
 
-      {/* 선택 리스트 */}
+      {/* 지역 선택 리스트 */}
       <ul className="flex flex-col">
         {cities.map((city) => (
           <>

@@ -124,58 +124,61 @@ const Menu = () => {
   };
 
   return (
-    <div className="mb-[9.37rem]">
-      {/* 메뉴 > 전체 */}
-      {/* 전국 각지의 또또가 상점을 만나보세요! */}
-      <div className="flex items-center justify-between px-6 py-12">
-        <div>
-          <div className="mb-4 text-2xl font-semibold leading-normal">
-            메뉴 <em>&gt;</em>{" "}
-            <span className="relative">
-              전체
-              <div className="absolute right-0 w-12 h-1 -bottom-1 bg-custom-yellow"></div>
-            </span>
-          </div>
-          <p className="text-sm font-normal leading-normal text-custom-gray-100">
-            전국 각지의 또또가 상점을 만나보세요!
-          </p>
-        </div>
-
-        {/* 드롭다운 (인기순, 추천순, 최신순) */}
-        <div className="w-48 rounded-xl text-custom-gray-100">
-          <button
-            onClick={toggleDropdown}
-            className="flex items-center justify-between w-full p-2  bg-[#F3F3F3] rounded-xl"
-          >
-            <span>인기순</span>
-            <ArrowDownIcon dropdownOpen={dropdownOpen} />
-          </button>
-
-          {/* 드롭다운을 클릭하면 펼쳐진다 */}
-          {dropdownOpen && (
-            <div className="flex flex-col w-48 mt-2 bg-[#F3F3F3] rounded-xl absolute z-10">
-              <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white rounded-t-xl">
-                인기순
-              </button>
-              <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white">
-                추천순
-              </button>
-              <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white rounded-b-xl">
-                최신순
-              </button>
+    /* 전체 페이지 크기 설정 */
+    <div className={`w-xl px-36 font-inter`}>
+      <div className="mb-[9.37rem]">
+        {/* 메뉴 > 전체 */}
+        {/* 전국 각지의 또또가 상점을 만나보세요! */}
+        <div className="flex items-center justify-between px-6 py-12">
+          <div>
+            <div className="mb-4 text-2xl font-semibold leading-normal">
+              메뉴 <em>&gt;</em>{" "}
+              <span className="relative">
+                전체
+                <div className="absolute right-0 w-12 h-1 -bottom-1 bg-custom-yellow"></div>
+              </span>
             </div>
-          )}
-        </div>
-      </div>
+            <p className="text-sm font-normal leading-normal text-custom-gray-100">
+              전국 각지의 또또가 상점을 만나보세요!
+            </p>
+          </div>
 
-      {/* 카드 리스트 */}
-      <ul className="flex flex-wrap mb-[2.69rem]">
-        {MenuRestaurants.map((item) => (
-          <li className="w-1/5 p-4" key={item.id}>
-            <RestaurantCard item={item} />
-          </li>
-        ))}
-      </ul>
+          {/* 드롭다운 (인기순, 추천순, 최신순) */}
+          <div className="w-48 rounded-xl text-custom-gray-100">
+            <button
+              onClick={toggleDropdown}
+              className="flex items-center justify-between w-full p-2  bg-[#F3F3F3] rounded-xl"
+            >
+              <span>인기순</span>
+              <ArrowDownIcon dropdownOpen={dropdownOpen} />
+            </button>
+
+            {/* 드롭다운을 클릭하면 펼쳐진다 */}
+            {dropdownOpen && (
+              <div className="flex flex-col w-48 mt-2 bg-[#F3F3F3] rounded-xl absolute z-10">
+                <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white rounded-t-xl">
+                  인기순
+                </button>
+                <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white">
+                  추천순
+                </button>
+                <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white rounded-b-xl">
+                  최신순
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* 카드 리스트 */}
+        <ul className="flex flex-wrap mb-[2.69rem]">
+          {MenuRestaurants.map((item) => (
+            <li className="w-1/5 p-4" key={item.id}>
+              <RestaurantCard item={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -5,22 +5,24 @@ import Review from "./Review";
 import BannerImg from "../../../assets/images/banner.png";
 const Main = () => {
   return (
-    <div className="relative">
+    /* 전체 페이지 크기 설정 */
+    <div className={`w-xl px-36 font-inter relative`}>
       {/* 모달창 */}
       <Modal />
-
-      {/* TOP 15 또또가 */}
-      <Top />
-      {/* Hot */}
-      <Hot />
-      {/* 또또가 리뷰 */}
-      <Review />
-      {/* 배너 */}
-      <div
-        className="w-full h-[11.25rem] bg-center bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url(${BannerImg})` }}
-      >
-        <img src={`${BannerImg}`} alt="banner" className="hidden" />
+      <div>
+        {/* TOP 15 또또가 */}
+        <Top />
+        {/* Hot */}
+        <Hot />
+        {/* 또또가 리뷰 */}
+        <Review />
+        {/* 배너 */}
+        <div
+          className="w-full h-[11.25rem] bg-center bg-cover bg-no-repeat"
+          style={{ backgroundImage: `url(${BannerImg})` }}
+        >
+          <img src={`${BannerImg}`} alt="banner" className="hidden" />
+        </div>
       </div>
     </div>
   );

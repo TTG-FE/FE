@@ -112,30 +112,33 @@ const LocalRestaurant = () => {
     },
   ];
   return (
-    <div className="mb-[9.37rem]">
-      {/* 지역 > 전체 */}
-      {/* 전국 각지의 또또가 상점을 만나보세요! */}
-      <div className="px-6 py-12">
-        <div className="mb-4 text-2xl font-semibold leading-normal">
-          지역 <em>&gt;</em>{" "}
-          <span className="relative">
-            전체
-            <div className="absolute right-0 w-12 h-1 -bottom-1 bg-custom-yellow"></div>
-          </span>
+    /* 전체 페이지 크기 설정 */
+    <div className={`w-xl px-36 font-inter`}>
+      <div className="mb-[9.37rem]">
+        {/* 지역 > 전체 */}
+        {/* 전국 각지의 또또가 상점을 만나보세요! */}
+        <div className="px-6 py-12">
+          <div className="mb-4 text-2xl font-semibold leading-normal">
+            지역 <em>&gt;</em>{" "}
+            <span className="relative">
+              전체
+              <div className="absolute right-0 w-12 h-1 -bottom-1 bg-custom-yellow"></div>
+            </span>
+          </div>
+          <p className="text-sm font-normal leading-normal text-custom-gray-100">
+            전국 각지의 또또가 상점을 만나보세요!
+          </p>
         </div>
-        <p className="text-sm font-normal leading-normal text-custom-gray-100">
-          전국 각지의 또또가 상점을 만나보세요!
-        </p>
-      </div>
 
-      {/* 카드 리스트 */}
-      <ul className="flex flex-wrap w-full mb-[2.69rem]">
-        {localRestaurants.map((item) => (
-          <li className="w-1/5 p-4" key={item.id}>
-            <RestaurantCard item={item} />
-          </li>
-        ))}
-      </ul>
+        {/* 카드 리스트 */}
+        <ul className="flex flex-wrap w-full mb-[2.69rem]">
+          {localRestaurants.map((item) => (
+            <li className="w-1/5 p-4" key={item.id}>
+              <RestaurantCard item={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
