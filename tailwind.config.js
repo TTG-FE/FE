@@ -19,7 +19,11 @@ module.exports = {
       fontFamily: {
         inter: ["Noto Sans KR", "sans-serif"],
       },
+      boxShadow: {
+        "custom-box-shadow": "0px 0px 10px 0px rgba(0, 0, 0, 0.25)",
+        "custom-box-shadow-pink": "0px 0px 10px 0px #FF0069",
+      },
     },
   },
-  plugins: [],
+  plugins: ["./src/styles/index.css"], // 'index.css'에 @layer utilities로 선언된 클래스를 사용할 수 있도록 설정
 };
