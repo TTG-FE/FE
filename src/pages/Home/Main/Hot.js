@@ -47,8 +47,11 @@ const Hot = () => {
       <div className="flex items-center justify-center w-2/3 p-8">
         <ul className="flex space-x-4">
           {hotRestarants.map((item) => (
-            <li className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer">
-              <HotCard key={item.id} item={item} />
+            <li
+              className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer"
+              key={item.id}
+            >
+              <HotCard item={item} />
             </li>
           ))}
         </ul>
