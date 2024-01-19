@@ -3,13 +3,23 @@
 @tailwind utilities;
 
 /* tailwind plugins */
-/** 2줄을 기반으로 자르고 말줄임표(...)로 생략*/
+
 @layer utilities {
+  /** 2줄을 기반으로 자르고 말줄임표(...)로 생략*/
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: normal;
+  }
+
+  /** border 색을 또또가 그라데이션으로 */
+  .border-custom-gradation {
+    background-image: linear-gradient(#fff, #fff),
+      linear-gradient(91deg, #ff0069, #ff7a00, #ff0068);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border: 1px solid transparent;
   }
 }
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Oswald&family=Poppins:wght@300;400;500;600&display=swap");

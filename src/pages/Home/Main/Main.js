@@ -6,7 +6,8 @@ import BannerImg from "../../../assets/images/banner.png";
 const Main = () => {
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`w-xl px-36 font-inter relative`}>
+
+    <div className={` font-inter relative`}>
       {/* 모달창 */}
       <Modal />
       <div>

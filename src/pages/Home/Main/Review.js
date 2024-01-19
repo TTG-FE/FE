@@ -33,7 +33,7 @@ const Review = () => {
     },
   ];
   return (
-    <div className="mb-16">
+    <div className="px-16 mb-16">
       <div className="py-[1.5em]">
         <p className="text-2xl font-semibold leading-normal text-black">
           또또가 리뷰

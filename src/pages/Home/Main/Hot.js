@@ -47,7 +47,9 @@ const Hot = () => {
       <div className="flex items-center justify-center w-2/3 p-8">
         <ul className="flex space-x-4">
           {hotRestarants.map((item) => (
-            <HotCard key={item.id} item={item} />
+            <li className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer">
+              <HotCard key={item.id} item={item} />
+            </li>
           ))}
         </ul>
       </div>
@@ -67,7 +69,7 @@ const HotCard = ({ item }) => {
   };
 
   return (
-    <li className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer">
+    <div>
       {/* 카드 이미지 */}
       <figure
         className="relative pb-[65%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-6"
@@ -86,7 +88,7 @@ const HotCard = ({ item }) => {
         {/* 메뉴 */}
         <p className="text-base font-normal text-custom-pink">{item.free}</p>
       </div>
-    </li>
+    </div>
   );
 };
 export default Hot;
