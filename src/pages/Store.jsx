@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
+
+
+// ASSETS
 import storeFoodImage from "../assets/store-food.jpg";
 import storeEmptyHeartImage from "../assets/관심상점 하트 아이콘_before.svg";
 import storeFullHeartImage from "../assets/관심상점 하트 아이콘_after.svg";
 import storeMapImage from "../assets/store-map.jpg";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
-// font-family 불러와야함
-
 
 function Store() {
+  // 상점 정보
+  const [storeInfo, setStoreInfo] = useState({});
+
   // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
   // 하트 이미지 변화
@@ -210,7 +214,9 @@ function Store() {
 
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${
-                isCoupon ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
+                isCoupon
+                  ? "bg-[#D9D9D9] text-[#545454] cursor-not-allowed"
+                  : "bg-[#FF0069]"
               }`}
               onClick={handleOpenModal}
               disabled={isCoupon}
