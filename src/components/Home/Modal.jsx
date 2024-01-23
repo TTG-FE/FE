@@ -1,40 +1,40 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-/** 모달창
- * 'isModalVisible' 상태 변수는 모달이 켜져있는지 꺼져있는지를 의미
- * 'isRegionSelected' 상태 변수는 모달 종류를 의미(지역 선택, 메뉴 선택)
+/**
+ * 'Modal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
+ *
+ * @param {object} props - 모달창에 필요한 속성들
+ * @param {number} props.selectModal - 모달 번호(0: 모달창x 1: 지역 선택 2: 메뉴선택)
+ * @param {Function} props.setSelectModal - 모달 번호를 변경하는 함수
  */
-const Modal = () => {
-  const [isRegionSelected, setIsRegionSelected] = useState(true); // 모달 종류 선택(지역, 메뉴)
-  const [isModalVisible, setIsModalVisible] = useState(true); // 모달 가시성 상태 관리
-
+const Modal = ({ selectModal, setSelectModal }) => {
   /** 모달 닫기 함수 */
-  const closeModal = () => setIsModalVisible(false);
+  const closeModal = () => {
+    setSelectModal(0);
+  };
 
   /** 모달 클릭 시 이벤트 핸들링 함수 */
-  const handleModalClick = (e) => {
+  const handleCloseModal = (e) => {
     e.stopPropagation(); // 모달 영역 내에서의 클릭 이벤트 전파 차단
   };
   return (
     <>
       {/* 모달이 가시적인 상태일 때만 렌더링 */}
-      {isModalVisible && (
+      {selectModal !== 0 && (
         <div
           className={
-            "flex justify-center absolute top-0 bottom-0 left-0 right-0 bg-[rgba(216, 216, 216, 0.50)] z-50"
+            "flex justify-center absolute top-0 bottom-0 left-0 right-0 bg-opacity-25 backdrop-blur-xl z-50"
           }
-          style={{
-            backdropFilter: "blur(50px)",
-          }}
           onClick={closeModal}
         >
           {/* 모달 내용 영역 */}
           <div
             className="absolute top-28 w-[47rem] h-[52rem] bg-white shadow-custom-box-shadow rounded-xl"
-            onClick={handleModalClick}
+            onClick={handleCloseModal}
           >
-            {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 */}
-            {isRegionSelected ? (
+            {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 (1: 지역 선택, 2: 메뉴선택 */}
+            {selectModal === 1 ? (
               // 지역 선택
               <RegionSelector closeModal={closeModal} />
             ) : (
@@ -84,7 +84,12 @@ const MenuSelector = ({ closeModal }) => {
       {/* 메뉴 선택 리스트 */}
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
-          <li className="w-1/4 cursor-pointer" key={menu.id}>
+          <Link
+            to="/menu-restaurant"
+            key={menu.id}
+            className="w-1/4 cursor-pointer"
+            onClick={closeModal}
+          >
             <div className="px-8 py-5">
               <figure className="pb-[100%] h-0 bg-gray-200 bg-center bg-no-repeat bg-cover ">
                 {/* 높이를 0, 바닥 패딩을 100프로로 주어서 정사각형을 만듬 */}
@@ -94,7 +99,7 @@ const MenuSelector = ({ closeModal }) => {
                 {menu.label}
               </p>
             </div>
-          </li>
+          </Link>
         ))}
       </ul>
     </div>
@@ -180,24 +185,27 @@ const RegionSelector = ({ closeModal }) => {
       {/* 지역 선택 리스트 */}
       <ul className="flex flex-col">
         {cities.map((city) => (
-          <>
+          <div key={city.id}>
             <div className="w-full h-0.5 bg-[#0000001A]"></div>
-            <li key={city.id} className="flex cursor-pointer">
+            {/* 지역을 구분하기 위한 회색 구분선 */}
+            <li className="flex cursor-pointer">
               <div className="w-1/5 p-4 text-lg text-[#000000B2]">
                 {city.label}
               </div>
               <ul className="flex flex-wrap w-4/5">
                 {city.towns.map((town, i) => (
-                  <li
-                    className="w-1/4 p-4 text-sm text-[#00000080] cursor-pointer"
+                  <Link
                     key={i}
+                    to="/local-restaurant"
+                    onClick={closeModal}
+                    className="w-1/4 p-4 text-sm text-[#00000080] cursor-pointer"
                   >
                     {town}
-                  </li>
+                  </Link>
                 ))}
               </ul>
             </li>
-          </>
+          </div>
         ))}
       </ul>
     </div>
