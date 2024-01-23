@@ -1,6 +1,6 @@
 import { useState } from "react";
 import chickenImg from "./../../../assets/images/chicken.png";
-import HeartIcon from "./../../../components/Home/HeartIcon";
+import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 /** Top 15 또또가 */
 const Top = () => {
@@ -147,7 +147,7 @@ const Top15Card = ({ item }) => {
         </div>
         {/* 하트아이콘 */}
         <button className="absolute top-4 right-4" onClick={handleLikeClick}>
-          <HeartIcon isLiked={isLiked} />
+          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
       <div>

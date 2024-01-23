@@ -1,6 +1,6 @@
 import { useState } from "react";
 import saladImg from "./../../../assets/images/salad.png";
-import HeartIcon from "./../../../components/Home/HeartIcon";
+import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 const Hot = () => {
   const hotRestarants = [
@@ -80,7 +80,7 @@ const HotCard = ({ item }) => {
       >
         <img src={saladImg} alt="review" className="hidden" />
         <button className="absolute top-4 right-4 " onClick={handleLikeClick}>
-          <HeartIcon isLiked={isLiked} />
+          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
       <div>

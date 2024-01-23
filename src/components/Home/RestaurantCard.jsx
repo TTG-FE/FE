@@ -1,6 +1,6 @@
 import { useState } from "react";
 import saladImg from "./../../assets/images/salad.png";
-import HeartIcon from "./HeartIcon";
+import { ReactComponent as HeartIcon } from "./../../assets/images/heartIcon.svg";
 
 /** 지역별 상점 및 메뉴별 상점의 카드 */
 const RestaurantCard = ({ item }) => {
@@ -23,7 +23,7 @@ const RestaurantCard = ({ item }) => {
         <img src={saladImg} alt="review" className="hidden" />
         {/* 하트아이콘 */}
         <button className="absolute top-3 right-3" onClick={handleLikeClick}>
-          <HeartIcon isLiked={isLiked} />
+          <HeartIcon fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
       <div>
