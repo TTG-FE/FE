@@ -2,7 +2,7 @@ import React from "react";
 
 export const FinishReview = () => {
   return (
-    <div className="w-[14.4125rem] h-[20.1875rem] mb-[9.71rem] p-[0.44rem] rounded-[0.19538rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]">
+    <div className="w-[14.4125rem] h-[20.1875rem] mb-[8.65rem] p-[0.44rem] rounded-[0.19538rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]">
       <div className="rounded-[0.19538rem] mb-[0.95rem] w-[13.36881rem] h-[11.23306rem] bg-[#FFEDED]">
         이미지
       </div>
