@@ -136,7 +136,7 @@ const Button = ({ icon, label, index, handleButtonColor }) => {
         navigate("/");
         break;
       case 2: // '마이' 페이지로 이동
-        navigate("/");
+        navigate("/mypage");
         break;
       default:
         break;
@@ -147,9 +147,7 @@ const Button = ({ icon, label, index, handleButtonColor }) => {
     <button
       onMouseEnter={() => handleButtonColor(index, true)}
       onMouseLeave={() => handleButtonColor(index, false)}
-      onClick={() => {
-        handleButtonClick(index);
-      }}
+      onClick={() => handleButtonClick(index)}
       className="flex flex-col items-center  w-14 h-12 mr-8 text-[#19191980] hover:text-[#FF0069] text-sm "
     >
       {/* 아이콘 */}
