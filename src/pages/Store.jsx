@@ -11,9 +11,6 @@ import storeMapImage from "../assets/store-map.jpg";
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
 function Store() {
-  // 상점 정보
-  const [storeInfo, setStoreInfo] = useState({});
-
   // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
   // 하트 이미지 변화
@@ -170,7 +167,8 @@ function Store() {
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <div className="w-1/2 pl-16">
-          <div className="mt-14 w-2/5 fixed top-0">
+          {/* <div className="mt-14 w-2/5 fixed top-0"> */}
+          <div className="mt-14 w-full sticky top-10">
             {/* 데이터를 받아와야하니 props로 변경하기? */}
             <div className="text-3xl font-semibold mb-5">
               [강북] 또먹고싶어 곱창
@@ -198,7 +196,7 @@ function Store() {
               <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
                 또또가 기간
               </div>
-              <div className="text-[#404040]">2024. 01. 24 ~ 2024. 02. 28</div>
+              <div className="text-[#404040]">리뷰 게시일 기준 60일 이상</div>
             </div>
             <div className="flex py-8 border-b">
               <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
@@ -214,9 +212,7 @@ function Store() {
 
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${
-                isCoupon
-                  ? "bg-[#D9D9D9] text-[#545454] cursor-not-allowed"
-                  : "bg-[#FF0069]"
+                isCoupon ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
               }`}
               onClick={handleOpenModal}
               disabled={isCoupon}

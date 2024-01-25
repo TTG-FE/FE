@@ -1,14 +1,12 @@
 import Top from "./Top";
 import Hot from "./Hot";
-import Modal from "../../../components/Home/Modal";
 import Review from "./Review";
 import BannerImg from "../../../assets/images/banner.png";
 const Main = () => {
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`w-xl px-36 font-inter relative`}>
-      {/* 모달창 */}
-      <Modal />
+
+    <div className={` font-inter`}>
       <div>
         {/* TOP 15 또또가 */}
         <Top />

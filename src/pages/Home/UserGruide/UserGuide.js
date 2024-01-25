@@ -1,6 +1,6 @@
 const UserGuide = () => {
   return (
-    <div className={`w-xl px-36 font-inter`}>
+    <div className={`w-xl px-16 font-inter`}>
       {/* 이용 가이드 */}
       <div className="px-6 py-12 ">
         <p className="relative text-2xl font-semibold leading-normal size-fit">
