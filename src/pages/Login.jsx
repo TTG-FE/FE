@@ -15,7 +15,7 @@ export const Login = () => {
           간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
         </div>
         <button
-          className="mr-[20.06rem] flex items-center justify-center rounded-2xl  bg-custom-yellow rounded-md p-3 h-[4.125rem] w-[32.0625rem]"
+          className="mr-[20.06rem] flex items-center justify-center rounded-[1rem]  bg-[#57BC63] rounded-md p-3 h-[4.125rem] w-[32.0625rem]"
           onClick={() => {
             console.log("카카오톡 로그인 버튼이 클릭");
           }}
@@ -23,9 +23,9 @@ export const Login = () => {
           <img
             src="./assets/login-kakao.png"
             className="h-[2.625rem] w-[2.625rem] "
-            alt="Kakao Logo"
+            alt="naver logo"
           />
-          <span className="text-[1.5625rem]">카카오톡 로그인</span>
+          <span className="text-[1.5625rem] text-[#FFF]">네이버 로그인</span>
         </button>
       </div>
     </div>

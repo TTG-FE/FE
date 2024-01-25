@@ -33,7 +33,9 @@ const Navbar = ({ setSelectModal }) => {
       <ul className="flex items-center space-x-2 shrink-0">
         {/* 로그인되지 않은 상태 */}
         <li className="flex items-center h-10  text-[#19191980] text-base hover:text-custom-pink focus:text-custom-pink">
-          <button>로그인</button>
+          <Link to="/login">
+            <button>로그인</button>
+          </Link>
         </li>
         <li className="flex items-center h-10  text-[#19191980] text-base hover:text-custom-pink focus:text-custom-pink">
           <button>회원가입</button>
