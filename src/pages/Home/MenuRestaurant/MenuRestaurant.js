@@ -1,6 +1,7 @@
 import RestaurantCard from "../../../components/Home/RestaurantCard";
 import ArrowDownIcon from "../../../components/Home/ArrowDownIcon";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Menu = () => {
   // 메뉴 별 상점 리스트 객체
   const MenuRestaurants = [
@@ -125,8 +126,9 @@ const Menu = () => {
 
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`w-xl px-36 font-inter`}>
-      <div className="mb-[9.37rem]">
+    <div className={`w-xl px-16 font-inter`}>
+      {/* 모달창 */}
+      <div>
         {/* 메뉴 > 전체 */}
         {/* 전국 각지의 또또가 상점을 만나보세요! */}
         <div className="flex items-center justify-between px-6 py-12">

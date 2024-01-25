@@ -1,6 +1,6 @@
 import { useState } from "react";
 import saladImg from "./../../../assets/images/salad.png";
-import HeartIcon from "./../../../components/Home/HeartIcon";
+import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 const Hot = () => {
   const hotRestarants = [
@@ -47,7 +47,12 @@ const Hot = () => {
       <div className="flex items-center justify-center w-2/3 p-8">
         <ul className="flex space-x-4">
           {hotRestarants.map((item) => (
-            <HotCard key={item.id} item={item} />
+            <li
+              className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer"
+              key={item.id}
+            >
+              <HotCard item={item} />
+            </li>
           ))}
         </ul>
       </div>
@@ -67,7 +72,7 @@ const HotCard = ({ item }) => {
   };
 
   return (
-    <li className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer">
+    <div>
       {/* 카드 이미지 */}
       <figure
         className="relative pb-[65%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-6"
@@ -75,7 +80,7 @@ const HotCard = ({ item }) => {
       >
         <img src={saladImg} alt="review" className="hidden" />
         <button className="absolute top-4 right-4 " onClick={handleLikeClick}>
-          <HeartIcon isLiked={isLiked} />
+          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
       <div>
@@ -86,7 +91,7 @@ const HotCard = ({ item }) => {
         {/* 메뉴 */}
         <p className="text-base font-normal text-custom-pink">{item.free}</p>
       </div>
-    </li>
+    </div>
   );
 };
 export default Hot;

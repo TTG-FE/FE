@@ -113,8 +113,8 @@ const LocalRestaurant = () => {
   ];
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`w-xl px-36 font-inter`}>
-      <div className="mb-[9.37rem]">
+    <div className={`w-xl px-16 font-inter`}>
+      <div>
         {/* 지역 > 전체 */}
         {/* 전국 각지의 또또가 상점을 만나보세요! */}
         <div className="px-6 py-12">
