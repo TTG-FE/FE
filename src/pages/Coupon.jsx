@@ -80,7 +80,7 @@ const Coupon = () => {
 
         {/* 쿠폰 영역 전체 패딩*/}
         <div
-          className={`pt-9 border-t border-[#D9D9D9] text-xl h-[660px] ${
+          className={`pt-9 border-t border-[#D9D9D9] text-xl ${
             coupons.length === 0
               ? "flex flex-col justify-center items-center"
               : ""

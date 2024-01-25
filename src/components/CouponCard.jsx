@@ -16,24 +16,24 @@ const CouponCard = ({
   handleCloseModal,
   modalStates,
 }) => {
+  // 쿠폰 정보
+  const { id, used } = isCoupon;
+
   // 이메일 유효검사
   const [email, setEmail] = useState("abc@123.com");
+
   //email& 비밀번호 정규식
-  const emailRegEx =
+  const regexEmail =
     /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
 
   const emailCheck = (email) => {
-    return emailRegEx.test(email); //형식에 맞을 경우, true 리턴
+    return regexEmail.test(email); //형식에 맞을 경우, true 리턴
   };
 
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
-  // let isCoupon = false;
-  // console.log(`isCoupon: ${isCoupon}`);
 
-  const { id, used } = isCoupon;
-
-  console.log(` id, used`,id,used);
+  
 
   return (
     <div className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8">
@@ -150,7 +150,6 @@ const CouponCard = ({
                   setEmail(e.target.value);
                   emailCheck(e.target.value);
                 }}
-                value={email}
               />
               <div className="flex items-center">
                 <button
