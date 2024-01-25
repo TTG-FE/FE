@@ -46,27 +46,26 @@ const Header = () => {
         </div>
 
         {/* 우측영역: 버튼 3개와 '우리가게 등록하기' 버튼 */}
+        {/* 참고: 버튼을 눌렀을 때 페이지 이동은 useNavigate로 할것! -> 버튼 컴포넌트 구현 */}
         <div className="flex items-center">
           {/* 쿠폰 버튼 */}
-
           <div className="flex">
-            <Link to={'/coupon'}>
-              <Button
-                icon={
-                  <CouponIcon
-                    stroke={
-                      // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
-                      buttonsHover[0]
-                        ? "url(#paint0_linear_306_2415)"
-                        : "#19191980"
-                    }
-                  />
-                }
-                handleButtonColor={handleButtonColor}
-                index={0}
-                label={"쿠폰함"}
-              />
-            </Link>
+            <Button
+              icon={
+                <CouponIcon
+                  stroke={
+                    // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
+                    buttonsHover[0]
+                      ? "url(#paint0_linear_306_2415)"
+                      : "#19191980"
+                  }
+                />
+              }
+              handleButtonColor={handleButtonColor}
+              index={0}
+              label={"쿠폰함"}
+            />
+
             {/* 관심상점 버튼 */}
             <Button
               icon={
@@ -133,7 +132,7 @@ const Button = ({ icon, label, index, handleButtonColor }) => {
     // TODO: 페이지 경로를 추가해주세요.
     switch (index) {
       case 0: // '쿠폰함' 페이지로 이동
-        navigate("/");
+        navigate("/coupon");
         break;
       case 1: // '관심상점' 페이지로 이동
         navigate("/");
