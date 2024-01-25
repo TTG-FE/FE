@@ -6,6 +6,9 @@ module.exports = {
       backgroundImage: {
         "custom-gradation":
           "linear-gradient(91deg, #FF0068 0%, #FF4D27 51%, #FF7A01 73%, #FFD600 100%)",
+        "custom-gradation-180":
+          "linear-gradient(180deg, #FF0068 0%, #FF4D27 71%, #FF7A01 100%)",
+        
       },
       colors: {
         "custom-pink": "#FF0069",

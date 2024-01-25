@@ -9,7 +9,7 @@ import storeMapImage from "../assets/store-map.jpg";
 // font-family 불러와야함
 
 
-function Store() {
+const Store = () => {
   // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
   // 하트 이미지 변화
@@ -194,7 +194,7 @@ function Store() {
               <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
                 또또가 기간
               </div>
-              <div className="text-[#404040]">2024. 01. 24 ~ 2024. 02. 28</div>
+              <div className="text-[#404040]">리뷰 게시일 기준 60일 이상</div>
             </div>
             <div className="flex py-8 border-b">
               <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
@@ -209,8 +209,10 @@ function Store() {
             </div>
 
             <button
-              className={` w-full h-14 mt-8 text-white rounded text-xl ${
-                isCoupon ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
+              className={` w-full h-14 mt-8 rounded text-xl ${
+                isCoupon
+                  ? "bg-[#D9D9D9] text-custom-gray-100"
+                  : "bg-[#FF0069] text-white"
               }`}
               onClick={handleOpenModal}
               disabled={isCoupon}
