@@ -48,22 +48,25 @@ const Header = () => {
         {/* 우측영역: 버튼 3개와 '우리가게 등록하기' 버튼 */}
         <div className="flex items-center">
           {/* 쿠폰 버튼 */}
+
           <div className="flex">
-            <Button
-              icon={
-                <CouponIcon
-                  stroke={
-                    // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
-                    buttonsHover[0]
-                      ? "url(#paint0_linear_306_2415)"
-                      : "#19191980"
-                  }
-                />
-              }
-              handleButtonColor={handleButtonColor}
-              index={0}
-              label={"쿠폰함"}
-            />
+            <Link to={'/coupon'}>
+              <Button
+                icon={
+                  <CouponIcon
+                    stroke={
+                      // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
+                      buttonsHover[0]
+                        ? "url(#paint0_linear_306_2415)"
+                        : "#19191980"
+                    }
+                  />
+                }
+                handleButtonColor={handleButtonColor}
+                index={0}
+                label={"쿠폰함"}
+              />
+            </Link>
             {/* 관심상점 버튼 */}
             <Button
               icon={

@@ -11,6 +11,7 @@ import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Modal from "./components/Home/Modal";
 import { useState } from "react";
+import Coupon from "./pages/Coupon";
 import MyPage from "./pages/MyPage";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/coupon" element={<Coupon />} />
           <Route path="/local-restaurant" element={<LocalRestaurant />} />
           <Route path="/menu-restaurant" element={<MenuRestaurant />} />
           <Route path="/user-guide" element={<UserGuide />} />

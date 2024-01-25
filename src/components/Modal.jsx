@@ -1,6 +1,6 @@
 import React from "react";
 
-function Modal({ isOpen, onClose, children }) {
+const Modal = ({ isOpen, onClose, isCoupon, children }) => {
   if (!isOpen) return null;
 
   const handleClose = (e) => {
@@ -14,9 +14,13 @@ function Modal({ isOpen, onClose, children }) {
       onClick={handleClose}
     >
       {/* 모달 내용 */}
-      <div className="w-fit">
+      <div className="w-fit truncate">
         {/* 모달 바디 */}
-        <div className="relative bg-white p-2 rounded">
+        <div
+          className={`relative bg-white p-2 rounded-md ${
+            isCoupon ? "border-solid border-4 border-custom-pink" : ""
+          }`}
+        >
           {/* 모달 닫기 버튼 */}
           <button
             className="absolute top-0 right-0 mt-4 mr-4 text-gray-500 cursor-pointer"
