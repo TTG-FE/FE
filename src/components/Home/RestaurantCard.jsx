@@ -23,7 +23,7 @@ const RestaurantCard = ({ item }) => {
         <img src={saladImg} alt="review" className="hidden" />
         {/* 하트아이콘 */}
         <button className="absolute top-3 right-3" onClick={handleLikeClick}>
-          <HeartIcon fill={isLiked ? "#FF0069" : "none"} />
+          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
       <div>
