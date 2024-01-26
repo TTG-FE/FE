@@ -1,5 +1,5 @@
 import RestaurantCard from "../../../components/Home/RestaurantCard";
-import ArrowDownIcon from "../../../components/Home/ArrowDownIcon";
+import { ReactComponent as ArrowDownIcon } from "../../../assets/images/arrowDownIcon.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const Menu = () => {
@@ -152,7 +152,12 @@ const Menu = () => {
               className="flex items-center justify-between w-full p-2  bg-[#F3F3F3] rounded-xl"
             >
               <span>인기순</span>
-              <ArrowDownIcon dropdownOpen={dropdownOpen} />
+              <ArrowDownIcon
+                fill={dropdownOpen ? "#FF0069" : "#B2B2B2"}
+                className={`transform transition-transform ${
+                  dropdownOpen ? "rotate-[-180deg]" : ""
+                }`}
+              />
             </button>
 
             {/* 드롭다운을 클릭하면 펼쳐진다 */}
