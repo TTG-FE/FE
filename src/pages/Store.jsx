@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
 
-
 // ASSETS
 import storeFoodImage from "../assets/store-food.jpg";
-import storeEmptyHeartImage from "../assets/관심상점 하트 아이콘_before.svg";
-import storeFullHeartImage from "../assets/관심상점 하트 아이콘_after.svg";
+import { ReactComponent as HeartIcon } from "../assets/storeHeartIcon.svg";
 import storeMapImage from "../assets/store-map.jpg";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
@@ -13,8 +11,8 @@ import storeMapImage from "../assets/store-map.jpg";
 function Store() {
   // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // 하트 이미지 변화
-  const [isHeartFull, setIsHeartFull] = useState(false);
+  // 현재 상점의 관심 여부를 나타낸다.
+  const [isLiked, setIsLiked] = useState(false);
 
   // 리뷰 등록 이메일 유효성 검사
   const [reviewUrl, setReviewUrl] = useState("");
@@ -32,7 +30,7 @@ function Store() {
 
   // 하트 이벤트
   const handleToggleHeart = () => {
-    setIsHeartFull((prev) => !prev);
+    setIsLiked((prev) => !prev);
   };
 
   // 리뷰 페이지 주소 입력 시 상태 업데이트
@@ -167,7 +165,6 @@ function Store() {
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <div className="w-1/2 pl-16">
-          {/* <div className="mt-14 w-2/5 fixed top-0"> */}
           <div className="mt-14 w-full sticky top-10">
             {/* 데이터를 받아와야하니 props로 변경하기? */}
             <div className="text-3xl font-semibold mb-5">
@@ -202,12 +199,19 @@ function Store() {
               <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
                 관심상점
               </div>
-              <img
+              {/* <img
                 src={isHeartFull ? storeFullHeartImage : storeEmptyHeartImage}
                 alt=""
                 onClick={handleToggleHeart}
                 className="cursor-pointer"
-              />
+              /> */}
+              <button onClick={handleToggleHeart} className="flex">
+                <HeartIcon
+                  stroke={isLiked ? "#FF0069" : "black"}
+                  stroke-opacity={isLiked ? "1" : "0.3"}
+                  fill={isLiked ? "#FF0069" : "none"}
+                />
+              </button>
             </div>
 
             <button
