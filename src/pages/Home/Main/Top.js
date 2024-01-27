@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import chickenImg from "./../../../assets/images/chicken.png";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 

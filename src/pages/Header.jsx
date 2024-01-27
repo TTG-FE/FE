@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "./../assets/images/logo.png";
 import { ReactComponent as CouponIcon } from "./../assets/images/couponIcon.svg";
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div>
       {/* 헤더 부분 */}
-      <div className="flex justify-between h-40 p-16 ">
+      <div className="flex justify-between h-40 p-12 ">
         {/* 좌측영역: 로고, 검색창 */}
         <div className="flex items-center">
           {/* 로고 */}
@@ -33,7 +33,7 @@ const Header = () => {
           </Link>
 
           {/* 로고 옆 텍스트 */}
-          <div className="mr-4 shrink-0">
+          <div className="mr-8 shrink-0">
             <Link className="text-3xl font-semibold" to="/">
               또또가
             </Link>
@@ -119,46 +119,25 @@ const Header = () => {
  * @param {Function} props.handleButtonColor - 마우스 위치에 따라 버튼 색상을 변경하는 함수
  */
 const Button = ({ icon, label, index, handleButtonColor }) => {
-  // 'useNavigate' 훅을 통해 navigate 함수를 가져옴
-  const navigate = useNavigate();
-
-  /**
-   * 'handleButtonClick': 버튼을 클릭하면 해당 버튼에 맞는 페이지로 이동
-   * (단, 로그인 되어있지 않다면 로그인 창으로 이동)
-   * @param {number} index - 클릭된 버튼 인덱스
-   */
-  const handleButtonClick = (index) => {
-    // TODO: 만약 로그인 상태가 아니라면 로그인 페이지로 이동하는 코드를 작성하세요.
-    // TODO: 페이지 경로를 추가해주세요.
-    switch (index) {
-      case 0: // '쿠폰함' 페이지로 이동
-        navigate("/coupon");
-        break;
-      case 1: // '관심상점' 페이지로 이동
-        navigate("/");
-        break;
-      case 2: // '마이' 페이지로 이동
-        navigate("/");
-        break;
-      default:
-        break;
-    }
+  // TODO: 페이지 경로 설정
+  const PATHS = {
+    0: "/coupon",
+    1: "/",
+    2: "/",
   };
   return (
     // 버튼 요소에 마우스 진입시와 마우스 이탈시 handleButtonColor 함수를 호출하여 hover 상태를 갱신
-    <button
+    <Link
       onMouseEnter={() => handleButtonColor(index, true)}
       onMouseLeave={() => handleButtonColor(index, false)}
-      onClick={() => {
-        handleButtonClick(index);
-      }}
-      className="flex flex-col items-center  w-14 h-12 mr-8 text-[#19191980] hover:text-[#FF0069] text-sm "
+      className="flex flex-col items-center  w-14 h-12 mr-8 text-[#19191980] hover:text-[#FF0069] text-sm"
+      to={PATHS[index]}
     >
       {/* 아이콘 */}
       {icon}
       {/* 텍스트 */}
       <p> {label}</p>
-    </button>
+    </Link>
   );
 };
 
@@ -176,7 +155,7 @@ const SearchBar = () => {
     e.preventDefault();
 
     // 입력 텍스트가 비어있다면 검색 입력창에 다시 포커스를 맞춤
-    if (inputText === "") {
+    if (!inputText) {
       inputRef.current.focus();
     }
     // TODO: 아래에 'inputText'를 기반으로 하는 검색을 위한 API 요청을 로직을 구현하세요.
@@ -184,7 +163,7 @@ const SearchBar = () => {
 
   return (
     // 검색 폼 컴포넌트
-    <form className="flex w-72" onSubmit={handleSearch}>
+    <form className="relative flex items-center w-72" onSubmit={handleSearch}>
       {/* 입력창 */}
       <input
         ref={inputRef}
@@ -196,16 +175,14 @@ const SearchBar = () => {
         onChange={handleInputChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="flex-1 text-xs border-b outline-none ps-2 h-7 focus:border-custom-pink"
+        className="flex-1 p-1 text-xs border-b outline-none pe-6 h-7 focus:border-custom-pink"
       />
       {/* 검색버튼 */}
-      <button
-        type="submit"
-        className="outline-none"
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-      >
-        <SearchIcon fill={isFocused ? "#FF0069" : "#D9D9D9"} />
+      <button type="submit" className="absolute right-0 ">
+        <SearchIcon
+          stroke={isFocused ? "#FF0069" : "#D9D9D9"}
+          fill={isFocused ? "#FF0069" : "#D9D9D9"}
+        />
       </button>
     </form>
   );

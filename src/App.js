@@ -3,9 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // PAGES
 import Store from "./pages/Store";
 import Main from "./pages/Home/Main/Main";
-import LocalRestaurant from "./pages/Home/LocalRestaurant/LocalRestaurant";
-import MenuRestaurant from "./pages/Home/MenuRestaurant/MenuRestaurant";
-import UserGuide from "./pages/Home/UserGruide/UserGuide";
+import SelectRestaurant from "./pages/Home/SelectRestaurant";
+import UserGuide from "./pages/Home/UserGuide";
 import Header from "./pages/Header";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
@@ -29,8 +28,14 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/store" element={<Store />} />
           <Route path="/coupon" element={<Coupon />} />
-          <Route path="/local-restaurant" element={<LocalRestaurant />} />
-          <Route path="/menu-restaurant" element={<MenuRestaurant />} />
+          <Route
+            path="/local-restaurant"
+            element={<SelectRestaurant title={"지역"} />}
+          />
+          <Route
+            path="/menu-restaurant"
+            element={<SelectRestaurant title={"메뉴"} />}
+          />
           <Route path="/user-guide" element={<UserGuide />} />
 
           {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
