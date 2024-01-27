@@ -44,7 +44,7 @@ function Store() {
       {/* 양쪽을 포함하는 div 설정 */}
       <div className="flex">
         {/* 왼쪽 상점 관련 안내 */}
-        <div className="w-1/2 mt-9 pr-14 border-r-2 border-[#f5f5f5]">
+        <div className="w-1/2 mt-9 pr-14 border-r-2 border-[#f5f5f5] break-words">
           <div className="w-full overflow-hidden mb-16 v">
             <img
               src={storeFoodImage}
