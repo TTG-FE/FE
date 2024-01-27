@@ -48,7 +48,7 @@ function Store() {
           <div className="w-full overflow-hidden mb-16 v">
             <img
               src={storeFoodImage}
-              alt=""
+              alt="매장 음식 이미지"
               className="w-full rounded-3xl object-cover"
             />
           </div>
@@ -182,7 +182,7 @@ function Store() {
               </li>
             </ul>
             <div className="flex py-8 border-b text-lg">
-              <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
+              <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
                 제공내역
               </div>
               <div className="text-[#404040]">
@@ -190,21 +190,15 @@ function Store() {
               </div>
             </div>
             <div className="flex py-8 border-b text-lg">
-              <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
+              <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
                 또또가 기간
               </div>
               <div className="text-[#404040]">리뷰 게시일 기준 60일 이상</div>
             </div>
             <div className="flex py-8 border-b">
-              <div className="text-lg text-[#000000] opacity-30 w-52 font-semibold	">
+              <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
                 관심상점
               </div>
-              {/* <img
-                src={isHeartFull ? storeFullHeartImage : storeEmptyHeartImage}
-                alt=""
-                onClick={handleToggleHeart}
-                className="cursor-pointer"
-              /> */}
               <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
                   stroke={isLiked ? "#FF0069" : "black"}
