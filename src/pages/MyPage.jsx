@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import doraImage from "../assets/dora.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
@@ -9,9 +9,21 @@ export const MyPage = () => {
   const ongoingRef = useRef(null);
   const rejectedRef = useRef(null);
   const completedRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
+  const handleClick = () => {
+    // Trigger file input click when "프로필 사진 변경" is clicked
+    document.getElementById("profileImageInput").click();
   };
   return (
     <div className="grid place-items-center relative">
@@ -51,12 +63,21 @@ export const MyPage = () => {
           <div className="rounded-full overflow-hidden">
             <img
               className="w-[10.6875rem] h-[10.6875rem] object-cover"
-              src={doraImage}
+              src={selectedImage || doraImage}
               alt="프로필 사진"
             />
           </div>
-          <div className="text=[1.28rem] text-[#000000]/50 mt-[0.88rem]">
-            프로필 사진 변경
+          <input
+          type="file"
+          id="profileImageInput"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
+          <div
+          className="text-[1.28rem] text-[#000000]/50 mt-[0.88rem] cursor-pointer"
+          onClick={handleClick}
+        >            프로필 사진 변경
           </div>
         </div>
 

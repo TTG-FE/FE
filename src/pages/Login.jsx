@@ -1,6 +1,7 @@
 import React from "react";
 
 export const Login = () => {
+  
   return (
     <div className="flex center center items-center h-screen">
       <div className="w-[43rem] h-[30.125rem] mr-[19.44rem] ml-[14.87rem]  bg-slate-300">
