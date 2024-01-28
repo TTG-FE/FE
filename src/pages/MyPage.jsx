@@ -12,7 +12,7 @@ export const MyPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const scrollToSection = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth" });
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start"  });
   };
 
   const handleImageChange = (event) => {
@@ -22,7 +22,6 @@ export const MyPage = () => {
     }
   };
   const handleClick = () => {
-    // Trigger file input click when "프로필 사진 변경" is clicked
     document.getElementById("profileImageInput").click();
   };
   return (
