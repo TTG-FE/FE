@@ -122,7 +122,7 @@ const Button = ({ icon, label, index, handleButtonColor }) => {
   // TODO: 페이지 경로 설정
   const PATHS = {
     0: "/coupon",
-    1: "/",
+    1: "/heart",
     2: "/",
   };
   return (

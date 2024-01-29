@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 
 /** 지역별 상점 및 메뉴별 상점의 카드 */
-const RestaurantCard = ({ item }) => {
+const StoreCard = ({ item }) => {
   const [isLiked, setIsLiked] = useState(false); // 현재 상점의 관심 여부를 나타낸다.
 
   /** 'handleLikeClick' 함수는 하트 아이콘을 클릭했을 때 호출되며
@@ -42,4 +42,4 @@ const RestaurantCard = ({ item }) => {
   );
 };
 
-export default RestaurantCard;
+export default StoreCard;

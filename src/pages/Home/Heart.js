@@ -1,7 +1,5 @@
-import RestaurantCard from "../../components/RestaurantCard";
-
-const SelectRestaurant = ({ title }) => {
-  // 상점 리스트 객체
+import RestaurantCard from "../../components/StoreCard";
+const Heart = () => {
   const restaurants = [
     {
       id: 1,
@@ -112,35 +110,28 @@ const SelectRestaurant = ({ title }) => {
       reviewCount: 654,
     },
   ];
-
   return (
     /* 전체 페이지 크기 설정 */
     <div className={`px-16 font-inter`}>
-      <div>
-        {/* 상점 필터명 */}
-        <div className="flex items-center justify-between px-6 py-12">
-          <div>
-            <div className="mb-4 text-2xl font-semibold leading-normal">
-              {title} &gt;{" "}
-              <span className="border-b-4 border-custom-yellow">전체</span>
-            </div>
-            <p className="text-sm font-normal leading-normal text-custom-gray-100">
-              전국 각지의 또또가 상점을 만나보세요!
-            </p>
-          </div>
-        </div>
-
-        {/* 상점 카드 리스트 */}
-        <ul className="flex flex-wrap mb-[2.69rem]">
-          {restaurants.map((item) => (
-            <li className="w-1/5 p-4" key={item.id}>
-              <RestaurantCard item={item} />
-            </li>
-          ))}
-        </ul>
+      {/* 제목 */}
+      <div className="flex items-center px-6 py-12">
+        <span className="mr-2 text-2xl font-semibold border-b-4 border-custom-pink">
+          관심상점
+        </span>
+        <span className="w-6 text-xs text-center border rounded-xl text-custom-gray-400">
+          ?
+        </span>
       </div>
+
+      {/* 상점 카드 리스트 */}
+      <ul className="flex flex-wrap mb-[2.69rem]">
+        {restaurants.map((item) => (
+          <li className="w-1/5 p-4 " key={item.id}>
+            <RestaurantCard item={item} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
-
-export default SelectRestaurant;
+export default Heart;
