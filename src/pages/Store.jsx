@@ -40,7 +40,7 @@ function Store() {
 
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`w-xl px-36 font-inter`}>
+    <div className={`w-xl px-36 font-inter relative`}>
       {/* 양쪽을 포함하는 div 설정 */}
       <div className="flex">
         {/* 왼쪽 상점 관련 안내 */}
@@ -145,16 +145,28 @@ function Store() {
                   <ul className="mb-4 list-disc">
                     <li>
                       상세설명 url :
-                      https://blog.naver.com/yonggini84/222163678341 (새로운
-                      D.I.A+ 로직에 대응)
+                      <a
+                        href="https://blog.naver.com/yonggini84/222163678341"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        https://blog.naver.com/yonggini84/222163678341 (새로운
+                        D.I.A+ 로직에 대응)
+                      </a>
                       <br />
                       ★협찬문구는 네이버 공정위 문구 url 연결
                     </li>
 
                     <li>
-                      https://ogqmarket.naver.com/artworks/sticker/detail?artworkId=5a5ff364e96bc
-                      (네이버에서 판매하는 공정위 문구 사용하세요. 1,500원에
-                      무제한 사용 가능)
+                      <a
+                        href="https://ogqmarket.naver.com/artworks/sticker/detail?artworkId=5a5ff364e96bc"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        https://ogqmarket.naver.com/artworks/sticker/detail?artworkId=5a5ff364e96bc
+                        (네이버에서 판매하는 공정위 문구 사용하세요. 1,500원에
+                        무제한 사용 가능)
+                      </a>
                     </li>
                   </ul>
                 </ol>
@@ -202,7 +214,7 @@ function Store() {
               <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
                   stroke={isLiked ? "#FF0069" : "black"}
-                  stroke-opacity={isLiked ? "1" : "0.3"}
+                  strokeOpacity={isLiked ? "1" : "0.3"}
                   fill={isLiked ? "#FF0069" : "none"}
                 />
               </button>
@@ -220,7 +232,7 @@ function Store() {
                 : "리뷰 등록하고 또또가 쿠폰 받기"}
             </button>
             {/* 모달 컴포넌트 사용 */}
-            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            {/* <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
               <div className="px-12 py-7 text-lg">
                 <div className="text-2xl mb-9">내 리뷰 등록</div>
                 <input
@@ -276,10 +288,66 @@ function Store() {
                   등록하기
                 </button>
               </div>
-            </Modal>
+            </Modal> */}
           </div>
         </div>
       </div>
+      {/* 모달 컴포넌트 사용 */}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="px-12 py-7 text-lg">
+          <div className="text-2xl mb-9">내 리뷰 등록</div>
+          <input
+            type="text"
+            placeholder="http:// 또는 https://를 포함한 정확한 리뷰 페이지 주소를 입력해주세요."
+            className="w-full px-4 py-5 mb-24 border-solid border border-[#545454] rounded-lg"
+            onChange={handleReviewUrlChange}
+          />
+          <div className="h-64">
+            <h2 className="text-[#FF0069] text-lg font-bold">
+              등록 시 유의사항
+            </h2>
+            <br />
+            <ul className="list-disc ml-7 text-[#898989]">
+              <li>
+                해당 상점에 대한 리뷰를 작성한 페이지의 링크를 정확히
+                입력해주세요.
+              </li>
+              <li>페이지를 전체 공개, 검색 허용으로 적용해주세요.</li>
+              <li>
+                부적절한 SNS페이지로 판단되는 경우 등록이 어려울 수 있습니다.
+              </li>
+              <li>
+                방문자 수 조작 및 불법 프로그램 사용 등 어뷰징 행위 적발 시,
+                패널티가 부여됩니다.
+              </li>
+              <li>
+                페이지 등록에 어려움이 있으시다면 고객센터로 문의에 남겨주세요.
+              </li>
+            </ul>
+          </div>
+
+          <button
+            className={`w-full h-16 rounded-lg ${
+              reviewUrl.startsWith("http://") ||
+              reviewUrl.startsWith("https://")
+                ? "bg-[#FF0069] text-white"
+                : "bg-[#D9D9D9] cursor-not-allowed"
+            }`}
+            disabled={
+              !(
+                reviewUrl.startsWith("http://") ||
+                reviewUrl.startsWith("https://")
+              )
+            }
+            onClick={() => {
+              setIsCoupon(true);
+              handleCloseModal();
+            }}
+          >
+            등록하기
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
