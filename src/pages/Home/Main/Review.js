@@ -35,6 +35,7 @@ const Review = () => {
   ];
   return (
     <div className="mb-16 font-inter">
+      <div className="h-px mx-6 bg-black sm:hidden opacity-10"></div>
       <div className="py-[1.5em] px-6 lg:px-16">
         <p className="text-base font-semibold text-black md:text-2xl">
           또또가 리뷰
@@ -45,11 +46,11 @@ const Review = () => {
       </div>
       {/* 카드 리스트 */}
       <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
-        <ul className="flex w-full space-x-1">
+        <ul className="flex w-full space-x-2">
           {reviews.map((review) => (
             <li
               key={review.id}
-              className="w-[47%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4"
+              className="w-[40%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4"
             >
               <ReviewCard review={review} />
             </li>
@@ -71,15 +72,15 @@ const ReviewCard = ({ review }) => {
         <div className="flex">
           {/* 작성자 */}
           <figure
-            className="w-4 h-4 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full md:w-11 md:h-11 shrink-0"
+            className="w-5 h-5 mr-1 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full md:w-11 md:h-11 shrink-0"
             style={{ backgroundImage: `url(${gukbapImg})` }}
           ></figure>
-          <div className="flex items-center flex-1 pl-3 text-[#9F9F9F] text-xs md:text-base truncate">
+          <div className="flex items-center flex-1 text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
             {review.author}
           </div>
         </div>
         {/* 리뷰 텍스트 */}
-        <p className="text-sm font-semibold md:text-xl min-h-10 h-fit text-custom-gray-100 line-clamp-2">
+        <p className="text-[0.625rem]  font-semibold md:text-xl min-h-6 h-fit text-custom-gray-100 line-clamp-2">
           {review.text}
         </p>
         {/* 상점명 */}
