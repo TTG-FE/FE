@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Modal from "./Modal"; // Modal 컴포넌트 import
 import DownloadIcon from "./DownloadIcon"; // DownloadIcon 컴포넌트 import
 import CheckIcon from "./CheckIcon";
+import EmployeeVerificationIcon from "../assets/employeeVerification.svg";
+import QrCodeIcon from "../assets/qr-code-line.svg";
 
+// 가게 사진, 지역, 이름, 행사 쿠폰명, 쿠폰 날짜, 쿠폰가게 이미지, 쿠폰여부, 쿠폰사용여부, 모달창 열기, 모달창 닫기, 모달 관리
 const CouponCard = ({
   storeImg,
   storeArea,
@@ -33,10 +36,8 @@ const CouponCard = ({
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
-  
-
   return (
-    <div className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8">
+    <div className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full">
       {/* 쿠폰 이미지 및 상세 내용 */}
       <div className="flex w-3/4 pl-7 py-6">
         {/* 이미지 */}
@@ -61,7 +62,7 @@ const CouponCard = ({
       </div>
       {/* 쿠픈 다운로드 */}
       <div
-        className={`relative w-1/4 rounded-r-lg h-full ${
+        className={`relative w-1/4 rounded-r-lg h-full overflow-hidden ${
           used ? "bg-custom-gray-200" : "bg-custom-gradation-180"
         }`}
       >
@@ -97,61 +98,65 @@ const CouponCard = ({
             Download
           </button>
         </div>
-
-        <Modal
-          isOpen={modalStates.isCouponModalOpen}
-          onClose={handleCloseModal}
-          isCoupon={true}
-        >
-          <div className="px-5 w-[376px] h-[510px]">
-            <div className="h-[300px]">
-              <div className="text-center">쿠폰 정보</div>
-              <img src={couponStoreImg} alt="" className="mt-5 mb-11" />
-            </div>
-
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink"></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
-
-            <div className="border-dashed border-t-2 border-custom-pink text-center">
-              <h2 className="text-base mt-12 mb-2.5">
-                [{storeArea}] {storeName}
-              </h2>
-              <h3 className="text-sm mb-2.5 text-custom-orange">
-                {promotionText}
-              </h3>
-              <h4 className="text-xs mb-5">기한: {couponDate}</h4>
-            </div>
-            <button
-              className="absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded bg-custom-pink text-white text-xs"
-              onClick={() => {
-                handleCloseModal();
-                handleOpenModal("isCouponInfoModalOpen");
-              }}
-            >
-              발급하기
-            </button>
+      </div>
+      <Modal
+        isOpen={modalStates.isCouponModalOpen}
+        onClose={handleCloseModal}
+        isCoupon={true}
+      >
+        <div className="px-5 w-[376px] h-[510px]">
+          <div className="h-[300px]">
+            <div className="text-center">쿠폰 정보</div>
+            <img src={couponStoreImg} alt="" className="mt-5 mb-11" />
           </div>
-        </Modal>
 
-        <Modal
-          isOpen={modalStates.isCouponInfoModalOpen}
-          onClose={handleCloseModal}
-          isCoupon={true}
-        >
-          <div className="px-5 w-[376px] h-[510px] ">
-            <div className="h-[300px]">
-              <div className="mb-14 text-center">발급 정보</div>
-              <h2 className="text-sm mb-4">카카오 계정</h2>
-              <input
-                className="w-full bg-[#F4F4F4] text-xs p-3 mb-4 w-[300px]"
-                type="email"
-                placeholder="예) kakaologin@naver.com"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  emailCheck(e.target.value);
-                }}
+          <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink"></div>
+          <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
+
+          <div className="border-dashed border-t-2 border-custom-pink text-center">
+            <h2 className="text-base mt-12 mb-2.5">
+              [{storeArea}] {storeName}
+            </h2>
+            <h3 className="text-sm mb-2.5 text-custom-orange">
+              {promotionText}
+            </h3>
+            <h4 className="text-xs mb-5">기한: {couponDate}</h4>
+          </div>
+          <button
+            className="absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded bg-custom-pink text-white text-xs"
+            onClick={() => {
+              handleCloseModal();
+              handleOpenModal("isCouponInfoModalOpen");
+            }}
+          >
+            발급하기
+          </button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={modalStates.isCouponInfoModalOpen}
+        onClose={handleCloseModal}
+        isCoupon={true}
+      >
+        <div className="px-5 w-[376px] h-[510px] ">
+          <div className="h-[300px]">
+            <div className="text-center">직원 확인</div>
+            <div className="flex justify-center items-center h-5/6">
+              <img
+                className=""
+                src={isCheck ? QrCodeIcon : EmployeeVerificationIcon}
+                alt=""
               />
-              <div className="flex items-center">
+            </div>
+          </div>
+          {/* 쿠폰 디자인 양쪽 원으로 파인 부분 */}
+          <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
+          <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
+          <div className="border-dashed border-t-2 border-custom-pink">
+            {/* 대쉬바 밑에 내용 전체 div */}
+            <div className="ml-14">
+              <div className="mt-9 mb-4 flex items-center">
                 <button
                   className="mr-1"
                   onClick={() => {
@@ -160,89 +165,80 @@ const CouponCard = ({
                 >
                   <CheckIcon isCheck={isCheck} />
                 </button>
-                <p className="text-[11px]">
-                  쿠폰 발급을 위한 개인정보 제 3자 제공에 동의합니다. (필수)
+                <p className="text-[11px] text-black">
+                  해당 쿠폰의 상점 직원이 맞습니다. (필수)
                 </p>
               </div>
-            </div>
-            {/* 쿠폰 디자인 양쪽 원으로 파인 부분 */}
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
-            <div className="border-dashed border-t-2 border-custom-pink">
-              <div className="mt-16 text-[#FF0000] text-xs">
+              <div className="text-[#FF0000] text-xs">
                 <p>※ 발급 정보는 마이페이지에서 수정가능합니다.</p>
                 <p>※ 쿠폰 발급 이후 발급 정보 수정이 불가합니다.</p>
                 <p>※ 본인 이외에 쿠폰 발급은 불가합니다.</p>
               </div>
-
-              <button
-                className={`absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded  text-white text-xs ${
-                  isCheck && emailCheck(email)
-                    ? "bg-custom-pink"
-                    : "bg-[#B2B2B2] cursor-not-allowed"
-                }`}
-                onClick={() => {
-                  if (isCheck) {
-                    // isCheck가 true일 때만 클릭 이벤트 처리
-                    handleCloseModal();
-                    handleOpenModal("isCouponDownloadModalOpen");
-                    // console.log(modalStates);
-                  }
-                }}
-                disabled={!isCheck && emailCheck(email)}
-              >
-                발급하기
-              </button>
-            </div>
-          </div>
-        </Modal>
-
-        <Modal
-          isOpen={modalStates.isCouponDownloadModalOpen}
-          onClose={handleCloseModal}
-          isCoupon={true}
-        >
-          <div className="px-5 w-[376px] h-[510px]">
-            <div className="h-[300px] relative">
-              <div className="text-center">쿠폰 정보</div>
-              <img
-                src={couponStoreImg}
-                alt=""
-                className="mt-5 mb-11 grayscale"
-              />
-              <div className="w-[160px] h-[160px] text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
-                <p className="text-custom-pink text-4xl font-bold">
-                  발급
-                  <br />
-                  완료
-                </p>
-              </div>
             </div>
 
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
-
-            <div className="border-dashed border-t-2 border-custom-pink text-center">
-              <h2 className="text-base mt-14 mb-2.5">
-                [{storeArea}] {storeName}
-              </h2>
-              <h3 className="text-sm mb-2.5 text-custom-orange">
-                {promotionText}
-              </h3>
-              <h4 className="text-xs">기한: {couponDate}</h4>
-            </div>
             <button
-              className="absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded bg-[#B2B2B2] text-white text-xs"
+              className={`absolute max-w-[300px] w-full  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded  text-white text-xs ${
+                isCheck && emailCheck(email)
+                  ? "bg-custom-pink"
+                  : "bg-[#B2B2B2] cursor-not-allowed"
+              }`}
               onClick={() => {
-                handleCloseModal();
-                handleCouponUsed(id);
+                if (isCheck) {
+                  // isCheck가 true일 때만 클릭 이벤트 처리
+                  handleCloseModal();
+                  handleOpenModal("isCouponDownloadModalOpen");
+                  // console.log(modalStates);
+                }
               }}
+              disabled={!isCheck && emailCheck(email)}
             >
-              닫기
+              발급하기
             </button>
           </div>
-        </Modal>
-      </div>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={modalStates.isCouponDownloadModalOpen}
+        onClose={handleCloseModal}
+        isCoupon={true}
+      >
+        <div className="px-5 w-[376px] h-[510px]">
+          <div className="h-[300px] relative">
+            <div className="text-center">쿠폰 정보</div>
+            <img src={QrCodeIcon} alt="" className="mt-5 mb-11 mx-auto grayscale" />
+            <div className="w-[160px] h-[160px] text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
+              <p className="text-custom-pink text-4xl font-bold">
+                발급
+                <br />
+                완료
+              </p>
+            </div>
+          </div>
+
+          <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
+          <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
+
+          <div className="border-dashed border-t-2 border-custom-pink text-center">
+            <h2 className="text-base mt-12 mb-2.5">
+              [{storeArea}] {storeName}
+            </h2>
+            <h3 className="text-sm mb-2.5 text-custom-orange">
+              {promotionText}
+            </h3>
+            <h4 className="text-xs">기한: {couponDate}</h4>
+          </div>
+          <button
+            className="absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded bg-[#B2B2B2] text-white text-xs"
+            onClick={() => {
+              handleCloseModal();
+              handleCouponUsed(id);
+            }}
+          >
+            닫기
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

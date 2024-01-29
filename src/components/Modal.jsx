@@ -10,7 +10,7 @@ const Modal = ({ isOpen, onClose, isCoupon, children }) => {
   // sticky로 어떻게 할수는 없을까?
   return (
     <div
-      className="absolute inset-0 bg-black bg-opacity-25 backdrop-blur-xl flex justify-center"
+      className={`absolute inset-0 bg-opacity-25 backdrop-blur-xl flex justify-center ${isCoupon ? null : "bg-black" }`}
       id="wrapper"
       onClick={handleClose}
     >
