@@ -5,6 +5,7 @@ import { ReactComponent as CouponIcon } from "./../assets/images/couponIcon.svg"
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 import { ReactComponent as HumanIcon } from "./../assets/images/humanIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
+
 /** Header */
 const Header = () => {
   const [buttonsHover, setButtonsHover] = useState([false, false, false]); // 버튼 호버 여부
@@ -20,8 +21,8 @@ const Header = () => {
 
   return (
     <div>
-      {/* 헤더 부분 */}
-      <div className="flex justify-between h-40 p-12 ">
+      {/* 데스크탑 헤더 */}
+      <div className="justify-between hidden h-40 p-12 sm:flex">
         {/* 좌측영역: 로고, 검색창 */}
         <div className="flex items-center">
           {/* 로고 */}
@@ -100,7 +101,7 @@ const Header = () => {
           </div>
           {/* 우리 가게 등록하러가기 버튼 */}
           {/* border-custom-gradation은 커스텀한 또또가 그라데이션 색상 */}
-          <button className="w-48 h-14 text-[#19191980] text-sm rounded-lg  shadow-custom-button-shadow border-custom-gradation">
+          <button className="w-48 h-14 text-[#19191980] text-sm rounded-lg  shadow-custom-button-shadow border-custom-gradation hidden lg:block">
             우리 가게 등록하러가기
           </button>
         </div>
@@ -130,7 +131,7 @@ const Button = ({ icon, label, index, handleButtonColor }) => {
     <Link
       onMouseEnter={() => handleButtonColor(index, true)}
       onMouseLeave={() => handleButtonColor(index, false)}
-      className="flex flex-col items-center  w-14 h-12 mr-8 text-[#19191980] hover:text-[#FF0069] text-sm"
+      className="flex flex-col items-center  w-14 h-12 mr-1 xl:mr-8 text-[#19191980] hover:text-[#FF0069] text-sm"
       to={PATHS[index]}
     >
       {/* 아이콘 */}

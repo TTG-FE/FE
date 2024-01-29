@@ -3,7 +3,8 @@ const Review = () => {
   const reviews = [
     {
       id: 1,
-      author: "산책왕자 강형욱",
+      author:
+        "산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱",
       text: "남은 횟감은 싸서 강아지에게 생식으로 주니 너무 좋아하더라구요~^^",
       store: "로우앤 하이",
     },
@@ -33,53 +34,58 @@ const Review = () => {
     },
   ];
   return (
-    <div className="px-16 mb-16">
-      <div className="py-[1.5em]">
-        <p className="text-2xl font-semibold leading-normal text-black">
+    <div className="mb-16 font-inter">
+      <div className="py-[1.5em] px-6 lg:px-16">
+        <p className="text-base font-semibold text-black md:text-2xl">
           또또가 리뷰
         </p>
-        <p className="text-xl font-normal leading-normal text-custom-gray-100">
+        <p className="text-xs font-normal md:text-xl text-custom-gray-100">
           또또가 리뷰어들이 작성한 리뷰를 모아봤어요.
         </p>
       </div>
       {/* 카드 리스트 */}
-      <ul className="flex justify-between mb-[1.63rem]">
-        {reviews.map((review) => (
-          <li
-            key={review.id}
-            className=" w-[19%] p-2 w-border rounded shadow-custom-box-shadow cursor-pointer"
-          >
-            <ReviewCard review={review} />
-          </li>
-        ))}
-      </ul>
+      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
+        <ul className="flex w-full space-x-1">
+          {reviews.map((review) => (
+            <li
+              key={review.id}
+              className="w-[47%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4"
+            >
+              <ReviewCard review={review} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
 const ReviewCard = ({ review }) => {
   return (
-    <div>
+    <div className="p-1 m-1 rounded cursor-pointer md:p-2 w-border shadow-custom-box-shadow">
       <figure
-        className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded mb-4 bg-gray-200"
+        className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded bg-gray-200 md:mb-4 mb-2"
         style={{ backgroundImage: `url(${gukbapImg})` }}
-      >
-        <img src={gukbapImg} alt="review" className="hidden" />
-      </figure>
-      <div>
-        <div className="flex mb-[0.96rem] author-wrap px-2">
+      ></figure>
+      <div className="space-y-2 ">
+        <div className="flex">
+          {/* 작성자 */}
           <figure
-            className="bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full w-11 h-11"
+            className="w-4 h-4 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full md:w-11 md:h-11 shrink-0"
             style={{ backgroundImage: `url(${gukbapImg})` }}
           ></figure>
-          <div className="flex items-center flex-1 pl-3 text-[#9F9F9F] ">
+          <div className="flex items-center flex-1 pl-3 text-[#9F9F9F] text-xs md:text-base truncate">
             {review.author}
           </div>
         </div>
-        <p className="min-h-12 h-fit mb-4 text-xl font-semibold text-custom-gray-100  line-clamp-2 leading-[1.8rem]">
+        {/* 리뷰 텍스트 */}
+        <p className="text-sm font-semibold md:text-xl min-h-10 h-fit text-custom-gray-100 line-clamp-2">
           {review.text}
         </p>
-        <p className=" text-custom-pink store-wrap">{review.store}</p>
+        {/* 상점명 */}
+        <p className=" overflow-hidden text-custom-pink truncate md:text-base text-[0.5rem] ">
+          {review.store}
+        </p>
       </div>
     </div>
   );

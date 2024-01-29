@@ -97,7 +97,7 @@ const Top = () => {
     },
   ];
   return (
-    <div className="px-16">
+    <div className={`lg:px-16 font-inter px-6`}>
       {/* 제목 */}
       {/* TOP 15 또또가 */}
       {/* 또또가에서 가장 인기있는 상위 15개 상점을 모아봤어요. */}

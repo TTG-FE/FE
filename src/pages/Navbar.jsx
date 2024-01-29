@@ -8,7 +8,7 @@ const Navbar = ({ setSelectModal }) => {
 
   return (
     // Header 아래의 네비게이션 바
-    <div className="flex justify-between w-full h-16 px-16 shadow-custom-button-shadow">
+    <div className="justify-between hidden w-full h-16 px-16 sm:flex shadow-custom-button-shadow">
       {/* 좌측영역: 이용가이드 및 상점, 메뉴 선택을 위한 네비게이션 */}
       <div className="flex items-center space-x-7 shrink-0">
         <NavLink
