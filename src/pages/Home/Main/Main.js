@@ -34,7 +34,7 @@ const Mobile = () => {
   return (
     <div>
       {/* 모바일용 헤더 */}
-      <div className="px-6 sm:hidden ">
+      <div className="px-6 md:hidden ">
         {/* 로그인 UI*/}
         <div className="flex justify-between my-11">
           <div className="space-y-2">

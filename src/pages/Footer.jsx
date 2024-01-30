@@ -6,7 +6,7 @@ const Footer = () => {
     <div>
       <Mobile />
       {/* 데스크탑  */}
-      <div className="hidden h-48 px-16 py-6 sm:flex ">
+      <div className="hidden h-48 px-16 py-6 md:flex ">
         <div className="flex items-center justify-between w-full px-10 border-t">
           {/* 좌측 영역: 로고 및 텍스트 */}
           <div className="flex items-center">
@@ -45,7 +45,7 @@ const Footer = () => {
 /** 모바일 푸터 */
 const Mobile = () => {
   return (
-    <div className="flex w-full sm:hidden">
+    <div className="flex w-full md:hidden">
       <div className="flex items-center text-white bg-[#FFCED7] h-28 w-full p-10">
         <LogoIcon width="26px" height="27px" className="mr-1" />
         <p className="mr-12 text-xl font-semibold">또또가</p>

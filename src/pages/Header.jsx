@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <div>
       {/* 데스크탑 헤더 */}
-      <div className="justify-between hidden h-40 p-12 sm:flex">
+      <div className="justify-between hidden h-40 p-12 md:flex">
         {/* 좌측영역: 로고, 검색창 */}
         <div className="flex items-center">
           {/* 로고 */}
