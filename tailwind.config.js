@@ -8,6 +8,8 @@ module.exports = {
           "linear-gradient(91deg, #FF0068 0%, #FF4D27 51%, #FF7A01 73%, #FFD600 100%)",
         "custom-gradation-180":
           "linear-gradient(180deg, #FF0068 0%, #FF4D27 71%, #FF7A01 100%)",
+        "custom-gradation-180-2":
+          "linear-gradient(180deg, #EF366A 0%, #FFE76C 113.16%)",
       },
       colors: {
         "custom-pink": "#FF0069",

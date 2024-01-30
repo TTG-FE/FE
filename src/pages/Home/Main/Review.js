@@ -6,13 +6,13 @@ const Review = () => {
       author:
         "산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱",
       text: "남은 횟감은 싸서 강아지에게 생식으로 주니 너무 좋아하더라구요~^^",
-      store: "로우앤 하이",
+      store: "로우앤 하이로우앤 하이로우앤 하이로우앤 하이로우앤 하이루하이루",
     },
     {
       id: 2,
       author: "카리나 로켓펀쳐",
       text: "언제라도 우린 together, 또 먹고싶은 감자튀김이 있는 공덕역 맛집",
-      store: "로우앤 하이",
+      store: "로우앤 하이로우앤 하이로우앤 하이로우앤 ",
     },
     {
       id: 3,
@@ -35,15 +35,18 @@ const Review = () => {
   ];
   return (
     <div className="mb-16 font-inter">
-      <div className="h-px mx-6 bg-black sm:hidden opacity-10"></div>
-      <div className="py-[1.5em] px-6 lg:px-16">
+      {/* 구분선 */}
+      <div className="h-px mx-6 bg-black md:hidden opacity-10"></div>
+      {/* 제목 텍스트 */}
+      <div className="px-6 pt-10 pb-6 md:py-6 lg:px-16">
         <p className="text-base font-semibold text-black md:text-2xl">
           또또가 리뷰
         </p>
-        <p className="text-xs font-normal md:text-xl text-custom-gray-100">
+        <p className="text-xs md:text-xl text-custom-gray-100">
           또또가 리뷰어들이 작성한 리뷰를 모아봤어요.
         </p>
       </div>
+
       {/* 카드 리스트 */}
       <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
         <ul className="flex w-full space-x-2">
@@ -72,7 +75,7 @@ const ReviewCard = ({ review }) => {
         <div className="flex">
           {/* 작성자 */}
           <figure
-            className="w-5 h-5 mr-1 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full md:w-11 md:h-11 shrink-0"
+            className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
             style={{ backgroundImage: `url(${gukbapImg})` }}
           ></figure>
           <div className="flex items-center flex-1 text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
@@ -80,11 +83,11 @@ const ReviewCard = ({ review }) => {
           </div>
         </div>
         {/* 리뷰 텍스트 */}
-        <p className="text-[0.625rem]  font-semibold md:text-xl min-h-6 h-fit text-custom-gray-100 line-clamp-2">
+        <p className="text-xs font-semibold sm:text-base min-h-6 h-fit text-custom-gray-100 line-clamp-2">
           {review.text}
         </p>
         {/* 상점명 */}
-        <p className=" overflow-hidden text-custom-pink truncate md:text-base text-[0.5rem] ">
+        <p className="text-custom-pink line-clamp-1 sm:text-sm text-[0.625rem] ">
           {review.store}
         </p>
       </div>

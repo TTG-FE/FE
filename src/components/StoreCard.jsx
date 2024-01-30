@@ -20,7 +20,7 @@ const StoreCard = ({ item }) => {
         style={{ backgroundImage: `url()` }}
       >
         {/* 하트아이콘 */}
-        <button className="absolute top-3 right-3" onClick={handleLikeClick}>
+        <button className="absolute top-2 right-2" onClick={handleLikeClick}>
           <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>

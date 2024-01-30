@@ -53,9 +53,10 @@ const Mobile = () => {
             <p className="text-[0.5rem] opacity-30">로그인</p>
           </Link>
         </div>
+
         {/* 쿠폰함 UI*/}
         <div className="my-11">
-          <div className="relative flex items-center w-full px-3 text-white h-28 rounded-xl bg-custom-gradation-180 opacity-70 ">
+          <div className="relative flex items-center w-full px-3 text-white h-28 rounded-xl bg-custom-gradation-180-2">
             <div className="w-1.5 h-20 bg-white rounded-full mix-blend-soft-light"></div>
             <div className="flex flex-col p-4">
               <div className="flex items-center mb-2">
@@ -67,12 +68,12 @@ const Mobile = () => {
               </p>
             </div>
 
+            {/* TODO: useNavigate 훅을 이용하여 쿠폰함 페이지로 이동하거나 로그인 페이지로 이동 */}
             <button className="absolute flex items-center justify-center bg-white rounded-full right-4 w-11 h-11 ">
               <RightArrow fill="#FF0069" width="24" height="24" />
             </button>
           </div>
         </div>
-        <div className="h-px bg-black opacity-10 "></div>
       </div>
     </div>
   );
@@ -85,7 +86,7 @@ const Banner = () => {
     { icon: PlusIcon, text: "채널 추가하기" },
   ];
   return (
-    <div className="hidden sm:flex">
+    <div className="hidden md:flex">
       <div className="h-40 bg-[#FFE6F0] flex items-center justify-between w-full sm:px-8 lg:px-16 xl:px-32 2xl:px-64">
         {/* 좌측영역*/}
         <div className="mr-4">

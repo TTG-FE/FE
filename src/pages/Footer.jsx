@@ -48,7 +48,6 @@ const Mobile = () => {
     <div className="flex w-full sm:hidden">
       <div className="flex items-center text-white bg-[#FFCED7] h-28 w-full p-10">
         <LogoIcon width="26px" height="27px" className="mr-1" />
-
         <p className="mr-12 text-xl font-semibold">또또가</p>
         <p>010-7747-4928</p>
       </div>

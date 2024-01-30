@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -85,7 +84,7 @@ const MenuSelector = ({ closeModal }) => {
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
           <Link
-            to="/menu-restaurant"
+            to="/menu"
             key={menu.id}
             className="w-1/4 cursor-pointer"
             onClick={closeModal}
@@ -196,7 +195,7 @@ const RegionSelector = ({ closeModal }) => {
                 {city.towns.map((town, i) => (
                   <Link
                     key={i}
-                    to="/local-restaurant"
+                    to="/region"
                     onClick={closeModal}
                     className="w-1/4 p-4 text-sm text-[#00000080] cursor-pointer"
                   >
