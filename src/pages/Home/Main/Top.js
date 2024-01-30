@@ -113,6 +113,7 @@ const Top = () => {
       {/* TOP15 카드 리스트 */}
       <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
         {/* 데스크탑 */}
+        {/* md를 기준으로 hidden처리를 하여 데스크탑용 UI를 분리 */}
         <ul className="flex-wrap justify-between hidden md:flex">
           {top15.map((item) => (
             <li className="w-[18%] mb-16" key={item.id}>
@@ -155,7 +156,7 @@ const Top15Card = ({ item }) => {
         style={{ backgroundImage: `url(${chickenImg})` }}
       >
         {/* 등수 표시 */}
-        <div className="absolute flex items-center justify-center w-8 h-8 text-white left-4 bg-custom-pink">
+        <div className="absolute flex items-center justify-center w-8 h-8 text-xs text-white left-4 bg-custom-pink">
           {item.rank}위
         </div>
         {/* 하트아이콘 */}
