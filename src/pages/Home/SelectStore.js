@@ -1,25 +1,23 @@
-import RestaurantCard from "../../../components/Home/RestaurantCard";
-import { ReactComponent as ArrowDownIcon } from "../../../assets/images/arrowDownIcon.svg";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-const Menu = () => {
-  // 메뉴 별 상점 리스트 객체
-  const MenuRestaurants = [
+import StoreCard from "../../components/StoreCard";
+
+const SelectStore = ({ title }) => {
+  // 상점 리스트 객체
+  const restaurants = [
     {
       id: 1,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      text: "[성신여대입구] 귀여운 용용이",
+      menu: "용용이 파스타 + 음료 1용용이 파스타 + 음료 1용용이 파스타 + 음료 1용용이 파스타 + 음료 1용용이 파스타 + 음료 1",
       reviewCount: 654,
     },
     {
       id: 2,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
+      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음",
       menu: "용용이 파스타 + 음료 1",
       reviewCount: 654,
     },
     {
       id: 3,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
+      text: "[성신여",
       menu: "용용이 파스타 + 음료 1",
       reviewCount: 654,
     },
@@ -115,73 +113,28 @@ const Menu = () => {
     },
   ];
 
-  const [dropdownOpen, setDropdownOpen] = useState(false); // 현재 드롭다운의 클릭 여부를 나타낸다.
-
-  /** 'toggleDropdown' 함수는 드롭다운 버튼을 클릭했을 때 호출되며
-   * 'dropdownOpen' 상태를 반전시켜 드롭다운은 펼치고 닫을 수 있다.
-   */
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
-  };
-
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`w-xl px-16 font-inter`}>
-      {/* 모달창 */}
+    <div className={`px-16 font-inter`}>
       <div>
-        {/* 메뉴 > 전체 */}
-        {/* 전국 각지의 또또가 상점을 만나보세요! */}
+        {/* 상점 필터명 */}
         <div className="flex items-center justify-between px-6 py-12">
           <div>
-            <div className="mb-4 text-2xl font-semibold leading-normal">
-              메뉴 <em>&gt;</em>{" "}
-              <span className="relative">
-                전체
-                <div className="absolute right-0 w-12 h-1 -bottom-1 bg-custom-yellow"></div>
-              </span>
+            <div className="mb-4 text-2xl font-semibold">
+              {title} &gt;{" "}
+              <span className="border-b-4 border-custom-yellow">전체</span>
             </div>
-            <p className="text-sm font-normal leading-normal text-custom-gray-100">
+            <p className="text-sm font-normal text-custom-gray-100">
               전국 각지의 또또가 상점을 만나보세요!
             </p>
           </div>
-
-          {/* 드롭다운 (인기순, 추천순, 최신순) */}
-          <div className="w-48 rounded-xl text-custom-gray-100">
-            <button
-              onClick={toggleDropdown}
-              className="flex items-center justify-between w-full p-2  bg-[#F3F3F3] rounded-xl"
-            >
-              <span>인기순</span>
-              <ArrowDownIcon
-                fill={dropdownOpen ? "#FF0069" : "#B2B2B2"}
-                className={`transform transition-transform ${
-                  dropdownOpen ? "rotate-[-180deg]" : ""
-                }`}
-              />
-            </button>
-
-            {/* 드롭다운을 클릭하면 펼쳐진다 */}
-            {dropdownOpen && (
-              <div className="flex flex-col w-48 mt-2 bg-[#F3F3F3] rounded-xl absolute z-10">
-                <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white rounded-t-xl">
-                  인기순
-                </button>
-                <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white">
-                  추천순
-                </button>
-                <button className="p-2 transition-all text-start hover:bg-custom-pink hover:text-white rounded-b-xl">
-                  최신순
-                </button>
-              </div>
-            )}
-          </div>
         </div>
 
-        {/* 카드 리스트 */}
+        {/* 상점 카드 리스트 */}
         <ul className="flex flex-wrap mb-[2.69rem]">
-          {MenuRestaurants.map((item) => (
+          {restaurants.map((item) => (
             <li className="w-1/5 p-4" key={item.id}>
-              <RestaurantCard item={item} />
+              <StoreCard item={item} />
             </li>
           ))}
         </ul>
@@ -190,4 +143,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default SelectStore;

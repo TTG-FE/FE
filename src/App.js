@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // PAGES
 import Store from "./pages/Store";
 import Main from "./pages/Home/Main/Main";
-import LocalRestaurant from "./pages/Home/LocalRestaurant/LocalRestaurant";
-import MenuRestaurant from "./pages/Home/MenuRestaurant/MenuRestaurant";
-import UserGuide from "./pages/Home/UserGruide/UserGuide";
+import SelectStore from "./pages/Home/SelectStore";
+import UserGuide from "./pages/Home/UserGuide";
 import Header from "./pages/Header";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Modal from "./components/Home/Modal";
 import { useState } from "react";
 import Coupon from "./pages/Coupon";
+import Heart from "./pages/Home/Heart";
 import MyPage from "./pages/MyPage";
 import { Login } from "./pages/Login";
 
@@ -31,11 +31,12 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/store" element={<Store />} />
           <Route path="/coupon" element={<Coupon />} />
-          <Route path="/local-restaurant" element={<LocalRestaurant />} />
-          <Route path="/menu-restaurant" element={<MenuRestaurant />} />
+          <Route path="/region" element={<SelectStore title={"지역"} />} />
+          <Route path="/menu" element={<SelectStore title={"메뉴"} />} />
           <Route path="/user-guide" element={<UserGuide />} />
-          <Route path="/mypage" element={<MyPage/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/heart" element={<Heart />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/login" element={<Login />} />
           {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
         </Routes>
       </div>

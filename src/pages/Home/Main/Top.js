@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import chickenImg from "./../../../assets/images/chicken.png";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
@@ -98,27 +97,44 @@ const Top = () => {
     },
   ];
   return (
-    <div className="px-16">
-      {/* 제목 */}
-      {/* TOP 15 또또가 */}
-      {/* 또또가에서 가장 인기있는 상위 15개 상점을 모아봤어요. */}
-      <div className="py-[1.5em]">
-        <p className="text-2xl font-semibold leading-normal text-black">
+    <div className={`font-inter my-16`}>
+      {/* 구분선 */}
+      <div className="h-px mx-6 bg-black md:hidden opacity-10"></div>
+      {/* 제목 텍스트*/}
+      <div className="px-6 pt-10 pb-6 md:py-6 lg:px-16">
+        <p className="text-base font-semibold text-black md:text-2xl">
           TOP 15 또또가
         </p>
-        <p className="text-xl font-normal leading-normal text-custom-gray-100">
+        <p className="text-xs md:text-xl text-custom-gray-100">
           또또가에서 가장 인기있는 상위 15개 상점을 모아봤어요.
         </p>
       </div>
 
       {/* TOP15 카드 리스트 */}
-      <ul className="flex flex-wrap justify-between">
-        {top15.map((item) => (
-          <li className="w-[18%] mb-16" key={item.id}>
-            <Top15Card item={item} />
-          </li>
-        ))}
-      </ul>
+      <div className="w-full px-6 lg:px-16">
+        {/* 데스크탑: 768px 이상일 때 보이도록 설정 */}
+        {/* md를 기준으로 hidden처리를 하여 데스크탑용 UI를 분리 */}
+        <ul className="flex-wrap justify-between hidden md:flex">
+          {top15.map((item) => (
+            <li className="w-[18%] mb-16" key={item.id}>
+              <Top15Card item={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* 모바일용 */}
+      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
+        <ul className="flex w-full space-x-2 md:hidden">
+          {top15.map((item) => (
+            <li
+              className="w-[40%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4"
+              key={item.id}
+            >
+              <Top15Card item={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
@@ -138,26 +154,25 @@ const Top15Card = ({ item }) => {
     <div>
       {/* 메뉴 이미지 */}
       <figure
-        className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-[0.63rem]"
+        className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
         style={{ backgroundImage: `url(${chickenImg})` }}
       >
-        <img src={chickenImg} alt="menu" className="hidden" />
         {/* 등수 표시 */}
-        <div className="flex justify-center items-center absolute w-[2.19rem] h-[2.56rem] left-[0.94rem] bg-custom-pink text-white">
+        <div className="absolute flex items-center justify-center w-8 h-8 text-xs text-white left-4 bg-custom-pink">
           {item.rank}위
         </div>
         {/* 하트아이콘 */}
-        <button className="absolute top-4 right-4" onClick={handleLikeClick}>
+        <button className="absolute top-2 right-2" onClick={handleLikeClick}>
           <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
       <div>
         {/* 텍스트 */}
-        <p className="mb-2 text-base font-bold h-fit min-h-10 text-custom-gray-100 line-clamp-2 ">
+        <p className="mb-2 text-xs font-bold sm:text-base sm:min-h-12 min-h-8 text-custom-gray-100 line-clamp-2 ">
           {item.text}
         </p>
         {/* 또또가 리뷰 참여 횟수 */}
-        <p className="text-sm text-custom-gray-200 ">
+        <p className="sm:text-sm text-custom-gray-200 text-[0.625rem]">
           또또가 리뷰 참여 횟수 {item.reviewCount}
         </p>
       </div>
