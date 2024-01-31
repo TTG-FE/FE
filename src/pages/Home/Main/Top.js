@@ -111,8 +111,8 @@ const Top = () => {
       </div>
 
       {/* TOP15 카드 리스트 */}
-      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
-        {/* 데스크탑 */}
+      <div className="w-full px-6 lg:px-16">
+        {/* 데스크탑: 768px 이상일 때 보이도록 설정 */}
         {/* md를 기준으로 hidden처리를 하여 데스크탑용 UI를 분리 */}
         <ul className="flex-wrap justify-between hidden md:flex">
           {top15.map((item) => (
@@ -121,7 +121,9 @@ const Top = () => {
             </li>
           ))}
         </ul>
-        {/* 모바일용 */}
+      </div>
+      {/* 모바일용 */}
+      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
         <ul className="flex w-full space-x-2 md:hidden">
           {top15.map((item) => (
             <li
@@ -166,7 +168,7 @@ const Top15Card = ({ item }) => {
       </figure>
       <div>
         {/* 텍스트 */}
-        <p className="mb-2 text-xs font-bold sm:text-base h-fit min-h-6 text-custom-gray-100 line-clamp-2 ">
+        <p className="mb-2 text-xs font-bold sm:text-base sm:min-h-12 min-h-8 text-custom-gray-100 line-clamp-2 ">
           {item.text}
         </p>
         {/* 또또가 리뷰 참여 횟수 */}

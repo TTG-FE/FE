@@ -4,10 +4,12 @@ import Logo from "./../assets/images/footerLogoIcon.png";
 const Footer = () => {
   return (
     <div>
+      {/* 780px 전까지 보이도록 설정 */}
       <Mobile />
-      {/* 데스크탑  */}
-      <div className="hidden h-48 px-16 py-6 md:flex ">
-        <div className="flex items-center justify-between w-full px-10 border-t">
+
+      {/* 780px 부터 보이도록 설정   */}
+      <div className="hidden px-8 pt-8 md:flex">
+        <div className="flex items-center justify-between w-full p-10 border-t">
           {/* 좌측 영역: 로고 및 텍스트 */}
           <div className="flex items-center">
             {/* 로고 */}
@@ -18,23 +20,25 @@ const Footer = () => {
               }}
             ></div>
             {/* 로고 옆 텍스트 */}
-            <div className="mr-4 shrink-0">
-              <p className="text-3xl font-semibold text-[#40404080]">또또가</p>
-              <p className="text-sm font-light text-[#54545480]">
+            <div className="mr-4 space-y-2 shrink-0">
+              <p className="text-3xl font-semibold opacity-60 text-custom-gray-100">
+                또또가
+              </p>
+              <p className="text-sm font-bold opacity-60 text-custom-gray-100">
                 또 가고싶은 곳만 리뷰한다
               </p>
             </div>
           </div>
 
           {/* 우측 영역: 전화번호 및 메뉴 목록 */}
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-end text-[#404040] space-y-1">
             <div className="flex items-center">
-              <p className="mr-4">010-7747-4928</p>
+              <p className="mr-3 font-bold">010-7747-4928</p>
               <PhoneIcon />
             </div>
-            <p className="text-5 text-[#404040] underline">공지사항</p>
-            <p className="text-5 text-[#404040] underline">우리가게 등록하기</p>
-            <p className="text-5 text-[#404040] underline">또또가 팀</p>
+            <p className="underline ">공지사항</p>
+            <p className="underline ">우리가게 등록하기</p>
+            <p className="underline ">또또가 팀</p>
           </div>
         </div>
       </div>

@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import Top from "./Top";
 import Hot from "./Hot";
 import Review from "./Review";
+import Banner from "./Banner";
 import { ReactComponent as CouponIcon } from "./../../../assets/images/couponIcon.svg";
 import { ReactComponent as RightArrow } from "./../../../assets/images/rightArrow.svg";
-import { ReactComponent as KakaoIcon } from "./../../../assets/images/kakaoIcon.svg";
-import { ReactComponent as SearchIcon } from "./../../../assets/images/searchIcon2.svg";
-import { ReactComponent as PlusIcon } from "./../../../assets/images/plusIcon.svg";
 import { ReactComponent as LoginIcon } from "./../../../assets/images/loginIcon.svg";
 
 const Main = () => {
@@ -15,6 +13,7 @@ const Main = () => {
 
     <div className=" font-inter">
       <div>
+        {/* 모바일일 때만 존재하는 상단 로그인, 쿠폰함 */}
         <Mobile />
         {/* TOP 15 또또가 */}
         <Top />
@@ -29,7 +28,7 @@ const Main = () => {
   );
 };
 
-/** 모바일 메인 페이지 */
+/** 모바일일 때만 존재하는 상단 로그인, 쿠폰함 */
 const Mobile = () => {
   return (
     <div>
@@ -68,58 +67,18 @@ const Mobile = () => {
               </p>
             </div>
 
-            {/* TODO: useNavigate 훅을 이용하여 쿠폰함 페이지로 이동하거나 로그인 페이지로 이동 */}
-            <button className="absolute flex items-center justify-center bg-white rounded-full right-4 w-11 h-11 ">
-              <RightArrow fill="#FF0069" width="24" height="24" />
-            </button>
+            {/* 화살표 버튼을 누르면 쿠폰함 페이지로 이동 */}
+            <Link
+              className="absolute flex items-center justify-center bg-white rounded-full right-4 w-11 h-11 "
+              to="/coupon"
+            >
+              <RightArrow fill="#FF0069" width="18" height="18" />
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
 };
-/** 또또가 카카오 채널톡 배너 */
-const Banner = () => {
-  const icons = [
-    { icon: KakaoIcon, text: "카카오톡 실행하기" },
-    { icon: SearchIcon, text: "검색창에 '또또가'입력하기" },
-    { icon: PlusIcon, text: "채널 추가하기" },
-  ];
-  return (
-    <div className="hidden md:flex">
-      <div className="h-40 bg-[#FFE6F0] flex items-center justify-between w-full sm:px-8 lg:px-16 xl:px-32 2xl:px-64">
-        {/* 좌측영역*/}
-        <div className="mr-4">
-          <p className="flex items-center h-12 font-bold md:text-3xl whitespace-nowrap sm:text-2xl ">
-            또또가 카카오 채널톡
-          </p>
-          <p className="text-sm font-light md:text-xl">
-            카카오톡으로 더 편하게 또또가의 소식을 받아보세요!
-          </p>
-        </div>
-        {/* 우측영역 */}
-        <ul className="relative flex items-center justify-between px-4 bg-white rounded-lg w-96 h-28 shrink-0">
-          {icons.map((item, i) => (
-            <li className="flex flex-col items-center" key={i}>
-              <figure className="bg-[#FFEE54] w-16 h-16 rounded-full mb-2 flex justify-center items-center">
-                <item.icon />
-              </figure>
-              <p className="text-xs font-light">{item.text}</p>
-            </li>
-          ))}
-          <RightArrow
-            className="absolute top-8 left-28"
-            width="32"
-            height="28"
-          />
-          <RightArrow
-            className="absolute top-8 right-24"
-            width="33"
-            height="28"
-          />
-        </ul>
-      </div>
-    </div>
-  );
-};
+
 export default Main;

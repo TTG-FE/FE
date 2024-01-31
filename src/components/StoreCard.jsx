@@ -26,11 +26,11 @@ const StoreCard = ({ item }) => {
       </figure>
       <div>
         {/* 텍스트 */}
-        <p className="mb-2 text-base font-semibold m-h-10 text-custom-gray-100 line-clamp-2 ">
+        <p className="mb-2 text-base font-semibold min-h-10 text-custom-gray-100 line-clamp-2 ">
           {item.text}
         </p>
         {/* 메뉴 */}
-        <p className="mb-6 text-xs font-semibold text-custom-pink">
+        <p className="mb-6 text-xs font-semibold text-custom-pink line-clamp-1">
           {item.menu}
         </p>
         {/* 또또가 리뷰 참여 횟수 */}

@@ -8,37 +8,37 @@ import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg"
 
 /** Header */
 const Header = () => {
-  const [buttonsHover, setButtonsHover] = useState([false, false, false]); // 버튼 호버 여부
+  const [buttonsHover, setButtonsHover] = useState({
+    coupon: false,
+    heart: false,
+    my: false,
+  }); // 버튼 호버 여부
 
   /** 버튼 Hover 일 때 버튼 호버 여부 변경 */
-  const handleButtonColor = (index, isHovered) => {
-    setButtonsHover((prev) => {
-      const newHover = [...prev];
-      newHover[index] = isHovered;
-      return newHover;
-    });
+  const handleButtonColor = (button, isHovered) => {
+    setButtonsHover((prev) => ({ ...prev, [button]: isHovered }));
   };
 
   return (
     <div>
-      {/* 데스크탑 헤더 */}
-      <div className="justify-between hidden h-40 p-12 md:flex">
+      {/* 780px 이상일 때 보여지도록 설정 */}
+      <div className="justify-between hidden h-40 md:px-6 lg:p-12 md:flex">
         {/* 좌측영역: 로고, 검색창 */}
         <div className="flex items-center">
           {/* 로고 */}
-          <Link className="mr-4 w-14 h-14 shrink-0" to="/">
+          <Link className="mr-4 w-14 h-14" to="/">
             <div
-              className="mr-4 bg-center bg-no-repeat bg-cover w-14 h-14"
+              className="bg-center bg-no-repeat bg-cover w-14 h-14 shrink-0 "
               style={{ backgroundImage: `url(${Logo})` }}
             ></div>
           </Link>
 
           {/* 로고 옆 텍스트 */}
-          <div className="mr-8 shrink-0">
+          <div className="mr-8">
             <Link className="text-3xl font-semibold" to="/">
               또또가
             </Link>
-            <p className="text-xs font-light text-[#19191980]">
+            <p className="text-xs font-light text-[#191919] opacity-70">
               또 가고싶은 곳만 리뷰한다
             </p>
           </div>
@@ -47,33 +47,33 @@ const Header = () => {
         </div>
 
         {/* 우측영역: 버튼 3개와 '우리가게 등록하기' 버튼 */}
-        {/* 참고: 버튼을 눌렀을 때 페이지 이동은 useNavigate로 할것! -> 버튼 컴포넌트 구현 */}
-        <div className="flex items-center">
+        <div className="flex items-center py-2">
           {/* 쿠폰 버튼 */}
-          <div className="flex">
-            <Button
+          <div className="flex lg:mr-6 lg:space-x-6 md:space-x-2">
+            <CustomLink
               icon={
                 <CouponIcon
                   stroke={
                     // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
-                    buttonsHover[0]
+                    buttonsHover.coupon
                       ? "url(#paint0_linear_306_2415)"
                       : "#19191980"
                   }
                 />
               }
               handleButtonColor={handleButtonColor}
-              index={0}
               label={"쿠폰함"}
+              to={"/coupon"}
+              obj="coupon"
             />
 
             {/* 관심상점 버튼 */}
-            <Button
+            <CustomLink
               icon={
                 <HeartIcon
                   fill="none"
                   stroke={
-                    buttonsHover[1]
+                    buttonsHover.heart
                       ? "url(#paint0_linear_306_2415)"
                       : "#19191980"
                   }
@@ -81,14 +81,15 @@ const Header = () => {
               }
               label={"관심상점"}
               handleButtonColor={handleButtonColor}
-              index={1}
+              to="heart"
+              obj="heart"
             />
             {/* 마이 버튼 */}
-            <Button
+            <CustomLink
               icon={
                 <HumanIcon
                   stroke={
-                    buttonsHover[2]
+                    buttonsHover.my
                       ? "url(#paint0_linear_306_2415)"
                       : "#19191980"
                   }
@@ -96,12 +97,13 @@ const Header = () => {
               }
               label={"마이"}
               handleButtonColor={handleButtonColor}
-              index={2}
+              to="/"
+              obj="my"
             />
           </div>
           {/* 우리 가게 등록하러가기 버튼 */}
           {/* border-custom-gradation은 커스텀한 또또가 그라데이션 색상 */}
-          <button className="w-48 h-14 text-[#19191980] text-sm rounded-lg  shadow-custom-button-shadow border-custom-gradation hidden lg:block">
+          <button className=" w-40 h-full  text-[#19191980] text-xs font-semibold hover:text-custom-pink rounded-lg  shadow-custom-button-shadow border-custom-gradation hidden lg:block ">
             우리 가게 등록하러가기
           </button>
         </div>
@@ -119,25 +121,21 @@ const Header = () => {
  * @param {number} props.index - 버튼 인덱스
  * @param {Function} props.handleButtonColor - 마우스 위치에 따라 버튼 색상을 변경하는 함수
  */
-const Button = ({ icon, label, index, handleButtonColor }) => {
+const CustomLink = ({ icon, label, to, obj, handleButtonColor }) => {
   // TODO: 페이지 경로 설정
-  const PATHS = {
-    0: "/coupon",
-    1: "/heart",
-    2: "/",
-  };
+
   return (
     // 버튼 요소에 마우스 진입시와 마우스 이탈시 handleButtonColor 함수를 호출하여 hover 상태를 갱신
     <Link
-      onMouseEnter={() => handleButtonColor(index, true)}
-      onMouseLeave={() => handleButtonColor(index, false)}
-      className="flex flex-col items-center  w-14 h-12 mr-1 xl:mr-8 text-[#19191980] hover:text-[#FF0069] text-sm"
-      to={PATHS[index]}
+      onMouseEnter={() => handleButtonColor(obj, true)}
+      onMouseLeave={() => handleButtonColor(obj, false)}
+      className="flex flex-col items-center justify-between text-[#19191980] hover:text-[#FF0069] text-sm"
+      to={to}
     >
       {/* 아이콘 */}
       {icon}
       {/* 텍스트 */}
-      <p> {label}</p>
+      <p className="p-1 text-xs"> {label}</p>
     </Link>
   );
 };
