@@ -45,7 +45,7 @@ const Mobile = () => {
             </p>
           </div>
           {/* TODO: 로그인 페이지 연결 */}
-          <Link to="/">
+          <Link to="/login">
             <div className="bg-[#EDEDED] rounded-full w-6 h-6 flex items-center justify-center">
               <LoginIcon />
             </div>

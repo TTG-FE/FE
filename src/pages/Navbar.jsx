@@ -11,7 +11,7 @@ const Navbar = ({ setSelectModal }) => {
         <CustomNavLink to="/region" onClick={() => setSelectModal(1)}>
           지역 별 상점
         </CustomNavLink>
-        <CustomNavLink to="/menu" onClick={() => setSelectModal(1)}>
+        <CustomNavLink to="/menu" onClick={() => setSelectModal(2)}>
           메뉴선택
         </CustomNavLink>
       </div>
@@ -20,7 +20,7 @@ const Navbar = ({ setSelectModal }) => {
       {/* 우측영역: 로그인 여부에 따라서 다른 메뉴를 표시 */}
       <div className="flex items-center">
         {/* 로그인되지 않은 상태 */}
-        <CustomNavLink to="/">로그인</CustomNavLink>
+        <CustomNavLink to="/login">로그인</CustomNavLink>
       </div>
       {/* 로그인된 상태, 로그인 기능이 완료되면 'hidden'은 삭제 */}
       <div className="items-center hidden">

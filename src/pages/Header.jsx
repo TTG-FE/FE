@@ -97,7 +97,7 @@ const Header = () => {
               }
               label={"마이"}
               handleButtonColor={handleButtonColor}
-              to="/"
+              to="/mypage"
               obj="my"
             />
           </div>

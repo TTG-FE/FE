@@ -12,6 +12,8 @@ import Modal from "./components/Home/Modal";
 import { useState } from "react";
 import Coupon from "./pages/Coupon";
 import Heart from "./pages/Home/Heart";
+import MyPage from "./pages/MyPage";
+import { Login } from "./pages/Login";
 
 function App() {
   // 모달 선택창 상태를 관리하는 상태 변수
@@ -33,7 +35,8 @@ function App() {
           <Route path="/menu" element={<SelectStore title={"메뉴"} />} />
           <Route path="/user-guide" element={<UserGuide />} />
           <Route path="/heart" element={<Heart />} />
-
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/login" element={<Login />} />
           {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
         </Routes>
       </div>
