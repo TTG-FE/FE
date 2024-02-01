@@ -67,13 +67,13 @@ const CouponCard = ({
       {/* //모바일 쿠폰 영역 끝 */}
 
       {/* 데스크탑 쿠폰 */}
-      <main className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden sm:block">
+      <main className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden sm:flex">
         {/* 쿠폰 이미지 및 상세 내용 */}
-        <div className="flex w-3/4 pl-7 py-6">
+        <div className="flex basis-3/4 pl-7 py-6">
           {/* 이미지 */}
           <img src={storeImg} alt="" className="mr-12" />
           {/* 내용 전체 크기 설정 */}
-          <div className="pt-11 pb-7">
+          <div className="pt-11 pb-7 truncate">
             <h2 className="text-3xl	font-medium	mb-4">
               [{storeArea}] {storeName}
             </h2>
@@ -92,7 +92,7 @@ const CouponCard = ({
         </div>
         {/* 쿠픈 다운로드 */}
         <div
-          className={`relative w-1/4 rounded-r-lg h-full overflow-hidden ${
+          className={`relative basis-1/4 rounded-r-lg h-full overflow-hidden ${
             used ? "bg-custom-gray-200" : "bg-custom-gradation-180"
           }`}
         >
@@ -305,7 +305,7 @@ const CouponCard = ({
           onClose={handleCloseModal}
           isCoupon={true}
         >
-          <div className="px-5 w-[376px] h-[510px]">
+          <div className="px-9 py-8 w-[408px] h-full">
             <div className="h-[300px]">
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img src={couponStoreImg} alt="" className="mt-5 mb-11" />
@@ -316,24 +316,26 @@ const CouponCard = ({
             <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink"></div>
             <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
 
-            <div className="border-dashed border-t-2 border-custom-pink text-center">
-              <h2 className="text-base mt-12 mb-2.5">
-                [{storeArea}] {storeName}
-              </h2>
-              <h3 className="text-sm mb-2.5 text-custom-orange">
-                {promotionText}
-              </h3>
-              <h4 className="text-xs mb-5">기한: {couponDate}</h4>
-            </div>
-            <button
-              className="absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded bg-custom-pink text-white text-xs"
-              onClick={() => {
-                handleCloseModal();
-                handleOpenModal("isCouponInfoModalOpen");
-              }}
-            >
-              발급하기
-            </button>
+            <section className="flex flex-col items-center">
+              <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
+                <h2 className="text-base mt-12 mb-2.5">
+                  [{storeArea}] {storeName}
+                </h2>
+                <h3 className="text-sm mb-2.5 text-custom-orange">
+                  {promotionText}
+                </h3>
+                <h4 className="text-xs mb-5">기한: {couponDate}</h4>
+                <button
+                  className="w-full h-9 rounded bg-custom-pink text-white text-xs"
+                  onClick={() => {
+                    handleCloseModal();
+                    handleOpenModal("isCouponInfoModalOpen");
+                  }}
+                >
+                  직원확인
+                </button>
+              </div>
+            </section>
           </div>
         </Modal>
 
@@ -342,9 +344,9 @@ const CouponCard = ({
           onClose={handleCloseModal}
           isCoupon={true}
         >
-          <div className="px-5 w-[376px] h-[510px] ">
+          <div className="px-9 py-8 w-[408px] h-full">
             <div className="h-[300px]">
-              <div className="text-center">직원 확인</div>
+              <div className="text-center text-custom-gray-200">직원 확인</div>
               <div className="flex justify-center items-center h-5/6">
                 <img
                   className=""
@@ -356,48 +358,50 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
             <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
-            <div className="border-dashed border-t-2 border-custom-pink">
-              {/* 대쉬바 밑에 내용 전체 div */}
-              <div className="ml-14">
-                <div className="mt-9 mb-4 flex items-center">
-                  <button
-                    className="mr-1"
-                    onClick={() => {
-                      setIsCheck(!isCheck);
-                    }}
-                  >
-                    <CheckIcon isCheck={isCheck} />
-                  </button>
-                  <p className="text-[11px] text-black">
-                    해당 쿠폰의 상점 직원이 맞습니다. (필수)
-                  </p>
+            <section className="flex flex-col items-center">
+              <div className="w-11/12 border-dashed border-t-2 border-custom-pink ">
+                {/* 대쉬바 밑에 내용 전체 div */}
+                <div className="mb-7">
+                  <div className="mt-9 mb-2 flex items-center">
+                    <button
+                      className="mr-1"
+                      onClick={() => {
+                        setIsCheck(!isCheck);
+                      }}
+                    >
+                      <CheckIcon isCheck={isCheck} />
+                    </button>
+                    <p className="text-[11px] text-black">
+                      해당 쿠폰의 상점 직원이 맞습니다. (필수)
+                    </p>
+                  </div>
+                  <div className="text-[#FF0000] text-xs">
+                    <p>※ 발급 정보는 마이페이지에서 수정가능합니다.</p>
+                    <p>※ 쿠폰 발급 이후 발급 정보 수정이 불가합니다.</p>
+                    <p>※ 본인 이외에 쿠폰 발급은 불가합니다.</p>
+                  </div>
                 </div>
-                <div className="text-[#FF0000] text-xs">
-                  <p>※ 발급 정보는 마이페이지에서 수정가능합니다.</p>
-                  <p>※ 쿠폰 발급 이후 발급 정보 수정이 불가합니다.</p>
-                  <p>※ 본인 이외에 쿠폰 발급은 불가합니다.</p>
-                </div>
-              </div>
 
-              <button
-                className={`absolute max-w-[300px] w-full  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded  text-white text-xs ${
-                  isCheck
-                    ? "bg-custom-pink"
-                    : "bg-[#B2B2B2] cursor-not-allowed"
-                }`}
-                onClick={() => {
-                  if (isCheck) {
-                    // isCheck가 true일 때만 클릭 이벤트 처리
-                    handleCloseModal();
-                    handleOpenModal("isCouponDownloadModalOpen");
-                    // console.log(modalStates);
-                  }
-                }}
-                disabled={!isCheck}
-              >
-                발급하기
-              </button>
-            </div>
+                <button
+                  className={`w-full h-9 rounded  text-white text-xs ${
+                    isCheck
+                      ? "bg-custom-pink"
+                      : "bg-[#B2B2B2] cursor-not-allowed"
+                  }`}
+                  onClick={() => {
+                    if (isCheck) {
+                      // isCheck가 true일 때만 클릭 이벤트 처리
+                      handleCloseModal();
+                      handleOpenModal("isCouponDownloadModalOpen");
+                      // console.log(modalStates);
+                    }
+                  }}
+                  disabled={!isCheck}
+                >
+                  사용하기
+                </button>
+              </div>
+            </section>
           </div>
         </Modal>
 
@@ -405,46 +409,48 @@ const CouponCard = ({
           isOpen={modalStates.isCouponDownloadModalOpen}
           onClose={handleCloseModal}
           isCoupon={true}
+          isLast={true}
         >
-          {/* <div className="px-5 w-max-[376px] w-4/5 h-[510px]"> */}
-          {/* 모달 실선 윗 영역 */}
-          <div className="px-5">
-            <div className="h-[300px] relative">
-              <div className="text-center">쿠폰 정보</div>
-
-              <div className="flex justify-center items-center h-5/6 grayscale">
-                <img src={QrCodeIcon} alt="" />
-              </div>
-              <div className="w-[160px] h-[160px] text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
+          <div className="px-9 py-8 w-[408px] h-full">
+            <div className="h-[300px]">
+              <div className="text-center text-custom-gray-200">쿠폰 정보</div>
+              <img
+                src={couponStoreImg}
+                alt=""
+                className="mt-5 mb-11 grayscale"
+              />
+              <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
                 <p className="text-custom-pink text-4xl font-bold">
-                  발급
+                  사용
                   <br />
                   완료
                 </p>
               </div>
             </div>
 
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
+            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-gray-400 "></div>
+            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-gray-400 "></div>
 
-            <div className="border-dashed border-t-2 border-custom-pink text-center">
-              <h2 className="text-base mt-12 mb-2.5">
-                [{storeArea}] {storeName}
-              </h2>
-              <h3 className="text-sm mb-2.5 text-custom-orange">
-                {promotionText}
-              </h3>
-              <h4 className="text-xs">기한: {couponDate}</h4>
-            </div>
-            <button
-              className="absolute w-[300px]  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded bg-[#B2B2B2] text-white text-xs"
-              onClick={() => {
-                handleCloseModal();
-                handleCouponUsed(id);
-              }}
-            >
-              닫기
-            </button>
+            <section className="flex flex-col items-center">
+              <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
+                <h2 className="text-base mt-12 mb-2.5">
+                  [{storeArea}] {storeName}
+                </h2>
+                <h3 className="text-sm mb-2.5 text-custom-orange">
+                  {promotionText}
+                </h3>
+                <h4 className="text-xs mb-5">기한: {couponDate}</h4>
+                <button
+                  className="w-full h-9 rounded bg-[#B2B2B2] text-white text-xs"
+                  onClick={() => {
+                    handleCloseModal();
+                    handleCouponUsed(id);
+                  }}
+                >
+                  닫기
+                </button>
+              </div>
+            </section>
           </div>
         </Modal>
       </div>

@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, isCoupon,isLast, children }) => {
           >
             {/* 모달 닫기 버튼 */}
             <button
-              className="absolute top-5 right-3 text-gray-500 cursor-pointer"
+              className="absolute top-5 right-3 sm:top-9 sm:right-4 text-gray-500 cursor-pointer"
               onClick={onClose}
             >
               <img src={closeIcon} alt="" />
