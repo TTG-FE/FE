@@ -1,7 +1,7 @@
 import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
 
-const SelectStore = ({ title, selectModal, setSelectModal }) => {
+const Region = ({ selectModal, setSelectModal }) => {
   // 상점 리스트 객체
   const restaurants = [
     {
@@ -124,7 +124,7 @@ const SelectStore = ({ title, selectModal, setSelectModal }) => {
         <div className="flex items-center justify-between px-6 py-12">
           <div>
             <div className="mb-4 text-2xl font-semibold">
-              {title} &gt;{" "}
+              지역 &gt;{" "}
               <span className="border-b-4 border-custom-yellow">전체</span>
             </div>
             <p className="text-sm font-normal text-custom-gray-100">
@@ -146,4 +146,4 @@ const SelectStore = ({ title, selectModal, setSelectModal }) => {
   );
 };
 
-export default SelectStore;
+export default Region;
