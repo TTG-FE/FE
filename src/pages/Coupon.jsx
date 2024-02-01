@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Asset
 import BakeryImg from "../assets/bakery.png";
@@ -7,7 +7,11 @@ import QrCodeImg from "../assets/qr-code-line.svg";
 import arrowRightImg from "../assets/arrow_right_light.svg";
 import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
 import phoneDownloadIcon from "../assets/phone_downloadIcon.svg";
+import searchIcon from "../assets/images/searchIcon.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
+import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
+
+
 
 // Component
 import CouponCard from "../components/CouponCard";
@@ -109,12 +113,9 @@ const Coupon = () => {
         {login ? (
           <div className="relative mt-8">
             {/* 검색 영역 */}
-            <div className="flex justify-center">
-              <input
-                type="text"
-                className="border-b-2 w-4/5 p-1.5 mb-11"
-                placeholder="또 가고싶은 곳을 검색해보세요!"
-              />
+
+            <div className="flex justify-center mb-10">
+              <SearchBar />
             </div>
 
             {/* 쿠폰 영역 */}
@@ -229,6 +230,54 @@ const Coupon = () => {
         </div>
       </div>
     </>
+  );
+};
+
+const SearchBar = () => {
+  const [inputText, setInputText] = useState(""); // 검색 텍스트
+  const [isFocused, setIsFocused] = useState(false); // 검색창 포커스 여부
+  const inputRef = useRef(); // 검색창
+
+  /** handleInputChange': 검색창의 값이 변경될 때마다 호출되는 함수 */
+  const handleInputChange = (e) => setInputText(e.target.value);
+
+  /** 'handleSearch': 검색 버튼 클릭 시 API 요청보내는 함수 */
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    // 입력 텍스트가 비어있다면 검색 입력창에 다시 포커스를 맞춤
+    if (inputText === "") {
+      inputRef.current.focus();
+    }
+    // TODO: 아래에 'inputText'를 기반으로 하는 검색을 위한 API 요청을 로직을 구현하세요.
+  };
+
+  return (
+    // 검색 폼 컴포넌트
+    <form className="flex w-80" onSubmit={handleSearch}>
+      {/* 입력창 */}
+      <input
+        ref={inputRef}
+        type="text"
+        value={inputText}
+        placeholder={
+          "찾고싶은 쿠폰을 검색해보세요!"
+        }
+        onChange={handleInputChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        className="flex-1 text-xs border-b outline-none ps-2 h-6 focus:border-custom-pink"
+      />
+      {/* 검색버튼 */}
+      <button
+        type="submit"
+        className="outline-none relative"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
+        <SearchIcon fill={isFocused ? "#FF0069" : "#D9D9D9"} className="absolute top-0 right-0"/>
+      </button>
+    </form>
   );
 };
 
