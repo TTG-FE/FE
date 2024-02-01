@@ -8,7 +8,7 @@ import UserGuide from "./pages/Home/UserGuide";
 import Header from "./pages/Header";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
-import Modal from "./components/Home/Modal";
+import SelectModal from "./components/SelectModal";
 import { useState } from "react";
 import Coupon from "./pages/Coupon";
 import Heart from "./pages/Home/Heart";
@@ -24,7 +24,10 @@ function App() {
       <Navbar setSelectModal={setSelectModal} />
       <div className="relative min-h-screen">
         {/* 모달창 컴포넌트 (모달 선택 상태 전달)*/}
-        <Modal selectModal={selectModal} setSelectModal={setSelectModal} />
+        <SelectModal
+          selectModal={selectModal}
+          setSelectModal={setSelectModal}
+        />
 
         {/* 라우트를 정의한 부분 */}
         <Routes>

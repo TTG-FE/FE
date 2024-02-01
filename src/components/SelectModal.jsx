@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
  * @param {number} props.selectModal - 모달 번호(0: 모달창x 1: 지역 선택 2: 메뉴선택)
  * @param {Function} props.setSelectModal - 모달 번호를 변경하는 함수
  */
-const Modal = ({ selectModal, setSelectModal }) => {
+const SelectModal = ({ selectModal, setSelectModal }) => {
   /** 모달 닫기 함수 */
   const closeModal = () => {
     setSelectModal(0);
@@ -211,4 +211,4 @@ const RegionSelector = ({ closeModal }) => {
   );
 };
 
-export default Modal;
+export default SelectModal;
