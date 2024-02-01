@@ -23,17 +23,6 @@ const CouponCard = ({
   // 쿠폰 정보
   const { id, used } = isCoupon;
 
-  // 이메일 유효검사
-  const [email, setEmail] = useState("abc@123.com");
-
-  //email& 비밀번호 정규식
-  const regexEmail =
-    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-
-  const emailCheck = (email) => {
-    return regexEmail.test(email); //형식에 맞을 경우, true 리턴
-  };
-
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
@@ -233,7 +222,7 @@ const CouponCard = ({
                 </div>
                 <button
                   className={`w-full h-8 rounded  text-white text-xs ${
-                    isCheck && emailCheck(email)
+                    isCheck
                       ? "bg-custom-pink"
                       : "bg-[#B2B2B2] cursor-not-allowed"
                   }`}
@@ -245,7 +234,7 @@ const CouponCard = ({
                       // console.log(modalStates);
                     }
                   }}
-                  disabled={!isCheck && emailCheck(email)}
+                  disabled={!isCheck}
                 >
                   사용하기
                 </button>
@@ -392,7 +381,7 @@ const CouponCard = ({
 
               <button
                 className={`absolute max-w-[300px] w-full  left-1/2 transform -translate-x-1/2 bottom-7 h-9 rounded  text-white text-xs ${
-                  isCheck && emailCheck(email)
+                  isCheck
                     ? "bg-custom-pink"
                     : "bg-[#B2B2B2] cursor-not-allowed"
                 }`}
@@ -404,7 +393,7 @@ const CouponCard = ({
                     // console.log(modalStates);
                   }
                 }}
-                disabled={!isCheck && emailCheck(email)}
+                disabled={!isCheck}
               >
                 발급하기
               </button>
