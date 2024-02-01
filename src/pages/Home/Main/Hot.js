@@ -1,60 +1,58 @@
 import { useState } from "react";
-import saladImg from "./../../../assets/images/salad.png";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 const Hot = () => {
   const hotRestarants = [
     {
       id: 1,
-      text: "연어 무게는 조상님이 들어주시나요? 연어 g수 안따지고 사장님이 미친 만큼 넣어줘요",
-      free: "펩시 제로 콜라 1개",
+      text: "연어 무게",
+      free: "펩",
     },
     {
       id: 2,
-      text: "칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요",
-      free: "샐러드 1 개 ",
+      text: "칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요",
+      free: "펩시 제로 콜라 1개 + 연어 100g 추가추가추가추가추가하하하",
     },
     {
       id: 3,
-      text: "용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?",
-      free: "별주부전 스끼다시 1개 ",
+      text: "용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?",
+      free: "뭐라뭐라뭐라",
     },
   ];
   return (
-    <div className="flex mb-16 bg-custom-gradation">
-      {/*  HOT!
-        지금 또또가에서 핫한 상점
-        좋은 가게들의
-        단골이 되어보세요. */}
+    <div className="md:mb-16 font-inter">
+      {/* 구분선 */}
+      <div className="h-px mx-6 bg-black md:hidden opacity-10 "></div>
+      <div className="flex flex-col py-10 bg-white md:pl-6 md:py-6 lg:px-16 md:bg-custom-gradation md:flex-row">
+        {/* 텍스트 부분 w = 1/3 */}
+        <div className="flex flex-col items-start px-6 sm:justify-center sm:mr-16 md:p-0 ">
+          <div className="flex items-center mb-1 text-custom-pink md:text-white md:flex-col md:items-start">
+            <p className="mr-2 text-3xl font-bold md:text-4xl ">HOT!</p>
+            <p className="text-sm font-semibold md:mb-12 md:text-xl whitespace-nowrap">
+              지금 또또가에서 핫한 상점
+            </p>
+          </div>
 
-      {/* 텍스트 부분 w = 1/3 */}
-      <div className="flex items-center justify-center w-1/3">
-        <div className="w-3/4">
-          <p className="text-6xl font-bold text-white">HOT!</p>
-          <p className="mb-12 text-3xl font-semibold text-white">
-            지금 또또가에서 핫한 상점
-          </p>
-
-          <p className="text-2xl text-white ">
-            좋은 가게들의
-            <br />
-            단골이 되어보세요.
-          </p>
+          <div className="text-xs text-black opacity-50 md:text-lg md:text-white md:opacity-100">
+            <p className="inline md:block ">좋은 가게들의</p>
+            <p className="inline md:block"> 단골이 되어보세요.</p>
+          </div>
         </div>
-      </div>
 
-      {/* 카드 리스트 */}
-      <div className="flex items-center justify-center w-2/3 p-8">
-        <ul className="flex space-x-4">
-          {hotRestarants.map((item) => (
-            <li
-              className="w-[33%] flex-1 bg-white p-4 rounded-2xl cursor-pointer"
-              key={item.id}
-            >
-              <HotCard item={item} />
-            </li>
-          ))}
-        </ul>
+        {/* 카드 리스트 */}
+
+        <div className="w-full pl-6 overflow-hidden overflow-x-auto md:pl-0 scrollbar-hide">
+          <ul className="flex w-full py-6 space-x-6">
+            {hotRestarants.map((item) => (
+              <li
+                className="w-[65%] lg:shrink shrink-0 xl:w-1/3 sm:w-[40%] md:w-[45%]"
+                key={item.id}
+              >
+                <HotCard item={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
@@ -72,24 +70,27 @@ const HotCard = ({ item }) => {
   };
 
   return (
-    <div>
-      {/* 카드 이미지 */}
-      <figure
-        className="relative pb-[65%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-6"
-        style={{ backgroundImage: `url(${saladImg})` }}
-      >
-        <img src={saladImg} alt="review" className="hidden" />
-        <button className="absolute top-4 right-4 " onClick={handleLikeClick}>
-          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
-        </button>
-      </figure>
-      <div>
-        {/* 텍스트 */}
-        <p className="m-h-14 h-fit mb-[0.44rem] text-xl font-semibold text-custom-gray-100  line-clamp-2">
-          {item.text}
-        </p>
-        {/* 메뉴 */}
-        <p className="text-base font-normal text-custom-pink">{item.free}</p>
+    <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0 ">
+      <div className="flex flex-col h-full p-2 md:p-3">
+        {/* 카드 이미지 */}
+        <figure
+          className="relative pb-[60%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-4"
+          style={{ backgroundImage: `url()` }}
+        >
+          <button className="absolute top-2 right-2" onClick={handleLikeClick}>
+            <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
+          </button>
+        </figure>
+        <div className="flex flex-col space-y-2 grow">
+          {/* 텍스트 */}
+          <p className="text-sm font-semibold leading-2 sm:text-base text-custom-gray-100 line-clamp-2 grow">
+            {item.text}
+          </p>
+          {/* 메뉴 */}
+          <p className="text-[0.625rem] sm:text-sm text-custom-pink line-clamp-1">
+            {item.free}
+          </p>
+        </div>
       </div>
     </div>
   );
