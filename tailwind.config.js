@@ -8,7 +8,11 @@ module.exports = {
           "linear-gradient(91deg, #FF0068 0%, #FF4D27 51%, #FF7A01 73%, #FFD600 100%)",
         "custom-gradation-180":
           "linear-gradient(180deg, #FF0068 0%, #FF4D27 71%, #FF7A01 100%)",
-        
+      },
+      boxShadow: {
+        "custom-box-shadow": "0px 0px 10px 0px rgba(0, 0, 0, 0.25)",
+        "custom-box-shadow-pink": "0px 0px 10px 0px #FF0069",
+        "custom-button-shadow": "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
       },
       colors: {
         "custom-pink": "#FF0069",
@@ -22,10 +26,8 @@ module.exports = {
       fontFamily: {
         inter: ["Noto Sans KR", "sans-serif"],
       },
-      boxShadow: {
-        "custom-box-shadow": "0px 0px 10px 0px rgba(0, 0, 0, 0.25)",
-        "custom-box-shadow-pink": "0px 0px 10px 0px #FF0069",
-        "custom-button-shadow": "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+      screens: {
+        "phone":"376px",
       },
     },
   },

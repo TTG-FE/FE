@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Asset
 import BakeryImg from "../assets/bakery.png";
 import CouponImg from "../assets/bakery-sm.png";
 import QrCodeImg from "../assets/qr-code-line.svg";
 import arrowRightImg from "../assets/arrow_right_light.svg";
+import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
+import phoneDownloadIcon from "../assets/phone_downloadIcon.svg";
+import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
+import { Link } from "react-router-dom";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
@@ -18,11 +22,11 @@ const Coupon = () => {
     { id: 3, used: false },
   ]);
 
+  // 임시 로그인
   const handleTest = () => {
     setLogin(true);
     console.log(login);
   };
-
 
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
@@ -73,10 +77,91 @@ const Coupon = () => {
     });
   };
 
+  // JS로 반응형 컨트롤 예시
+
+  // const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 375);
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobileView(window.innerWidth <= 375);
+  //   };
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
+
   return (
     <>
+      {/* ---------------모바일 쿠폰------------------- */}
+      <div className="sm:hidden h-full pb-20">
+        {/* 쿠폰함 타이틀 헤더 영역 */}
+        <header className="pt-7 px-6 pb-5 border-b-2 flex ">
+          <button>
+            <Link to={"/"}>
+              <img src={phoneArrowLeftIcon} alt="" />
+            </Link>
+          </button>
+
+          <h1 className="w-full text-center font-semibold text-base">쿠폰함</h1>
+        </header>
+        {login ? (
+          <div className="relative mt-8">
+            {/* 검색 영역 */}
+            <div className="flex justify-center">
+              <input
+                type="text"
+                className="border-b-2 w-4/5 p-1.5 mb-11"
+                placeholder="또 가고싶은 곳을 검색해보세요!"
+              />
+            </div>
+
+            {/* 쿠폰 영역 */}
+
+            {coupons.map((coupon, index) => (
+              <CouponCard
+                key={coupon.id}
+                storeImg={BakeryImg}
+                storeArea={`성수`}
+                storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
+                promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
+                couponDate={`2023.12.01 ~ 2023.12.31`}
+                couponStoreImg={CouponImg}
+                isCoupon={coupon}
+                handleCouponUsed={() => handleCouponUsed(coupon.id)}
+                handleOpenModal={(modalName) =>
+                  handleOpenModal(modalName, index)
+                }
+                handleCloseModal={() => handleCloseModal(index)}
+                modalStates={modalStates[index]}
+              />
+            ))}
+          </div>
+        ) : (
+          <>
+            {/* 로그인 전 모바일 화면 */}
+            <div className="flex flex-col items-center mt-20 break-words">
+              <h1 className="text-xl font-semibold text-custom-pink mb-4">
+                로그인 후 이용하실 수 있습니다
+              </h1>
+              <p className="text-xs text-custom-gray-200 mb-8">
+                오늘도 또또가에서 혜택을 받아보세요!
+              </p>
+              <button
+                className="bg-custom-pink rounded w-4/6 text-white text-sm py-2 max-w-60"
+                onClick={handleTest}
+              >
+                로그인 하기
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ----------데스크탑 쿠폰-------------- */}
       {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 font-inter">
+      <div className="px-24 pt-16 font-inter hidden sm:block">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex mb-7">
           <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
