@@ -4,7 +4,7 @@ import DownloadIcon from "./DownloadIcon"; // DownloadIcon 컴포넌트 import
 import CheckIcon from "./CheckIcon";
 import EmployeeVerificationIcon from "../assets/employeeVerification.svg";
 import QrCodeIcon from "../assets/qr-code-line.svg";
-import horizontalCircleIcon from "../assets/horizontalCircle.svg";
+import { ReactComponent as HorizontalCircleIcon } from "../assets/horizontalCircle.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 
 // 가게 사진, 지역, 이름, 행사 쿠폰명, 쿠폰 날짜, 쿠폰가게 이미지, 쿠폰여부, 쿠폰사용여부, 모달창 열기, 모달창 닫기, 모달 관리
@@ -32,7 +32,7 @@ const CouponCard = ({
       {/* 모바일 쿠폰 영역 */}
       <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 sm:hidden font-inter">
         {/* 쿠폰 왼쪽 다운로드 영역*/}
-        <div className="relative">
+        <div className="relative z-0">
           <div
             className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 overflow-hidden ${
               used ? "bg-custom-gray-300" : "bg-custom-pink"
@@ -46,7 +46,7 @@ const CouponCard = ({
               }}
               disabled={used}
             >
-              <div className="w-10 h-10 bg-white rounded-full mb-1.5 flex justify-center items-center">
+              <div className="w-9 h-9 bg-white rounded-full mb-1.5 flex justify-center items-center">
                 <PhoneDownloadIcon
                   fill={`${used ? "#B3B3B3" : "#FF0068"}`}
                   stroke={`${used ? "#B3B3B3" : "#FF0068"}`}
@@ -55,9 +55,8 @@ const CouponCard = ({
               </div>
               <p className="text-white">다운로드</p>
             </button>
-            <img
-              src={horizontalCircleIcon}
-              alt=""
+            <HorizontalCircleIcon
+              fill={used ? "white" : "#FFF2F2"}
               className="absolute top-3 right-[-6px]"
             />
           </div>
@@ -65,11 +64,11 @@ const CouponCard = ({
 
         {/* 쿠폰 오른쪽 내용 영역 */}
         <div
-          className={`py-6 pl-6 pr-2  w-full basis-3/4 ${
+          className={`py-6 pl-6 pr-2  w-full ${
             used ? "bg-white" : "bg-[#FFF2F2]"
           }`}
         >
-          <div className="flex flex-col h-full justify-evenly">
+          <div className="flex flex-col h-full justify-around">
             <h1>[성수] 베리베리 스트로베리 케이크 전문점</h1>
             <p
               className={`text-[10px]  ${

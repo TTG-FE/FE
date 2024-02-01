@@ -7,7 +7,6 @@ import QrCodeImg from "../assets/qr-code-line.svg";
 import arrowRightImg from "../assets/arrow_right_light.svg";
 import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
 import phoneDownloadIcon from "../assets/phone_downloadIcon.svg";
-import searchIcon from "../assets/images/searchIcon.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
 
@@ -159,7 +158,7 @@ const Coupon = () => {
 
       {/* ----------데스크탑 쿠폰-------------- */}
       {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 font-inter hidden sm:block">
+      <div className="px-24 pt-16 pb-8 font-inter hidden sm:block">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex mb-7">
           <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
