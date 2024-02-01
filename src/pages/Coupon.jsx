@@ -111,9 +111,8 @@ const Coupon = () => {
           <h1 className="w-full text-center font-semibold text-base">쿠폰함</h1>
         </header>
         {login ? (
-          <div className="relative mt-8">
+          <div className="relative pt-8">
             {/* 검색 영역 */}
-
             <div className="flex justify-center mb-10">
               <SearchBar />
             </div>
@@ -254,7 +253,7 @@ const SearchBar = () => {
 
   return (
     // 검색 폼 컴포넌트
-    <form className="flex w-80" onSubmit={handleSearch}>
+    <form className="flex w-[300px]" onSubmit={handleSearch}>
       {/* 입력창 */}
       <input
         ref={inputRef}

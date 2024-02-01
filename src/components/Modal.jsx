@@ -1,7 +1,7 @@
 import React from "react";
 import closeIcon from "../assets/modalCloseIcon.svg";
 
-const Modal = ({ isOpen, onClose, isCoupon, children }) => {
+const Modal = ({ isOpen, onClose, isCoupon,isLast, children }) => {
   if (!isOpen) return null;
 
   const handleClose = (e) => {
@@ -23,12 +23,13 @@ const Modal = ({ isOpen, onClose, isCoupon, children }) => {
           {/* 모달 바디 */}
           <div
             className={`relative bg-white rounded-md ${
-              isCoupon ? "border-solid border-4 border-custom-pink" : ""
-            }`}
+              isCoupon ? `border-solid border-4 ${isLast ? "#B2B2B2":"border-custom-pink"}` : ""
+              }`
+            }
           >
             {/* 모달 닫기 버튼 */}
             <button
-              className="absolute top-3 right-5 sm:mt-4 sm:mr-4 text-gray-500 cursor-pointer"
+              className="absolute top-5 right-3 text-gray-500 cursor-pointer"
               onClick={onClose}
             >
               <img src={closeIcon} alt="" />
