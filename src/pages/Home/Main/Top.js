@@ -167,11 +167,11 @@ const Top15Card = ({ item }) => {
       </figure>
       <div className="flex flex-col grow">
         {/* 텍스트 */}
-        <p className="mb-2 text-xs font-bold sm:text-base text-custom-gray-100 line-clamp-2 grow">
+        <p className="mb-2 text-xs font-bold lg:text-sm text-custom-gray-100 line-clamp-2 grow">
           {item.text}
         </p>
         {/* 또또가 리뷰 참여 횟수 */}
-        <p className="sm:text-sm text-custom-gray-200 text-[0.625rem]">
+        <p className="lg:text-sm text-custom-gray-200 text-[0.625rem] ">
           또또가 리뷰 참여 횟수 {item.reviewCount}
         </p>
       </div>
