@@ -23,19 +23,31 @@ function App() {
       <Header />
       <Navbar setSelectModal={setSelectModal} />
       <div className="relative min-h-screen">
-        {/* 모달창 컴포넌트 (모달 선택 상태 전달)*/}
-        <SelectModal
-          selectModal={selectModal}
-          setSelectModal={setSelectModal}
-        />
-
         {/* 라우트를 정의한 부분 */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/store" element={<Store />} />
           <Route path="/coupon" element={<Coupon />} />
-          <Route path="/region" element={<SelectStore title={"지역"} />} />
-          <Route path="/menu" element={<SelectStore title={"메뉴"} />} />
+          <Route
+            path="/region"
+            element={
+              <SelectStore
+                title={"지역"}
+                selectModal={selectModal}
+                setSelectModal={setSelectModal}
+              />
+            }
+          />
+          <Route
+            path="/menu"
+            element={
+              <SelectStore
+                title={"메뉴"}
+                selectModal={selectModal}
+                setSelectModal={setSelectModal}
+              />
+            }
+          />
           <Route path="/user-guide" element={<UserGuide />} />
           <Route path="/heart" element={<Heart />} />
           <Route path="/mypage" element={<MyPage />} />

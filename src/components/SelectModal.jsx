@@ -9,36 +9,35 @@ import { Link } from "react-router-dom";
  */
 const SelectModal = ({ selectModal, setSelectModal }) => {
   /** 모달 닫기 함수 */
-  const closeModal = () => {
-    setSelectModal(0);
+  const handleClose = (e) => {
+    if (e.target.id === "wrapper") {
+      setSelectModal(0);
+    }
+    if (e.target.classList.contains("target")) {
+      setSelectModal(0);
+    }
   };
 
-  /** 모달 클릭 시 이벤트 핸들링 함수 */
-  const handleCloseModal = (e) => {
-    e.stopPropagation(); // 모달 영역 내에서의 클릭 이벤트 전파 차단
-  };
   return (
     <>
       {/* 모달이 가시적인 상태일 때만 렌더링 */}
-      {selectModal !== 0 && (
+      {!!selectModal && (
         <div
+          id="wrapper"
           className={
-            "flex justify-center absolute top-0 bottom-0 left-0 right-0 bg-opacity-25 backdrop-blur-xl z-50"
+            "absolute inset-0 bg-black bg-opacity-25 backdrop-blur-xl flex justify-center z-50"
           }
-          onClick={closeModal}
+          onClick={handleClose}
         >
           {/* 모달 내용 영역 */}
-          <div
-            className="absolute top-28 w-[47rem] h-[52rem] bg-white shadow-custom-box-shadow rounded-xl"
-            onClick={handleCloseModal}
-          >
+          <div className="absolute top-28 w-[47rem] h-[52rem] bg-white shadow-custom-box-shadow rounded-xl">
             {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 (1: 지역 선택, 2: 메뉴선택 */}
             {selectModal === 1 ? (
               // 지역 선택
-              <RegionSelector closeModal={closeModal} />
+              <RegionSelector closeModal={handleClose} />
             ) : (
               // 메뉴 선택
-              <MenuSelector closeModal={closeModal} />
+              <MenuSelector closeModal={handleClose} />
             )}
           </div>
         </div>
@@ -48,7 +47,7 @@ const SelectModal = ({ selectModal, setSelectModal }) => {
 };
 
 /** 메뉴 선택 모달창 */
-const MenuSelector = ({ closeModal }) => {
+const MenuSelector = ({ handleClose }) => {
   // 메뉴 이름 리스트
   const menus = [
     { id: 1, label: "치킨" },
@@ -74,31 +73,27 @@ const MenuSelector = ({ closeModal }) => {
         <p className="text-[1.37rem] text-[#000000B2] my-4 cursor-pointer">
           메뉴
         </p>
-        <button onClick={closeModal} className="text-custom-pink">
-          확인
-        </button>
+        <button className="text-custom-pink target">확인</button>
       </div>
       <div className="w-full h-0.5 bg-[#0000001A]"></div>
 
       {/* 메뉴 선택 리스트 */}
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
-          <Link
+          <li
             to="/menu"
             key={menu.id}
-            className="w-1/4 cursor-pointer"
-            onClick={closeModal}
+            className="w-1/4 px-8 py-5 cursor-pointer"
           >
-            <div className="px-8 py-5">
-              <figure className="pb-[100%] h-0 bg-gray-200 bg-center bg-no-repeat bg-cover ">
+            <button className="w-full">
+              <figure className="pb-[100%] h-0 bg-gray-200 bg-center bg-no-repeat bg-cover shrink-0 target">
                 {/* 높이를 0, 바닥 패딩을 100프로로 주어서 정사각형을 만듬 */}
-                <img src="" alt={`${menu.label}`} className="hidden"></img>
               </figure>
-              <p className="text-[#000000B2] text-center text-lg">
+              <p className="text-[#000000B2] text-center text-lg target">
                 {menu.label}
               </p>
-            </div>
-          </Link>
+            </button>
+          </li>
         ))}
       </ul>
     </div>
@@ -106,7 +101,7 @@ const MenuSelector = ({ closeModal }) => {
 };
 
 /** 지역 선택 모달창 */
-const RegionSelector = ({ closeModal }) => {
+const RegionSelector = ({ handleClose }) => {
   // 지역 이름 리스트
   const cities = [
     {
@@ -176,7 +171,7 @@ const RegionSelector = ({ closeModal }) => {
         <p className="text-[1.37rem] text-[#000000B2] my-4 cursor-pointer">
           전체 지역
         </p>
-        <button onClick={closeModal} className="text-custom-pink">
+        <button onClick={handleClose} className="text-custom-pink target">
           확인
         </button>
       </div>
@@ -193,14 +188,13 @@ const RegionSelector = ({ closeModal }) => {
               </div>
               <ul className="flex flex-wrap w-4/5">
                 {city.towns.map((town, i) => (
-                  <Link
+                  <li
                     key={i}
                     to="/region"
-                    onClick={closeModal}
                     className="w-1/4 p-4 text-sm text-[#00000080] cursor-pointer"
                   >
-                    {town}
-                  </Link>
+                    <button className="target">{town}</button>
+                  </li>
                 ))}
               </ul>
             </li>
