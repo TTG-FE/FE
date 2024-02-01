@@ -4,24 +4,6 @@
 
 /* tailwind plugins */
 @layer utilities {
-  /** 2줄을 기반으로 자르고 말줄임표(...)로 생략*/
-  .line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 원하는 줄 수를 여기에 입력하세요 */
-    line-height: normal;
-  }
-
-  /** 1줄을 기반으로 자르고 말줄임표(...)로 생략*/
-  .line-clamp-1 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    line-height: normal;
-  }
-
   /** border 색을 또또가 그라데이션으로 */
   .border-custom-gradation {
     background-image: linear-gradient(#fff, #fff),

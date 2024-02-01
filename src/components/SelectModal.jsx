@@ -25,12 +25,12 @@ const SelectModal = ({ selectModal, setSelectModal }) => {
         <div
           id="wrapper"
           className={
-            "absolute inset-0 bg-black bg-opacity-25 backdrop-blur-xl flex justify-center z-50"
+            "absolute inset-0 bg-custom-gray-300 bg-opacity-25 backdrop-blur-xl flex justify-center z-50"
           }
           onClick={handleClose}
         >
           {/* 모달 내용 영역 */}
-          <div className="absolute top-28 w-[47rem] h-[52rem] bg-white shadow-custom-box-shadow rounded-xl">
+          <div className="absolute w-[42rem] bg-white  top-28 shadow-custom-box-shadow rounded-xl">
             {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 (1: 지역 선택, 2: 메뉴선택 */}
             {selectModal === 1 ? (
               // 지역 선택
@@ -68,12 +68,10 @@ const MenuSelector = ({ handleClose }) => {
     { id: 16, label: "샌드위치" },
   ];
   return (
-    <div className="p-12">
+    <div className="p-8">
       <div className="flex justify-between">
-        <p className="text-[1.37rem] text-[#000000B2] my-4 cursor-pointer">
-          메뉴
-        </p>
-        <button className="text-custom-pink target">확인</button>
+        <p className="text-xl text-[#000000B2] my-4 cursor-pointer">메뉴</p>
+        <button className="text-sm  text-custom-pink target">확인</button>
       </div>
       <div className="w-full h-0.5 bg-[#0000001A]"></div>
 
@@ -85,14 +83,14 @@ const MenuSelector = ({ handleClose }) => {
             key={menu.id}
             className="w-1/4 px-8 py-5 cursor-pointer"
           >
-            <button className="w-full">
+            <Link className="w-full">
               <figure className="pb-[100%] h-0 bg-gray-200 bg-center bg-no-repeat bg-cover shrink-0 target">
                 {/* 높이를 0, 바닥 패딩을 100프로로 주어서 정사각형을 만듬 */}
               </figure>
               <p className="text-[#000000B2] text-center text-lg target">
                 {menu.label}
               </p>
-            </button>
+            </Link>
           </li>
         ))}
       </ul>
@@ -166,12 +164,15 @@ const RegionSelector = ({ handleClose }) => {
     },
   ];
   return (
-    <div className="p-12">
-      <div className="flex justify-between px-4">
-        <p className="text-[1.37rem] text-[#000000B2] my-4 cursor-pointer">
+    <div className="p-8">
+      <div className="flex justify-between px-3">
+        <p className="text-xl text-[#000000B2] my-4 cursor-pointer">
           전체 지역
         </p>
-        <button onClick={handleClose} className="text-custom-pink target">
+        <button
+          onClick={handleClose}
+          className="text-sm text-custom-pink target"
+        >
           확인
         </button>
       </div>
@@ -182,8 +183,8 @@ const RegionSelector = ({ handleClose }) => {
           <div key={city.id}>
             <div className="w-full h-0.5 bg-[#0000001A]"></div>
             {/* 지역을 구분하기 위한 회색 구분선 */}
-            <li className="flex cursor-pointer">
-              <div className="w-1/5 p-4 text-lg text-[#000000B2]">
+            <li className="flex p-3 cursor-pointer">
+              <div className="w-1/5  text-base text-[#000000B2]">
                 {city.label}
               </div>
               <ul className="flex flex-wrap w-4/5">
@@ -191,9 +192,9 @@ const RegionSelector = ({ handleClose }) => {
                   <li
                     key={i}
                     to="/region"
-                    className="w-1/4 p-4 text-sm text-[#00000080] cursor-pointer"
+                    className="w-1/4 p-2 text-sm text-[#00000080] cursor-pointer "
                   >
-                    <button className="target">{town}</button>
+                    <Link className="target">{town}</Link>
                   </li>
                 ))}
               </ul>
