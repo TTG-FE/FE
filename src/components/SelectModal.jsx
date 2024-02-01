@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-
+import menuBurger from "./../assets/images/menu-burger.png";
+import menuChicken from "./../assets/images/menu-chicken.png";
+import menuKorean from "./../assets/images/menu-korean.png";
+import menuLunchbox from "./../assets/images/menu-lunchbox.png";
+import menuSandwich from "./../assets/images/menu-sandwich.png";
+import menuSnack from "./../assets/images/menu-snack.png";
+import menuSushi from "./../assets/images/menu-sushi.png";
 /**
  * 'Modal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
  *
@@ -7,38 +13,37 @@ import { Link } from "react-router-dom";
  * @param {number} props.selectModal - 모달 번호(0: 모달창x 1: 지역 선택 2: 메뉴선택)
  * @param {Function} props.setSelectModal - 모달 번호를 변경하는 함수
  */
-const Modal = ({ selectModal, setSelectModal }) => {
+const SelectModal = ({ selectModal, setSelectModal }) => {
   /** 모달 닫기 함수 */
-  const closeModal = () => {
-    setSelectModal(0);
+  const handleClose = (e) => {
+    if (e.target.id === "wrapper") {
+      setSelectModal(0);
+    }
+    if (e.target.classList.contains("target")) {
+      setSelectModal(0);
+    }
   };
 
-  /** 모달 클릭 시 이벤트 핸들링 함수 */
-  const handleCloseModal = (e) => {
-    e.stopPropagation(); // 모달 영역 내에서의 클릭 이벤트 전파 차단
-  };
   return (
     <>
       {/* 모달이 가시적인 상태일 때만 렌더링 */}
-      {selectModal !== 0 && (
+      {!!selectModal && (
         <div
+          id="wrapper"
           className={
-            "flex justify-center absolute top-0 bottom-0 left-0 right-0 bg-opacity-25 backdrop-blur-xl z-50"
+            "absolute inset-0 bg-custom-gray-300 bg-opacity-25 backdrop-blur-xl flex justify-center z-50"
           }
-          onClick={closeModal}
+          onClick={handleClose}
         >
           {/* 모달 내용 영역 */}
-          <div
-            className="absolute top-28 w-[47rem] h-[52rem] bg-white shadow-custom-box-shadow rounded-xl"
-            onClick={handleCloseModal}
-          >
+          <div className="absolute w-[44rem] bg-white top-28 shadow-custom-box-shadow rounded-xl">
             {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 (1: 지역 선택, 2: 메뉴선택 */}
             {selectModal === 1 ? (
               // 지역 선택
-              <RegionSelector closeModal={closeModal} />
+              <RegionSelector closeModal={handleClose} />
             ) : (
               // 메뉴 선택
-              <MenuSelector closeModal={closeModal} />
+              <MenuSelector closeModal={handleClose} />
             )}
           </div>
         </div>
@@ -48,57 +53,54 @@ const Modal = ({ selectModal, setSelectModal }) => {
 };
 
 /** 메뉴 선택 모달창 */
-const MenuSelector = ({ closeModal }) => {
+const MenuSelector = ({ handleClose }) => {
   // 메뉴 이름 리스트
   const menus = [
-    { id: 1, label: "치킨" },
-    { id: 2, label: "버거" },
-    { id: 3, label: "한식" },
+    { id: 1, label: "치킨", img: menuChicken },
+    { id: 2, label: "버거", img: menuBurger },
+    { id: 3, label: "한식", img: menuKorean },
     { id: 4, label: "일식/돈까스" },
     { id: 5, label: "족발/보쌈" },
     { id: 6, label: "중국집" },
-    { id: 7, label: "분식" },
+    { id: 7, label: "분식", img: menuSnack },
     { id: 8, label: "아시안" },
     { id: 9, label: "피자/양식" },
     { id: 10, label: "카페/디저트" },
-    { id: 11, label: "샐러드" },
-    { id: 12, label: "도시락/죽" },
+    { id: 11, label: "샐러드", img: menuChicken },
+    { id: 12, label: "도시락/죽", img: menuLunchbox },
     { id: 13, label: "찜/탕" },
     { id: 14, label: "고기/구이" },
-    { id: 15, label: "회/초밥" },
-    { id: 16, label: "샌드위치" },
+    { id: 15, label: "회/초밥", img: menuSushi },
+    { id: 16, label: "샌드위치", img: menuSandwich },
   ];
   return (
-    <div className="p-12">
-      <div className="flex justify-between">
-        <p className="text-[1.37rem] text-[#000000B2] my-4 cursor-pointer">
-          메뉴
-        </p>
-        <button onClick={closeModal} className="text-custom-pink">
-          확인
-        </button>
+    <div className="p-8">
+      <div className="flex justify-between px-3">
+        <p className="text-xl text-[#000000B2] my-4 cursor-pointer">메뉴</p>
+        <button className="text-sm text-custom-pink target">확인</button>
       </div>
       <div className="w-full h-0.5 bg-[#0000001A]"></div>
 
       {/* 메뉴 선택 리스트 */}
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
-          <Link
+          <li
             to="/menu"
             key={menu.id}
-            className="w-1/4 cursor-pointer"
-            onClick={closeModal}
+            className="w-1/4 px-8 py-5 cursor-pointer"
           >
-            <div className="px-8 py-5">
-              <figure className="pb-[100%] h-0 bg-gray-200 bg-center bg-no-repeat bg-cover ">
+            <Link className="w-full">
+              <figure
+                className="pb-[100%] h-0 bg-center bg-no-repeat bg-cover shrink-0 target"
+                style={{ backgroundImage: `url(${menu.img})` }}
+              >
                 {/* 높이를 0, 바닥 패딩을 100프로로 주어서 정사각형을 만듬 */}
-                <img src="" alt={`${menu.label}`} className="hidden"></img>
               </figure>
-              <p className="text-[#000000B2] text-center text-lg">
+              <p className="text-[#000000B2] text-center target">
                 {menu.label}
               </p>
-            </div>
-          </Link>
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
@@ -106,7 +108,7 @@ const MenuSelector = ({ closeModal }) => {
 };
 
 /** 지역 선택 모달창 */
-const RegionSelector = ({ closeModal }) => {
+const RegionSelector = ({ handleClose }) => {
   // 지역 이름 리스트
   const cities = [
     {
@@ -171,12 +173,15 @@ const RegionSelector = ({ closeModal }) => {
     },
   ];
   return (
-    <div className="p-12">
-      <div className="flex justify-between px-4">
-        <p className="text-[1.37rem] text-[#000000B2] my-4 cursor-pointer">
+    <div className="p-8">
+      <div className="flex justify-between px-3">
+        <p className="text-xl text-[#000000B2] my-4 cursor-pointer">
           전체 지역
         </p>
-        <button onClick={closeModal} className="text-custom-pink">
+        <button
+          onClick={handleClose}
+          className="text-sm text-custom-pink target"
+        >
           확인
         </button>
       </div>
@@ -187,20 +192,19 @@ const RegionSelector = ({ closeModal }) => {
           <div key={city.id}>
             <div className="w-full h-0.5 bg-[#0000001A]"></div>
             {/* 지역을 구분하기 위한 회색 구분선 */}
-            <li className="flex cursor-pointer">
-              <div className="w-1/5 p-4 text-lg text-[#000000B2]">
+            <li className="flex p-3 cursor-pointer">
+              <div className="w-1/5  text-base text-[#000000B2]">
                 {city.label}
               </div>
               <ul className="flex flex-wrap w-4/5">
                 {city.towns.map((town, i) => (
-                  <Link
+                  <li
                     key={i}
                     to="/region"
-                    onClick={closeModal}
-                    className="w-1/4 p-4 text-sm text-[#00000080] cursor-pointer"
+                    className="w-1/4 p-2 text-sm text-[#00000080] cursor-pointer "
                   >
-                    {town}
-                  </Link>
+                    <Link className="target">{town}</Link>
+                  </li>
                 ))}
               </ul>
             </li>
@@ -211,4 +215,4 @@ const RegionSelector = ({ closeModal }) => {
   );
 };
 
-export default Modal;
+export default SelectModal;

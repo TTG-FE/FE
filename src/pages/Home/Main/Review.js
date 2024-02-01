@@ -1,17 +1,15 @@
-import gukbapImg from "./../../../assets/images/gukbap.png";
 const Review = () => {
   const reviews = [
     {
       id: 1,
-      author:
-        "산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱산책왕자 강형욱",
+      author: "산책강형욱",
       text: "남은 횟감은 싸서 강아지에게 생식으로 주니 너무 좋아하더라구요~^^",
       store: "로우앤 하이로우앤 하이로우앤 하이로우앤 하이로우앤 하이루하이루",
     },
     {
       id: 2,
       author: "카리나 로켓펀쳐",
-      text: "언제라도 우린 together, 또 먹고싶은 감자튀김이 있는 공덕역 맛집",
+      text: "123",
       store: "로우앤 하이로우앤 하이로우앤 하이로우앤 ",
     },
     {
@@ -23,7 +21,7 @@ const Review = () => {
     {
       id: 4,
       author: "닝닝 이디해커",
-      text: "망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요",
+      text: "망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요",
       store: "커잠투 스파이시떡볶이",
     },
     {
@@ -48,8 +46,8 @@ const Review = () => {
       </div>
 
       {/* 카드 리스트 */}
-      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
-        <ul className="flex w-full space-x-2">
+      <div className="w-full py-5 pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
+        <ul className="flex w-full space-x-4">
           {reviews.map((review) => (
             <li
               key={review.id}
@@ -66,30 +64,33 @@ const Review = () => {
 
 const ReviewCard = ({ review }) => {
   return (
-    <div className="p-1 m-1 rounded cursor-pointer md:p-2 w-border shadow-custom-box-shadow">
-      <figure
-        className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded bg-gray-200 md:mb-4 mb-2"
-        style={{ backgroundImage: `url(${gukbapImg})` }}
-      ></figure>
-      <div className="space-y-2 ">
-        <div className="flex">
-          {/* 작성자 */}
-          <figure
-            className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
-            style={{ backgroundImage: `url(${gukbapImg})` }}
-          ></figure>
-          <div className="flex items-center flex-1 text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
-            {review.author}
+    <div className="h-full p-1 rounded-lg cursor-pointer w-border shadow-custom-box-shadow sm:p-2">
+      <div className="flex flex-col h-full">
+        <figure
+          className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded-lg bg-gray-200 md:mb-4 mb-2 "
+          style={{ backgroundImage: `url()` }}
+        ></figure>
+        <div className="flex flex-col h-full space-y-2">
+          <div className="flex">
+            {/* 작성자 */}
+            <figure
+              className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
+              style={{ backgroundImage: `url()` }}
+            ></figure>
+            <p className="text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
+              {review.author}
+            </p>
           </div>
+          {/* 리뷰 텍스트 */}
+          <p className="text-xs font-semibold sm:text-base text-custom-gray-100 line-clamp-2 grow">
+            {review.text}
+          </p>
+
+          {/* 상점명 */}
+          <p className="text-custom-pink line-clamp-1 sm:text-sm text-[0.625rem]">
+            {review.store}
+          </p>
         </div>
-        {/* 리뷰 텍스트 */}
-        <p className="text-xs font-semibold sm:text-base min-h-6 h-fit text-custom-gray-100 line-clamp-2">
-          {review.text}
-        </p>
-        {/* 상점명 */}
-        <p className="text-custom-pink line-clamp-1 sm:text-sm text-[0.625rem] ">
-          {review.store}
-        </p>
       </div>
     </div>
   );

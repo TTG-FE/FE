@@ -1,8 +1,9 @@
 import StoreCard from "../../components/StoreCard";
+import SelectModal from "../../components/SelectModal";
 
-const SelectStore = ({ title }) => {
+const Region = ({ selectModal, setSelectModal }) => {
   // 상점 리스트 객체
-  const restaurants = [
+  const stores = [
     {
       id: 1,
       text: "[성신여대입구] 귀여운 용용이",
@@ -115,13 +116,15 @@ const SelectStore = ({ title }) => {
 
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`px-16 font-inter`}>
+    <div className={`px-16 font-inter relative`}>
+      {/* 모달창 */}
+      <SelectModal selectModal={selectModal} setSelectModal={setSelectModal} />
       <div>
         {/* 상점 필터명 */}
         <div className="flex items-center justify-between px-6 py-12">
           <div>
             <div className="mb-4 text-2xl font-semibold">
-              {title} &gt;{" "}
+              지역 &gt;{" "}
               <span className="border-b-4 border-custom-yellow">전체</span>
             </div>
             <p className="text-sm font-normal text-custom-gray-100">
@@ -132,8 +135,11 @@ const SelectStore = ({ title }) => {
 
         {/* 상점 카드 리스트 */}
         <ul className="flex flex-wrap mb-[2.69rem]">
-          {restaurants.map((item) => (
-            <li className="w-1/5 p-4" key={item.id}>
+          {stores.map((item) => (
+            <li
+              className="p-4 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
+              key={item.id}
+            >
               <StoreCard item={item} />
             </li>
           ))}
@@ -143,4 +149,4 @@ const SelectStore = ({ title }) => {
   );
 };
 
-export default SelectStore;
+export default Region;
