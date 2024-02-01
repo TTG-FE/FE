@@ -42,7 +42,7 @@ const Hot = () => {
         {/* 카드 리스트 */}
 
         <div className="w-full pl-6 overflow-hidden overflow-x-auto md:pl-0 scrollbar-hide">
-          <ul className="flex w-full py-6 space-x-4">
+          <ul className="flex w-full py-6 space-x-6">
             {hotRestarants.map((item) => (
               <li
                 className="w-[65%] lg:shrink shrink-0 xl:w-1/3 sm:w-[40%] md:w-[45%]"
@@ -70,7 +70,7 @@ const HotCard = ({ item }) => {
   };
 
   return (
-    <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0">
+    <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0 ">
       <div className="flex flex-col h-full p-2 md:p-3">
         {/* 카드 이미지 */}
         <figure

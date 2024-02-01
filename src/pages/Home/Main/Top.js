@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 /** Top 15 또또가 */
@@ -150,7 +151,7 @@ const Top15Card = ({ item }) => {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <Link className="flex flex-col h-full rounded">
       {/* 메뉴 이미지 */}
       <figure
         className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
@@ -175,7 +176,7 @@ const Top15Card = ({ item }) => {
           또또가 리뷰 참여 횟수 {item.reviewCount}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
