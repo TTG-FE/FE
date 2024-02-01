@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-
+import menuBurger from "./../assets/images/menu-burger.png";
+import menuChicken from "./../assets/images/menu-chicken.png";
+import menuKorean from "./../assets/images/menu-korean.png";
+import menuLunchbox from "./../assets/images/menu-lunchbox.png";
+import menuSandwich from "./../assets/images/menu-sandwich.png";
+import menuSnack from "./../assets/images/menu-snack.png";
+import menuSushi from "./../assets/images/menu-sushi.png";
 /**
  * 'Modal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
  *
@@ -30,7 +36,7 @@ const SelectModal = ({ selectModal, setSelectModal }) => {
           onClick={handleClose}
         >
           {/* 모달 내용 영역 */}
-          <div className="absolute w-[42rem] bg-white  top-28 shadow-custom-box-shadow rounded-xl">
+          <div className="absolute w-[44rem] bg-white top-28 shadow-custom-box-shadow rounded-xl">
             {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 (1: 지역 선택, 2: 메뉴선택 */}
             {selectModal === 1 ? (
               // 지역 선택
@@ -50,28 +56,28 @@ const SelectModal = ({ selectModal, setSelectModal }) => {
 const MenuSelector = ({ handleClose }) => {
   // 메뉴 이름 리스트
   const menus = [
-    { id: 1, label: "치킨" },
-    { id: 2, label: "버거" },
-    { id: 3, label: "한식" },
+    { id: 1, label: "치킨", img: menuChicken },
+    { id: 2, label: "버거", img: menuBurger },
+    { id: 3, label: "한식", img: menuKorean },
     { id: 4, label: "일식/돈까스" },
     { id: 5, label: "족발/보쌈" },
     { id: 6, label: "중국집" },
-    { id: 7, label: "분식" },
+    { id: 7, label: "분식", img: menuSnack },
     { id: 8, label: "아시안" },
     { id: 9, label: "피자/양식" },
     { id: 10, label: "카페/디저트" },
-    { id: 11, label: "샐러드" },
-    { id: 12, label: "도시락/죽" },
+    { id: 11, label: "샐러드", img: menuChicken },
+    { id: 12, label: "도시락/죽", img: menuLunchbox },
     { id: 13, label: "찜/탕" },
     { id: 14, label: "고기/구이" },
-    { id: 15, label: "회/초밥" },
-    { id: 16, label: "샌드위치" },
+    { id: 15, label: "회/초밥", img: menuSushi },
+    { id: 16, label: "샌드위치", img: menuSandwich },
   ];
   return (
     <div className="p-8">
-      <div className="flex justify-between">
+      <div className="flex justify-between px-3">
         <p className="text-xl text-[#000000B2] my-4 cursor-pointer">메뉴</p>
-        <button className="text-sm  text-custom-pink target">확인</button>
+        <button className="text-sm text-custom-pink target">확인</button>
       </div>
       <div className="w-full h-0.5 bg-[#0000001A]"></div>
 
@@ -84,10 +90,13 @@ const MenuSelector = ({ handleClose }) => {
             className="w-1/4 px-8 py-5 cursor-pointer"
           >
             <Link className="w-full">
-              <figure className="pb-[100%] h-0 bg-gray-200 bg-center bg-no-repeat bg-cover shrink-0 target">
+              <figure
+                className="pb-[100%] h-0 bg-center bg-no-repeat bg-cover shrink-0 target"
+                style={{ backgroundImage: `url(${menu.img})` }}
+              >
                 {/* 높이를 0, 바닥 패딩을 100프로로 주어서 정사각형을 만듬 */}
               </figure>
-              <p className="text-[#000000B2] text-center text-lg target">
+              <p className="text-[#000000B2] text-center target">
                 {menu.label}
               </p>
             </Link>

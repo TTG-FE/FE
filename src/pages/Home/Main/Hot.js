@@ -1,13 +1,12 @@
 import { useState } from "react";
-import saladImg from "./../../../assets/images/salad.png";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 const Hot = () => {
   const hotRestarants = [
     {
       id: 1,
-      text: "연어 무게는 조상님이 들어주시나요? 연어 g수 안따지고 사장님이 미친 만큼 넣어줘요",
-      free: "펩시 제로 콜라 1개 + 연어 100g 추가추가추가추가추가",
+      text: "연어 무게",
+      free: "펩",
     },
     {
       id: 2,
@@ -71,20 +70,20 @@ const HotCard = ({ item }) => {
   };
 
   return (
-    <div className="bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0">
-      <div className="p-2 md:p-3">
+    <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0">
+      <div className="flex flex-col h-full p-2 md:p-3">
         {/* 카드 이미지 */}
         <figure
           className="relative pb-[60%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-4"
-          style={{ backgroundImage: `url(${saladImg})` }}
+          style={{ backgroundImage: `url()` }}
         >
           <button className="absolute top-2 right-2" onClick={handleLikeClick}>
             <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
           </button>
         </figure>
-        <div className="space-y-2 ">
+        <div className="flex flex-col space-y-2 grow">
           {/* 텍스트 */}
-          <p className="text-sm font-semibold m-h-6 h-fit sm:text-base text-custom-gray-100 line-clamp-2">
+          <p className="text-sm font-semibold leading-2 sm:text-base text-custom-gray-100 line-clamp-2 grow">
             {item.text}
           </p>
           {/* 메뉴 */}

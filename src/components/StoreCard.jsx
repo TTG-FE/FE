@@ -13,7 +13,7 @@ const StoreCard = ({ item }) => {
   };
 
   return (
-    <div className="p-4 transition-all rounded-2xl shadow-custom-box-shadow hover:shadow-custom-box-shadow-pink">
+    <div className="flex flex-col h-full p-4 transition-all rounded-2xl shadow-custom-box-shadow hover:shadow-custom-box-shadow-pink">
       {/* 카드 이미지 */}
       <figure
         className="pb-[75%] h-0 bg-cover bg-no-repeat bg-center rounded-lg mb-4 bg-gray-200 relative"
@@ -24,9 +24,9 @@ const StoreCard = ({ item }) => {
           <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
-      <div>
+      <div className="flex flex-col grow">
         {/* 텍스트 */}
-        <p className="mb-2 text-base font-semibold min-h-10 text-custom-gray-100 line-clamp-2 ">
+        <p className="mb-2 text-base font-semibold min-h-10 text-custom-gray-100 line-clamp-2 grow">
           {item.text}
         </p>
         {/* 메뉴 */}

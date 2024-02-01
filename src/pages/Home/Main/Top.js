@@ -1,5 +1,4 @@
 import { useState } from "react";
-import chickenImg from "./../../../assets/images/chicken.png";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 
 /** Top 15 또또가 */
@@ -151,11 +150,11 @@ const Top15Card = ({ item }) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       {/* 메뉴 이미지 */}
       <figure
         className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
-        style={{ backgroundImage: `url(${chickenImg})` }}
+        style={{ backgroundImage: `url()` }}
       >
         {/* 등수 표시 */}
         <div className="absolute flex items-center justify-center w-8 h-8 text-xs text-white left-4 bg-custom-pink">
@@ -166,9 +165,9 @@ const Top15Card = ({ item }) => {
           <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
         </button>
       </figure>
-      <div>
+      <div className="flex flex-col grow">
         {/* 텍스트 */}
-        <p className="mb-2 text-xs font-bold sm:text-base sm:min-h-12 min-h-8 text-custom-gray-100 line-clamp-2 ">
+        <p className="mb-2 text-xs font-bold sm:text-base text-custom-gray-100 line-clamp-2 grow">
           {item.text}
         </p>
         {/* 또또가 리뷰 참여 횟수 */}

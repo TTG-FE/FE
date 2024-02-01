@@ -16,6 +16,7 @@ import MyPage from "./pages/MyPage";
 import { Login } from "./pages/Login";
 
 function App() {
+  // TODO: Redux로 상태변수를 관리
   // 모달 선택창 상태를 관리하는 상태 변수
   const [selectModal, setSelectModal] = useState(0);
   return (

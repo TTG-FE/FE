@@ -3,7 +3,7 @@ import SelectModal from "../../components/SelectModal";
 
 const Region = ({ selectModal, setSelectModal }) => {
   // 상점 리스트 객체
-  const restaurants = [
+  const stores = [
     {
       id: 1,
       text: "[성신여대입구] 귀여운 용용이",
@@ -135,8 +135,11 @@ const Region = ({ selectModal, setSelectModal }) => {
 
         {/* 상점 카드 리스트 */}
         <ul className="flex flex-wrap mb-[2.69rem]">
-          {restaurants.map((item) => (
-            <li className="w-1/5 p-4" key={item.id}>
+          {stores.map((item) => (
+            <li
+              className="p-4 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
+              key={item.id}
+            >
               <StoreCard item={item} />
             </li>
           ))}

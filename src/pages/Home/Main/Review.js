@@ -1,4 +1,3 @@
-import gukbapImg from "./../../../assets/images/gukbap.png";
 const Review = () => {
   const reviews = [
     {
@@ -11,7 +10,7 @@ const Review = () => {
     {
       id: 2,
       author: "카리나 로켓펀쳐",
-      text: "언제라도 우린 together, 또 먹고싶은 감자튀김이 있는 공덕역 맛집",
+      text: "",
       store: "로우앤 하이로우앤 하이로우앤 하이로우앤 ",
     },
     {
@@ -48,7 +47,7 @@ const Review = () => {
       </div>
 
       {/* 카드 리스트 */}
-      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
+      <div className="w-full py-5 pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
         <ul className="flex w-full space-x-2">
           {reviews.map((review) => (
             <li
@@ -66,24 +65,24 @@ const Review = () => {
 
 const ReviewCard = ({ review }) => {
   return (
-    <div className="p-1 m-1 rounded cursor-pointer md:p-2 w-border shadow-custom-box-shadow">
+    <div className="flex flex-col h-full p-1 m-2 rounded cursor-pointer md:p-2 w-border shadow-custom-box-shadow">
       <figure
         className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded bg-gray-200 md:mb-4 mb-2"
-        style={{ backgroundImage: `url(${gukbapImg})` }}
+        style={{ backgroundImage: `url()` }}
       ></figure>
-      <div className="space-y-2 ">
+      <div className="flex flex-col space-y-2 grow">
         <div className="flex">
           {/* 작성자 */}
           <figure
             className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
-            style={{ backgroundImage: `url(${gukbapImg})` }}
+            style={{ backgroundImage: `url()` }}
           ></figure>
           <div className="flex items-center flex-1 text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
             {review.author}
           </div>
         </div>
         {/* 리뷰 텍스트 */}
-        <p className="text-xs font-semibold sm:text-base min-h-6 h-fit text-custom-gray-100 line-clamp-2">
+        <p className="text-xs font-semibold sm:text-base text-custom-gray-100 line-clamp-2 grow">
           {review.text}
         </p>
         {/* 상점명 */}

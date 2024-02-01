@@ -3,7 +3,7 @@ const Heart = () => {
   const stores = [
     {
       id: 1,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
+      text: "[성",
       menu: "용용이 파스타 + 음료 1",
       reviewCount: 654,
     },
