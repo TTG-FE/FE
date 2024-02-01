@@ -4,6 +4,7 @@ import DownloadIcon from "./DownloadIcon"; // DownloadIcon 컴포넌트 import
 import CheckIcon from "./CheckIcon";
 import EmployeeVerificationIcon from "../assets/employeeVerification.svg";
 import QrCodeIcon from "../assets/qr-code-line.svg";
+import horizontalCircleIcon from "../assets/horizontalCircle.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 
 // 가게 사진, 지역, 이름, 행사 쿠폰명, 쿠폰 날짜, 쿠폰가게 이미지, 쿠폰여부, 쿠폰사용여부, 모달창 열기, 모달창 닫기, 모달 관리
@@ -29,37 +30,67 @@ const CouponCard = ({
   return (
     <>
       {/* 모바일 쿠폰 영역 */}
-      <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 sm:hidden">
+      <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 sm:hidden font-inter">
         {/* 쿠폰 왼쪽 다운로드 영역*/}
-        <div className="rounded-l-lg bg-custom-pink h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4">
-          <button
-            className="text-[8px]"
-            onClick={() => {
-              handleOpenModal("isCouponModalOpen");
-              console.log(modalStates);
-            }}
-            disabled={used}
+        <div className="relative">
+          <div
+            className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 overflow-hidden ${
+              used ? "bg-custom-gray-300" : "bg-custom-pink"
+            }`}
           >
-            <div className="w-10 h-10 bg-white rounded-full mb-1.5 flex justify-center items-center">
-              <PhoneDownloadIcon fill={"#FF0068"} stroke={"#FF0068"} />
-              {/* <img src={phoneDownloadIcon} alt="" /> */}
-            </div>
-            <p className="text-white">다운로드</p>
-          </button>
+            <button
+              className="text-[8px]"
+              onClick={() => {
+                handleOpenModal("isCouponModalOpen");
+                console.log(modalStates);
+              }}
+              disabled={used}
+            >
+              <div className="w-10 h-10 bg-white rounded-full mb-1.5 flex justify-center items-center">
+                <PhoneDownloadIcon
+                  fill={`${used ? "#B3B3B3" : "#FF0068"}`}
+                  stroke={`${used ? "#B3B3B3" : "#FF0068"}`}
+                />
+                {/* <img src={phoneDownloadIcon} alt="" /> */}
+              </div>
+              <p className="text-white">다운로드</p>
+            </button>
+            <img
+              src={horizontalCircleIcon}
+              alt=""
+              className="absolute top-3 right-[-6px]"
+            />
+          </div>
         </div>
 
         {/* 쿠폰 오른쪽 내용 영역 */}
-        <div className="py-6 pl-6 pr-2 bg-[#FFF2F2] w-full basis-3/4">
+        <div
+          className={`py-6 pl-6 pr-2  w-full basis-3/4 ${
+            used ? "bg-white" : "bg-[#FFF2F2]"
+          }`}
+        >
           <div className="flex flex-col h-full justify-evenly">
             <h1>[성수] 베리베리 스트로베리 케이크 전문점</h1>
-            <p className="text-[10px] text-custom-pink">
+            <p
+              className={`text-[10px]  ${
+                used ? "text-custom-gray-200" : "text-custom-pink"
+              }`}
+            >
               닐라닐라바닐라 조각케이크 무료증정
             </p>
             <div className="flex flex-row items-center">
-              <p className="text-[8px] bg-custom-pink rounded-lg text-white px-2 py-0.5 mr-2">
-                사용가능
+              <p
+                className={`text-[8px] rounded-lg text-white px-2 py-0.5 mr-2 ${
+                  used ? "bg-custom-gray-300" : "bg-custom-pink"
+                }`}
+              >
+                {used ? "사용완료" : "사용가능"}
               </p>
-              <p className="text-[10px]">2023.12.01 ~ 2023.12.31</p>
+              <p
+                className={`text-[10px]  ${used ? "text-custom-gray-200" : ""}`}
+              >
+                2023.12.01 ~ 2023.12.31
+              </p>
             </div>
           </div>
         </div>

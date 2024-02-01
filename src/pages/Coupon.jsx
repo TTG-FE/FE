@@ -11,8 +11,6 @@ import searchIcon from "../assets/images/searchIcon.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
 
-
-
 // Component
 import CouponCard from "../components/CouponCard";
 import { Link } from "react-router-dom";
@@ -167,11 +165,9 @@ const Coupon = () => {
           <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
             쿠폰함
           </div>
-          <input
-            type="text"
-            placeholder="쿠폰 검색하기"
-            className="text-xs border-b border-[#D9D9D9] w-1/4"
-          />
+          <div className="mt-2">
+            <SearchBar />
+          </div>
         </div>
 
         {/* 쿠폰 영역 전체 패딩*/}
@@ -259,9 +255,7 @@ const SearchBar = () => {
         ref={inputRef}
         type="text"
         value={inputText}
-        placeholder={
-          "찾고싶은 쿠폰을 검색해보세요!"
-        }
+        placeholder={"찾고싶은 쿠폰을 검색해보세요!"}
         onChange={handleInputChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -274,7 +268,10 @@ const SearchBar = () => {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
-        <SearchIcon fill={isFocused ? "#FF0069" : "#D9D9D9"} className="absolute top-0 right-0"/>
+        <SearchIcon
+          fill={isFocused ? "#FF0069" : "#D9D9D9"}
+          className="absolute top-0 right-0"
+        />
       </button>
     </form>
   );
