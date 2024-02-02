@@ -38,7 +38,7 @@ const CouponCard = ({
   return (
     <>
       {/* 모바일 쿠폰 영역 */}
-      <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 md:hidden font-inter">
+      <main className="ml-7 h-40 shadow-lg flex flex-row break-words mb-6 md:hidden font-inter rounded-l-lg">
         {/* 쿠폰 왼쪽 다운로드 영역*/}
         <div className="relative z-0">
           <div
