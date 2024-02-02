@@ -77,7 +77,7 @@ const Coupon = () => {
   return (
     <>
       {/* ---------------모바일 쿠폰------------------- */}
-      <div className="sm:hidden h-full pb-20">
+      <div className="md:hidden h-full pb-20">
         {/* 쿠폰함 타이틀 헤더 영역 */}
         <header className="pt-7 px-6 pb-5 border-b-2 flex ">
           <button>
@@ -139,7 +139,7 @@ const Coupon = () => {
 
       {/* ----------데스크탑 쿠폰-------------- */}
       {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 pb-8 font-inter hidden sm:block">
+      <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex items-end mb-7">
           <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">

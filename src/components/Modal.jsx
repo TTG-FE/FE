@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, isCoupon,isLast, children }) => {
       id="wrapper"
       onClick={handleClose}
     >
-      <div className="absolute top-24 sm:top-10">
+      <div className="absolute top-24 md:top-10">
         {/* 모달 내용 */}
         <div className="w-fit truncate sticky">
           {/* 모달 바디 */}
@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, isCoupon,isLast, children }) => {
           >
             {/* 모달 닫기 버튼 */}
             <button
-              className="absolute top-5 right-3 sm:top-9 sm:right-4 text-gray-500 cursor-pointer"
+              className="absolute top-5 right-3 md:top-9 md:right-4 text-gray-500 cursor-pointer"
               onClick={onClose}
             >
               <img src={closeIcon} alt="" />

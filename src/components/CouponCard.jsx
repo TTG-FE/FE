@@ -38,7 +38,7 @@ const CouponCard = ({
   return (
     <>
       {/* 모바일 쿠폰 영역 */}
-      <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 sm:hidden font-inter">
+      <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 md:hidden font-inter">
         {/* 쿠폰 왼쪽 다운로드 영역*/}
         <div className="relative z-0">
           <div
@@ -104,7 +104,7 @@ const CouponCard = ({
       {/* //모바일 쿠폰 영역 끝 */}
 
       {/* 데스크탑 쿠폰 */}
-      <main className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden sm:flex">
+      <main className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
         {/* 쿠폰 이미지 및 상세 내용 */}
         <div className="flex basis-3/4 pl-7 py-6">
           {/* 이미지 */}
@@ -168,7 +168,7 @@ const CouponCard = ({
       </main>
 
       {/* 모바일 모달 */}
-      <div className="sm:hidden">
+      <div className="md:hidden">
         {/* 1번째 모달 */}
         <Modal
           isOpen={modalStates.isCouponModalOpen}
@@ -349,7 +349,7 @@ const CouponCard = ({
       </div>
 
       {/* 데스크탑 모달 */}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         {/* <div className=""> */}
         <Modal
           isOpen={modalStates.isCouponModalOpen}
