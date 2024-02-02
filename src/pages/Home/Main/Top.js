@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
+import BakeryImg from "./../../../assets/bakery.png";
 
 /** Top 15 또또가 */
 const Top = () => {
@@ -155,7 +156,7 @@ const Top15Card = ({ item }) => {
       {/* 메뉴 이미지 */}
       <figure
         className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
-        style={{ backgroundImage: `url()` }}
+        style={{ backgroundImage: `url(${BakeryImg})` }}
       >
         {/* 등수 표시 */}
         <div className="absolute flex items-center justify-center w-8 h-8 text-xs text-white left-4 bg-custom-pink">

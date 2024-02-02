@@ -1,3 +1,4 @@
+import BakeryImg from "./../../../assets/bakery.png";
 const Review = () => {
   const reviews = [
     {
@@ -75,7 +76,7 @@ const ReviewCard = ({ review }) => {
             {/* 작성자 */}
             <figure
               className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
-              style={{ backgroundImage: `url()` }}
+              style={{ backgroundImage: `url(${BakeryImg})` }}
             ></figure>
             <p className="text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
               {review.author}

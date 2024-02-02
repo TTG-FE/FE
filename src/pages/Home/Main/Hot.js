@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
+import BakeryImg from "./../../../assets/bakery.png";
 
 const Hot = () => {
   const hotRestarants = [
@@ -74,7 +75,7 @@ const HotCard = ({ item }) => {
         {/* 카드 이미지 */}
         <figure
           className="relative pb-[60%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-4"
-          style={{ backgroundImage: `url()` }}
+          style={{ backgroundImage: `url(${BakeryImg})` }}
         >
           <button className="absolute top-2 right-2" onClick={handleLikeClick}>
             <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
