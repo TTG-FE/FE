@@ -27,6 +27,14 @@ const CouponCard = ({
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
+  // 모달창 쿠폰 양옆 반원 UI 관련 설정
+  const couponSemicircle_desktop_size = 14; /* 크기 14x14 */
+  const couponSemicircle_desktop_top = `306px`; /* top으로부터 위치 */
+  const couponSemicircle_desktop_side = `-28px`; /* left, right */
+  const couponSemicircle_mobile_size = 10;
+  const couponSemicircle_mobile_top = `200px`;
+  const couponSemicircle_mobile_side = `-20px`;
+
   return (
     <>
       {/* 모바일 쿠폰 영역 */}
@@ -183,8 +191,12 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            <div className="absolute w-10 h-10 bg-white rounded-full top-[204px] left-[-20px] border-4 border-custom-pink"></div>
-            <div className="absolute w-10 h-10 bg-white rounded-full top-[204px] right-[-20px] border-4 border-custom-pink "></div>
+            <CouponSemicircleUI
+              size={couponSemicircle_mobile_size}
+              top={couponSemicircle_mobile_top}
+              leftAndright={couponSemicircle_mobile_side}
+              borderColor={`custom-pink`}
+            />
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="border-dashed border-t-2 border-custom-pink text-center">
@@ -225,9 +237,14 @@ const CouponCard = ({
                 />
               </div>
             </div>
+
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <div className="absolute w-10 h-10 bg-white rounded-full top-[204px] left-[-20px] border-4 border-custom-pink"></div>
-            <div className="absolute w-10 h-10 bg-white rounded-full top-[204px] right-[-20px] border-4 border-custom-pink "></div>
+            <CouponSemicircleUI
+              size={couponSemicircle_mobile_size}
+              top={couponSemicircle_mobile_top}
+              leftAndright={couponSemicircle_mobile_side}
+              borderColor={`custom-pink`}
+            />
 
             <div className="border-dashed border-t-2 border-custom-pink">
               {/* 대쉬바 밑에 내용 전체 div */}
@@ -301,8 +318,12 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            <div className="absolute w-10 h-10 bg-white rounded-full top-[204px] left-[-20px] border-[3px] border-custom-gray-400"></div>
-            <div className="absolute w-10 h-10 bg-white rounded-full top-[204px] right-[-20px] border-[3px] border-custom-gray-400 "></div>
+            <CouponSemicircleUI
+              size={couponSemicircle_mobile_size}
+              top={couponSemicircle_mobile_top}
+              leftAndright={couponSemicircle_mobile_side}
+              borderColor={`custom-gray-400`}
+            />
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="border-dashed border-t-2 border-[#B2B2B2] text-center">
@@ -343,8 +364,12 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink"></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
+            <CouponSemicircleUI
+              size={couponSemicircle_desktop_size}
+              top={couponSemicircle_desktop_top}
+              leftAndright={couponSemicircle_desktop_side}
+              borderColor={`custom-pink`}
+            />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
@@ -386,8 +411,13 @@ const CouponCard = ({
               </div>
             </div>
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-pink "></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-pink "></div>
+            <CouponSemicircleUI
+              size={couponSemicircle_desktop_size}
+              top={couponSemicircle_desktop_top}
+              leftAndright={couponSemicircle_desktop_side}
+              borderColor={`custom-pink`}
+            />
+
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-custom-pink ">
                 {/* 대쉬바 밑에 내용 전체 div */}
@@ -458,11 +488,15 @@ const CouponCard = ({
               </div>
             </div>
 
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] left-[-28px] border-4 border-custom-gray-400 "></div>
-            <div className="absolute w-14 h-14 bg-white rounded-full top-[300px] right-[-28px] border-4 border-custom-gray-400 "></div>
+            <CouponSemicircleUI
+              size={couponSemicircle_desktop_size}
+              top={couponSemicircle_desktop_top}
+              leftAndright={couponSemicircle_desktop_side}
+              borderColor={`custom-gray-400`}
+            />
 
             <section className="flex flex-col items-center">
-              <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
+              <div className="w-11/12 border-dashed border-t-2 border-[#B2B2B2] text-center">
                 <h2 className="text-base mt-12 mb-2.5">
                   [{storeArea}] {storeName}
                 </h2>
@@ -485,6 +519,20 @@ const CouponCard = ({
         </Modal>
       </div>
       {/* //모달 */}
+    </>
+  );
+};
+
+// 쿠폰 양옆 반원 UI 추가(가로x세로, 위, 양옆, border 색상)
+const CouponSemicircleUI = ({ size, top, leftAndright, borderColor }) => {
+  return (
+    <>
+      <div
+        className={`absolute w-${size} h-${size} bg-white rounded-full top-[${top}] left-[${leftAndright}] border-4 border-${borderColor}`}
+      ></div>
+      <div
+        className={`absolute w-${size} h-${size} bg-white rounded-full top-[${top}] right-[${leftAndright}] border-4 border-${borderColor}`}
+      ></div>
     </>
   );
 };
