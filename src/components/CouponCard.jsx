@@ -27,13 +27,13 @@ const CouponCard = ({
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
-  const couponSemicircle_desktop_size = 14;
-  const couponSemicircle_desktop_top = `300px`;
-  const couponSemicircle_desktop_side = `-28px`;
+  // 모달창 쿠폰 양옆 반원 UI 관련 설정
+  const couponSemicircle_desktop_size = 14; /* 크기 14x14 */
+  const couponSemicircle_desktop_top = `306px`; /* top으로부터 위치 */
+  const couponSemicircle_desktop_side = `-28px`; /* left, right */
   const couponSemicircle_mobile_size = 10;
   const couponSemicircle_mobile_top = `200px`;
   const couponSemicircle_mobile_side = `-20px`;
-
 
   return (
     <>
@@ -524,7 +524,7 @@ const CouponCard = ({
 };
 
 // 쿠폰 양옆 반원 UI 추가(가로x세로, 위, 양옆, border 색상)
-const CouponSemicircleUI = ({ size, top, leftAndright, borderColor}) => {
+const CouponSemicircleUI = ({ size, top, leftAndright, borderColor }) => {
   return (
     <>
       <div
