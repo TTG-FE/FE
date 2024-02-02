@@ -1,14 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 // Asset
 import BakeryImg from "../assets/bakery.png";
 import CouponImg from "../assets/bakery-sm.png";
-import QrCodeImg from "../assets/qr-code-line.svg";
 import arrowRightImg from "../assets/arrow_right_light.svg";
 import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
-import phoneDownloadIcon from "../assets/phone_downloadIcon.svg";
-import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
-import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
+import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
@@ -26,7 +23,6 @@ const Coupon = () => {
   // 임시 로그인
   const handleTest = () => {
     setLogin(true);
-    console.log(login);
   };
 
   // 사용한 쿠폰 처리
@@ -78,25 +74,10 @@ const Coupon = () => {
     });
   };
 
-  // JS로 반응형 컨트롤 예시
-
-  // const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 375);
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsMobileView(window.innerWidth <= 375);
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-
-  //   // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
   return (
     <>
       {/* ---------------모바일 쿠폰------------------- */}
-      <div className="sm:hidden h-full pb-20">
+      <div className="md:hidden h-full pb-20">
         {/* 쿠폰함 타이틀 헤더 영역 */}
         <header className="pt-7 px-6 pb-5 border-b-2 flex ">
           <button>
@@ -158,13 +139,13 @@ const Coupon = () => {
 
       {/* ----------데스크탑 쿠폰-------------- */}
       {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 pb-8 font-inter hidden sm:block">
+      <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
         {/* 쿠폰함 및 검색창 */}
-        <div className="flex mb-7">
+        <div className="flex items-end mb-7">
           <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
             쿠폰함
           </div>
-          <div className="mt-2">
+          <div className="h-full">
             <SearchBar />
           </div>
         </div>
@@ -268,8 +249,8 @@ const SearchBar = () => {
         onBlur={() => setIsFocused(false)}
       >
         <SearchIcon
-          fill={isFocused ? "#FF0069" : "#D9D9D9"}
-          className="absolute top-0 right-0"
+          stroke={isFocused ? "#FF0069" : "#D9D9D9"}
+          className="absolute top-0 right-0 w-5 h-5"
         />
       </button>
     </form>
