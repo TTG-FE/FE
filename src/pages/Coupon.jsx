@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 // Asset
 import BakeryImg from "../assets/bakery.png";
 import CouponImg from "../assets/bakery-sm.png";
-import QrCodeImg from "../assets/qr-code-line.svg";
 import arrowRightImg from "../assets/arrow_right_light.svg";
 import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
-import phoneDownloadIcon from "../assets/phone_downloadIcon.svg";
-import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
 
 // Component
@@ -26,7 +23,6 @@ const Coupon = () => {
   // 임시 로그인
   const handleTest = () => {
     setLogin(true);
-    console.log(login);
   };
 
   // 사용한 쿠폰 처리
@@ -77,21 +73,6 @@ const Coupon = () => {
       return newStates;
     });
   };
-
-  // JS로 반응형 컨트롤 예시
-
-  // const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 375);
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsMobileView(window.innerWidth <= 375);
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-
-  //   // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
 
   return (
     <>
