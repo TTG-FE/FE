@@ -5,7 +5,7 @@ import BakeryImg from "../assets/bakery.png";
 import CouponImg from "../assets/bakery-sm.png";
 import arrowRightImg from "../assets/arrow_right_light.svg";
 import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
-import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
+import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
@@ -141,11 +141,11 @@ const Coupon = () => {
       {/* 전체 페이지 설정 */}
       <div className="px-24 pt-16 pb-8 font-inter hidden sm:block">
         {/* 쿠폰함 및 검색창 */}
-        <div className="flex mb-7">
+        <div className="flex items-end mb-7">
           <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
             쿠폰함
           </div>
-          <div className="mt-2">
+          <div className="h-full">
             <SearchBar />
           </div>
         </div>
@@ -249,8 +249,8 @@ const SearchBar = () => {
         onBlur={() => setIsFocused(false)}
       >
         <SearchIcon
-          fill={isFocused ? "#FF0069" : "#D9D9D9"}
-          className="absolute top-0 right-0"
+          stroke={isFocused ? "#FF0069" : "#D9D9D9"}
+          className="absolute top-0 right-0 w-5 h-5"
         />
       </button>
     </form>

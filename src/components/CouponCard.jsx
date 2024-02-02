@@ -495,7 +495,7 @@ const CouponCard = ({
               leftAndright={couponSemicircle_desktop_side}
               borderColor={`custom-gray-400`}
             /> */}
-            <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
+            <CouponSemicircleUI_Desktop borderColor={`custom-gray-400`} />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-[#B2B2B2] text-center">
