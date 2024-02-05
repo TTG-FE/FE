@@ -564,4 +564,6 @@ const CouponSemicircleUI_Mobile = ({ borderColor }) => {
   );
 };
 
+
+
 export default CouponCard;
