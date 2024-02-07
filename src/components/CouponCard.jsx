@@ -27,18 +27,10 @@ const CouponCard = ({
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
-  // 모달창 쿠폰 양옆 반원 UI 관련 설정
-  const couponSemicircle_desktop_size = 14; /* 크기 48x48(단위 rem)*/
-  const couponSemicircle_desktop_top = 306; /* top으로부터 위치(단위 px) */
-  const couponSemicircle_desktop_side = -28; /* left, right (단위 px)*/
-  const couponSemicircle_mobile_size = 10; 
-  const couponSemicircle_mobile_top = 200;
-  const couponSemicircle_mobile_side = -20;
-
   return (
     <>
       {/* 모바일 쿠폰 영역 */}
-      <main className="ml-7 border h-40 shadow-lg flex flex-row break-words mb-6 md:hidden font-inter">
+      <main className="ml-7 h-40 shadow-lg flex flex-row break-words mb-6 md:hidden font-inter rounded-l-lg">
         {/* 쿠폰 왼쪽 다운로드 영역*/}
         <div className="relative z-0">
           <div
@@ -104,17 +96,19 @@ const CouponCard = ({
       {/* //모바일 쿠폰 영역 끝 */}
 
       {/* 데스크탑 쿠폰 */}
-      <main className="flex h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
+      <main className="h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
         {/* 쿠폰 이미지 및 상세 내용 */}
-        <div className="flex basis-3/4 pl-7 py-6">
+        <div className="flex basis-3/4 pl-7 py-6 h-full">
           {/* 이미지 */}
           <img src={storeImg} alt="" className="mr-12" />
           {/* 내용 전체 크기 설정 */}
-          <div className="pt-11 pb-7 truncate">
-            <h2 className="text-3xl	font-medium	mb-4">
+          <div className=" pt-11 pb-7 truncate">
+            <h2 className="text-3xl	font-medium	mb-4 text-ellipsis overflow-hidden">
               [{storeArea}] {storeName}
             </h2>
-            <h3 className="text-[#FF7A00] mb-14">{promotionText}</h3>
+            <h3 className="text-[#FF7A00] mb-14 text-ellipsis overflow-hidden">
+              {promotionText}
+            </h3>
             <div className="flex items-center">
               <p
                 className={`px-5 py-2.5 rounded-3xl	text-white mr-5 ${
@@ -123,7 +117,9 @@ const CouponCard = ({
               >
                 {used ? "사용완료" : "사용가능"}
               </p>
-              <p>기한: {couponDate}</p>
+              <p className="text-ellipsis overflow-hidden">
+                기한: {couponDate}
+              </p>
             </div>
           </div>
         </div>
@@ -521,20 +517,6 @@ const CouponCard = ({
         </Modal>
       </div>
       {/* //모달 */}
-    </>
-  );
-};
-
-// 쿠폰 양옆 반원 UI 추가(가로x세로, 위, 양옆, border 색상) -> [] 가로를 치면 버그가 발생함
-const CouponSemicircleUI = ({ size, top, leftAndright, borderColor }) => {
-  return (
-    <>
-      <div
-        className={`absolute w-${size} h-${size} bg-white rounded-full top-[${top}px] left-[${leftAndright}px] border-4 border-${borderColor}`}
-      ></div>
-      <div
-        className={`absolute w-${size} h-${size} bg-white rounded-full top-[${top}px] right-[${leftAndright}px] border-4 border-${borderColor}`}
-      ></div>
     </>
   );
 };

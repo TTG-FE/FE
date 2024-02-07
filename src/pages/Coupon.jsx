@@ -3,27 +3,58 @@ import React, { useRef, useState } from "react";
 // Asset
 import BakeryImg from "../assets/bakery.png";
 import CouponImg from "../assets/bakery-sm.png";
-import arrowRightImg from "../assets/arrow_right_light.svg";
-import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
 import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
 import { Link } from "react-router-dom";
+import GoToLogin from "../components/GoToLogin";
+import MobileHeader from "../components/MobileHeader";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(!false);
   const [coupons, setCoupons] = useState([
-    { id: 1, used: false },
-    { id: 2, used: false },
-    { id: 3, used: false },
+    // { id: 1, used: false },
+    // { id: 2, used: false },
+    // { id: 3, used: false },
+    {
+      id: 21,
+      name: "name",
+      subtitle: "subTitle1",
+      useYn: "Y",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/fe8b6765-7b92-4ea7-87ca-79cb74e7a59fimage.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d394c8b1-a4e2-4793-8bcf-84210f7256cd%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
+    {
+      id: 22,
+      name: "name",
+      subtitle: "subTitle1",
+      useYn: "Y",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/3896a88d-09b8-40a9-966c-c715fdfd0ec4image.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d5c859a4-9614-4e14-a9f1-2b35f143f27a%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
+    {
+      id: 23,
+      name: "name",
+      subtitle: "subTitle1",
+      useYn: "Y",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
   ]);
-
-  // 임시 로그인
-  const handleTest = () => {
-    setLogin(true);
-  };
 
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
@@ -76,133 +107,26 @@ const Coupon = () => {
 
   return (
     <>
-      {/* ---------------모바일 쿠폰------------------- */}
-      <div className="md:hidden h-full pb-20">
-        {/* 쿠폰함 타이틀 헤더 영역 */}
-        <header className="pt-7 px-6 pb-5 border-b-2 flex ">
-          <button>
-            <Link to={"/"}>
-              <img src={phoneArrowLeftIcon} alt="" />
-            </Link>
-          </button>
+      <div className="font-inter">
+        {/* ---------------모바일 쿠폰------------------- */}
+        <MobileCouponSection
+          coupons={coupons}
+          login={login}
+          handleOpenModal={handleOpenModal}
+          handleCloseModal={handleCloseModal}
+          modalStates={modalStates}
+          handleCouponUsed={handleCouponUsed}
+        />
 
-          <h1 className="w-full text-center font-semibold text-base">쿠폰함</h1>
-        </header>
-        {login ? (
-          <div className="relative pt-8">
-            {/* 검색 영역 */}
-            <div className="flex justify-center mb-10">
-              <SearchBar />
-            </div>
-
-            {/* 쿠폰 영역 */}
-
-            {coupons.map((coupon, index) => (
-              <CouponCard
-                key={coupon.id}
-                storeImg={BakeryImg}
-                storeArea={`성수`}
-                storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
-                promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
-                couponDate={`2023.12.01 ~ 2023.12.31`}
-                couponStoreImg={CouponImg}
-                isCoupon={coupon}
-                handleCouponUsed={() => handleCouponUsed(coupon.id)}
-                handleOpenModal={(modalName) =>
-                  handleOpenModal(modalName, index)
-                }
-                handleCloseModal={() => handleCloseModal(index)}
-                modalStates={modalStates[index]}
-              />
-            ))}
-          </div>
-        ) : (
-          <>
-            {/* 로그인 전 모바일 화면 */}
-            <div className="flex flex-col items-center mt-20 break-words">
-              <h1 className="text-xl font-semibold text-custom-pink mb-4">
-                로그인 후 이용하실 수 있습니다
-              </h1>
-              <p className="text-xs text-custom-gray-200 mb-8">
-                오늘도 또또가에서 혜택을 받아보세요!
-              </p>
-              <button
-                className="bg-custom-pink rounded w-4/6 text-white text-sm py-2 max-w-60"
-                onClick={handleTest}
-              >
-                로그인 하기
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* ----------데스크탑 쿠폰-------------- */}
-      {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
-        {/* 쿠폰함 및 검색창 */}
-        <div className="flex items-end mb-7">
-          <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
-            쿠폰함
-          </div>
-          <div className="h-full">
-            <SearchBar />
-          </div>
-        </div>
-
-        {/* 쿠폰 영역 전체 패딩*/}
-        <div
-          className={`border-t border-[#D9D9D9] text-xl ${
-            coupons.length === 0 || !login
-              ? "flex flex-col justify-center items-center absolute inset-0"
-              : "pt-9"
-          }`}
-        >
-          {/* 각 쿠폰들*/}
-
-          {login ? (
-            coupons.length === 0 ? (
-              <p className="text-custom-gray-200 text-lg font-normal">
-                또또가 리뷰를 등록하고 쿠폰을 받아보세요.
-              </p>
-            ) : (
-              coupons.map((coupon, index) => (
-                <CouponCard
-                  key={coupon.id}
-                  storeImg={BakeryImg}
-                  storeArea={`성수`}
-                  storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
-                  promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
-                  couponDate={`2023.12.01 ~ 2023.12.31`}
-                  couponStoreImg={CouponImg}
-                  isCoupon={coupon}
-                  handleCouponUsed={() => handleCouponUsed(coupon.id)}
-                  handleOpenModal={(modalName) =>
-                    handleOpenModal(modalName, index)
-                  }
-                  handleCloseModal={() => handleCloseModal(index)}
-                  modalStates={modalStates[index]}
-                />
-              ))
-            )
-          ) : (
-            <>
-              <p className="text-custom-gray-200 text-lg font-normal ">
-                지금 바로 로그인하고
-              </p>
-              <p className="text-custom-gray-200 text-lg mb-10 font-bold">
-                또또가의 더 많은 기능을 사용해보세요.
-              </p>
-              <button
-                className="bg-custom-pink w-1/3 text-white rounded-2xl h-16 text-2xl px-12 flex flex-row items-center justify-center"
-                onClick={handleTest}
-              >
-                <img src={arrowRightImg} className="mr-2" alt="" />
-                로그인 하러가기
-              </button>
-            </>
-          )}
-        </div>
+        {/* ----------데스크탑 쿠폰-------------- */}
+        <DesktopCouponSection
+          coupons={coupons}
+          login={login}
+          handleOpenModal={handleOpenModal}
+          handleCloseModal={handleCloseModal}
+          modalStates={modalStates}
+          handleCouponUsed={handleCouponUsed}
+        />
       </div>
     </>
   );
@@ -254,6 +178,122 @@ const SearchBar = () => {
         />
       </button>
     </form>
+  );
+};
+
+const DesktopCouponSection = ({
+  coupons,
+  login,
+  handleOpenModal,
+  handleCloseModal,
+  modalStates,
+  handleCouponUsed,
+}) => {
+  return (
+    <>
+      {/* 전체 페이지 설정 */}
+      <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
+        {/* 쿠폰함 및 검색창 */}
+        <div className="flex items-end mb-7">
+          <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
+            쿠폰함
+          </div>
+          <div className="h-full">
+            <SearchBar />
+          </div>
+        </div>
+
+        {/* 쿠폰 영역 전체 패딩*/}
+        <div
+          className={`border-t border-[#D9D9D9] text-xl ${
+            coupons.length === 0 || !login
+              ? "flex flex-col justify-center items-center absolute inset-0"
+              : "pt-9"
+          }`}
+        >
+          {/* 각 쿠폰들*/}
+
+          {login ? (
+            coupons.length === 0 ? (
+              <p className="text-custom-gray-200 text-lg font-normal">
+                또또가 리뷰를 등록하고 쿠폰을 받아보세요.
+              </p>
+            ) : (
+              coupons.map((coupon, index) => (
+                <CouponCard
+                  key={coupon.id}
+                  s
+                  storeImg={BakeryImg}
+                  storeArea={`성수`}
+                  storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
+                  promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
+                  couponDate={`2023.12.01 ~ 2023.12.31`}
+                  couponStoreImg={CouponImg}
+                  isCoupon={coupon}
+                  handleCouponUsed={() => handleCouponUsed(coupon.id)}
+                  handleOpenModal={(modalName) =>
+                    handleOpenModal(modalName, index)
+                  }
+                  handleCloseModal={() => handleCloseModal(index)}
+                  modalStates={modalStates[index]}
+                />
+              ))
+            )
+          ) : (      
+              <GoToLogin/>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const MobileCouponSection = ({
+  coupons,
+  login,
+  handleOpenModal,
+  handleCloseModal,
+  modalStates,
+  handleCouponUsed,
+}) => {
+  return (
+    <>
+      {/* 쿠폰함 타이틀 헤더 영역 */}
+      {/* <MobileHeader title={"쿠폰함"} /> */}
+      <div className="md:hidden h-full pb-20">
+        {login ? (
+          <div className="relative pt-8">
+            {/* 검색 영역 */}
+            <div className="flex justify-center mb-10">
+              <SearchBar />
+            </div>
+
+            {/* 쿠폰 영역 */}
+
+            {coupons.map((coupon, index) => (
+              <CouponCard
+                key={coupon.id}
+                storeImg={BakeryImg}
+                storeArea={`성수`}
+                storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
+                promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
+                couponDate={`2023.12.01 ~ 2023.12.31`}
+                couponStoreImg={CouponImg}
+                isCoupon={coupon}
+                handleCouponUsed={() => handleCouponUsed(coupon.id)}
+                handleOpenModal={(modalName) =>
+                  handleOpenModal(modalName, index)
+                }
+                handleCloseModal={() => handleCloseModal(index)}
+                modalStates={modalStates[index]}
+              />
+            ))}
+          </div>
+        ) : (
+          <GoToLogin />
+        )}
+      </div>
+    </>
   );
 };
 

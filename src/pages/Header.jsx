@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "./../assets/images/logo.png";
 import { ReactComponent as CouponIcon } from "./../assets/images/couponIcon.svg";
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 import { ReactComponent as HumanIcon } from "./../assets/images/humanIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
+import MobileHeader from "../components/MobileHeader";
 
 /** Header */
 const Header = () => {
@@ -18,6 +19,23 @@ const Header = () => {
   const handleButtonColor = (button, isHovered) => {
     setButtonsHover((prev) => ({ ...prev, [button]: isHovered }));
   };
+
+  const location = useLocation(); // 현재 경로 정보를 가져옴
+
+  // 현재 경로에 따른 MobileHeader title 결정
+  let headerTitle = ""; // 기본값
+  switch (location.pathname) {
+    case "/coupon":
+      headerTitle = "쿠폰함";
+      break;
+    case "/login":
+      headerTitle = "로그인";
+      break;
+    // 추가적인 경로와 타이틀 매핑이 필요하다면 여기에 추가
+    default:
+      // 기본값 또는 다른 로직
+      break;
+  }
 
   return (
     <div>
@@ -108,6 +126,7 @@ const Header = () => {
           </button>
         </div>
       </div>
+      {headerTitle && <MobileHeader title={headerTitle} />}
     </div>
   );
 };
