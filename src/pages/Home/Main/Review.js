@@ -1,3 +1,4 @@
+import BakeryImg from "./../../../assets/bakery.png";
 const Review = () => {
   const reviews = [
     {
@@ -46,8 +47,8 @@ const Review = () => {
       </div>
 
       {/* 카드 리스트 */}
-      <div className="w-full py-5 pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
-        <ul className="flex w-full space-x-4">
+      <div className="w-full py-5 pl-4 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16 ">
+        <ul className="flex w-full m-2 space-x-4">
           {reviews.map((review) => (
             <li
               key={review.id}
@@ -64,10 +65,10 @@ const Review = () => {
 
 const ReviewCard = ({ review }) => {
   return (
-    <div className="h-full p-1 rounded-lg cursor-pointer w-border shadow-custom-box-shadow sm:p-2">
+    <div className="h-full p-1 rounded-lg cursor-pointer w-border shadow-custom-box-shadow sm:p-2 hover:shadow-custom-box-shadow-pink">
       <div className="flex flex-col h-full">
         <figure
-          className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded-lg bg-gray-200 md:mb-4 mb-2 "
+          className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded-lg bg-gray-200 md:mb-4 mb-2"
           style={{ backgroundImage: `url()` }}
         ></figure>
         <div className="flex flex-col h-full space-y-2">
@@ -75,7 +76,7 @@ const ReviewCard = ({ review }) => {
             {/* 작성자 */}
             <figure
               className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
-              style={{ backgroundImage: `url()` }}
+              style={{ backgroundImage: `url(${BakeryImg})` }}
             ></figure>
             <p className="text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
               {review.author}
