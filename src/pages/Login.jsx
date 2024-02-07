@@ -38,7 +38,7 @@ export const Login = () => {
           onFailure={onFailureNaverLogin}
           render={(props) => (
             <button
-              className="mr-[20.06rem] mb-[1.19rem] flex items-center rounded-[1rem]  bg-[#57BC63] rounded-md  h-[4.125rem] w-[32.0625rem]"
+              className="mr-[20.06rem] mb-[1.19rem] flex items-center bg-[#57BC63] rounded-md  h-[4.125rem] w-[32.0625rem]"
               onClick={props.onClick}
             >
               <svg
@@ -62,7 +62,7 @@ export const Login = () => {
             </button>
           )}
         />
-        <button className="mr-[20.06rem] flex items-center rounded-[1rem]  bg-[#FFD600] rounded-md  h-[4.125rem] w-[32.0625rem]">
+        <button className="mr-[20.06rem] flex items-center bg-[#FFD600] rounded-md  h-[4.125rem] w-[32.0625rem]">
           <svg
             style={{ marginRight: "5.44rem" }}
             className="ml-[3rem]"

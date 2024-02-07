@@ -3,13 +3,13 @@ import React, { useRef, useState } from "react";
 // Asset
 import BakeryImg from "../assets/bakery.png";
 import CouponImg from "../assets/bakery-sm.png";
-import arrowRightImg from "../assets/arrow_right_light.svg";
-import phoneArrowLeftIcon from "../assets/phone_Arrow_right.svg";
 import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
 import { Link } from "react-router-dom";
+import GoToLogin from "../components/GoToLogin";
+import MobileHeader from "../components/MobileHeader";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
@@ -19,11 +19,6 @@ const Coupon = () => {
     { id: 2, used: false },
     { id: 3, used: false },
   ]);
-
-  // 임시 로그인
-  const handleTest = () => {
-    setLogin(true);
-  };
 
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
@@ -207,27 +202,8 @@ const DesktopCouponSection = ({
                 />
               ))
             )
-          ) : (
-            <>
-              <p className="text-custom-gray-200 text-lg font-normal ">
-                지금 바로 로그인하고
-              </p>
-              <p className="text-custom-gray-200 text-lg mb-10 font-bold">
-                또또가의 더 많은 기능을 사용해보세요.
-              </p>
-              <Link
-                to="/login"
-                className="bg-custom-pink w-1/3 text-white rounded-2xl "
-              >
-                <button
-                  className=" w-full h-16 text-2xl px-12 flex flex-row items-center justify-center"
-                  // onClick={handleTest}
-                >
-                  <img src={arrowRightImg} className="mr-2" alt="" />
-                  로그인 하러가기
-                </button>
-              </Link>
-            </>
+          ) : (      
+              <GoToLogin/>
           )}
         </div>
       </div>
@@ -247,15 +223,7 @@ const MobileCouponSection = ({
     <>
       <div className="md:hidden h-full pb-20">
         {/* 쿠폰함 타이틀 헤더 영역 */}
-        <header className="pt-7 px-6 pb-5 border-b-2 flex ">
-          <button>
-            <Link to={"/"}>
-              <img src={phoneArrowLeftIcon} alt="" />
-            </Link>
-          </button>
-
-          <h1 className="w-full text-center font-semibold text-base">쿠폰함</h1>
-        </header>
+        <MobileHeader title={'쿠폰함'}/>
         {login ? (
           <div className="relative pt-8">
             {/* 검색 영역 */}
@@ -285,25 +253,7 @@ const MobileCouponSection = ({
             ))}
           </div>
         ) : (
-          <>
-            {/* 로그인 전 모바일 화면 */}
-            <div className="flex flex-col items-center mt-20 break-words">
-              <h1 className="text-xl font-semibold text-custom-pink mb-4">
-                로그인 후 이용하실 수 있습니다
-              </h1>
-              <p className="text-xs text-custom-gray-200 mb-8">
-                오늘도 또또가에서 혜택을 받아보세요!
-              </p>
-              <Link>
-                <button
-                  className="bg-custom-pink rounded w-4/6 text-white text-sm py-2 max-w-60"
-                  // onClick={handleTest}
-                >
-                  로그인 하기
-                </button>
-              </Link>
-            </div>
-          </>
+          <GoToLogin />
         )}
       </div>
     </>
