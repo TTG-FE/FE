@@ -8,13 +8,13 @@ export const FinishReview = () => {
       </div>
       <div
         style={{ fontSize: "0.9375rem" }}
-        className="text-[#545454] leading-[1.17238rem] mb-[0.5rem] w-[12.9375rem] h-[4.8125rem] font-bold"
+        className="text-[#545454] font=['Inter'] leading-[1.17238rem] mb-[0.5rem] w-[12.9375rem] h-[4.8125rem] font-bold"
       >
         데이트 코스로 딱! 여의도역 5분 거리 스끼다시 맛있는 집!!
       </div>
       <div
         style={{ fontSize: "0.62525rem" }}
-        className="text-[#FF0069] leading-[1.17238rem]"
+        className="text-[#FF0069] font=['Inter'] leading-[1.17238rem]"
       >
         여의도 또가횟집
       </div>
