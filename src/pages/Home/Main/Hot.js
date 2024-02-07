@@ -42,7 +42,7 @@ const Hot = () => {
         </div>
         {/* 화살표 이미지 */}
         <figure
-          className="absolute right-3 w-[4.81rem] bg-center bg-no-repeat bg-cover h-[6.48rem] top-7"
+          className="absolute right-3 w-[4.81rem] bg-center bg-no-repeat bg-cover h-[6.48rem] top-7 md:hidden"
           style={{ backgroundImage: `url(${ttgArrow})` }}
         ></figure>
         {/* 카드 리스트 */}
