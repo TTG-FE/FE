@@ -121,7 +121,7 @@ const Region = ({ selectModal, setSelectModal }) => {
       <SelectModal selectModal={selectModal} setSelectModal={setSelectModal} />
       <div>
         {/* 상점 필터명 */}
-        <div className="flex items-center justify-between px-6 py-12">
+        <div className="flex items-center justify-between px-8 py-16">
           <div>
             <div className="mb-4 text-2xl font-semibold">
               지역 &gt;{" "}

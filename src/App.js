@@ -21,37 +21,42 @@ function App() {
   const [selectModal, setSelectModal] = useState(0);
   return (
     <BrowserRouter>
-      <Header />
-      <Navbar setSelectModal={setSelectModal} />
-      <div className="relative min-h-screen font-inter">
-        {/* 라우트를 정의한 부분 */}
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/coupon" element={<Coupon />} />
-          <Route
-            path="/region"
-            element={
-              <Region
-                selectModal={selectModal}
-                setSelectModal={setSelectModal}
-              />
-            }
-          />
-          <Route
-            path="/menu"
-            element={
-              <Menu selectModal={selectModal} setSelectModal={setSelectModal} />
-            }
-          />
-          <Route path="/user-guide" element={<UserGuide />} />
-          <Route path="/heart" element={<Heart />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/login" element={<Login />} />
-          {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
-        </Routes>
+      <div className="flex flex-col min-h-screen font-inter ">
+        <Header />
+        <Navbar setSelectModal={setSelectModal} />
+        <div className="relative flex-grow">
+          {/* 라우트를 정의한 부분 */}
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/coupon" element={<Coupon />} />
+            <Route
+              path="/region"
+              element={
+                <Region
+                  selectModal={selectModal}
+                  setSelectModal={setSelectModal}
+                />
+              }
+            />
+            <Route
+              path="/menu"
+              element={
+                <Menu
+                  selectModal={selectModal}
+                  setSelectModal={setSelectModal}
+                />
+              }
+            />
+            <Route path="/user-guide" element={<UserGuide />} />
+            <Route path="/heart" element={<Heart />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/login" element={<Login />} />
+            {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </BrowserRouter>
   );
 }
