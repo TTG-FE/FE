@@ -227,9 +227,7 @@ const DesktopCouponSection = ({
           >
             쿠폰함
           </div>
-          <div className="h-full">
             {login ? <SearchBar /> : null}
-          </div>
         </div>
 
         {/* 쿠폰 영역 전체 패딩*/}
