@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BakeryImg from "./../../../assets/bakery.png";
 const Review = () => {
   const reviews = [
@@ -33,7 +34,7 @@ const Review = () => {
     },
   ];
   return (
-    <div className="mb-16 font-inter">
+    <div className="mb-16">
       {/* 구분선 */}
       <div className="h-px mx-6 bg-black md:hidden opacity-10"></div>
       {/* 제목 텍스트 */}
@@ -52,7 +53,7 @@ const Review = () => {
           {reviews.map((review) => (
             <li
               key={review.id}
-              className="w-[40%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4"
+              className="w-[40%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4 "
             >
               <ReviewCard review={review} />
             </li>

@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import StoreCard from "../../components/StoreCard";
+import GoToLogin from "../../components/GoToLogin";
 const Heart = () => {
   const stores = [
     {
@@ -110,24 +112,33 @@ const Heart = () => {
       reviewCount: 654,
     },
   ];
+  const [login, setLogin] = useState(false);
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`lg:px-16 font-inter px-6`}>
+    <div className={`lg:px-16 px-6`}>
       {/* 제목 */}
-      <div className="flex items-center px-6 py-12">
+      <div className="flex items-center px-8 py-16">
         <span className="mr-2 text-2xl font-semibold border-b-4 border-custom-pink">
           관심상점
         </span>
       </div>
-
+      {login ? (
+        <ul className="flex flex-wrap mb-[2.69rem]">
+          {stores.map((item) => (
+            <li
+              className="p-4 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
+              key={item.id}
+            >
+              <StoreCard item={item} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <GoToLogin />
+        </div>
+      )}
       {/* 상점 카드 리스트 */}
-      <ul className="flex flex-wrap mb-[2.69rem]">
-        {stores.map((item) => (
-          <li className="p-4 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
-            <StoreCard item={item} />
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

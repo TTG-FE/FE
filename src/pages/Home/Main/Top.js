@@ -97,7 +97,7 @@ const Top = () => {
     },
   ];
   return (
-    <div className={`font-inter my-16`}>
+    <div className="my-16">
       {/* 구분선 */}
       <div className="h-px mx-6 bg-black md:hidden opacity-10"></div>
       {/* 제목 텍스트*/}

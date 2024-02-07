@@ -5,10 +5,22 @@ import { ReactComponent as CouponIcon } from "./../assets/images/couponIcon.svg"
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 import { ReactComponent as HumanIcon } from "./../assets/images/humanIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
-import MobileHeader from "../components/MobileHeader";
+import { ReactComponent as PhoneArrowLeftIcon } from "./../assets/phone_Arrow_right.svg";
 
 /** Header */
 const Header = () => {
+  return (
+    <>
+      {/** 너비 780px 이상일 때 헤더 */}
+      <DesktopHeader />
+      {/* 모바일 헤더 */}
+      <MobileHeader />
+    </>
+  );
+};
+
+/** 데스크탑 헤더 */
+const DesktopHeader = () => {
   const [buttonsHover, setButtonsHover] = useState({
     coupon: false,
     heart: false,
@@ -19,7 +31,97 @@ const Header = () => {
   const handleButtonColor = (button, isHovered) => {
     setButtonsHover((prev) => ({ ...prev, [button]: isHovered }));
   };
+  return (
+    //780px 이상일 때 보여지도록 설정
+    <div className="justify-between hidden h-40 md:px-6 lg:p-12 md:flex">
+      {/* 좌측영역: 로고, 검색창 */}
+      <div className="flex items-center">
+        {/* 로고 */}
+        <Link className="mr-4 w-14 h-14" to="/">
+          <div
+            className="bg-center bg-no-repeat bg-cover w-14 h-14 shrink-0 "
+            style={{ backgroundImage: `url(${Logo})` }}
+          ></div>
+        </Link>
 
+        {/* 로고 옆 텍스트 */}
+        <div className="mr-8">
+          <Link className="text-3xl font-semibold" to="/">
+            또또가
+          </Link>
+          <p className="text-xs font-light text-[#191919] opacity-70">
+            또 가고싶은 곳만 리뷰한다
+          </p>
+        </div>
+        {/* 검색창 */}
+        <SearchBar />
+      </div>
+
+      {/* 우측영역: 버튼 3개와 '우리가게 등록하기' 버튼 */}
+      <div className="flex items-center py-2">
+        {/* 쿠폰 버튼 */}
+        <div className="flex lg:mr-6 lg:space-x-6 md:space-x-2">
+          <CustomLink
+            icon={
+              <CouponIcon
+                stroke={
+                  // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
+                  buttonsHover.coupon
+                    ? "url(#paint0_linear_306_2415)"
+                    : "#19191980"
+                }
+              />
+            }
+            handleButtonColor={handleButtonColor}
+            label={"쿠폰함"}
+            to={"/coupon"}
+            obj="coupon"
+          />
+
+          {/* 관심상점 버튼 */}
+          <CustomLink
+            icon={
+              <HeartIcon
+                fill="none"
+                stroke={
+                  buttonsHover.heart
+                    ? "url(#paint0_linear_306_2415)"
+                    : "#19191980"
+                }
+              />
+            }
+            label={"관심상점"}
+            handleButtonColor={handleButtonColor}
+            to="heart"
+            obj="heart"
+          />
+          {/* 마이 버튼 */}
+          <CustomLink
+            icon={
+              <HumanIcon
+                stroke={
+                  buttonsHover.my ? "url(#paint0_linear_306_2415)" : "#19191980"
+                }
+              />
+            }
+            label={"마이"}
+            handleButtonColor={handleButtonColor}
+            to="/mypage"
+            obj="my"
+          />
+        </div>
+        {/* 우리 가게 등록하러가기 버튼 */}
+        {/* border-custom-gradation은 커스텀한 또또가 그라데이션 색상 */}
+        <button className=" w-40 h-full  text-[#19191980] text-xs font-semibold hover:text-custom-pink rounded-lg  shadow-custom-button-shadow border-custom-gradation hidden lg:block ">
+          우리 가게 등록하러가기
+        </button>
+      </div>
+    </div>
+  );
+};
+
+/** 모바일 헤더 */
+const MobileHeader = () => {
   const location = useLocation(); // 현재 경로 정보를 가져옴
 
   // 현재 경로에 따른 MobileHeader title 결정
@@ -36,98 +138,19 @@ const Header = () => {
       // 기본값 또는 다른 로직
       break;
   }
-
   return (
-    <div>
-      {/* 780px 이상일 때 보여지도록 설정 */}
-      <div className="justify-between hidden h-40 md:px-6 lg:p-12 md:flex">
-        {/* 좌측영역: 로고, 검색창 */}
-        <div className="flex items-center">
-          {/* 로고 */}
-          <Link className="mr-4 w-14 h-14" to="/">
-            <div
-              className="bg-center bg-no-repeat bg-cover w-14 h-14 shrink-0 "
-              style={{ backgroundImage: `url(${Logo})` }}
-            ></div>
+    <>
+      {headerTitle && (
+        <header className="flex w-full px-6 pb-5 border-b-2 pt-7 md:hidden ">
+          <Link to="/" className="z-10">
+            <PhoneArrowLeftIcon />
           </Link>
-
-          {/* 로고 옆 텍스트 */}
-          <div className="mr-8">
-            <Link className="text-3xl font-semibold" to="/">
-              또또가
-            </Link>
-            <p className="text-xs font-light text-[#191919] opacity-70">
-              또 가고싶은 곳만 리뷰한다
-            </p>
-          </div>
-          {/* 검색창 */}
-          <SearchBar />
-        </div>
-
-        {/* 우측영역: 버튼 3개와 '우리가게 등록하기' 버튼 */}
-        <div className="flex items-center py-2">
-          {/* 쿠폰 버튼 */}
-          <div className="flex lg:mr-6 lg:space-x-6 md:space-x-2">
-            <CustomLink
-              icon={
-                <CouponIcon
-                  stroke={
-                    // 마우스가 호버될 때 그라데이션, 해제될 때 그레이
-                    buttonsHover.coupon
-                      ? "url(#paint0_linear_306_2415)"
-                      : "#19191980"
-                  }
-                />
-              }
-              handleButtonColor={handleButtonColor}
-              label={"쿠폰함"}
-              to={"/coupon"}
-              obj="coupon"
-            />
-
-            {/* 관심상점 버튼 */}
-            <CustomLink
-              icon={
-                <HeartIcon
-                  fill="none"
-                  stroke={
-                    buttonsHover.heart
-                      ? "url(#paint0_linear_306_2415)"
-                      : "#19191980"
-                  }
-                />
-              }
-              label={"관심상점"}
-              handleButtonColor={handleButtonColor}
-              to="heart"
-              obj="heart"
-            />
-            {/* 마이 버튼 */}
-            <CustomLink
-              icon={
-                <HumanIcon
-                  stroke={
-                    buttonsHover.my
-                      ? "url(#paint0_linear_306_2415)"
-                      : "#19191980"
-                  }
-                />
-              }
-              label={"마이"}
-              handleButtonColor={handleButtonColor}
-              to="/mypage"
-              obj="my"
-            />
-          </div>
-          {/* 우리 가게 등록하러가기 버튼 */}
-          {/* border-custom-gradation은 커스텀한 또또가 그라데이션 색상 */}
-          <button className=" w-40 h-full  text-[#19191980] text-xs font-semibold hover:text-custom-pink rounded-lg  shadow-custom-button-shadow border-custom-gradation hidden lg:block ">
-            우리 가게 등록하러가기
-          </button>
-        </div>
-      </div>
-      {headerTitle && <MobileHeader title={headerTitle} />}
-    </div>
+          <h1 className="w-full text-center font-semibold text-base ml-[-23px]">
+            {headerTitle}
+          </h1>
+        </header>
+      )}
+    </>
   );
 };
 

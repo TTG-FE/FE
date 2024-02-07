@@ -16,18 +16,18 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex center center items-center h-screen">
-      <div className="w-[43rem] h-[30.125rem] mr-[19.44rem] ml-[14.87rem]  bg-slate-300">
+    <div className="flex items-center h-screen ">
+      <div className="hidden sm:block w-[43rem] h-[30.125rem] mr-[19.44rem] ml-[14.87rem] bg-slate-300">
         이미지 영역
       </div>
 
-      <div>
-        <div className="mr-[31.75rem] text-[2.1875rem] font-semibold mb-4">
+      <div className="mx-auto p-4 sm:p-0">
+        <div className=" mr-[31.75rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
           간편 로그인 후 <br />
           이용 가능합니다.
         </div>
 
-        <div className="mr-[19.38rem] whitespace-nowrap w-[32.125rem] h-[1.3125rem] text-[1.125rem] text-gray-700 mb-[3.245rem] opacity-50">
+        <div className="mr-[19.38rem] whitespace-nowrap w-[32.125rem] h-[1.3125rem] sm:text-[1.125rem] text-[0.9rem] text-gray-700 mb-[3.245rem] opacity-50">
           간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
         </div>
 
@@ -38,7 +38,7 @@ export const Login = () => {
           onFailure={onFailureNaverLogin}
           render={(props) => (
             <button
-              className="mr-[20.06rem] mb-[1.19rem] flex items-center bg-[#57BC63] rounded-md  h-[4.125rem] w-[32.0625rem]"
+              className="mr-[20.06rem]  mb-[1.19rem] flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
               onClick={props.onClick}
             >
               <svg
@@ -56,13 +56,13 @@ export const Login = () => {
                 />
               </svg>
 
-              <span className="text-[1.5625rem] font-medium flex items-center justify-center font=['Inter'] text-[#FFF]">
+              <span className="sm:text-[1.5625rem]  font-medium flex items-center justify-center font=['Inter'] text-[#FFF]">
                 네이버 로그인
               </span>
             </button>
           )}
         />
-        <button className="mr-[20.06rem] flex items-center bg-[#FFD600] rounded-md  h-[4.125rem] w-[32.0625rem]">
+        <button className="mr-[20.06rem] flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]">
           <svg
             style={{ marginRight: "5.44rem" }}
             className="ml-[3rem]"
@@ -78,7 +78,7 @@ export const Login = () => {
             />
           </svg>
 
-          <span className="text-[1.5625rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
+          <span className="sm:text-[1.5625rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
             카카오톡 로그인
           </span>
         </button>

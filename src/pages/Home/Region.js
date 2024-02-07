@@ -116,12 +116,12 @@ const Region = ({ selectModal, setSelectModal }) => {
 
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`px-16 font-inter relative`}>
+    <div className={`px-16 relative`}>
       {/* 모달창 */}
       <SelectModal selectModal={selectModal} setSelectModal={setSelectModal} />
       <div>
         {/* 상점 필터명 */}
-        <div className="flex items-center justify-between px-6 py-12">
+        <div className="flex items-center justify-between px-8 py-16">
           <div>
             <div className="mb-4 text-2xl font-semibold">
               지역 &gt;{" "}
@@ -134,7 +134,7 @@ const Region = ({ selectModal, setSelectModal }) => {
         </div>
 
         {/* 상점 카드 리스트 */}
-        <ul className="flex flex-wrap mb-[2.69rem]">
+        <ul className="flex flex-wrap ">
           {stores.map((item) => (
             <li
               className="p-4 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
@@ -144,6 +144,8 @@ const Region = ({ selectModal, setSelectModal }) => {
             </li>
           ))}
         </ul>
+        {/* infiniteScroll 감지할 요소 */}
+        <div className="p-6"></div>
       </div>
     </div>
   );
