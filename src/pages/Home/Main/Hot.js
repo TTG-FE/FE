@@ -22,7 +22,7 @@ const Hot = () => {
     },
   ];
   return (
-    <div className="md:mb-16 font-inter">
+    <div className="md:mb-16 ">
       {/* 구분선 */}
       <div className="h-px mx-6 bg-black md:hidden opacity-10 "></div>
       <div className="relative flex flex-col py-10 bg-white md:pl-6 md:py-6 lg:px-16 md:bg-custom-gradation md:flex-row">

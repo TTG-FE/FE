@@ -11,7 +11,7 @@ const Main = () => {
   return (
     /* 전체 페이지 크기 설정 */
 
-    <div className=" font-inter">
+    <div className="">
       <div>
         {/* 모바일일 때만 존재하는 상단 로그인, 쿠폰함 */}
         <Mobile />

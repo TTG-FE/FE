@@ -141,7 +141,7 @@ const MobileHeader = () => {
   return (
     <>
       {headerTitle && (
-        <header className="flex w-full px-6 pb-5 border-b-2 pt-7 md:hidden font-inter">
+        <header className="flex w-full px-6 pb-5 border-b-2 pt-7 md:hidden ">
           <Link to="/" className="z-10">
             <PhoneArrowLeftIcon />
           </Link>
