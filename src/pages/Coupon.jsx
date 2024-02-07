@@ -169,47 +169,42 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-            {/* 쿠폰 영역 */}
+    // 입력 텍스트가 비어있다면 검색 입력창에 다시 포커스를 맞춤
+    if (inputText === "") {
+      inputRef.current.focus();
+    }
+    // TODO: 아래에 'inputText'를 기반으로 하는 검색을 위한 API 요청을 로직을 구현하세요.
+  };
 
-            {coupons.map((coupon, index) => (
-              <CouponCard
-                key={coupon.id}
-                storeImg={BakeryImg}
-                storeArea={`성수`}
-                storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
-                promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
-                couponDate={`2023.12.01 ~ 2023.12.31`}
-                couponStoreImg={CouponImg}
-                isCoupon={coupon}
-                handleCouponUsed={() => handleCouponUsed(coupon.id)}
-                handleOpenModal={(modalName) =>
-                  handleOpenModal(modalName, index)
-                }
-                handleCloseModal={() => handleCloseModal(index)}
-                modalStates={modalStates[index]}
-              />
-            ))}
-          </div>
-        ) : (
-          <>
-            {/* 로그인 전 모바일 화면 */}
-            <div className="flex flex-col items-center mt-20 break-words">
-              <h1 className="mb-4 text-xl font-semibold text-custom-pink">
-                로그인 후 이용하실 수 있습니다
-              </h1>
-              <p className="mb-8 text-xs text-custom-gray-200">
-                오늘도 또또가에서 혜택을 받아보세요!
-              </p>
-              <button
-                className="w-4/6 py-2 text-sm text-white rounded bg-custom-pink max-w-60"
-                onClick={handleTest}
-              >
-                로그인 하기
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+  return (
+    // 검색 폼 컴포넌트
+    <form className="flex w-[300px]" onSubmit={handleSearch}>
+      {/* 입력창 */}
+      <input
+        ref={inputRef}
+        type="text"
+        value={inputText}
+        placeholder={"찾고싶은 쿠폰을 검색해보세요!"}
+        onChange={handleInputChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        className="flex-1 text-xs border-b outline-none ps-2 h-6 focus:border-custom-pink"
+      />
+      {/* 검색버튼 */}
+      <button
+        type="submit"
+        className="outline-none relative"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
+        <SearchIcon
+          stroke={isFocused ? "#FF0069" : "#D9D9D9"}
+          className="absolute top-0 right-0 w-5 h-5"
+        />
+      </button>
+    </form>
+  );
+};
 
 const DesktopCouponSection = ({
   coupons,
@@ -223,7 +218,7 @@ const DesktopCouponSection = ({
   return (
     <>
       {/* 전체 페이지 설정 */}
-      <div className="hidden px-24 pt-16 pb-8 font-inter md:block">
+      <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex items-end mb-7">
           <div
@@ -247,7 +242,7 @@ const DesktopCouponSection = ({
 
           {login ? (
             coupons.length === 0 ? (
-              <p className="text-lg font-normal text-custom-gray-200">
+              <p className="text-custom-gray-200 text-lg font-normal">
                 또또가 리뷰를 등록하고 쿠폰을 받아보세요.
               </p>
             ) : (
