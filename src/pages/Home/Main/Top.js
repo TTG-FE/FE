@@ -123,8 +123,8 @@ const Top = () => {
         </ul>
       </div>
       {/* 모바일용 */}
-      <div className="w-full pl-6 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
-        <ul className="flex w-full space-x-2 md:hidden">
+      <div className="w-full pl-4 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16">
+        <ul className="flex w-full m-2 space-x-4 md:hidden">
           {top15.map((item) => (
             <li
               className="w-[40%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4"
@@ -151,7 +151,7 @@ const Top15Card = ({ item }) => {
   };
 
   return (
-    <Link className="flex flex-col h-full rounded">
+    <Link className="flex flex-col h-full rounded hover:shadow-custom-box-shadow-pink">
       {/* 메뉴 이미지 */}
       <figure
         className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
@@ -163,7 +163,10 @@ const Top15Card = ({ item }) => {
         </div>
         {/* 하트아이콘 */}
         <button className="absolute top-2 right-2" onClick={handleLikeClick}>
-          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
+          <HeartIcon
+            stroke={isLiked ? "#FF0069" : "white"}
+            fill={isLiked ? "#FF0069" : "none"}
+          />
         </button>
       </figure>
       <div className="flex flex-col grow">

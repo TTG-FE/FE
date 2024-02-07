@@ -21,7 +21,10 @@ const StoreCard = ({ item }) => {
       >
         {/* 하트아이콘 */}
         <button className="absolute top-2 right-2" onClick={handleLikeClick}>
-          <HeartIcon stroke="white" fill={isLiked ? "#FF0069" : "none"} />
+          <HeartIcon
+            stroke={isLiked ? "#FF0069" : "white"}
+            fill={isLiked ? "#FF0069" : "none"}
+          />
         </button>
       </figure>
       <div className="flex flex-col grow">

@@ -6,6 +6,14 @@ import menuLunchbox from "./../assets/images/menu-lunchbox.png";
 import menuSandwich from "./../assets/images/menu-sandwich.png";
 import menuSnack from "./../assets/images/menu-snack.png";
 import menuSushi from "./../assets/images/menu-sushi.png";
+import menuJapanese from "./../assets/images/menu-japanese.png";
+import menuAsian from "./../assets/images/menu-asian.png";
+import menuChinese from "./../assets/images/menu-chinese.png";
+import menuJokbal from "./../assets/images/menu-jokbal.png";
+import menuCafe from "./../assets/images/menu-cafe.png";
+import menuPizza from "./../assets/images/menu-pizza.png";
+import menuSteamed from "./../assets/images/menu-steamed.png";
+import menuMeat from "./../assets/images/menu-meat.png";
 /**
  * 'Modal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
  *
@@ -59,24 +67,24 @@ const MenuSelector = ({ handleClose }) => {
     { id: 1, label: "치킨", img: menuChicken },
     { id: 2, label: "버거", img: menuBurger },
     { id: 3, label: "한식", img: menuKorean },
-    { id: 4, label: "일식/돈까스" },
-    { id: 5, label: "족발/보쌈" },
-    { id: 6, label: "중국집" },
+    { id: 4, label: "일식/돈까스", img: menuJapanese },
+    { id: 5, label: "족발/보쌈", img: menuJokbal },
+    { id: 6, label: "중국집", img: menuChinese },
     { id: 7, label: "분식", img: menuSnack },
-    { id: 8, label: "아시안" },
-    { id: 9, label: "피자/양식" },
-    { id: 10, label: "카페/디저트" },
+    { id: 8, label: "아시안", img: menuAsian },
+    { id: 9, label: "피자/양식", img: menuPizza },
+    { id: 10, label: "카페/디저트", img: menuCafe },
     { id: 11, label: "샐러드", img: menuChicken },
     { id: 12, label: "도시락/죽", img: menuLunchbox },
-    { id: 13, label: "찜/탕" },
-    { id: 14, label: "고기/구이" },
+    { id: 13, label: "찜/탕", img: menuSteamed },
+    { id: 14, label: "고기/구이", img: menuMeat },
     { id: 15, label: "회/초밥", img: menuSushi },
     { id: 16, label: "샌드위치", img: menuSandwich },
   ];
   return (
     <div className="p-8">
       <div className="flex justify-between px-3">
-        <p className="text-xl text-[#000000B2] my-4 cursor-pointer">메뉴</p>
+        <p className="text-xl text-[#000000B2] my-4">메뉴</p>
         <button className="text-sm text-custom-pink target">확인</button>
       </div>
       <div className="w-full h-0.5 bg-[#0000001A]"></div>
@@ -84,12 +92,8 @@ const MenuSelector = ({ handleClose }) => {
       {/* 메뉴 선택 리스트 */}
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
-          <li
-            to="/menu"
-            key={menu.id}
-            className="w-1/4 px-8 py-5 cursor-pointer"
-          >
-            <Link className="w-full">
+          <li to="/menu" key={menu.id} className="w-1/4 px-8 py-5">
+            <Link className="w-full target">
               <figure
                 className="pb-[100%] h-0 bg-center bg-no-repeat bg-cover shrink-0 target"
                 style={{ backgroundImage: `url(${menu.img})` }}
@@ -175,9 +179,7 @@ const RegionSelector = ({ handleClose }) => {
   return (
     <div className="p-8">
       <div className="flex justify-between px-3">
-        <p className="text-xl text-[#000000B2] my-4 cursor-pointer">
-          전체 지역
-        </p>
+        <p className="text-xl text-[#000000B2] my-4">전체 지역</p>
         <button
           onClick={handleClose}
           className="text-sm text-custom-pink target"
@@ -192,7 +194,7 @@ const RegionSelector = ({ handleClose }) => {
           <div key={city.id}>
             <div className="w-full h-0.5 bg-[#0000001A]"></div>
             {/* 지역을 구분하기 위한 회색 구분선 */}
-            <li className="flex p-3 cursor-pointer">
+            <li className="flex p-3">
               <div className="w-1/5  text-base text-[#000000B2]">
                 {city.label}
               </div>
@@ -201,7 +203,7 @@ const RegionSelector = ({ handleClose }) => {
                   <li
                     key={i}
                     to="/region"
-                    className="w-1/4 p-2 text-sm text-[#00000080] cursor-pointer "
+                    className="w-1/4 p-2 text-sm text-[#00000080]"
                   >
                     <Link className="target">{town}</Link>
                   </li>
