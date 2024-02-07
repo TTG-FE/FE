@@ -15,9 +15,45 @@ const Coupon = () => {
   // 쿠폰 사용 여부
   const [login, setLogin] = useState(!false);
   const [coupons, setCoupons] = useState([
-    { id: 1, used: false },
-    { id: 2, used: false },
-    { id: 3, used: false },
+    // { id: 1, used: false },
+    // { id: 2, used: false },
+    // { id: 3, used: false },
+    {
+      id: 21,
+      name: "name",
+      subtitle: "subTitle1",
+      useYn: "Y",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/fe8b6765-7b92-4ea7-87ca-79cb74e7a59fimage.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d394c8b1-a4e2-4793-8bcf-84210f7256cd%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
+    {
+      id: 22,
+      name: "name",
+      subtitle: "subTitle1",
+      useYn: "Y",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/3896a88d-09b8-40a9-966c-c715fdfd0ec4image.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d5c859a4-9614-4e14-a9f1-2b35f143f27a%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
+    {
+      id: 23,
+      name: "name",
+      subtitle: "subTitle1",
+      useYn: "Y",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
   ]);
 
   // 사용한 쿠폰 처리
@@ -186,6 +222,7 @@ const DesktopCouponSection = ({
               coupons.map((coupon, index) => (
                 <CouponCard
                   key={coupon.id}
+                  s
                   storeImg={BakeryImg}
                   storeArea={`성수`}
                   storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
@@ -221,9 +258,9 @@ const MobileCouponSection = ({
 }) => {
   return (
     <>
+      {/* 쿠폰함 타이틀 헤더 영역 */}
+      {/* <MobileHeader title={"쿠폰함"} /> */}
       <div className="md:hidden h-full pb-20">
-        {/* 쿠폰함 타이틀 헤더 영역 */}
-        <MobileHeader title={'쿠폰함'}/>
         {login ? (
           <div className="relative pt-8">
             {/* 검색 영역 */}

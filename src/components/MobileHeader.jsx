@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const MobileHeader = ({ title }) => {
   return (
-    <header className="pt-7 px-6 pb-5 border-b-2 flex md:hidden">
+    <header className="w-full pt-7 px-6 pb-5 border-b-2 flex md:hidden font-inter">
       <button>
         <Link to={"/"}>
           <img src={phoneArrowLeftIcon} alt="" />
