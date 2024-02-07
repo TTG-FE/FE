@@ -10,6 +10,7 @@ export const MyPage = () => {
   const rejectedRef = useRef(null);
   const completedRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState(null);
 
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -23,6 +24,9 @@ export const MyPage = () => {
   };
   const handleClick = () => {
     document.getElementById("profileImageInput").click();
+  };
+  const handleMenuClick = (menu) => {
+    setSelectedMenu(menu);
   };
   return (
     <div className="grid place-items-center relative">
@@ -177,7 +181,14 @@ export const MyPage = () => {
           </div>
 
           <div className="flex items-center mb-[0.94rem]  pt-[1.06rem] pb-[1.25rem] border-[#545454] border-b w-[74.625rem] pl-[8.44rem] pr-[8.44rem]">
-            <div className="w-[3.5625rem]  mr-[11.06rem]">신청</div>
+            <div
+              onClick={() => handleMenuClick("신청")}
+              className={`w-[3.5625rem] mr-[11.06rem] cursor-pointer ${
+                selectedMenu === "신청" && "font-semibold"
+              }`}
+            >
+              신청
+            </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="8"
@@ -190,7 +201,12 @@ export const MyPage = () => {
                 fill="#545454"
               />
             </svg>
-            <div className="mr-[9.44rem] font-['Inter'] flex-shrink-0 ml-[9.44rem]">
+            <div
+              onClick={() => handleMenuClick("리뷰 유지 기간")}
+              className={`mr-[9.44rem] font-['Inter'] flex-shrink-0 ml-[9.44rem] cursor-pointer ${
+                selectedMenu === "리뷰 유지 기간" && "font-semibold"
+              }`}
+            >
               리뷰 유지 기간
             </div>
             <svg
@@ -205,7 +221,14 @@ export const MyPage = () => {
                 fill="#545454"
               />
             </svg>
-            <div className="ml-[11.06rem] flex-shrink-0 font-['Inter']">쿠폰 발급 완료</div>
+            <div
+              onClick={() => handleMenuClick("쿠폰 발급 완료")}
+              className={`ml-[11.06rem] flex-shrink-0 font-['Inter'] cursor-pointer ${
+                selectedMenu === "쿠폰 발급 완료" && "font-semibold"
+              }`}
+            >
+              쿠폰 발급 완료
+            </div>
           </div>
 
           <OngoingReview />

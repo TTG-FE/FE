@@ -118,9 +118,6 @@ const Heart = () => {
         <span className="mr-2 text-2xl font-semibold border-b-4 border-custom-pink">
           관심상점
         </span>
-        <span className="w-6 text-xs text-center border rounded-xl text-custom-gray-400">
-          ?
-        </span>
       </div>
 
       {/* 상점 카드 리스트 */}
