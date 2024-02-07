@@ -12,7 +12,7 @@ export const MyPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const scrollToSection = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth", block: "start"  });
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const handleImageChange = (event) => {
@@ -54,7 +54,7 @@ export const MyPage = () => {
       </svg>
 
       <div className="flex justify-center items-center relative mt-[6.315rem] w-[95.4375rem] h-[24.0625rem] rounded-[1.125rem] shadow-[0_0_45px_0_rgba(0,0,0,0.2)] backdrop-sepia-74.99999237060547 bg-white/70 ">
-        <div className="absolute text-white top-[-3.12rem] left-0 text-[1.25rem] font-bold">
+        <div className="absolute font=['Inter'] text-white top-[-3.12rem] left-0 text-[1.25rem] font-bold">
           마이페이지
         </div>
 
@@ -67,16 +67,18 @@ export const MyPage = () => {
             />
           </div>
           <input
-          type="file"
-          id="profileImageInput"
-          accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
+            type="file"
+            id="profileImageInput"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleImageChange}
+          />
           <div
-          className="text-[1.28rem] text-[#000000]/50 mt-[0.88rem] cursor-pointer"
-          onClick={handleClick}
-        >            프로필 사진 변경
+            className="text-[1.28rem] text-[#000000]/50 mt-[0.88rem] cursor-pointer"
+            onClick={handleClick}
+          >
+            {" "}
+            프로필 사진 변경
           </div>
         </div>
 
@@ -89,33 +91,46 @@ export const MyPage = () => {
           }}
         >
           <div className="flex mb-[2.43rem] ">
-            <div style={{ fontSize: "1.875rem", marginRight: "0.5rem" }}>
+            <div
+              style={{
+                fontSize: "1.875rem",
+                marginRight: "0.5rem",
+                fontStyle: "normal",
+                fontFamily: "Inter",
+              }}
+            >
               안녕하세요,{" "}
             </div>
-            <div style={{ fontSize: "1.875rem", fontWeight: "bold" }}>
+            <div
+              style={{
+                fontSize: "1.875rem",
+                fontWeight: "bold",
+                fontStyle: "normal",
+                fontFamily: "Inter",
+              }}
+            >
               도라도라영어나라노랑이보라님
             </div>
           </div>
-          <div className=" w-[35.8125rem] h-[5.5rem] flex  place-items-center bg-[#FFEDED] rounded-[0.9375rem] gap-x-[5.56rem]">
+          <div className=" w-[35.8125rem] h-[5.5rem] flex items-center bg-[#FFEDED] rounded-[0.9375rem] gap-x-[5.56rem]">
             <div
               style={{
                 fontSize: "1.25rem",
                 whiteSpace: "nowrap",
                 paddingLeft: "3.75rem",
                 fontWeight: "normal",
+                fontFamily: "Inter",
               }}
             >
               {" "}
               지금까지 또또가로 혜택받은 횟수
             </div>
-            <div className="text-[#FF0069]  text-2xl font-semibold pr-[4.94rem]">
-              17회
-            </div>
+            <div className="text-[#FF0069]  text-2xl font-semibold ">17회</div>
           </div>
         </div>
 
         <div className="ml-[5.94rem]">
-          <div className="text=[1.38669rem] text-[#000000]/30 tracking-[0.01388rem] font-bold ">
+          <div className="text=[1.38669rem] font-['Pretendard']  text-[#000000]/30 tracking-[0.01388rem] font-bold ">
             고객센터
           </div>
           <div className="w-[19.62669rem] h-[3.2rem] mt-[1.88rem] mb-[1rem] grid place-items-center text-[#000000]/50 rounded-[0.53331rem] bg-[#E9E9E9] tracking-[0.01281rem] font-bold text=[1.28rem]">
@@ -156,7 +171,7 @@ export const MyPage = () => {
 
         <div className="mt-[3.31rem] ml-[9.5rem]">
           <div ref={ongoingRef}>
-            <div className="w-[74.625rem] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
+            <div className="w-[74.625rem] font-['Inter'] border-[#000000] border-b pb-[1rem] text=[1.25rem] font-semibold">
               진행중인 리뷰
             </div>
           </div>
@@ -175,7 +190,7 @@ export const MyPage = () => {
                 fill="#545454"
               />
             </svg>
-            <div className="mr-[9.44rem] flex-shrink-0 ml-[9.44rem]">
+            <div className="mr-[9.44rem] font-['Inter'] flex-shrink-0 ml-[9.44rem]">
               리뷰 유지 기간
             </div>
             <svg
@@ -190,7 +205,7 @@ export const MyPage = () => {
                 fill="#545454"
               />
             </svg>
-            <div className="ml-[11.06rem] flex-shrink-0">쿠폰 발급 완료</div>
+            <div className="ml-[11.06rem] flex-shrink-0 font-['Inter']">쿠폰 발급 완료</div>
           </div>
 
           <OngoingReview />
