@@ -6,7 +6,7 @@ const GoToLogin = () => {
   return (
     <>
       {/* 데스크탑 768px */}
-      <div className="hidden md:block w-[512px] text-center">
+      <div className="hidden md:block w-[512px] text-center font-inter">
         <p className="text-custom-gray-200 text-lg font-normal ">
           지금 바로 로그인하고
         </p>
@@ -24,7 +24,7 @@ const GoToLogin = () => {
       </div>
 
       {/* 모바일 */}
-      <div className="md:hidden">
+      <div className="md:hidden font-inter">
         {/* 로그인 전 모바일 화면 */}
         <div className="flex flex-col items-center mt-20 break-words">
           <h1 className="text-xl font-semibold text-custom-pink mb-4">

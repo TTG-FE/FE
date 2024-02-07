@@ -23,7 +23,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Navbar setSelectModal={setSelectModal} />
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen font-inter">
         {/* 라우트를 정의한 부분 */}
         <Routes>
           <Route path="/" element={<Main />} />

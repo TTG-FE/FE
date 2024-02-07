@@ -20,9 +20,9 @@ const Coupon = () => {
     // { id: 3, used: false },
     {
       id: 21,
-      name: "name",
-      subtitle: "subTitle1",
-      useYn: "Y",
+      name: "[성수] 베리베리스트로베리케이크 전문점",
+      subtitle: "닐라닐라바닐라 조각케이크 무료증정",
+      useYn: false,
       qrCode:
         "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/fe8b6765-7b92-4ea7-87ca-79cb74e7a59fimage.jpeg",
       storeImage:
@@ -33,8 +33,8 @@ const Coupon = () => {
     {
       id: 22,
       name: "name",
-      subtitle: "subTitle1",
-      useYn: "Y",
+      subtitle: "subTitle2",
+      useYn: false,
       qrCode:
         "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/3896a88d-09b8-40a9-966c-c715fdfd0ec4image.jpeg",
       storeImage:
@@ -45,8 +45,8 @@ const Coupon = () => {
     {
       id: 23,
       name: "name",
-      subtitle: "subTitle1",
-      useYn: "Y",
+      subtitle: "subTitle3",
+      useYn: false,
       qrCode:
         "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
       storeImage:
@@ -55,6 +55,7 @@ const Coupon = () => {
       endDate: "2024-02-04",
     },
   ]);
+  // console.log("길이",coupons.length);
 
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
@@ -105,28 +106,50 @@ const Coupon = () => {
     });
   };
 
+  // 쿠폰 카드를 렌더링하는 공통 함수
+  const renderCouponCards = () => {
+    return coupons.map((coupon, index) => (
+      <CouponCard
+        key={coupon.id}
+        couponData={coupon}
+        handleCouponUsed={() => handleCouponUsed(coupon.id)}
+        handleOpenModal={(modalName) => handleOpenModal(modalName, index)}
+        handleCloseModal={() => handleCloseModal(index)}
+        modalStates={modalStates[index]}
+      />
+    ));
+  };
+
   return (
     <>
       <div className="font-inter">
         {/* ---------------모바일 쿠폰------------------- */}
-        <MobileCouponSection
-          coupons={coupons}
-          login={login}
-          handleOpenModal={handleOpenModal}
-          handleCloseModal={handleCloseModal}
-          modalStates={modalStates}
-          handleCouponUsed={handleCouponUsed}
-        />
+        <div className="md:hidden">
+          <MobileCouponSection
+            coupons={coupons}
+            login={login}
+            handleOpenModal={handleOpenModal}
+            handleCloseModal={handleCloseModal}
+            modalStates={modalStates}
+            handleCouponUsed={handleCouponUsed}
+          >
+            {login ? renderCouponCards() : <GoToLogin />}
+          </MobileCouponSection>
+        </div>
 
         {/* ----------데스크탑 쿠폰-------------- */}
-        <DesktopCouponSection
-          coupons={coupons}
-          login={login}
-          handleOpenModal={handleOpenModal}
-          handleCloseModal={handleCloseModal}
-          modalStates={modalStates}
-          handleCouponUsed={handleCouponUsed}
-        />
+        <div className="hidden md:block">
+          <DesktopCouponSection
+            coupons={coupons}
+            login={login}
+            handleOpenModal={handleOpenModal}
+            handleCloseModal={handleCloseModal}
+            modalStates={modalStates}
+            handleCouponUsed={handleCouponUsed}
+          >
+            {login ? renderCouponCards() : <GoToLogin />}
+          </DesktopCouponSection>
+        </div>
       </div>
     </>
   );
@@ -184,10 +207,7 @@ const SearchBar = () => {
 const DesktopCouponSection = ({
   coupons,
   login,
-  handleOpenModal,
-  handleCloseModal,
-  modalStates,
-  handleCouponUsed,
+  children,
 }) => {
   return (
     <>
@@ -219,28 +239,10 @@ const DesktopCouponSection = ({
                 또또가 리뷰를 등록하고 쿠폰을 받아보세요.
               </p>
             ) : (
-              coupons.map((coupon, index) => (
-                <CouponCard
-                  key={coupon.id}
-                  s
-                  storeImg={BakeryImg}
-                  storeArea={`성수`}
-                  storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
-                  promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
-                  couponDate={`2023.12.01 ~ 2023.12.31`}
-                  couponStoreImg={CouponImg}
-                  isCoupon={coupon}
-                  handleCouponUsed={() => handleCouponUsed(coupon.id)}
-                  handleOpenModal={(modalName) =>
-                    handleOpenModal(modalName, index)
-                  }
-                  handleCloseModal={() => handleCloseModal(index)}
-                  modalStates={modalStates[index]}
-                />
-              ))
+              children
             )
-          ) : (      
-              <GoToLogin/>
+          ) : (
+            <GoToLogin />
           )}
         </div>
       </div>
@@ -251,10 +253,7 @@ const DesktopCouponSection = ({
 const MobileCouponSection = ({
   coupons,
   login,
-  handleOpenModal,
-  handleCloseModal,
-  modalStates,
-  handleCouponUsed,
+  children,
 }) => {
   return (
     <>
@@ -267,27 +266,9 @@ const MobileCouponSection = ({
             <div className="flex justify-center mb-10">
               <SearchBar />
             </div>
-
             {/* 쿠폰 영역 */}
 
-            {coupons.map((coupon, index) => (
-              <CouponCard
-                key={coupon.id}
-                storeImg={BakeryImg}
-                storeArea={`성수`}
-                storeName={`베리베리스트로베리케이크 전문점 ${coupon.id}`}
-                promotionText={`닐라닐라바닐라 조각케이크 무료증정`}
-                couponDate={`2023.12.01 ~ 2023.12.31`}
-                couponStoreImg={CouponImg}
-                isCoupon={coupon}
-                handleCouponUsed={() => handleCouponUsed(coupon.id)}
-                handleOpenModal={(modalName) =>
-                  handleOpenModal(modalName, index)
-                }
-                handleCloseModal={() => handleCloseModal(index)}
-                modalStates={modalStates[index]}
-              />
-            ))}
+            {children}
           </div>
         ) : (
           <GoToLogin />

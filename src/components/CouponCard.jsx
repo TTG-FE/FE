@@ -7,23 +7,14 @@ import QrCodeIcon from "../assets/qr-code-line.svg";
 import { ReactComponent as HorizontalCircleIcon } from "../assets/horizontalCircle.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 
-// 가게 사진, 지역, 이름, 행사 쿠폰명, 쿠폰 날짜, 쿠폰가게 이미지, 쿠폰여부, 쿠폰사용여부, 모달창 열기, 모달창 닫기, 모달 관리
+// 쿠폰 데이터, 쿠폰사용여부, 모달창 열기, 모달창 닫기, 모달 관리
 const CouponCard = ({
-  storeImg,
-  storeArea,
-  storeName,
-  promotionText,
-  couponDate,
-  couponStoreImg,
-  isCoupon,
+  couponData,
   handleCouponUsed,
   handleOpenModal,
   handleCloseModal,
   modalStates,
 }) => {
-  // 쿠폰 정보
-  const { id, used } = isCoupon;
-
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
@@ -35,7 +26,7 @@ const CouponCard = ({
         <div className="relative z-0">
           <div
             className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 overflow-hidden ${
-              used ? "bg-custom-gray-300" : "bg-custom-pink"
+              couponData.useYn ? "bg-custom-gray-300" : "bg-custom-pink"
             }`}
           >
             <button
@@ -43,19 +34,19 @@ const CouponCard = ({
               onClick={() => {
                 handleOpenModal("isCouponModalOpen");
               }}
-              disabled={used}
+              disabled={couponData.useYn}
             >
               <div className="w-9 h-9 bg-white rounded-full mb-1.5 flex justify-center items-center">
                 <PhoneDownloadIcon
-                  fill={`${used ? "#B3B3B3" : "#FF0068"}`}
-                  stroke={`${used ? "#B3B3B3" : "#FF0068"}`}
+                  fill={`${couponData.useYn ? "#B3B3B3" : "#FF0068"}`}
+                  stroke={`${couponData.useYn ? "#B3B3B3" : "#FF0068"}`}
                 />
                 {/* <img src={phoneDownloadIcon} alt="" /> */}
               </div>
               <p className="text-white">다운로드</p>
             </button>
             <HorizontalCircleIcon
-              fill={used ? "white" : "#FFF2F2"}
+              fill={couponData.useYn ? "white" : "#FFF2F2"}
               className="absolute top-3 right-[-6px]"
             />
           </div>
@@ -64,28 +55,32 @@ const CouponCard = ({
         {/* 쿠폰 오른쪽 내용 영역 */}
         <div
           className={`py-6 pl-6 pr-2  w-full ${
-            used ? "bg-white" : "bg-[#FFF2F2]"
+            couponData.useYn ? "bg-white" : "bg-[#FFF2F2]"
           }`}
         >
           <div className="flex flex-col h-full justify-around">
-            <h1>[성수] 베리베리 스트로베리 케이크 전문점</h1>
+            {/* <h1>[성수] 베리베리 스트로베리 케이크 전문점</h1> */}
+            <h1>{couponData.name}</h1>
             <p
               className={`text-[10px]  ${
-                used ? "text-custom-gray-200" : "text-custom-pink"
+                couponData.useYn ? "text-custom-gray-200" : "text-custom-pink"
               }`}
             >
-              닐라닐라바닐라 조각케이크 무료증정
+              {/* 닐라닐라바닐라 조각케이크 무료증정 */}
+              {couponData.subtitle}
             </p>
             <div className="flex flex-row items-center">
               <p
                 className={`text-[8px] rounded-lg text-white px-2 py-0.5 mr-2 ${
-                  used ? "bg-custom-gray-300" : "bg-custom-pink"
+                  couponData.useYn ? "bg-custom-gray-300" : "bg-custom-pink"
                 }`}
               >
-                {used ? "사용완료" : "사용가능"}
+                {couponData.useYn ? "사용완료" : "사용가능"}
               </p>
               <p
-                className={`text-[10px]  ${used ? "text-custom-gray-200" : ""}`}
+                className={`text-[10px]  ${
+                  couponData.useYn ? "text-custom-gray-200" : ""
+                }`}
               >
                 2023.12.01 ~ 2023.12.31
               </p>
@@ -100,25 +95,25 @@ const CouponCard = ({
         {/* 쿠폰 이미지 및 상세 내용 */}
         <div className="flex basis-3/4 pl-7 py-6 h-full">
           {/* 이미지 */}
-          <img src={storeImg} alt="" className="mr-12" />
+          <img src={couponData.storeImage} alt="" className="mr-12 rounded-lg" />
           {/* 내용 전체 크기 설정 */}
           <div className=" pt-11 pb-7 truncate">
             <h2 className="text-3xl	font-medium	mb-4 text-ellipsis overflow-hidden">
-              [{storeArea}] {storeName}
+              {couponData.name}
             </h2>
             <h3 className="text-[#FF7A00] mb-14 text-ellipsis overflow-hidden">
-              {promotionText}
+              {couponData.subtitle}
             </h3>
             <div className="flex items-center">
               <p
                 className={`px-5 py-2.5 rounded-3xl	text-white mr-5 ${
-                  used ? "bg-custom-gray-200" : "bg-custom-pink"
+                  couponData.useYn ? "bg-custom-gray-200" : "bg-custom-pink"
                 }`}
               >
-                {used ? "사용완료" : "사용가능"}
+                {couponData.useYn ? "사용완료" : "사용가능"}
               </p>
               <p className="text-ellipsis overflow-hidden">
-                기한: {couponDate}
+                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
               </p>
             </div>
           </div>
@@ -126,7 +121,7 @@ const CouponCard = ({
         {/* 쿠픈 다운로드 */}
         <div
           className={`relative basis-1/4 rounded-r-lg h-full overflow-hidden ${
-            used ? "bg-custom-gray-200" : "bg-custom-gradation-180"
+            couponData.useYn ? "bg-custom-gray-200" : "bg-custom-gradation-180"
           }`}
         >
           {/* 쿠폰 디자인 */}
@@ -145,9 +140,9 @@ const CouponCard = ({
                 onClick={() => {
                   handleOpenModal("isCouponModalOpen");
                 }}
-                disabled={used}
+                disabled={couponData.useYn}
               >
-                <DownloadIcon isCoupon={used} />
+                <DownloadIcon isCoupon={couponData.useYn} />
               </button>
             </div>
             <button
@@ -155,7 +150,7 @@ const CouponCard = ({
               onClick={() => {
                 handleOpenModal("isCouponModalOpen");
               }}
-              disabled={used}
+              disabled={couponData.useYn}
             >
               Download
             </button>
@@ -177,7 +172,7 @@ const CouponCard = ({
                 쿠폰 정보
               </div>
               <img
-                src={couponStoreImg}
+                src={couponData.storeImage}
                 alt=""
                 className="mb-8 w-[228px] h-[141px]"
               />
@@ -195,13 +190,11 @@ const CouponCard = ({
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="border-dashed border-t-2 border-custom-pink text-center">
-              <h2 className="text-xs mt-8 mb-2.5">
-                [{storeArea}] {storeName}
-              </h2>
+              <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
               <h3 className="text-[10px] mb-2.5 text-custom-orange">
-                {promotionText}
+                {couponData.subtitle}
               </h3>
-              <h4 className="text-[9px] mb-1">기한: {couponDate}</h4>
+              <h4 className="text-[9px] mb-1">기한: {couponData.startDate}</h4>
               <button
                 className="h-8 w-full rounded bg-custom-pink text-white text-xs"
                 onClick={() => {
@@ -298,7 +291,7 @@ const CouponCard = ({
                 쿠폰 정보
               </div>
               <img
-                src={couponStoreImg}
+                src={couponData.storeImage}
                 alt=""
                 className="mb-8 w-[228px] h-[141px] grayscale"
               />
@@ -323,18 +316,16 @@ const CouponCard = ({
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="border-dashed border-t-2 border-[#B2B2B2] text-center">
-              <h2 className="text-xs mt-8 mb-2.5">
-                [{storeArea}] {storeName}
-              </h2>
+              <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
               <h3 className="text-[10px] mb-2.5 text-custom-orange">
-                {promotionText}
+                {couponData.subtitle}
               </h3>
-              <h4 className="text-[9px] mb-1">기한: {couponDate}</h4>
+              <h4 className="text-[9px] mb-1">기한: {couponData.startDate}</h4>
               <button
                 className="h-8 w-full rounded bg-[#B2B2B2] text-white text-xs"
                 onClick={() => {
                   handleCloseModal();
-                  handleCouponUsed(id);
+                  handleCouponUsed(couponData.id);
                 }}
               >
                 닫기
@@ -355,7 +346,11 @@ const CouponCard = ({
           <div className="px-9 py-8 w-[408px] h-full">
             <div className="h-[300px]">
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
-              <img src={couponStoreImg} alt="" className="mt-5 mb-11" />
+              <img
+                src={couponData.storeImage}
+                alt=""
+                className="mt-5 mb-11 rounded-xl"
+              />
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
@@ -370,13 +365,13 @@ const CouponCard = ({
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
-                <h2 className="text-base mt-12 mb-2.5">
-                  [{storeArea}] {storeName}
-                </h2>
+                <h2 className="text-base mt-12 mb-2.5">{couponData.name}</h2>
                 <h3 className="text-sm mb-2.5 text-custom-orange">
-                  {promotionText}
+                  {couponData.subtitle}
                 </h3>
-                <h4 className="text-xs mb-5">기한: {couponDate}</h4>
+                <h4 className="text-xs mb-5">
+                  기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+                </h4>
                 <button
                   className="w-full h-9 rounded bg-custom-pink text-white text-xs"
                   onClick={() => {
@@ -401,8 +396,8 @@ const CouponCard = ({
               <div className="text-center text-custom-gray-200">직원 확인</div>
               <div className="flex justify-center items-center h-5/6">
                 <img
-                  className=""
-                  src={isCheck ? QrCodeIcon : EmployeeVerificationIcon}
+                  className={isCheck? "w-64":null}
+                  src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
                   alt=""
                 />
               </div>
@@ -472,9 +467,9 @@ const CouponCard = ({
             <div className="h-[300px]">
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img
-                src={couponStoreImg}
+                src={couponData.storeImage}
                 alt=""
-                className="mt-5 mb-11 grayscale"
+                className="mt-5 mb-11 grayscale rounded-xl"
               />
               <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
                 <p className="text-custom-pink text-4xl font-bold">
@@ -485,28 +480,20 @@ const CouponCard = ({
               </div>
             </div>
 
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_desktop_size}
-              top={couponSemicircle_desktop_top}
-              leftAndright={couponSemicircle_desktop_side}
-              borderColor={`custom-gray-400`}
-            /> */}
             <CouponSemicircleUI_Desktop borderColor={`custom-gray-400`} />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-[#B2B2B2] text-center">
-                <h2 className="text-base mt-12 mb-2.5">
-                  [{storeArea}] {storeName}
-                </h2>
+                <h2 className="text-base mt-12 mb-2.5">{couponData.name}</h2>
                 <h3 className="text-sm mb-2.5 text-custom-orange">
-                  {promotionText}
+                  {couponData.subtitle}
                 </h3>
-                <h4 className="text-xs mb-5">기한: {couponDate}</h4>
+                <h4 className="text-xs mb-5">기한: {couponData.startDate}</h4>
                 <button
                   className="w-full h-9 rounded bg-[#B2B2B2] text-white text-xs"
                   onClick={() => {
                     handleCloseModal();
-                    handleCouponUsed(id);
+                    handleCouponUsed(couponData.id);
                   }}
                 >
                   닫기
