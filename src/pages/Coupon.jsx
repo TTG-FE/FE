@@ -1,19 +1,16 @@
 import React, { useRef, useState } from "react";
 
 // Asset
-import BakeryImg from "../assets/bakery.png";
-import CouponImg from "../assets/bakery-sm.png";
 import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
 import { Link } from "react-router-dom";
 import GoToLogin from "../components/GoToLogin";
-import MobileHeader from "../components/MobileHeader";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
-  const [login, setLogin] = useState(!false);
+  const [login, setLogin] = useState(false);
   const [coupons, setCoupons] = useState([
     // { id: 1, used: false },
     // { id: 2, used: false },
@@ -55,7 +52,11 @@ const Coupon = () => {
       endDate: "2024-02-04",
     },
   ]);
-  // console.log("길이",coupons.length);
+
+  const handleLogin = () => {
+    setLogin(!login);
+    console.log(login);
+  }
 
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
@@ -142,6 +143,7 @@ const Coupon = () => {
           <DesktopCouponSection
             coupons={coupons}
             login={login}
+            setLogin={setLogin}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
             modalStates={modalStates}
@@ -207,19 +209,26 @@ const SearchBar = () => {
 const DesktopCouponSection = ({
   coupons,
   login,
+  setLogin,
   children,
 }) => {
+  // 클릭 이벤트 핸들러 추가
+  const toggleLogin = () => setLogin(!login);
+
   return (
     <>
       {/* 전체 페이지 설정 */}
       <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex items-end mb-7">
-          <div className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]">
+          <div
+            className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]"
+            onClick={toggleLogin}
+          >
             쿠폰함
           </div>
           <div className="h-full">
-            <SearchBar />
+            {login ? <SearchBar /> : null}
           </div>
         </div>
 
@@ -227,7 +236,7 @@ const DesktopCouponSection = ({
         <div
           className={`border-t border-[#D9D9D9] text-xl ${
             coupons.length === 0 || !login
-              ? "flex flex-col justify-center items-center absolute inset-0"
+              ? "flex flex-col justify-center items-center h-screen"
               : "pt-9"
           }`}
         >

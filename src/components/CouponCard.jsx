@@ -95,7 +95,11 @@ const CouponCard = ({
         {/* 쿠폰 이미지 및 상세 내용 */}
         <div className="flex basis-3/4 pl-7 py-6 h-full">
           {/* 이미지 */}
-          <img src={couponData.storeImage} alt="" className="mr-12 rounded-lg" />
+          <img
+            src={couponData.storeImage}
+            alt=""
+            className="mr-12 rounded-lg"
+          />
           {/* 내용 전체 크기 설정 */}
           <div className=" pt-11 pb-7 truncate">
             <h2 className="text-3xl	font-medium	mb-4 text-ellipsis overflow-hidden">
@@ -174,7 +178,7 @@ const CouponCard = ({
               <img
                 src={couponData.storeImage}
                 alt=""
-                className="mb-8 w-[228px] h-[141px]"
+                className="mb-8 w-[228px] h-[141px] rounded-lg"
               />
             </div>
 
@@ -194,7 +198,9 @@ const CouponCard = ({
               <h3 className="text-[10px] mb-2.5 text-custom-orange">
                 {couponData.subtitle}
               </h3>
-              <h4 className="text-[9px] mb-1">기한: {couponData.startDate}</h4>
+              <h4 className="text-[9px] mb-1">
+                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+              </h4>
               <button
                 className="h-8 w-full rounded bg-custom-pink text-white text-xs"
                 onClick={() => {
@@ -220,7 +226,7 @@ const CouponCard = ({
               <div className="flex justify-center items-center h-5/6">
                 <img
                   className={`${isCheck ? "w-40 h-40" : "w-28 h-28"}`}
-                  src={isCheck ? QrCodeIcon : EmployeeVerificationIcon}
+                  src={isCheck ? couponData.qrCode: EmployeeVerificationIcon}
                   alt=""
                 />
               </div>
@@ -396,19 +402,14 @@ const CouponCard = ({
               <div className="text-center text-custom-gray-200">직원 확인</div>
               <div className="flex justify-center items-center h-5/6">
                 <img
-                  className={isCheck? "w-64":null}
+                  className={isCheck ? "w-64" : null}
                   src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
                   alt=""
                 />
               </div>
             </div>
+
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_desktop_size}
-              top={couponSemicircle_desktop_top}
-              leftAndright={couponSemicircle_desktop_side}
-              borderColor={`custom-pink`}
-            /> */}
             <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
 
             <section className="flex flex-col items-center">
