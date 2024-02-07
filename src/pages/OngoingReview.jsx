@@ -2,28 +2,16 @@ import React from "react";
 
 export const OngoingReview = () => {
   return (
-    <div className="flex space-x-[1.12rem]">
-      <div>
-        <div className="w-[13.97756rem] h-[13.97756rem] bg-[#FFEDED] rounded-[0.59481rem]"></div>
-        <div
-          style={{ fontSize: "0.9375rem" }}
-          className="w-[13.97756rem] font-['Inter'] text-[0.9375rem] flex items-center h-[2.26019rem] text-[#545454] font-bold"
-        >
+    <div className="flex space-x-[1.12rem] font-inter">
+      <div className="w-56">
+        <div className="w-56rem h-56 bg-[#FFEDED] rounded-[0.59481rem]"></div>
+        <div className="text-[0.9375rem]  text-custom-gray-100 font-bold truncate mt-2 mb-1">
           [강북] 또먹고싶어 곱창
         </div>
-        <div
-          style={{ fontSize: "0.8125rem" }}
-          className="mb-[0.58rem] font-['Inter'] text-[#FF0069]"
-        >
-          주먹밥+캔음료 1개
+        <div className="mb-[0.58rem]  text-[#FF0069] truncate text-sm">
+          주먹밥+캔음료 1개 또먹고싶지않아도 먹어
         </div>
-        <div
-          style={{
-            fontSize: "0.8125rem",
-            color: "#898989",
-            fontFamily: "Inter",
-          }}
-        >
+        <div className="text-[0.8125rem] text-custom-gray-200 ">
           신청일자: 2023.11.29
         </div>
       </div>
