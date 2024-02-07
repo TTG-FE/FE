@@ -16,13 +16,13 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex center center items-center h-screen">
-      <div className="w-[43rem] h-[30.125rem] mr-[19.44rem] ml-[14.87rem]  bg-slate-300">
+    <div className="flex items-center h-screen ">
+      <div className="hidden sm:block w-[43rem] h-[30.125rem] mr-[19.44rem] ml-[14.87rem] bg-slate-300">
         이미지 영역
       </div>
 
       <div>
-        <div className="mr-[31.75rem] text-[2.1875rem] font-semibold mb-4">
+        <div className="mr-[31.75rem]  text-[2.1875rem] font-semibold mb-4 ">
           간편 로그인 후 <br />
           이용 가능합니다.
         </div>
