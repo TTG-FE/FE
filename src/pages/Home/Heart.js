@@ -112,7 +112,7 @@ const Heart = () => {
   ];
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`lg:px-16 font-inter px-6`}>
+    <div className={`lg:px-16 px-6`}>
       {/* 제목 */}
       <div className="flex items-center px-6 py-12">
         <span className="mr-2 text-2xl font-semibold border-b-4 border-custom-pink">

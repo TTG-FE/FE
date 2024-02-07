@@ -116,7 +116,7 @@ const Menu = ({ selectModal, setSelectModal }) => {
 
   return (
     /* 전체 페이지 크기 설정 */
-    <div className={`px-16 font-inter relative`}>
+    <div className={`px-16 relative`}>
       {/* 모달창 */}
       <SelectModal selectModal={selectModal} setSelectModal={setSelectModal} />
       <div>
