@@ -12,8 +12,8 @@ const Banner = () => {
   ];
   return (
     // 780px 부터 보이도록 설정
-    <div className="hidden md:flex">
-      <div className="py-4 bg-[#FFE6F0] flex items-center justify-between w-full md:px-14 lg:px-24 xl:px-32 2xl:px-64">
+    <div className="hidden pb-8 md:flex">
+      <div className="py-4 bg-[#FFE6F0] flex items-center justify-between w-full md:px-14 lg:px-24 xl:px-32 2xl:px-64 ">
         {/* 좌측영역*/}
         <div>
           <p className="flex items-center h-12 text-xl font-extrabold md:text-2xl whitespace-nowrap">

@@ -134,13 +134,15 @@ const Menu = ({ selectModal, setSelectModal }) => {
         </div>
 
         {/* 상점 카드 리스트 */}
-        <ul className="flex flex-wrap mb-[2.69rem]">
+        <ul className="flex flex-wrap ">
           {restaurants.map((item) => (
             <li className="w-1/5 p-4" key={item.id}>
               <StoreCard item={item} />
             </li>
           ))}
         </ul>
+        {/* infiniteScroll 감지할 요소 */}
+        <div className="p-6"></div>
       </div>
     </div>
   );

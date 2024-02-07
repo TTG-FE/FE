@@ -134,7 +134,7 @@ const Region = ({ selectModal, setSelectModal }) => {
         </div>
 
         {/* 상점 카드 리스트 */}
-        <ul className="flex flex-wrap mb-[2.69rem]">
+        <ul className="flex flex-wrap ">
           {stores.map((item) => (
             <li
               className="p-4 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
@@ -144,6 +144,8 @@ const Region = ({ selectModal, setSelectModal }) => {
             </li>
           ))}
         </ul>
+        {/* infiniteScroll 감지할 요소 */}
+        <div className="p-6"></div>
       </div>
     </div>
   );

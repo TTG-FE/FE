@@ -8,7 +8,7 @@ const Footer = () => {
       <Mobile />
 
       {/* 780px 부터 보이도록 설정   */}
-      <div className="hidden px-8 pt-8 md:flex">
+      <div className="hidden px-8 md:flex">
         <div className="flex items-center justify-between w-full p-10 border-t">
           {/* 좌측 영역: 로고 및 텍스트 */}
           <div className="flex items-center">
