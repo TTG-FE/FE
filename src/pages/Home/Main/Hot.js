@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
-
 import ttgArrow from "./../../../assets/images/ttg-arrow.png";
+import { LoginContext } from "../../../contexts/LoginContextProvider";
 
 const Hot = () => {
   const hotRestarants = [
@@ -65,6 +65,7 @@ const Hot = () => {
 
 /** Hot 한 상점 카드 */
 const HotCard = ({ item }) => {
+  const { isLogin } = useContext(LoginContext);
   const [isLiked, setIsLiked] = useState(false); // 현재 상점의 관심 여부를 나타낸다.
 
   /** 'handleLikeClick' 함수는 하트 아이콘을 클릭했을 때 호출되며
@@ -83,10 +84,12 @@ const HotCard = ({ item }) => {
           style={{ backgroundImage: `url()` }}
         >
           <button className="absolute top-2 right-2" onClick={handleLikeClick}>
-            <HeartIcon
-              stroke={isLiked ? "#FF0069" : "white"}
-              fill={isLiked ? "#FF0069" : "none"}
-            />
+            {isLogin && (
+              <HeartIcon
+                stroke={isLiked ? "#FF0069" : "white"}
+                fill={isLiked ? "#FF0069" : "none"}
+              />
+            )}
           </button>
         </figure>
         <div className="flex flex-col space-y-2 grow">

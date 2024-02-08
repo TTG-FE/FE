@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Top from "./Top";
 import Hot from "./Hot";
 import Review from "./Review";
@@ -6,6 +6,8 @@ import Banner from "./Banner";
 import { ReactComponent as CouponIcon } from "./../../../assets/images/couponIcon.svg";
 import { ReactComponent as RightArrow } from "./../../../assets/images/rightArrow.svg";
 import { ReactComponent as LoginIcon } from "./../../../assets/images/loginIcon.svg";
+import { LoginContext } from "../../../contexts/LoginContextProvider";
+import { useContext } from "react";
 
 const Main = () => {
   return (
@@ -30,27 +32,46 @@ const Main = () => {
 
 /** 모바일일 때만 존재하는 상단 로그인, 쿠폰함 */
 const Mobile = () => {
+  const { isLogin, logout } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  /** 로그인 버튼을 눌렀을 때 동작 */
+  const handleLogin = () => {
+    if (isLogin) {
+      logout();
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div>
-      {/* 모바일용 헤더 */}
       <div className="px-6 md:hidden ">
         {/* 로그인 UI*/}
         <div className="flex justify-between my-11">
-          <div className="space-y-2">
-            <p className="text-xl font-semibold">
-              로그인 후 이용하실 수 있습니다.
+          <div className="flex flex-col mr-2 space-y-2">
+            <p className="text-xl font-semibold line-clamp-1">
+              {isLogin
+                ? "안녕하세요 산책왕자 강형욱님22222222"
+                : "로그인 후 이용하실 수 있습니다."}
             </p>
             <p className="text-xs opacity-60">
               오늘도 또또가에서 혜택을 받아보세요.
             </p>
           </div>
           {/* TODO: 로그인 페이지 연결 */}
-          <Link to="/login">
+          <button
+            to="/login"
+            className="flex flex-col items-center justify-center"
+            onClick={handleLogin}
+          >
             <div className="bg-[#EDEDED] rounded-full w-6 h-6 flex items-center justify-center">
               <LoginIcon />
             </div>
-            <p className="text-[0.5rem] opacity-30">로그인</p>
-          </Link>
+            <p className="text-[0.5rem] opacity-30 whitespace-nowrap">
+              {isLogin ? "로그아웃" : "로그인"}
+            </p>
+          </button>
         </div>
 
         {/* 쿠폰함 UI*/}
