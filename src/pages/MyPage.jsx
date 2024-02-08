@@ -4,7 +4,6 @@ import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
 import FailReview from "./FailReview";
 
-//상단바+메뉴바까지 같이 생각해서 마진 설정
 export const MyPage = () => {
   const ongoingRef = useRef(null);
   const rejectedRef = useRef(null);
@@ -16,12 +15,38 @@ export const MyPage = () => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleImageChange = (event) => {
+  // 프로필 사진 변경
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      setSelectedImage(URL.createObjectURL(file));
+      try {
+        const formData = new FormData();
+        formData.append("profile_image", file);
+
+        const response = await fetch("/members/profile/image", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.isSuccess) {
+          setSelectedImage(URL.createObjectURL(file));
+        } else {
+          if (result.code === "MEMBER4001") {
+            console.error("사용자가 없습니다.");
+          } else if (result.code === "S34001") {
+            console.error("파일 업로드에 실패했습니다.");
+          } else {
+            console.error("알 수 없는 오류:", result.message);
+          }
+        }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+      }
     }
   };
+
   const handleClick = () => {
     document.getElementById("profileImageInput").click();
   };
