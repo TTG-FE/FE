@@ -1,10 +1,17 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
 /** 'NavBar': 네비게이션 컴포넌트 */
 const Navbar = ({ setSelectModal }) => {
-  const { isLogin } = useContext(LoginContext);
+  const { isLogin, logout } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  /** 로그아웃 버튼을 누르면 로그아웃 로직을 수행 */
+  const handleLogout = () => {
+    logout();
+    navigate("/", { replace: true });
+  };
   return (
     // 780px 부터 보이도록 설정
     <div className="justify-between hidden w-full h-16 lg:px-16 md:px-6 md: md:flex shadow-custom-button-shadow">
@@ -22,7 +29,12 @@ const Navbar = ({ setSelectModal }) => {
       <div className="flex items-center">
         {/* 우측영역: 로그인 여부에 따라서 다른 메뉴를 표시 */}
         {isLogin ? (
-          <CustomNavLink to="/login">로그아웃</CustomNavLink>
+          <button
+            onClick={handleLogout}
+            className="flex items-center h-10 text-lg hover:text-custom-pink text-[#19191980]"
+          >
+            로그아웃
+          </button>
         ) : (
           <CustomNavLink to="/login">로그인</CustomNavLink>
         )}
