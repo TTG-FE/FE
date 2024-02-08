@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { LoginContext } from "../contexts/LoginContextProvider";
 
 /** 'NavBar': 네비게이션 컴포넌트 */
 const Navbar = ({ setSelectModal }) => {
+  const { isLogin } = useContext(LoginContext);
   return (
     // 780px 부터 보이도록 설정
     <div className="justify-between hidden w-full h-16 lg:px-16 md:px-6 md: md:flex shadow-custom-button-shadow">
@@ -16,15 +19,13 @@ const Navbar = ({ setSelectModal }) => {
         </CustomNavLink>
       </div>
 
-      {/* TODO: 페이지 연결 및 로그인 여부에 따른 UI 화면 표시 */}
-      {/* 우측영역: 로그인 여부에 따라서 다른 메뉴를 표시 */}
       <div className="flex items-center">
-        {/* 로그인되지 않은 상태 */}
-        <CustomNavLink to="/login">로그인</CustomNavLink>
-      </div>
-      {/* 로그인된 상태, 로그인 기능이 완료되면 'hidden'은 삭제 */}
-      <div className="items-center hidden">
-        <CustomNavLink to="/">로그아웃</CustomNavLink>
+        {/* 우측영역: 로그인 여부에 따라서 다른 메뉴를 표시 */}
+        {isLogin ? (
+          <CustomNavLink to="/login">로그아웃</CustomNavLink>
+        ) : (
+          <CustomNavLink to="/login">로그인</CustomNavLink>
+        )}
       </div>
     </div>
   );
