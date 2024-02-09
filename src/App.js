@@ -54,6 +54,7 @@ function App() {
               <Route path="/heart" element={<Heart />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/menu/:id" element={<Menu />} />
               {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
             </Routes>
           </div>
