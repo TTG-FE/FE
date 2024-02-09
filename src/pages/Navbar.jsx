@@ -1,10 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContextProvider";
-
+import { ModalContext } from "../contexts/ModalContextProvider";
 /** 'NavBar': 네비게이션 컴포넌트 */
-const Navbar = ({ setSelectModal }) => {
+const Navbar = () => {
   const { isLogin, logout } = useContext(LoginContext);
+  const { openRegionModal, openMenuModal } = useContext(ModalContext);
   const navigate = useNavigate();
 
   /** 로그아웃 버튼을 누르면 로그아웃 로직을 수행 */
@@ -18,10 +19,10 @@ const Navbar = ({ setSelectModal }) => {
       {/* 좌측영역: 이용가이드 및 상점, 메뉴 선택을 위한 네비게이션 */}
       <div className="flex items-center space-x-7">
         <CustomNavLink to="/user-guide">이용가이드</CustomNavLink>
-        <CustomNavLink to="/region" onClick={() => setSelectModal(1)}>
+        <CustomNavLink to="/region" onClick={() => openRegionModal()}>
           지역 별 상점
         </CustomNavLink>
-        <CustomNavLink to="/menu" onClick={() => setSelectModal(2)}>
+        <CustomNavLink to="/menu" onClick={() => openMenuModal()}>
           메뉴선택
         </CustomNavLink>
       </div>

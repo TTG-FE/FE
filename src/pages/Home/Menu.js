@@ -121,7 +121,7 @@ const Menu = ({ selectModal, setSelectModal }) => {
     /* 전체 페이지 크기 설정 */
     <div className={`px-16 relative`}>
       {/* 모달창 */}
-      <SelectModal selectModal={selectModal} setSelectModal={setSelectModal} />
+      <SelectModal />
       <div>
         {/* 상점 필터명 */}
         <div className="flex items-center justify-between px-8 py-16">

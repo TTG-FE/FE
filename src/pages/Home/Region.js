@@ -1,7 +1,7 @@
 import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
 
-const Region = ({ selectModal, setSelectModal }) => {
+const Region = () => {
   // 상점 리스트 객체
   const stores = [
     {
@@ -118,7 +118,7 @@ const Region = ({ selectModal, setSelectModal }) => {
     /* 전체 페이지 크기 설정 */
     <div className={`px-16 relative`}>
       {/* 모달창 */}
-      <SelectModal selectModal={selectModal} setSelectModal={setSelectModal} />
+      <SelectModal />
       <div>
         {/* 상점 필터명 */}
         <div className="flex items-center justify-between px-8 py-16">
