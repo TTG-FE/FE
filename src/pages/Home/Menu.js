@@ -3,7 +3,7 @@ import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
 
 const Menu = ({ selectModal, setSelectModal }) => {
-  const { id } = useParams(); // 파라미터로 넘어오는 메뉴 아이디
+  const { menu_id } = useParams(); // 파라미터로 넘어오는 메뉴 아이디
 
   // 상점 리스트 객체
   const restaurants = [

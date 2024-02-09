@@ -1,7 +1,9 @@
+import { useParams } from "react-router";
 import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
 
 const Region = () => {
+  const { city_id, town_id } = useParams();
   // 상점 리스트 객체
   const stores = [
     {

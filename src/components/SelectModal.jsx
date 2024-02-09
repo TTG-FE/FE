@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+// 메뉴 아이콘
 import menuBurger from "./../assets/images/menu-burger.png";
 import menuChicken from "./../assets/images/menu-chicken.png";
 import menuKorean from "./../assets/images/menu-korean.png";
@@ -15,9 +17,12 @@ import menuCafe from "./../assets/images/menu-cafe.png";
 import menuPizza from "./../assets/images/menu-pizza.png";
 import menuSteamed from "./../assets/images/menu-steamed.png";
 import menuMeat from "./../assets/images/menu-meat.png";
+
+// context
 import { ModalContext } from "../contexts/ModalContextProvider";
+
 /**
- * 'Modal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
+ * 'SelectModal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
  */
 const SelectModal = () => {
   const { modalNumber, closeModal } = useContext(ModalContext);
@@ -91,7 +96,7 @@ const MenuSelector = ({ handleClose }) => {
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
           <li to="/menu" key={menu.id} className="w-1/4 px-8 py-5">
-            <Link className="w-full target">
+            <Link className="w-full target" to={`/menu/${menu.id}`}>
               <figure
                 className="pb-[100%] h-0 bg-center bg-no-repeat bg-cover shrink-0 target"
                 style={{ backgroundImage: `url(${menu.img})` }}
@@ -197,13 +202,15 @@ const RegionSelector = ({ handleClose }) => {
                 {city.label}
               </div>
               <ul className="flex flex-wrap w-4/5">
-                {city.towns.map((town, i) => (
+                {city.towns.map((town, id) => (
                   <li
-                    key={i}
+                    key={id}
                     to="/region"
                     className="w-1/4 p-2 text-sm text-[#00000080]"
                   >
-                    <Link className="target">{town}</Link>
+                    <Link className="target" to={`/region/${city.id}/${id}`}>
+                      {town}
+                    </Link>
                   </li>
                 ))}
               </ul>

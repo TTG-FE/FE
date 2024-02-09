@@ -18,8 +18,7 @@ import LoginContextProvider from "./contexts/LoginContextProvider"; // LoginCont
 import ModalContextProvider from "./contexts/ModalContextProvider"; // SelectModalProvider
 
 function App() {
-  // TODO: Redux로 상태변수를 관리
-  // 모달 선택창 상태를 관리하는 상태 변수
+  // LoginContext, ModalcontextProvider 추가
   return (
     <BrowserRouter>
       <LoginContextProvider>
@@ -27,7 +26,7 @@ function App() {
           <div className="flex flex-col min-h-screen font-inter ">
             <Header />
             <Navbar />
-            <div className="relative flex-grow">
+            <section className="relative flex-grow">
               {/* 라우트를 정의한 부분 */}
               <Routes>
                 <Route path="/" element={<Main />} />
@@ -39,10 +38,11 @@ function App() {
                 <Route path="/heart" element={<Heart />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/menu/:id" element={<Menu />} />
+                <Route path="/menu/menu_id" element={<Menu />} />
+                <Route path="/region/:city_id/:town_id" element={<Region />} />
                 {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
               </Routes>
-            </div>
+            </section>
             <Footer />
           </div>
         </ModalContextProvider>
