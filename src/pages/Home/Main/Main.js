@@ -1,4 +1,6 @@
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Top from "./Top";
 import Hot from "./Hot";
 import Review from "./Review";
@@ -7,22 +9,53 @@ import { ReactComponent as CouponIcon } from "./../../../assets/images/couponIco
 import { ReactComponent as RightArrow } from "./../../../assets/images/rightArrow.svg";
 import { ReactComponent as LoginIcon } from "./../../../assets/images/loginIcon.svg";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
-import { useContext } from "react";
 
 const Main = () => {
+  const [top15, setTop15] = useState([]); // top15
+  const [hotStores, setHotStores] = useState([]); // hot
+  const [homeReviews, setHomeReviews] = useState([]); // review
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // TODO: url 주소 변경 및 homeReview의 프로퍼티 변수 변경
+        const response = await axios.get("/stores/home");
+        const { top15, hotStores, homeReviews } = response.data.result;
+        setTop15(top15);
+        setHotStores(hotStores);
+        setHomeReviews(homeReviews);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <div>is Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
   return (
     /* 전체 페이지 크기 설정 */
-
     <div className="">
       <div>
         {/* 모바일일 때만 존재하는 상단 로그인, 쿠폰함 */}
         <Mobile />
         {/* TOP 15 또또가 */}
-        <Top />
+        <Top top15={top15} />
         {/* Hot */}
-        <Hot />
+        <Hot hotStores={hotStores} />
         {/* 또또가 리뷰 */}
-        <Review />
+        <Review homeReviews={homeReviews} />
         {/* 배너 */}
         <Banner />
       </div>
