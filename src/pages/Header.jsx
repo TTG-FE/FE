@@ -1,20 +1,29 @@
-import { useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useRef, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "./../assets/images/logo.png";
 import { ReactComponent as CouponIcon } from "./../assets/images/couponIcon.svg";
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 import { ReactComponent as HumanIcon } from "./../assets/images/humanIcon.svg";
 import { ReactComponent as SearchIcon } from "./../assets/images/searchIcon.svg";
 import { ReactComponent as PhoneArrowLeftIcon } from "./../assets/phone_Arrow_right.svg";
+import { ReactComponent as RightArrow } from "./../assets/images/rightArrow.svg";
+import { ReactComponent as LoginIcon } from "./../assets/images/loginIcon.svg";
+import { LoginContext } from "./../contexts/LoginContextProvider";
 
 /** Header */
 const Header = () => {
+  const location = useLocation();
+
   return (
     <>
       {/** 너비 780px 이상일 때 헤더 */}
       <DesktopHeader />
-      {/* 모바일 헤더 */}
-      <MobileHeader />
+      {/* 모바일 화면일 때 메인페이지인지 아닌지에 따라 헤더가 달라진다 */}
+      {location.pathname === "/" ? (
+        <MobileMainPageHeader />
+      ) : (
+        <MobileRestPageHeader />
+      )}
     </>
   );
 };
@@ -119,9 +128,80 @@ const DesktopHeader = () => {
     </div>
   );
 };
+/** 모바일 메인페이지 헤더 */
+/** 모바일일 때만 존재하는 상단 로그인, 쿠폰함 */
+const MobileMainPageHeader = () => {
+  const { isLogin, logout } = useContext(LoginContext);
+  const navigate = useNavigate();
 
-/** 모바일 헤더 */
-const MobileHeader = () => {
+  /** 로그인 버튼을 눌렀을 때 동작 */
+  const handleLogin = () => {
+    if (isLogin) {
+      logout();
+    } else {
+      navigate("/login");
+    }
+  };
+
+  return (
+    <div>
+      <div className="px-6 md:hidden ">
+        {/* 로그인 UI*/}
+        <div className="flex justify-between my-11">
+          <div className="flex flex-col mr-2 space-y-2">
+            <p className="text-xl font-semibold line-clamp-1">
+              {isLogin
+                ? "안녕하세요 산책왕자 강형욱님22222222"
+                : "로그인 후 이용하실 수 있습니다."}
+            </p>
+            <p className="text-xs opacity-60">
+              오늘도 또또가에서 혜택을 받아보세요.
+            </p>
+          </div>
+          {/* 로그인 페이지로 이동하는 버튼 */}
+          <button
+            to="/login"
+            className="flex flex-col items-center justify-center"
+            onClick={handleLogin}
+          >
+            <div className="bg-[#EDEDED] rounded-full w-6 h-6 flex items-center justify-center">
+              <LoginIcon />
+            </div>
+            <p className="text-[0.5rem] opacity-30 whitespace-nowrap">
+              {isLogin ? "로그아웃" : "로그인"}
+            </p>
+          </button>
+        </div>
+
+        {/* 쿠폰함 UI*/}
+        <div className="my-11">
+          <div className="relative flex items-center w-full px-3 text-white h-28 rounded-xl bg-custom-gradation-180-2">
+            <div className="w-1.5 h-20 bg-white rounded-full mix-blend-soft-light"></div>
+            <div className="flex flex-col p-4">
+              <div className="flex items-center mb-2">
+                <CouponIcon stroke="white" />
+                <span className="ml-3 text-xl">쿠폰함</span>
+              </div>
+              <p className="text-xs">
+                또또가 리뷰를 통해 받은 쿠폰 사용하러 가기
+              </p>
+            </div>
+
+            {/* 화살표 버튼을 누르면 쿠폰함 페이지로 이동 */}
+            <Link
+              className="absolute flex items-center justify-center bg-white rounded-full right-4 w-11 h-11 "
+              to="/coupon"
+            >
+              <RightArrow fill="#FF0069" width="18" height="18" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+/** 모바일 메인페이지를 제외한 나머지 페이지의 헤더 */
+const MobileRestPageHeader = () => {
   const location = useLocation(); // 현재 경로 정보를 가져옴
 
   // 현재 경로에 따른 MobileHeader title 결정

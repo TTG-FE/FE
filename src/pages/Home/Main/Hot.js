@@ -5,23 +5,6 @@ import channelIcon from "./../../../assets/images/channelIcon.png";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
 
 const Hot = ({ hotStores }) => {
-  // const hotRestarants = [
-  //   {
-  //     id: 1,
-  //     text: "연어 무게",
-  //     free: "펩",
-  //   },
-  //   {
-  //     id: 2,
-  //     text: "칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요",
-  //     free: "펩시 제로 콜라 1개 + 연어 100g 추가추가추가추가추가하하하",
-  //   },
-  //   {
-  //     id: 3,
-  //     text: "용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?",
-  //     free: "뭐라뭐라뭐라",
-  //   },
-  // ];
   return (
     <div className="md:mb-16 ">
       {/* 구분선 */}

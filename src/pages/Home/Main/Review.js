@@ -1,38 +1,6 @@
 import { Link } from "react-router-dom";
 import BakeryImg from "./../../../assets/bakery.png";
 const Review = ({ homeReviews }) => {
-  // const reviews = [
-  //   {
-  //     id: 1,
-  //     author: "산책강형욱",
-  //     text: "남은 횟감은 싸서 강아지에게 생식으로 주니 너무 좋아하더라구요~^^",
-  //     store: "로우앤 하이로우앤 하이로우앤 하이로우앤 하이로우앤 하이루하이루",
-  //   },
-  //   {
-  //     id: 2,
-  //     author: "카리나 로켓펀쳐",
-  //     text: "123",
-  //     store: "로우앤 하이로우앤 하이로우앤 하이로우앤 ",
-  //   },
-  //   {
-  //     id: 3,
-  //     author: "윈터 아머멘털",
-  //     text: "내 무기들에 기름칠 하기 딱 좋은 무쇠 삼겹살 맛집",
-  //     store: "무쇠 기름칠 삼겹살구이 ",
-  //   },
-  //   {
-  //     id: 4,
-  //     author: "닝닝 이디해커",
-  //     text: "망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요망설이듯 간 보는 너 기회는 없어 Oh : 매우 spicy한 분모자 떡볶이에요",
-  //     store: "커잠투 스파이시떡볶이",
-  //   },
-  //   {
-  //     id: 5,
-  //     author: "지젤 갓제너글로스",
-  //     text: "내 본능을 당겨 Zoom Hold up, What? Oh my god 너무 맛있어서..",
-  //     store: "아침드라마 닭갈비",
-  //   },
-  // ];
   return (
     <div className="mb-16">
       {/* 구분선 */}
