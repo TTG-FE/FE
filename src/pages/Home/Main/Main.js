@@ -59,7 +59,7 @@ const Mobile = () => {
               오늘도 또또가에서 혜택을 받아보세요.
             </p>
           </div>
-          {/* TODO: 로그인 페이지 연결 */}
+          {/* 로그인 페이지로 이동하는 버튼 */}
           <button
             to="/login"
             className="flex flex-col items-center justify-center"
