@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 import ttgArrow from "./../../../assets/images/ttg-arrow.png";
+import channelIcon from "./../../../assets/images/channelIcon.png";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
 
 const Hot = () => {
@@ -45,6 +46,10 @@ const Hot = () => {
           className="absolute right-3 w-[4.81rem] bg-center bg-no-repeat bg-cover h-[6.48rem] top-7 md:hidden"
           style={{ backgroundImage: `url(${ttgArrow})` }}
         ></figure>
+        {/* 채널톡 버튼 */}
+        <button className="fixed z-50 flex items-center justify-center  rounded-full right-3 top-[46.5rem] w-11 h-11 md:hidden">
+          <img src={channelIcon} alt="ch" />
+        </button>
         {/* 카드 리스트 */}
         <div className="z-10 w-full pl-4 overflow-hidden overflow-x-auto md:pl-0 scrollbar-hide">
           <ul className="flex w-full py-6 m-2 space-x-3 ">
