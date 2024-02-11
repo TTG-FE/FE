@@ -4,7 +4,6 @@ import Top from "./Top";
 import Hot from "./Hot";
 import Review from "./Review";
 import Banner from "./Banner";
-
 const Main = () => {
   const [top15, setTop15] = useState([]); // top15
   const [hotStores, setHotStores] = useState([]); // hot
@@ -31,12 +30,22 @@ const Main = () => {
     fetchData();
   }, []);
 
+  // TODO: 로딩중 텍스트를 아이콘으로 변경
   if (isLoading) {
-    return <div>is Loading...</div>;
+    return (
+      <div className="absolute animate-pulse text-custom-orange w-fit top-1/2 left-1/2">
+        로딩중...
+      </div>
+    );
   }
 
+  // TODO: 에러 처리하는 방식 변경
   if (error) {
-    return <div>{error.message}</div>;
+    return (
+      <div className="absolute text-custom-orange w-fit top-1/2 left-1/2">
+        에러
+      </div>
+    );
   }
 
   return (
