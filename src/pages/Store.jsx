@@ -24,7 +24,27 @@ function Store() {
   // 쿠폰 발행 여부
   const [isCouponUsed, setIsCouponUsed] = useState(false);
 
-  const [storeData, setStoreData] = useState([{}])
+  const [storeData, setStoreData] = useState([
+    {
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/73e9e03b-6b1e-4968-a5a6-3a8ed52f4080cicd.png",
+      title: "간장게장 맛집",
+      name: "간장게장집",
+      subTitle: "김부각이랑 먹으러 오세요 ~",
+      regionName: "서울",
+      menuName: "버거",
+      serviceInfo: "test",
+      reviewSpan: 5,
+      heartStore: false,
+      useInfo: "test",
+      saleInfo: "saleInfo",
+      placeInfo: "test",
+      address: "address",
+      sponInfo: "test",
+      reviewCount: 0,
+      submitReview: false,
+    },
+  ]);
 
   // 모달창 열기
   const handleOpenModal = () => {
@@ -89,7 +109,7 @@ const StoreLeftSection = () => {
       {/* 안내 문구들 */}
       <div className="">
         {/* 이용 안내 */}
-        <div className="mb-20">
+        <section className="mb-20">
           <div className="text-[#FF0069] font-semibold text-xl mb-4">
             이용 안내
           </div>
@@ -133,10 +153,10 @@ const StoreLeftSection = () => {
               </ul>
             </ol>
           </div>
-        </div>
+        </section>
 
         {/* 영업 안내 */}
-        <div className="mb-20">
+        <section className="mb-20">
           <div className="text-[#FF0069] font-semibold text-xl mb-4">
             영업 안내
           </div>
@@ -149,10 +169,10 @@ const StoreLeftSection = () => {
               <li>대기 인원이 많은 식당으로 예약 방문 필수입니다.</li>
             </ul>
           </div>
-        </div>
+        </section>
 
         {/* 가게 장소 */}
-        <div className="mb-20">
+        <section className="mb-20">
           <div className="text-[#FF0069] font-semibold text-xl mb-4">
             가게 장소
           </div>
@@ -164,10 +184,10 @@ const StoreLeftSection = () => {
             </ul>
             <img src={storeMapImage} alt="" />
           </div>
-        </div>
+        </section>
 
         {/* 협찬문구 */}
-        <div className="mb-20">
+        <section className="mb-20">
           <div className="text-[#FF0069] font-semibold text-xl mb-4">
             협찬문구
           </div>
@@ -203,7 +223,7 @@ const StoreLeftSection = () => {
               </ul>
             </ol>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
@@ -279,7 +299,9 @@ const StoreRightSection = ({
           <>
             <Link to="/login">
               <button
-                className={"w-full h-14 mt-8 text-white rounded text-xl bg-[#FF0069]"}
+                className={
+                  "w-full h-14 mt-8 text-white rounded text-xl bg-[#FF0069]"
+                }
               >
                 로그인 하러가기
               </button>
