@@ -74,6 +74,13 @@ const Coupon = () => {
     },
   ]);
 
+  // 검색 처리
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredCoupons = coupons.filter((coupon) =>
+    coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
     // 해당 쿠폰을 사용했다고 true로 변경
@@ -148,10 +155,14 @@ const Coupon = () => {
     setActiveModalCouponId(null);
   };
 
+  
+
   // 현재 열린 모달의 쿠폰 ID 상태
   const [activeModalCouponId, setActiveModalCouponId] = useState(null);
 
-  const renderCouponCards = () => {
+console.log(activeModalCouponId);
+
+  const renderCouponCards = (coupons) => {
     return coupons.map((coupon) => (
       <CouponCard
         key={coupon.id}
@@ -169,22 +180,27 @@ const Coupon = () => {
       <div className="font-inter">
         {/* ---------------모바일 쿠폰------------------- */}
         <div className="md:hidden">
-          <MobileCouponSection coupons={coupons} login={login}>
-            {login ? renderCouponCards() : <GoToLogin />}
+          <MobileCouponSection
+            coupons={filteredCoupons}
+            login={login}
+            setSearchTerm={setSearchTerm}
+          >
+            {login ? renderCouponCards(filteredCoupons) : <GoToLogin />}
           </MobileCouponSection>
         </div>
 
         {/* ----------데스크탑 쿠폰-------------- */}
         <div className="hidden md:block">
           <DesktopCouponSection
-            coupons={coupons}
+            coupons={filteredCoupons}
             login={login}
             onToggleLogin={() => {
               setLogin(!login);
               handleCloseModal();
             }}
+            setSearchTerm={setSearchTerm}
           >
-            {login ? renderCouponCards() : <GoToLogin />}
+            {login ? renderCouponCards(filteredCoupons) : <GoToLogin />}
           </DesktopCouponSection>
         </div>
       </div>
@@ -192,13 +208,22 @@ const Coupon = () => {
   );
 };
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
   const [inputText, setInputText] = useState(""); // 검색 텍스트
   const [isFocused, setIsFocused] = useState(false); // 검색창 포커스 여부
   const inputRef = useRef(); // 검색창
 
   /** handleInputChange': 검색창의 값이 변경될 때마다 호출되는 함수 */
-  const handleInputChange = (e) => setInputText(e.target.value);
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  // 엔터 키를 눌렀을 경우에만 onSearch 함수 호출
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSearch(e.target.value);
+    }
+  };
 
   /** 'handleSearch': 검색 버튼 클릭 시 API 요청보내는 함수 */
   const handleSearch = (e) => {
@@ -213,6 +238,10 @@ const SearchBar = () => {
 
   return (
     // 검색 폼 컴포넌트
+    // <form className="flex w-[300px]" onSubmit={(e) => {
+    //   e.preventDefault();
+    //   handleSearch();
+    // }}>
     <form className="flex w-[300px]" onSubmit={handleSearch}>
       {/* 입력창 */}
       <input
@@ -221,6 +250,7 @@ const SearchBar = () => {
         value={inputText}
         placeholder={"찾고싶은 쿠폰을 검색해보세요!"}
         onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className="flex-1 text-xs border-b outline-none ps-2 h-6 focus:border-custom-pink"
@@ -231,6 +261,7 @@ const SearchBar = () => {
         className="outline-none relative"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        onClick={(e) => handleKeyPress(e)}
       >
         <SearchIcon
           stroke={isFocused ? "#FF0069" : "#D9D9D9"}
@@ -241,7 +272,13 @@ const SearchBar = () => {
   );
 };
 
-const DesktopCouponSection = ({ coupons, login, onToggleLogin, children }) => {
+const DesktopCouponSection = ({
+  coupons,
+  login,
+  onToggleLogin,
+  setSearchTerm,
+  children,
+}) => {
   return (
     <>
       {/* 전체 페이지 설정 */}
@@ -254,7 +291,8 @@ const DesktopCouponSection = ({ coupons, login, onToggleLogin, children }) => {
           >
             쿠폰함
           </div>
-          {login ? <SearchBar /> : null}
+          {/* {login ? <SearchBar /> : null} */}
+          {login ? <SearchBar onSearch={setSearchTerm} /> : null}
         </div>
 
         {/* 쿠폰 영역 전체 패딩*/}
@@ -284,17 +322,17 @@ const DesktopCouponSection = ({ coupons, login, onToggleLogin, children }) => {
   );
 };
 
-const MobileCouponSection = ({ coupons, login, children }) => {
+const MobileCouponSection = ({ coupons, login, setSearchTerm, children }) => {
   return (
     <>
       {/* 쿠폰함 타이틀 헤더 영역 */}
       {/* <MobileHeader title={"쿠폰함"} /> */}
       <div className="md:hidden h-full pb-20">
         {login ? (
-          <div className="relative pt-8">
+          <div className="pt-8">
             {/* 검색 영역 */}
             <div className="flex justify-center mb-10">
-              <SearchBar />
+              <SearchBar onSearch={setSearchTerm} />
             </div>
             {/* 쿠폰 영역 */}
 

@@ -56,8 +56,6 @@ const CouponCard = ({
     }
   }, [isModalOpen]);
 
-  // console.log("modalsOpen", modalsOpen);
-
   console.log(modalsOpen);
 
   return (
