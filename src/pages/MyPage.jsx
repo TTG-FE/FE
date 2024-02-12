@@ -14,7 +14,6 @@ export const MyPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
     const fetchReviewData = async () => {
       try {
         const response = await fetch("/members/profile");
@@ -40,7 +39,7 @@ export const MyPage = () => {
   if (!reviewData || reviewData.length === 0) {
     return <div>아직 등록된 리뷰가 없어요.</div>;
   }
-  
+
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -184,7 +183,9 @@ export const MyPage = () => {
               {" "}
               지금까지 또또가로 혜택받은 횟수
             </div>
-            <div className="text-[#FF0069]  text-2xl font-semibold ">{reviewData.result.member.benefit_count}회</div>
+            <div className="text-[#FF0069]  text-2xl font-semibold ">
+              {reviewData.result.member.benefit_count}회
+            </div>
           </div>
         </div>
 
@@ -285,8 +286,14 @@ export const MyPage = () => {
               쿠폰 발급 완료
             </div>
           </div>
+          {selectedMenu === "신청" && <OngoingReview />}
+          {selectedMenu === "쿠폰 발급 완료" && <OngoingReview />}
+          {selectedMenu === "리뷰 유지 기간" && (
+            <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">
+              신청한 리뷰가 없어요
+            </div>
+          )}
 
-          <OngoingReview />
           <div ref={rejectedRef}>
             <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
               탈락된 리뷰
@@ -300,7 +307,11 @@ export const MyPage = () => {
             </div>
           </div>
 
-          <FinishReview />
+          <div className="flex flex-wrap gap-x-[0.69rem] gap-y-[1.31rem]">
+            {reviewData.map((review, index) => (
+              <FinishReview key={index} review={review} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

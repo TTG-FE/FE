@@ -28,12 +28,13 @@ export const FinishReview = () => {
   }
 
   if (!reviewData || reviewData.length === 0) {
-    return <div>아직 등록한 리뷰가 없어요.</div>;
+    return <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">아직 등록한 리뷰가 없어요.</div>;
   }
+
   return (
     <div className="w-[14.4125rem] h-[20.1875rem] mb-[8.65rem] p-[0.44rem] rounded-[0.19538rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]">
-      {reviewData.map((review) => (
-        <div key={review.reviewId}>
+      {reviewData.map((review, index) => (
+        <div key={review.reviewId} >
           <div
             className="rounded-[0.19538rem] mb-[0.95rem] w-[13.36881rem] h-[11.23306rem] bg-[#FFEDED]"
             style={{
