@@ -5,10 +5,14 @@ import Modal from "../components/Modal";
 import storeFoodImage from "../assets/store-food.jpg";
 import { ReactComponent as HeartIcon } from "../assets/storeHeartIcon.svg";
 import storeMapImage from "../assets/store-map.jpg";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
 function Store() {
+  const [login, setLogin] = useState(false);
+
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
   // 현재 상점의 관심 여부
@@ -19,6 +23,8 @@ function Store() {
 
   // 쿠폰 발행 여부
   const [isCouponUsed, setIsCouponUsed] = useState(false);
+
+  const [storeData, setStoreData] = useState([{}])
 
   // 모달창 열기
   const handleOpenModal = () => {
@@ -40,6 +46,15 @@ function Store() {
     setReviewUrl(event.target.value);
   };
 
+  axios
+    .get("http://13.125.71.170:8080/stores/home")
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return (
     /* 전체 페이지 크기 설정 */
     <div className={`w-xl px-36 font-inter relative`}>
@@ -50,6 +65,7 @@ function Store() {
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
+          login={login}
           handleToggleHeart={handleToggleHeart}
           isLiked={isLiked}
           isCouponUsed={isCouponUsed}
@@ -203,6 +219,7 @@ const StoreLeftSection = () => {
 };
 
 const StoreRightSection = ({
+  login,
   handleToggleHeart,
   isLiked,
   isCouponUsed,
@@ -240,30 +257,44 @@ const StoreRightSection = ({
           </div>
           <div className="text-[#404040]">리뷰 게시일 기준 60일 이상</div>
         </div>
-        <div className="flex py-8 border-b">
-          <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
-            관심상점
-          </div>
-          <button onClick={handleToggleHeart} className="flex">
-            <HeartIcon
-              stroke={isLiked ? "#FF0069" : "black"}
-              strokeOpacity={isLiked ? "1" : "0.3"}
-              fill={isLiked ? "#FF0069" : "none"}
-            />
-          </button>
-        </div>
 
-        <button
-          className={` w-full h-14 mt-8 text-white rounded text-xl ${
-            isCouponUsed ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
-          }`}
-          onClick={handleOpenModal}
-          disabled={isCouponUsed}
-        >
-          {isCouponUsed
-            ? "또또가 신청 완료!"
-            : "리뷰 등록하고 또또가 쿠폰 받기"}
-        </button>
+        {login ? (
+          <>
+            <div className="flex py-8 border-b">
+              <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
+                관심상점
+              </div>
+              <button onClick={handleToggleHeart} className="flex">
+                <HeartIcon
+                  stroke={isLiked ? "#FF0069" : "black"}
+                  strokeOpacity={isLiked ? "1" : "0.3"}
+                  fill={isLiked ? "#FF0069" : "none"}
+                />
+              </button>
+            </div>
+            <button
+              className={` w-full h-14 mt-8 text-white rounded text-xl ${
+                isCouponUsed ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
+              }`}
+              onClick={handleOpenModal}
+              disabled={isCouponUsed}
+            >
+              {isCouponUsed
+                ? "또또가 신청 완료!"
+                : "리뷰 등록하고 또또가 쿠폰 받기"}
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">
+              <button
+                className={"w-full h-14 mt-8 text-white rounded text-xl bg-[#FF0069]"}
+              >
+                로그인 하러가기
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
@@ -277,53 +308,59 @@ const StoreModal = ({
   setIsCouponUsed,
 }) => {
   return (
-     <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-    <div className="px-12 py-7 text-lg">
-      <div className="text-2xl mb-9">내 리뷰 등록</div>
-      <input
-        type="text"
-        placeholder="http:// 또는 https://를 포함한 정확한 리뷰 페이지 주소를 입력해주세요."
-        className="w-full px-4 py-5 mb-24 border-solid border border-[#545454] rounded-lg"
-        onChange={handleReviewUrlChange}
-      />
-      <div className="h-64">
-        <h2 className="text-[#FF0069] text-lg font-bold">등록 시 유의사항</h2>
-        <br />
-        <ul className="list-disc ml-7 text-[#898989]">
-          <li>
-            해당 상점에 대한 리뷰를 작성한 페이지의 링크를 정확히 입력해주세요.
-          </li>
-          <li>페이지를 전체 공개, 검색 허용으로 적용해주세요.</li>
-          <li>부적절한 SNS페이지로 판단되는 경우 등록이 어려울 수 있습니다.</li>
-          <li>
-            방문자 수 조작 및 불법 프로그램 사용 등 어뷰징 행위 적발 시,
-            패널티가 부여됩니다.
-          </li>
-          <li>
-            페이지 등록에 어려움이 있으시다면 고객센터로 문의에 남겨주세요.
-          </li>
-        </ul>
-      </div>
+    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      <div className="px-12 py-7 text-lg">
+        <div className="text-2xl mb-9">내 리뷰 등록</div>
+        <input
+          type="text"
+          placeholder="http:// 또는 https://를 포함한 정확한 리뷰 페이지 주소를 입력해주세요."
+          className="w-full px-4 py-5 mb-24 border-solid border border-[#545454] rounded-lg"
+          onChange={handleReviewUrlChange}
+        />
+        <div className="h-64">
+          <h2 className="text-[#FF0069] text-lg font-bold">등록 시 유의사항</h2>
+          <br />
+          <ul className="list-disc ml-7 text-[#898989]">
+            <li>
+              해당 상점에 대한 리뷰를 작성한 페이지의 링크를 정확히
+              입력해주세요.
+            </li>
+            <li>페이지를 전체 공개, 검색 허용으로 적용해주세요.</li>
+            <li>
+              부적절한 SNS페이지로 판단되는 경우 등록이 어려울 수 있습니다.
+            </li>
+            <li>
+              방문자 수 조작 및 불법 프로그램 사용 등 어뷰징 행위 적발 시,
+              패널티가 부여됩니다.
+            </li>
+            <li>
+              페이지 등록에 어려움이 있으시다면 고객센터로 문의에 남겨주세요.
+            </li>
+          </ul>
+        </div>
 
-      <button
-        className={`w-full h-16 rounded-lg ${
-          reviewUrl.startsWith("http://") || reviewUrl.startsWith("https://")
-            ? "bg-[#FF0069] text-white"
-            : "bg-[#D9D9D9] cursor-not-allowed"
-        }`}
-        disabled={
-          !(reviewUrl.startsWith("http://") || reviewUrl.startsWith("https://"))
-        }
-        onClick={() => {
-          setIsCouponUsed(true);
-          handleCloseModal();
-        }}
-      >
-        등록하기
-      </button>
-    </div>
-  </Modal>
-  )
+        <button
+          className={`w-full h-16 rounded-lg ${
+            reviewUrl.startsWith("http://") || reviewUrl.startsWith("https://")
+              ? "bg-[#FF0069] text-white"
+              : "bg-[#D9D9D9] cursor-not-allowed"
+          }`}
+          disabled={
+            !(
+              reviewUrl.startsWith("http://") ||
+              reviewUrl.startsWith("https://")
+            )
+          }
+          onClick={() => {
+            setIsCouponUsed(true);
+            handleCloseModal();
+          }}
+        >
+          등록하기
+        </button>
+      </div>
+    </Modal>
+  );
 };
 
 export default Store;
