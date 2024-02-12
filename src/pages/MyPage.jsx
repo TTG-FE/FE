@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import doraImage from "../assets/dora.png";
+import basicProfile from "../assets/basicprofile.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
 import FailReview from "./FailReview";
@@ -128,7 +128,7 @@ export const MyPage = () => {
                 <div className="rounded-full overflow-hidden">
                   <img
                     className="w-[10.6875rem] h-[10.6875rem] object-cover"
-                    src={selectedImage || doraImage}
+                    src={selectedImage || basicProfile}
                     alt="프로필 사진"
                   />
                 </div>
