@@ -18,9 +18,6 @@ const CouponCard = ({
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
 
-  // console.log("isModalOpen", isModalOpen);
-  // console.log("couponData.useYn", couponData.useYn, couponData.useYn === "Y");
-
   // 초기 상태 설정 예시
   const [modalsOpen, setModalsOpen] = useState({
     modal1: false,
@@ -58,8 +55,9 @@ const CouponCard = ({
     handleCloseModal();
   };
 
-
   // console.log("modalsOpen", modalsOpen);
+
+  console.log(modalsOpen);
 
   return (
     <>
@@ -75,7 +73,8 @@ const CouponCard = ({
             <button
               className="text-[8px]"
               onClick={() => {
-                handleOpenModal("isCouponModalOpen");
+                // handleOpenModal("isCouponModalOpen");
+                handleOpenModal();
               }}
               disabled={couponData.useYn === "Y"}
             >
@@ -129,7 +128,7 @@ const CouponCard = ({
                   couponData.useYn === "Y" ? "text-custom-gray-200" : ""
                 }`}
               >
-                2023.12.01 ~ 2023.12.31
+                {`${couponData.startDate} ~ ${couponData.endDate}`}
               </p>
             </div>
           </div>
@@ -195,7 +194,7 @@ const CouponCard = ({
                 onClick={() => {
                   // handleOpenModal("isCouponModalOpen");
                   handleOpenModal();
-                  console.log("isModalOpen",isModalOpen);
+                  // console.log("isModalOpen", isModalOpen);
                 }}
                 disabled={couponData.useYn === "Y"}
               >
@@ -207,7 +206,7 @@ const CouponCard = ({
               onClick={() => {
                 // handleOpenModal("isCouponModalOpen");
                 handleOpenModal();
-                console.log("isModalOpen",isModalOpen);
+                console.log("isModalOpen", isModalOpen);
               }}
               disabled={couponData.useYn === "Y"}
             >
@@ -220,7 +219,11 @@ const CouponCard = ({
       {/* 모바일 모달 */}
       <div className="md:hidden">
         {/* 1번째 모달 */}
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} isCoupon={true}>
+        <Modal
+          isOpen={modalsOpen.modal1}
+          onClose={closeAllModals}
+          isCoupon={true}
+        >
           <div className="px-6 py-5 w-[278px] h-full">
             <div className="h-[200px]">
               <div className="text-center mb-3 text-custom-gray-200">
@@ -235,12 +238,6 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_mobile_size}
-              top={couponSemicircle_mobile_top}
-              leftAndright={couponSemicircle_mobile_side}
-              borderColor={`custom-pink`}
-            /> */}
             <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
 
             {/* 쿠폰 실선 밑 영역 */}
@@ -255,8 +252,9 @@ const CouponCard = ({
               <button
                 className="h-8 w-full rounded bg-custom-pink text-white text-xs"
                 onClick={() => {
-                  handleCloseModal();
-                  handleOpenModal("isCouponInfoModalOpen");
+                  // handleCloseModal();
+                  // handleOpenModal("isCouponInfoModalOpen");
+                  openSpecificModal("modal2");
                 }}
               >
                 직원확인
@@ -266,7 +264,11 @@ const CouponCard = ({
         </Modal>
 
         {/* 2번째 모달 */}
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} isCoupon={true}>
+        <Modal
+          isOpen={modalsOpen.modal2}
+          onClose={closeAllModals}
+          isCoupon={true}
+        >
           <div className="px-6 py-5 w-[278px] h-full">
             <div className="h-[200px]">
               <div className="text-center text-custom-gray-200">직원 확인</div>
@@ -280,12 +282,6 @@ const CouponCard = ({
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_mobile_size}
-              top={couponSemicircle_mobile_top}
-              leftAndright={couponSemicircle_mobile_side}
-              borderColor={`custom-pink`}
-            /> */}
             <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
 
             <div className="border-dashed border-t-2 border-custom-pink">
@@ -318,8 +314,9 @@ const CouponCard = ({
                   onClick={() => {
                     if (isCheck) {
                       // isCheck가 true일 때만 클릭 이벤트 처리
-                      handleCloseModal();
-                      handleOpenModal("isCouponDownloadModalOpen");
+                      // handleCloseModal();
+                      // handleOpenModal("isCouponDownloadModalOpen");
+                      openSpecificModal("modal3");
                     }
                   }}
                   disabled={!isCheck}
@@ -333,8 +330,8 @@ const CouponCard = ({
 
         {/* 3번째 모달창 */}
         <Modal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal3}
+          onClose={closeAllModals}
           isCoupon={true}
           isLast={true}
         >
@@ -359,12 +356,7 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_mobile_size}
-              top={couponSemicircle_mobile_top}
-              leftAndright={couponSemicircle_mobile_side}
-              borderColor={`custom-gray-400`}
-            /> */}
+
             <CouponSemicircleUI_Mobile borderColor={`custom-gray-400`} />
 
             {/* 쿠폰 실선 밑 영역 */}
@@ -377,7 +369,9 @@ const CouponCard = ({
               <button
                 className="h-8 w-full rounded bg-[#B2B2B2] text-white text-xs"
                 onClick={() => {
-                  handleCloseModal();
+                  // handleCloseModal();
+                  // handleCouponUsed(couponData.id);
+                  closeAllModals();
                   handleCouponUsed(couponData.id);
                 }}
               >
