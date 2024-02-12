@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "./Modal"; // Modal 컴포넌트 import
 import DownloadIcon from "./DownloadIcon"; // DownloadIcon 컴포넌트 import
 import CheckIcon from "./CheckIcon";
@@ -10,13 +10,55 @@ import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIco
 // 쿠폰 데이터, 쿠폰사용여부, 모달창 열기, 모달창 닫기, 모달 관리
 const CouponCard = ({
   couponData,
-  handleCouponUsed,
+  isModalOpen,
   handleOpenModal,
   handleCloseModal,
-  modalStates,
+  handleCouponUsed,
 }) => {
   // 쿠폰 발급 동의 여부
   const [isCheck, setIsCheck] = useState(false);
+
+  // 초기 상태 설정 예시
+  const [modalsOpen, setModalsOpen] = useState({
+    modal1: false,
+    modal2: false,
+    modal3: false,
+  });
+
+  // 특정 모달을 제외하고 모두 닫는 함수
+  const openSpecificModal = (modalName) => {
+    console.log("closing modal");
+    setModalsOpen({
+      modal1: false,
+      modal2: false,
+      modal3: false,
+      [modalName]: true,
+    });
+  };
+
+  const closeAllModals = () => {
+    setModalsOpen({
+      modal1: false,
+      modal2: false,
+      modal3: false,
+    });
+    handleCloseModal();
+  };
+
+  // 이거 때문에 화면이 작아질때 쿠폰이 다시 보이는 버그 발생함 -> 어떻게
+  useEffect(() => {
+    if (isModalOpen) {
+      // isModalOpen이 true일 경우 modal1을 true로 설정
+      setModalsOpen((prevModals) => ({
+        ...prevModals, // 기존의 모달 상태를 유지
+        modal1: true, // modal1만 true로 설정
+      }));
+    }
+  }, [isModalOpen]);
+
+  // console.log("modalsOpen", modalsOpen);
+
+  console.log(modalsOpen);
 
   return (
     <>
@@ -26,27 +68,28 @@ const CouponCard = ({
         <div className="relative z-0">
           <div
             className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 overflow-hidden ${
-              couponData.useYn ? "bg-custom-gray-300" : "bg-custom-pink"
+              couponData.useYn === "Y" ? "bg-custom-gray-300" : "bg-custom-pink"
             }`}
           >
             <button
               className="text-[8px]"
               onClick={() => {
-                handleOpenModal("isCouponModalOpen");
+                // handleOpenModal("isCouponModalOpen");
+                handleOpenModal();
               }}
-              disabled={couponData.useYn}
+              disabled={couponData.useYn === "Y"}
             >
               <div className="w-9 h-9 bg-white rounded-full mb-1.5 flex justify-center items-center">
                 <PhoneDownloadIcon
-                  fill={`${couponData.useYn ? "#B3B3B3" : "#FF0068"}`}
-                  stroke={`${couponData.useYn ? "#B3B3B3" : "#FF0068"}`}
+                  fill={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
+                  stroke={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
                 />
                 {/* <img src={phoneDownloadIcon} alt="" /> */}
               </div>
               <p className="text-white">다운로드</p>
             </button>
             <HorizontalCircleIcon
-              fill={couponData.useYn ? "white" : "#FFF2F2"}
+              fill={couponData.useYn === "Y" ? "white" : "#FFF2F2"}
               className="absolute top-3 right-[-6px]"
             />
           </div>
@@ -55,7 +98,7 @@ const CouponCard = ({
         {/* 쿠폰 오른쪽 내용 영역 */}
         <div
           className={`py-6 pl-6 pr-2  w-full ${
-            couponData.useYn ? "bg-white" : "bg-[#FFF2F2]"
+            couponData.useYn === "Y" ? "bg-white" : "bg-[#FFF2F2]"
           }`}
         >
           <div className="flex flex-col h-full justify-around">
@@ -63,7 +106,9 @@ const CouponCard = ({
             <h1>{couponData.name}</h1>
             <p
               className={`text-[10px]  ${
-                couponData.useYn ? "text-custom-gray-200" : "text-custom-pink"
+                couponData.useYn === "Y"
+                  ? "text-custom-gray-200"
+                  : "text-custom-pink"
               }`}
             >
               {/* 닐라닐라바닐라 조각케이크 무료증정 */}
@@ -72,17 +117,19 @@ const CouponCard = ({
             <div className="flex flex-row items-center">
               <p
                 className={`text-[8px] rounded-lg text-white px-2 py-0.5 mr-2 ${
-                  couponData.useYn ? "bg-custom-gray-300" : "bg-custom-pink"
+                  couponData.useYn === "Y"
+                    ? "bg-custom-gray-300"
+                    : "bg-custom-pink"
                 }`}
               >
-                {couponData.useYn ? "사용완료" : "사용가능"}
+                {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
               </p>
               <p
                 className={`text-[10px]  ${
-                  couponData.useYn ? "text-custom-gray-200" : ""
+                  couponData.useYn === "Y" ? "text-custom-gray-200" : ""
                 }`}
               >
-                2023.12.01 ~ 2023.12.31
+                {`${couponData.startDate} ~ ${couponData.endDate}`}
               </p>
             </div>
           </div>
@@ -111,10 +158,12 @@ const CouponCard = ({
             <div className="flex items-center">
               <p
                 className={`px-5 py-2.5 rounded-3xl	text-white mr-5 ${
-                  couponData.useYn ? "bg-custom-gray-200" : "bg-custom-pink"
+                  couponData.useYn === "Y"
+                    ? "bg-custom-gray-200"
+                    : "bg-custom-pink"
                 }`}
               >
-                {couponData.useYn ? "사용완료" : "사용가능"}
+                {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
               </p>
               <p className="text-ellipsis overflow-hidden">
                 기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
@@ -125,7 +174,9 @@ const CouponCard = ({
         {/* 쿠픈 다운로드 */}
         <div
           className={`relative basis-1/4 rounded-r-lg h-full overflow-hidden ${
-            couponData.useYn ? "bg-custom-gray-200" : "bg-custom-gradation-180"
+            couponData.useYn === "Y"
+              ? "bg-custom-gray-200"
+              : "bg-custom-gradation-180"
           }`}
         >
           {/* 쿠폰 디자인 */}
@@ -142,19 +193,23 @@ const CouponCard = ({
               <button
                 className="w-40 h-40 bg-white rounded-full flex items-center justify-center"
                 onClick={() => {
-                  handleOpenModal("isCouponModalOpen");
+                  // handleOpenModal("isCouponModalOpen");
+                  handleOpenModal();
+                  // console.log("isModalOpen", isModalOpen);
                 }}
-                disabled={couponData.useYn}
+                disabled={couponData.useYn === "Y"}
               >
-                <DownloadIcon isCoupon={couponData.useYn} />
+                <DownloadIcon isCoupon={couponData.useYn === "Y"} />
               </button>
             </div>
             <button
               className="text-white"
               onClick={() => {
-                handleOpenModal("isCouponModalOpen");
+                // handleOpenModal("isCouponModalOpen");
+                handleOpenModal();
+                console.log("isModalOpen", isModalOpen);
               }}
-              disabled={couponData.useYn}
+              disabled={couponData.useYn === "Y"}
             >
               Download
             </button>
@@ -166,8 +221,8 @@ const CouponCard = ({
       <div className="md:hidden">
         {/* 1번째 모달 */}
         <Modal
-          isOpen={modalStates.isCouponModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal1}
+          onClose={closeAllModals}
           isCoupon={true}
         >
           <div className="px-6 py-5 w-[278px] h-full">
@@ -184,12 +239,6 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_mobile_size}
-              top={couponSemicircle_mobile_top}
-              leftAndright={couponSemicircle_mobile_side}
-              borderColor={`custom-pink`}
-            /> */}
             <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
 
             {/* 쿠폰 실선 밑 영역 */}
@@ -204,8 +253,9 @@ const CouponCard = ({
               <button
                 className="h-8 w-full rounded bg-custom-pink text-white text-xs"
                 onClick={() => {
-                  handleCloseModal();
-                  handleOpenModal("isCouponInfoModalOpen");
+                  // handleCloseModal();
+                  // handleOpenModal("isCouponInfoModalOpen");
+                  openSpecificModal("modal2");
                 }}
               >
                 직원확인
@@ -216,8 +266,8 @@ const CouponCard = ({
 
         {/* 2번째 모달 */}
         <Modal
-          isOpen={modalStates.isCouponInfoModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal2}
+          onClose={closeAllModals}
           isCoupon={true}
         >
           <div className="px-6 py-5 w-[278px] h-full">
@@ -226,19 +276,13 @@ const CouponCard = ({
               <div className="flex justify-center items-center h-5/6">
                 <img
                   className={`${isCheck ? "w-40 h-40" : "w-28 h-28"}`}
-                  src={isCheck ? couponData.qrCode: EmployeeVerificationIcon}
+                  src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
                   alt=""
                 />
               </div>
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_mobile_size}
-              top={couponSemicircle_mobile_top}
-              leftAndright={couponSemicircle_mobile_side}
-              borderColor={`custom-pink`}
-            /> */}
             <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
 
             <div className="border-dashed border-t-2 border-custom-pink">
@@ -271,8 +315,9 @@ const CouponCard = ({
                   onClick={() => {
                     if (isCheck) {
                       // isCheck가 true일 때만 클릭 이벤트 처리
-                      handleCloseModal();
-                      handleOpenModal("isCouponDownloadModalOpen");
+                      // handleCloseModal();
+                      // handleOpenModal("isCouponDownloadModalOpen");
+                      openSpecificModal("modal3");
                     }
                   }}
                   disabled={!isCheck}
@@ -286,8 +331,8 @@ const CouponCard = ({
 
         {/* 3번째 모달창 */}
         <Modal
-          isOpen={modalStates.isCouponDownloadModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal3}
+          onClose={closeAllModals}
           isCoupon={true}
           isLast={true}
         >
@@ -312,12 +357,7 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_mobile_size}
-              top={couponSemicircle_mobile_top}
-              leftAndright={couponSemicircle_mobile_side}
-              borderColor={`custom-gray-400`}
-            /> */}
+
             <CouponSemicircleUI_Mobile borderColor={`custom-gray-400`} />
 
             {/* 쿠폰 실선 밑 영역 */}
@@ -330,7 +370,9 @@ const CouponCard = ({
               <button
                 className="h-8 w-full rounded bg-[#B2B2B2] text-white text-xs"
                 onClick={() => {
-                  handleCloseModal();
+                  // handleCloseModal();
+                  // handleCouponUsed(couponData.id);
+                  closeAllModals();
                   handleCouponUsed(couponData.id);
                 }}
               >
@@ -345,8 +387,8 @@ const CouponCard = ({
       <div className="hidden md:block">
         {/* <div className=""> */}
         <Modal
-          isOpen={modalStates.isCouponModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal1}
+          onClose={closeAllModals}
           isCoupon={true}
         >
           <div className="px-9 py-8 w-[408px] h-full">
@@ -361,12 +403,7 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            {/* <CouponSemicircleUI
-              size={couponSemicircle_desktop_size}
-              top={couponSemicircle_desktop_top}
-              leftAndright={couponSemicircle_desktop_side}
-              borderColor={`custom-pink`}
-            /> */}
+
             <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
 
             <section className="flex flex-col items-center">
@@ -381,8 +418,12 @@ const CouponCard = ({
                 <button
                   className="w-full h-9 rounded bg-custom-pink text-white text-xs"
                   onClick={() => {
-                    handleCloseModal();
-                    handleOpenModal("isCouponInfoModalOpen");
+                    openSpecificModal("modal2"); // 'modal2' 문자열을 인자로 전달
+                    // console.log("test", modalsOpen);
+                    // handleCloseModal();
+
+                    // handleOpenModal("isCouponInfoModalOpen");
+                    // handleOpenModal();
                   }}
                 >
                   직원확인
@@ -393,8 +434,8 @@ const CouponCard = ({
         </Modal>
 
         <Modal
-          isOpen={modalStates.isCouponInfoModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal2}
+          onClose={closeAllModals}
           isCoupon={true}
         >
           <div className="px-9 py-8 w-[408px] h-full">
@@ -445,8 +486,9 @@ const CouponCard = ({
                   onClick={() => {
                     if (isCheck) {
                       // isCheck가 true일 때만 클릭 이벤트 처리
-                      handleCloseModal();
-                      handleOpenModal("isCouponDownloadModalOpen");
+                      // handleCloseModal();
+                      openSpecificModal("modal3");
+                      // handleOpenModal("isCouponDownloadModalOpen");
                     }
                   }}
                   disabled={!isCheck}
@@ -459,8 +501,8 @@ const CouponCard = ({
         </Modal>
 
         <Modal
-          isOpen={modalStates.isCouponDownloadModalOpen}
-          onClose={handleCloseModal}
+          isOpen={modalsOpen.modal3}
+          onClose={closeAllModals}
           isCoupon={true}
           isLast={true}
         >
@@ -493,7 +535,9 @@ const CouponCard = ({
                 <button
                   className="w-full h-9 rounded bg-[#B2B2B2] text-white text-xs"
                   onClick={() => {
-                    handleCloseModal();
+                    // handleCloseModal();
+                    // openSpecificModal();
+                    closeAllModals();
                     handleCouponUsed(couponData.id);
                   }}
                 >

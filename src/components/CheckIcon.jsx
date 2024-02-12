@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CheckIcon = ({ isCheck }) => {
-  console.log(isCheck);
+  // console.log(isCheck);
   return (
     <svg
       width="24"

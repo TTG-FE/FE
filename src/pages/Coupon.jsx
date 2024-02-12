@@ -12,14 +12,11 @@ const Coupon = () => {
   // 쿠폰 사용 여부
   const [login, setLogin] = useState(false);
   const [coupons, setCoupons] = useState([
-    // { id: 1, used: false },
-    // { id: 2, used: false },
-    // { id: 3, used: false },
     {
       id: 21,
       name: "[성수] 베리베리스트로베리케이크 전문점",
       subtitle: "닐라닐라바닐라 조각케이크 무료증정",
-      useYn: false,
+      useYn: "N",
       qrCode:
         "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/fe8b6765-7b92-4ea7-87ca-79cb74e7a59fimage.jpeg",
       storeImage:
@@ -31,7 +28,7 @@ const Coupon = () => {
       id: 22,
       name: "name",
       subtitle: "subTitle2",
-      useYn: false,
+      useYn: "N",
       qrCode:
         "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/3896a88d-09b8-40a9-966c-c715fdfd0ec4image.jpeg",
       storeImage:
@@ -43,7 +40,31 @@ const Coupon = () => {
       id: 23,
       name: "name",
       subtitle: "subTitle3",
-      useYn: false,
+      useYn: "N",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
+    {
+      id: 24,
+      name: "name",
+      subtitle: "subTitle3",
+      useYn: "N",
+      qrCode:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+      storeImage:
+        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+      startDate: "2024-02-04",
+      endDate: "2024-02-04",
+    },
+    {
+      id: 25,
+      name: "name",
+      subtitle: "subTitle3",
+      useYn: "N",
       qrCode:
         "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
       storeImage:
@@ -53,22 +74,17 @@ const Coupon = () => {
     },
   ]);
 
-  const handleLogin = () => {
-    setLogin(!login);
-    console.log(login);
-  }
-
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
     // 해당 쿠폰을 사용했다고 true로 변경
     setCoupons((prevCoupons) => {
       const updatedCoupons = prevCoupons.map((coupon) =>
-        coupon.id === couponId ? { ...coupon, used: true } : coupon
+        coupon.id === couponId ? { ...coupon, useYn: "Y" } : coupon
       );
 
       // 사용한 쿠폰을 배열의 끝으로 이동
       const usedCouponIndex = updatedCoupons.findIndex(
-        (coupon) => coupon.id === couponId && coupon.used
+        (coupon) => coupon.id === couponId && coupon.useYn
       );
 
       if (usedCouponIndex !== -1) {
@@ -80,43 +96,70 @@ const Coupon = () => {
     });
   };
 
-  // 모달창 상태
-  const [modalStates, setModalStates] = useState([
-    { isCouponModalOpen: false },
-    { isCouponModalOpen: false },
-    { isCouponModalOpen: false },
-  ]);
+  // // 모달창 상태
+  // const [modalStates, setModalStates] = useState([
+  //   { isCouponModalOpen: false },
+  //   { isCouponModalOpen: false },
+  //   { isCouponModalOpen: false },
+  //   { isCouponModalOpen: false },
+  // ]);
+
+  // // 모달창 열기
+  // const handleOpenModal = (modalName, couponIndex) => {
+  //   setModalStates((prevStates) => {
+  //     const newStates = [...prevStates];
+  //     newStates[couponIndex][modalName] = true;
+  //     return newStates;
+  //   });
+  // };
+
+  // // 모달창 닫기
+  // const handleCloseModal = (couponIndex) => {
+  //   setModalStates((prevStates) => {
+  //     const newStates = [...prevStates];
+  //     newStates[couponIndex] = {
+  //       isCouponModalOpen: false,
+  //     };
+  //     return newStates;
+  //   });
+  // };
+
+  // // 쿠폰 카드를 렌더링하는 공통 함수
+  // const renderCouponCards = () => {
+  //   return coupons.map((coupon, index) => (
+  //     <CouponCard
+  //       key={coupon.id}
+  //       couponData={coupon}
+  //       handleCouponUsed={() => handleCouponUsed(coupon.id)}
+  //       handleOpenModal={(modalName) => handleOpenModal(modalName, index)}
+  //       handleCloseModal={() => handleCloseModal(index)}
+  //       modalStates={modalStates[index]}
+  //     />
+  //   ));
+  // };
 
   // 모달창 열기
-  const handleOpenModal = (modalName, couponIndex) => {
-    setModalStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[couponIndex][modalName] = true;
-      return newStates;
-    });
+  const handleOpenModal = (couponId) => {
+    setActiveModalCouponId(couponId);
   };
 
   // 모달창 닫기
-  const handleCloseModal = (couponIndex) => {
-    setModalStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[couponIndex] = {
-        isCouponModalOpen: false,
-      };
-      return newStates;
-    });
+  const handleCloseModal = () => {
+    setActiveModalCouponId(null);
   };
 
-  // 쿠폰 카드를 렌더링하는 공통 함수
+  // 현재 열린 모달의 쿠폰 ID 상태
+  const [activeModalCouponId, setActiveModalCouponId] = useState(null);
+
   const renderCouponCards = () => {
-    return coupons.map((coupon, index) => (
+    return coupons.map((coupon) => (
       <CouponCard
         key={coupon.id}
         couponData={coupon}
+        isModalOpen={activeModalCouponId === coupon.id}
         handleCouponUsed={() => handleCouponUsed(coupon.id)}
-        handleOpenModal={(modalName) => handleOpenModal(modalName, index)}
-        handleCloseModal={() => handleCloseModal(index)}
-        modalStates={modalStates[index]}
+        handleOpenModal={() => handleOpenModal(coupon.id)}
+        handleCloseModal={handleCloseModal}
       />
     ));
   };
@@ -126,14 +169,7 @@ const Coupon = () => {
       <div className="font-inter">
         {/* ---------------모바일 쿠폰------------------- */}
         <div className="md:hidden">
-          <MobileCouponSection
-            coupons={coupons}
-            login={login}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
-            modalStates={modalStates}
-            handleCouponUsed={handleCouponUsed}
-          >
+          <MobileCouponSection coupons={coupons} login={login}>
             {login ? renderCouponCards() : <GoToLogin />}
           </MobileCouponSection>
         </div>
@@ -143,11 +179,10 @@ const Coupon = () => {
           <DesktopCouponSection
             coupons={coupons}
             login={login}
-            setLogin={setLogin}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
-            modalStates={modalStates}
-            handleCouponUsed={handleCouponUsed}
+            onToggleLogin={() => {
+              setLogin(!login);
+              handleCloseModal();
+            }}
           >
             {login ? renderCouponCards() : <GoToLogin />}
           </DesktopCouponSection>
@@ -206,35 +241,27 @@ const SearchBar = () => {
   );
 };
 
-const DesktopCouponSection = ({
-  coupons,
-  login,
-  setLogin,
-  children,
-}) => {
-  // 클릭 이벤트 핸들러 추가
-  const toggleLogin = () => setLogin(!login);
-
+const DesktopCouponSection = ({ coupons, login, onToggleLogin, children }) => {
   return (
     <>
       {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 pb-8 font-inter hidden md:block">
+      <div className="px-24 pt-16 pb-8 font-inter hidden md:block flow-grow">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex items-end mb-7">
           <div
             className="text-2xl font-semibold mr-9 border-b-4 border-[#FF7A00]"
-            onClick={toggleLogin}
+            onClick={onToggleLogin}
           >
             쿠폰함
           </div>
-            {login ? <SearchBar /> : null}
+          {login ? <SearchBar /> : null}
         </div>
 
         {/* 쿠폰 영역 전체 패딩*/}
         <div
-          className={`border-t border-[#D9D9D9] text-xl ${
+          className={`text-xl ${
             coupons.length === 0 || !login
-              ? "flex flex-col justify-center items-center h-screen"
+              ? "flex flex-col justify-center items-center h-[600px]"
               : "pt-9"
           }`}
         >
@@ -257,11 +284,7 @@ const DesktopCouponSection = ({
   );
 };
 
-const MobileCouponSection = ({
-  coupons,
-  login,
-  children,
-}) => {
+const MobileCouponSection = ({ coupons, login, children }) => {
   return (
     <>
       {/* 쿠폰함 타이틀 헤더 영역 */}
