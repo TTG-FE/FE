@@ -5,90 +5,105 @@ import { LoginContext } from "../../contexts/LoginContextProvider";
 
 const Heart = () => {
   const { isLogin } = useContext(LoginContext);
+  // 상점 리스트 객체
   const stores = [
     {
       storeId: 1,
-      storeTitle: "[성",
+      storeTitle: "[성진이",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 2,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 3,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 4,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 5,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
     {
       storeId: 6,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
     {
       storeId: 7,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 8,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 9,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 10,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 11,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 12,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
     {
       storeId: 13,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
       storeId: 14,
       storeTitle: "[성",
       serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
   ];
 
