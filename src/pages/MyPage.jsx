@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import doraImage from "../assets/dora.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
@@ -10,7 +10,37 @@ export const MyPage = () => {
   const completedRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(null);
+  const [reviewData, setReviewData] = useState(null);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+
+    const fetchReviewData = async () => {
+      try {
+        const response = await fetch("/members/profile");
+        const result = await response.json();
+
+        if (result.isSuccess) {
+          setReviewData(result.result.reviewDtos);
+        } else {
+          setError(result.message);
+        }
+      } catch (error) {
+        setError("API 호출 오류");
+      }
+    };
+
+    fetchReviewData();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!reviewData || reviewData.length === 0) {
+    return <div>아직 등록된 리뷰가 없어요.</div>;
+  }
+  
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -138,7 +168,7 @@ export const MyPage = () => {
                 fontFamily: "Inter",
               }}
             >
-              도라도라영어나라노랑이보라님
+              {reviewData.result.nickname}님
             </div>
           </div>
           <div className=" w-[35.8125rem] h-[5.5rem] flex items-center bg-[#FFEDED] rounded-[0.9375rem] gap-x-[5.56rem]">
@@ -154,7 +184,7 @@ export const MyPage = () => {
               {" "}
               지금까지 또또가로 혜택받은 횟수
             </div>
-            <div className="text-[#FF0069]  text-2xl font-semibold ">17회</div>
+            <div className="text-[#FF0069]  text-2xl font-semibold ">{reviewData.result.benefit_count}회</div>
           </div>
         </div>
 
@@ -165,7 +195,7 @@ export const MyPage = () => {
           <div className="w-[19.62669rem] h-[3.2rem] mt-[1.88rem] mb-[1rem] grid place-items-center text-[#000000]/50 rounded-[0.53331rem] bg-[#E9E9E9] tracking-[0.01281rem] font-bold text=[1.28rem]">
             P. 010-7747-4928
           </div>
-          <div className="text=[1.28rem] text-[#000000]/50 font-normal	">
+          <div className="text=[1.28rem] text-[#000000]/50 font-normal   ">
             *주중 10시~18시 / 주말 및 공휴일 제외
           </div>
         </div>
