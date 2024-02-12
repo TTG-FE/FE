@@ -1,27 +1,81 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import doraImage from "../assets/dora.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
 import FailReview from "./FailReview";
 
-//상단바+메뉴바까지 같이 생각해서 마진 설정
 export const MyPage = () => {
   const ongoingRef = useRef(null);
   const rejectedRef = useRef(null);
   const completedRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(null);
+  const [reviewData, setReviewData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchReviewData = async () => {
+      try {
+        const response = await fetch("/members/profile");
+        const result = await response.json();
+
+        if (result.isSuccess) {
+          setReviewData(result.result.reviewDtos);
+        } else {
+          setError(result.message);
+        }
+      } catch (error) {
+        setError("API 호출 오류");
+      }
+    };
+
+    fetchReviewData();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!reviewData || reviewData.length === 0) {
+    return <div>아직 등록된 리뷰가 없어요.</div>;
+  }
 
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleImageChange = (event) => {
+  // 프로필 사진 변경
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      setSelectedImage(URL.createObjectURL(file));
+      try {
+        const formData = new FormData();
+        formData.append("profile_image", file);
+
+        const response = await fetch("/members/profile/image", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.isSuccess) {
+          setSelectedImage(URL.createObjectURL(file));
+        } else {
+          if (result.code === "MEMBER4001") {
+            console.error("사용자가 없습니다.");
+          } else if (result.code === "S34001") {
+            console.error("파일 업로드에 실패했습니다.");
+          } else {
+            console.error("알 수 없는 오류:", result.message);
+          }
+        }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+      }
     }
   };
+
   const handleClick = () => {
     document.getElementById("profileImageInput").click();
   };
@@ -113,7 +167,7 @@ export const MyPage = () => {
                 fontFamily: "Inter",
               }}
             >
-              도라도라영어나라노랑이보라님
+              {reviewData.result.member.nickname}님
             </div>
           </div>
           <div className=" w-[35.8125rem] h-[5.5rem] flex items-center bg-[#FFEDED] rounded-[0.9375rem] gap-x-[5.56rem]">
@@ -129,7 +183,9 @@ export const MyPage = () => {
               {" "}
               지금까지 또또가로 혜택받은 횟수
             </div>
-            <div className="text-[#FF0069]  text-2xl font-semibold ">17회</div>
+            <div className="text-[#FF0069]  text-2xl font-semibold ">
+              {reviewData.result.member.benefit_count}회
+            </div>
           </div>
         </div>
 
@@ -140,7 +196,7 @@ export const MyPage = () => {
           <div className="w-[19.62669rem] h-[3.2rem] mt-[1.88rem] mb-[1rem] grid place-items-center text-[#000000]/50 rounded-[0.53331rem] bg-[#E9E9E9] tracking-[0.01281rem] font-bold text=[1.28rem]">
             P. 010-7747-4928
           </div>
-          <div className="text=[1.28rem] text-[#000000]/50 font-normal	">
+          <div className="text=[1.28rem] text-[#000000]/50 font-normal   ">
             *주중 10시~18시 / 주말 및 공휴일 제외
           </div>
         </div>
@@ -230,8 +286,14 @@ export const MyPage = () => {
               쿠폰 발급 완료
             </div>
           </div>
+          {selectedMenu === "신청" && <OngoingReview />}
+          {selectedMenu === "쿠폰 발급 완료" && <OngoingReview />}
+          {selectedMenu === "리뷰 유지 기간" && (
+            <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">
+              신청한 리뷰가 없어요
+            </div>
+          )}
 
-          <OngoingReview />
           <div ref={rejectedRef}>
             <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
               탈락된 리뷰
@@ -245,7 +307,11 @@ export const MyPage = () => {
             </div>
           </div>
 
-          <FinishReview />
+          <div className="flex flex-wrap gap-x-[0.69rem] gap-y-[1.31rem]">
+            {reviewData.map((review, index) => (
+              <FinishReview key={index} review={review} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

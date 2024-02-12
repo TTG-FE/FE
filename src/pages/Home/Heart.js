@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import StoreCard from "../../components/StoreCard";
 import GoToLogin from "../../components/GoToLogin";
+import { LoginContext } from "../../contexts/LoginContextProvider";
+
 const Heart = () => {
+  const { isLogin } = useContext(LoginContext);
   const stores = [
     {
       id: 1,
@@ -112,7 +115,7 @@ const Heart = () => {
       reviewCount: 654,
     },
   ];
-  const [login, setLogin] = useState(false);
+
   return (
     /* 전체 페이지 크기 설정 */
     <div className={`lg:px-16 px-6`}>
@@ -122,7 +125,7 @@ const Heart = () => {
           관심상점
         </span>
       </div>
-      {login ? (
+      {isLogin ? (
         <ul className="flex flex-wrap mb-[2.69rem]">
           {stores.map((item) => (
             <li

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
-
 import ttgArrow from "./../../../assets/images/ttg-arrow.png";
+import channelIcon from "./../../../assets/images/channelIcon.png";
+import { LoginContext } from "../../../contexts/LoginContextProvider";
 
 const Hot = () => {
   const hotRestarants = [
@@ -45,6 +46,10 @@ const Hot = () => {
           className="absolute right-3 w-[4.81rem] bg-center bg-no-repeat bg-cover h-[6.48rem] top-7 md:hidden"
           style={{ backgroundImage: `url(${ttgArrow})` }}
         ></figure>
+        {/* 채널톡 버튼 */}
+        <button className="fixed z-50 flex items-center justify-center  rounded-full right-3 top-[46.5rem] w-11 h-11 md:hidden">
+          <img src={channelIcon} alt="ch" />
+        </button>
         {/* 카드 리스트 */}
         <div className="z-10 w-full pl-4 overflow-hidden overflow-x-auto md:pl-0 scrollbar-hide">
           <ul className="flex w-full py-6 m-2 space-x-3 ">
@@ -65,6 +70,7 @@ const Hot = () => {
 
 /** Hot 한 상점 카드 */
 const HotCard = ({ item }) => {
+  const { isLogin } = useContext(LoginContext);
   const [isLiked, setIsLiked] = useState(false); // 현재 상점의 관심 여부를 나타낸다.
 
   /** 'handleLikeClick' 함수는 하트 아이콘을 클릭했을 때 호출되며
@@ -83,10 +89,12 @@ const HotCard = ({ item }) => {
           style={{ backgroundImage: `url()` }}
         >
           <button className="absolute top-2 right-2" onClick={handleLikeClick}>
-            <HeartIcon
-              stroke={isLiked ? "#FF0069" : "white"}
-              fill={isLiked ? "#FF0069" : "none"}
-            />
+            {isLogin && (
+              <HeartIcon
+                stroke={isLiked ? "#FF0069" : "white"}
+                fill={isLiked ? "#FF0069" : "none"}
+              />
+            )}
           </button>
         </figure>
         <div className="flex flex-col space-y-2 grow">

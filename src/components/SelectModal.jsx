@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+// 메뉴 아이콘
 import menuBurger from "./../assets/images/menu-burger.png";
 import menuChicken from "./../assets/images/menu-chicken.png";
 import menuKorean from "./../assets/images/menu-korean.png";
@@ -14,28 +17,28 @@ import menuCafe from "./../assets/images/menu-cafe.png";
 import menuPizza from "./../assets/images/menu-pizza.png";
 import menuSteamed from "./../assets/images/menu-steamed.png";
 import menuMeat from "./../assets/images/menu-meat.png";
+
+// context
+import { ModalContext } from "../contexts/ModalContextProvider";
+
 /**
- * 'Modal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
- *
- * @param {object} props - 모달창에 필요한 속성들
- * @param {number} props.selectModal - 모달 번호(0: 모달창x 1: 지역 선택 2: 메뉴선택)
- * @param {Function} props.setSelectModal - 모달 번호를 변경하는 함수
+ * 'SelectModal': '지역 별 상점', '메뉴 선택'을 눌렀을 때 화면에 나타나는 컴포넌트
  */
-const SelectModal = ({ selectModal, setSelectModal }) => {
+const SelectModal = () => {
+  const { modalNumber, closeModal } = useContext(ModalContext);
   /** 모달 닫기 함수 */
   const handleClose = (e) => {
     if (e.target.id === "wrapper") {
-      setSelectModal(0);
+      closeModal();
     }
     if (e.target.classList.contains("target")) {
-      setSelectModal(0);
+      closeModal();
     }
   };
-
   return (
     <>
       {/* 모달이 가시적인 상태일 때만 렌더링 */}
-      {!!selectModal && (
+      {!!modalNumber && (
         <div
           id="wrapper"
           className={
@@ -46,12 +49,12 @@ const SelectModal = ({ selectModal, setSelectModal }) => {
           {/* 모달 내용 영역 */}
           <div className="absolute w-[44rem] bg-white top-28 shadow-custom-box-shadow rounded-xl">
             {/* 모달 종류를 어떤 것을 선택되었는지에 따라 다른 컴포넌트 렌더링 (1: 지역 선택, 2: 메뉴선택 */}
-            {selectModal === 1 ? (
+            {modalNumber === 1 ? (
               // 지역 선택
-              <RegionSelector closeModal={handleClose} />
+              <RegionSelector handleClose={handleClose} />
             ) : (
               // 메뉴 선택
-              <MenuSelector closeModal={handleClose} />
+              <MenuSelector handleClose={handleClose} />
             )}
           </div>
         </div>
@@ -93,7 +96,7 @@ const MenuSelector = ({ handleClose }) => {
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
           <li to="/menu" key={menu.id} className="w-1/4 px-8 py-5">
-            <Link className="w-full target">
+            <Link className="w-full target" to={`/menu/${menu.id}`}>
               <figure
                 className="pb-[100%] h-0 bg-center bg-no-repeat bg-cover shrink-0 target"
                 style={{ backgroundImage: `url(${menu.img})` }}
@@ -199,13 +202,15 @@ const RegionSelector = ({ handleClose }) => {
                 {city.label}
               </div>
               <ul className="flex flex-wrap w-4/5">
-                {city.towns.map((town, i) => (
+                {city.towns.map((town, id) => (
                   <li
-                    key={i}
+                    key={id}
                     to="/region"
                     className="w-1/4 p-2 text-sm text-[#00000080]"
                   >
-                    <Link className="target">{town}</Link>
+                    <Link className="target" to={`/region/${city.id}/${id}`}>
+                      {town}
+                    </Link>
                   </li>
                 ))}
               </ul>

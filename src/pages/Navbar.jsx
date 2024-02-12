@@ -1,30 +1,44 @@
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LoginContext } from "../contexts/LoginContextProvider";
+import { ModalContext } from "../contexts/ModalContextProvider";
 /** 'NavBar': 네비게이션 컴포넌트 */
-const Navbar = ({ setSelectModal }) => {
+const Navbar = () => {
+  const { isLogin, logout } = useContext(LoginContext);
+  const { openRegionModal, openMenuModal } = useContext(ModalContext);
+  const navigate = useNavigate();
+
+  /** 로그아웃 버튼을 누르면 로그아웃 로직을 수행 */
+  const handleLogout = () => {
+    logout();
+    navigate("/", { replace: true });
+  };
   return (
     // 780px 부터 보이도록 설정
     <div className="justify-between hidden w-full h-16 lg:px-16 md:px-6 md: md:flex shadow-custom-button-shadow">
       {/* 좌측영역: 이용가이드 및 상점, 메뉴 선택을 위한 네비게이션 */}
       <div className="flex items-center space-x-7">
         <CustomNavLink to="/user-guide">이용가이드</CustomNavLink>
-        <CustomNavLink to="/region" onClick={() => setSelectModal(1)}>
+        <CustomNavLink to="/region" onClick={() => openRegionModal()}>
           지역 별 상점
         </CustomNavLink>
-        <CustomNavLink to="/menu" onClick={() => setSelectModal(2)}>
+        <CustomNavLink to="/menu" onClick={() => openMenuModal()}>
           메뉴선택
         </CustomNavLink>
       </div>
 
-      {/* TODO: 페이지 연결 및 로그인 여부에 따른 UI 화면 표시 */}
-      {/* 우측영역: 로그인 여부에 따라서 다른 메뉴를 표시 */}
       <div className="flex items-center">
-        {/* 로그인되지 않은 상태 */}
-        <CustomNavLink to="/login">로그인</CustomNavLink>
-      </div>
-      {/* 로그인된 상태, 로그인 기능이 완료되면 'hidden'은 삭제 */}
-      <div className="items-center hidden">
-        <CustomNavLink to="/">로그아웃</CustomNavLink>
+        {/* 우측영역: 로그인 여부에 따라서 다른 메뉴를 표시 */}
+        {isLogin ? (
+          <button
+            onClick={handleLogout}
+            className="flex items-center h-10 text-lg hover:text-custom-pink text-[#19191980]"
+          >
+            로그아웃
+          </button>
+        ) : (
+          <CustomNavLink to="/login">로그인</CustomNavLink>
+        )}
       </div>
     </div>
   );

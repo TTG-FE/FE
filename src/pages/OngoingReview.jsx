@@ -1,21 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export const OngoingReview = () => {
+const OngoingReview = () => {
+  const [reviewData, setReviewData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+
+    const fetchReviewData = async () => {
+      try {
+        const response = await fetch("/members/profile");
+        const result = await response.json();
+
+        if (result.isSuccess) {
+          setReviewData(result.result.reviewDtos.filter((review) => review.status === "SUCCESS"));
+        } else {
+          setError(result.message);
+        }
+      } catch (error) {
+        setError("API 호출 오류");
+      }
+    };
+
+    fetchReviewData();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!reviewData || reviewData.length === 0) {
+    return <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">신청한 리뷰가 없어요.</div>;
+  }
+
   return (
     <div className="flex space-x-[1.12rem] font-inter">
-      <div className="w-56">
-        <div className="w-56rem h-56 bg-[#FFEDED] rounded-[0.59481rem]"></div>
-        <div className="text-[0.9375rem]  text-custom-gray-100 font-bold truncate mt-2 mb-1">
-          [강북] 또먹고싶어 곱창
+      {reviewData.map((review) => (
+        <div key={review.reviewId} className="w-56">
+          <div
+            className="w-56rem h-56 rounded-[0.59481rem]"
+            style={{
+              backgroundImage: `url(${review.storeDto.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
+          <div className="text-[0.9375rem] text-custom-gray-100 font-bold truncate mt-2 mb-1">
+            {review.storeDto.name}
+          </div>
+          <div className="mb-[0.58rem] text-[#FF0069] truncate text-sm">
+            {review.couponDto.content}
+          </div>
+          <div className="text-[0.8125rem] text-custom-gray-200 ">
+            신청일자: {review.apply_date}
+          </div>
         </div>
-        <div className="mb-[0.58rem]  text-[#FF0069] truncate text-sm">
-          주먹밥+캔음료 1개 또먹고싶지않아도 먹어
-        </div>
-        <div className="text-[0.8125rem] text-custom-gray-200 ">
-          신청일자: 2023.11.29
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
+
 export default OngoingReview;
