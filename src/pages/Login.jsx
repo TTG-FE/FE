@@ -1,7 +1,7 @@
 import React from "react";
 import NaverLogin from "react-naver-login";
 import KakaoLogin from "react-kakao-login";
-
+import LoginImage from "../assets/loginimage.png";
 
 export const Login = () => {
   const naverClientId = "NAVER_CLIENT_ID";
@@ -31,11 +31,16 @@ export const Login = () => {
 
   return (
     <div className="flex items-center h-screen ">
-      <div className="hidden sm:block w-[43rem] h-[30.125rem] mr-[19.44rem] ml-[14.87rem] bg-slate-300">
-        이미지 영역
+      <div className="hidden sm:block mr-[7.69rem] ml-[15.81rem]">
+        <img
+          src={LoginImage}
+          alt="로그인 이미지"
+          className="w-[44.375rem] h-[32.4375rem]"
+          style={{ maxWidth: "100%", height: "auto" }}
+        />
       </div>
 
-      <div className="mx-auto p-4 sm:p-0">
+      <div className="mx-auto p-4 sm:p-0 ">
         <div className=" mr-[31.75rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
           간편 로그인 후 <br />
           이용 가능합니다.
@@ -52,7 +57,7 @@ export const Login = () => {
           onFailure={onFailureNaverLogin}
           render={(props) => (
             <button
-              className="mr-[20.06rem]  mb-[1.19rem] flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
+              className=" mb-[1.19rem]  flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
               onClick={props.onClick}
             >
               <svg
@@ -70,7 +75,7 @@ export const Login = () => {
                 />
               </svg>
 
-              <span className="sm:text-[1.5625rem]  font-medium flex items-center justify-center font=['Inter'] text-[#FFF]">
+              <span className="sm:text-[1.5625rem]  font-medium flex items-center justify-center font=['Inter']  text-[#FFF]">
                 네이버 로그인
               </span>
             </button>
@@ -78,7 +83,6 @@ export const Login = () => {
         />
         <KakaoLogin
           token={kakaoClientId}
-
           onSuccess={onSuccessKakaoLogin}
           onFail={onFailureKakaoLogin}
           render={(props) => (
