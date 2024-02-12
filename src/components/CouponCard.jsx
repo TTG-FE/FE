@@ -25,16 +25,6 @@ const CouponCard = ({
     modal3: false,
   });
 
-  useEffect(() => {
-    if (isModalOpen) {
-      // isModalOpen이 true일 경우 modal1을 true로 설정
-      setModalsOpen((prevModals) => ({
-        ...prevModals, // 기존의 모달 상태를 유지
-        modal1: true, // modal1만 true로 설정
-      }));
-    }
-  }, [isModalOpen]);
-
   // 특정 모달을 제외하고 모두 닫는 함수
   const openSpecificModal = (modalName) => {
     console.log("closing modal");
@@ -54,6 +44,17 @@ const CouponCard = ({
     });
     handleCloseModal();
   };
+
+  // 이거 때문에 화면이 작아질때 쿠폰이 다시 보이는 버그 발생함 -> 어떻게
+  useEffect(() => {
+    if (isModalOpen) {
+      // isModalOpen이 true일 경우 modal1을 true로 설정
+      setModalsOpen((prevModals) => ({
+        ...prevModals, // 기존의 모달 상태를 유지
+        modal1: true, // modal1만 true로 설정
+      }));
+    }
+  }, [isModalOpen]);
 
   // console.log("modalsOpen", modalsOpen);
 
