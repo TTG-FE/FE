@@ -29,7 +29,7 @@ const OngoingReview = () => {
   }
 
   if (!reviewData || reviewData.length === 0) {
-    return <div>신청한 리뷰가 없어요.</div>;
+    return <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">신청한 리뷰가 없어요.</div>;
   }
 
   return (

@@ -28,7 +28,7 @@ const FailReview = () => {
   }
 
   if (!reviewData || reviewData.length === 0) {
-    return <div>아직 등록된 탈락 리뷰가 없어요.</div>;
+    return <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">아직 등록된 탈락 리뷰가 없어요.</div>;
   }
 
   return (
