@@ -1,9 +1,13 @@
 import React from "react";
 import NaverLogin from "react-naver-login";
+import KakaoLogin from "react-kakao-login";
+
 
 export const Login = () => {
   const naverClientId = "NAVER_CLIENT_ID";
   const naverCallbackUrl = "NAVER_CALLBACK_URL";
+  const kakaoClientId = "KAKAO_CLIENT_ID";
+  // const kakaoCallbackUrl = "KAKAO_CALLBACK_URL";
 
   const onSuccessNaverLogin = (naverUser) => {
     // 네이버 로그인 성공 시
@@ -13,6 +17,16 @@ export const Login = () => {
   const onFailureNaverLogin = (result) => {
     // 네이버 로그인 실패 시
     console.error("네이버 로그인 실패!", result);
+  };
+
+  const onSuccessKakaoLogin = (kakaoUser) => {
+    // 카카오 로그인 성공 시
+    console.log("KakaoTalk login success!", kakaoUser);
+  };
+
+  const onFailureKakaoLogin = (result) => {
+    // 카카오 로그인 실패 시
+    console.error("KakaoTalk login failure!", result);
   };
 
   return (
@@ -62,26 +76,37 @@ export const Login = () => {
             </button>
           )}
         />
-        <button className="mr-[20.06rem] flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]">
-          <svg
-            style={{ marginRight: "5.44rem" }}
-            className="ml-[3rem]"
-            width="42"
-            height="42"
-            viewBox="0 0 42 42"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M21.9594 7C13.7059 7 7 12.425 7 19.075C7 23.275 9.75115 26.95 13.7059 29.225L12.6742 35L19.0363 30.8C19.896 30.975 20.9277 30.975 21.7874 30.975C30.0408 30.975 36.7468 25.55 36.7468 18.9C36.9187 12.425 30.2128 7 21.9594 7Z"
-              fill="#341C15"
-            />
-          </svg>
+        <KakaoLogin
+          token={kakaoClientId}
 
-          <span className="sm:text-[1.5625rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
-            카카오톡 로그인
-          </span>
-        </button>
+          onSuccess={onSuccessKakaoLogin}
+          onFail={onFailureKakaoLogin}
+          render={(props) => (
+            <button
+              className="flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
+              onClick={props.onClick}
+            >
+              <svg
+                style={{ marginRight: "5.44rem" }}
+                className="ml-[3rem]"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21.9594 7C13.7059 7 7 12.425 7 19.075C7 23.275 9.75115 26.95 13.7059 29.225L12.6742 35L19.0363 30.8C19.896 30.975 20.9277 30.975 21.7874 30.975C30.0408 30.975 36.7468 25.55 36.7468 18.9C36.9187 12.425 30.2128 7 21.9594 7Z"
+                  fill="#341C15"
+                />
+              </svg>
+
+              <span className="sm:text-[1.5625rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
+                카카오톡 로그인
+              </span>
+            </button>
+          )}
+        />
       </div>
     </div>
   );
