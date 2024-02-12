@@ -1,19 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 
-/** 'useInfiniteScroll': 무한 스크롤 커스텀 훅
- * @param {Function} fetchData 다음 페이지의 데이터를 가져오는 함수
- * @returns {Object} 페이지 끝 요소에 대한 참조를 포함하는 객체
- */
 const useInfiniteScroll = (fetchData) => {
-  const pageEndRef = useRef(null); // 페이지 끝을 나타내는 요소 참조
-  const [page, setPage] = useState(1); // 페이지 수
+  const pageEndRef = useRef(null);
+  const [page, setPage] = useState(0); // 페이지 수
+  const [isLoading, setLoading] = useState(false); // 로딩 여부
+  const [error, setError] = useState(null); // 에러
 
   useEffect(() => {
     // IntersectionObserver를 사용하여 페이지 끝에 도달할 때마다 fetchData를 호출
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          fetchData(page); // 데이터 가져오기
           setPage((prev) => prev + 1); // 페이지 증가
         }
       },
@@ -29,10 +26,22 @@ const useInfiniteScroll = (fetchData) => {
         observer.unobserve(pageEndRef.current); // 옵저버 제거
       }
     };
-  }, [page, fetchData]);
+  }, []);
+
+  useEffect(() => {
+    if (page === 0) return;
+    setLoading(true); // 데이터 로딩중
+    fetchData(page) // 서버에서 데이터 가져오기
+      .catch((e) => setError(e))
+      .finally(() => {
+        setLoading(false);
+      }); // 데이터 로딩 완료
+  }, [page]);
 
   return {
     pageEndRef,
+    isLoading,
+    error,
   };
 };
 
