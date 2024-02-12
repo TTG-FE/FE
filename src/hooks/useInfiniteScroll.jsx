@@ -26,7 +26,7 @@ const useInfiniteScroll = (fetchData) => {
         observer.unobserve(pageEndRef.current); // 옵저버 제거
       }
     };
-  }, [fetchData]);
+  }, []);
 
   useEffect(() => {
     if (page === 0) return;

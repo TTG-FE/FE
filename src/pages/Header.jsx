@@ -264,6 +264,7 @@ const CustomLink = ({ icon, label, to, obj, handleButtonColor }) => {
 
 /** 'SearchBar': 검색창 컴포넌트*/
 const SearchBar = () => {
+  const navigate = useNavigate();
   const [inputText, setInputText] = useState(""); // 검색 텍스트
   const [isFocused, setIsFocused] = useState(false); // 검색창 포커스 여부
   const inputRef = useRef(); // 검색창
@@ -278,8 +279,10 @@ const SearchBar = () => {
     // 입력 텍스트가 비어있다면 검색 입력창에 다시 포커스를 맞춤
     if (!inputText) {
       inputRef.current.focus();
+      return;
     }
     // TODO: 아래에 'inputText'를 기반으로 하는 검색을 위한 API 요청을 로직을 구현하세요.
+    navigate(`/search/${inputText}`);
   };
 
   return (

@@ -12,6 +12,7 @@ import Footer from "./pages/Footer";
 import { useState } from "react";
 import Coupon from "./pages/Coupon";
 import Heart from "./pages/Home/Heart";
+import Search from "./pages/Home/Search";
 import MyPage from "./pages/MyPage";
 import { Login } from "./pages/Login";
 import LoginContextProvider from "./contexts/LoginContextProvider"; // LoginContextProvider
@@ -38,8 +39,12 @@ function App() {
                 <Route path="/heart" element={<Heart />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/menu/:menu_id" element={<Menu />} />
-                <Route path="/region/:city_id/:town_id" element={<Region />} />
+                <Route path="/menu/:menu_id/:menu_label" element={<Menu />} />
+                <Route
+                  path="/region/:city_id/:city_label/:town_id/:town_label"
+                  element={<Region />}
+                />
+                <Route path="/search/:keyword" element={<Search />} />
                 {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
               </Routes>
             </section>
