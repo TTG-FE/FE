@@ -11,7 +11,7 @@ export const FinishReview = () => {
         const result = await response.json();
 
         if (result.isSuccess) {
-          setReviewData(result.result.reviewDtos.filter((review) => review.status === "FAIL"));
+          setReviewData(result.result.reviewDtos.filter((review) => review.status === "SUCCESS"));
         } else {
           setError(result.message);
         }

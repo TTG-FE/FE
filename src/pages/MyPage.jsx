@@ -168,7 +168,7 @@ export const MyPage = () => {
                 fontFamily: "Inter",
               }}
             >
-              {reviewData.result.nickname}님
+              {reviewData.result.member.nickname}님
             </div>
           </div>
           <div className=" w-[35.8125rem] h-[5.5rem] flex items-center bg-[#FFEDED] rounded-[0.9375rem] gap-x-[5.56rem]">
@@ -184,7 +184,7 @@ export const MyPage = () => {
               {" "}
               지금까지 또또가로 혜택받은 횟수
             </div>
-            <div className="text-[#FF0069]  text-2xl font-semibold ">{reviewData.result.benefit_count}회</div>
+            <div className="text-[#FF0069]  text-2xl font-semibold ">{reviewData.result.member.benefit_count}회</div>
           </div>
         </div>
 
