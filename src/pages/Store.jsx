@@ -46,15 +46,6 @@ function Store() {
     setReviewUrl(event.target.value);
   };
 
-  axios
-    .get("http://13.125.71.170:8080/stores/home")
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
   return (
     /* 전체 페이지 크기 설정 */
     <div className={`w-xl px-36 font-inter relative`}>
