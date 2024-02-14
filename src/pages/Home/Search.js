@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import StoreCard from "../../components/StoreCard";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 const Search = () => {
   const params = useParams();
-  const [stores, setStores] = useState([]);
+  const [stores, setStores] = useState([]); // 상점 데이터
+  const [isLoading, setLoading] = useState(false); // 로딩 여부
+  const [error, setError] = useState(null); // 에러
   //   const stores = [
   //     {
   //       storeId: 1,
@@ -94,14 +96,22 @@ const Search = () => {
   //   ];
 
   // 검색 키워드를 기반으로 api 호출
-  const fetchData = async (page) => {
-    const response = await axios.get(
-      `/stores/search?keyword=${params.keyword}&page=${page}&size=20`
-    );
-    setStores((prev) => [...prev, ...response.data]);
-  };
+  const fetchData = useCallback(async (page) => {
+    console.log(page);
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `/stores/search?keyword=${params.keyword}&page=${page}&size=20`
+      );
+      setStores((prev) => [...prev, ...response.data.result]);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  const { pageEndRef, isLoading, error } = useInfiniteScroll(fetchData);
+  const { pageEndRef } = useInfiniteScroll(fetchData);
 
   // TODO: 에러 처리하는 방식 변경
   if (error) {
