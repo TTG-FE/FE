@@ -18,6 +18,7 @@ const Main = () => {
         const response = await axios.get(
           "http://13.125.71.170:8080/stores/home"
         );
+        console.log("await 뒤에 있지롱~");
         const { top15, hotStores, homeReviews } = response.data.result;
         setTop15(top15);
         setHotStores(hotStores);
