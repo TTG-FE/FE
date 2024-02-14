@@ -14,18 +14,20 @@ const Main = () => {
   useEffect(() => {
     const fetchData = async () => {
       // TODO: url 주소 변경 및 homeReview의 프로퍼티 변수 변경
-      const response = await axios
-        .get("http://13.125.71.170:8080/stores/home")
-        .then((response) => {
-          const { top15, hotStores, homeReviews } = response.data.result;
-          setTop15(top15);
-          setHotStores(hotStores);
-          setHomeReviews(homeReviews);
-        })
-        .catch((error) => setError(error))
-        .finally(() => setLoading(false));
+      try {
+        const response = await axios.get(
+          "http://13.125.71.170:8080/stores/home"
+        );
+        const { top15, hotStores, homeReviews } = response.data.result;
+        setTop15(top15);
+        setHotStores(hotStores);
+        setHomeReviews(homeReviews);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
     };
-
     fetchData();
   }, []);
 
