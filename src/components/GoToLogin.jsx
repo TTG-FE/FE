@@ -14,9 +14,7 @@ const GoToLogin = () => {
           또또가의 더 많은 기능을 사용해보세요.
         </p>
         <Link to="/login" className="  ">
-          <button
-            className="w-full h-16 text-2xl px-12 flex flex-row items-center justify-center bg-custom-pink text-white rounded-2xl "
-          >
+          <button className="w-full h-16 text-2xl px-12 flex flex-row items-center justify-center bg-custom-pink text-white rounded-2xl ">
             <img src={arrowRightImg} className="mr-2" alt="" />
             로그인 하러가기
           </button>
@@ -33,10 +31,8 @@ const GoToLogin = () => {
           <p className="text-xs text-custom-gray-200 mb-8">
             오늘도 또또가에서 혜택을 받아보세요!
           </p>
-          <Link>
-            <button
-              className="bg-custom-pink rounded text-white text-sm py-2 max-w-60 w-52"
-            >
+          <Link to="/login">
+            <button className="bg-custom-pink rounded text-white text-sm py-2 max-w-60 w-52">
               로그인 하기
             </button>
           </Link>
