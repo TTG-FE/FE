@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 
 // ASSETS
@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
 function Store() {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(!false);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,27 +24,23 @@ function Store() {
   // 쿠폰 발행 여부
   const [isCouponUsed, setIsCouponUsed] = useState(false);
 
-  const [storeData, setStoreData] = useState([
-    {
-      storeImage:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/73e9e03b-6b1e-4968-a5a6-3a8ed52f4080cicd.png",
-      title: "간장게장 맛집",
-      name: "간장게장집",
-      subTitle: "김부각이랑 먹으러 오세요 ~",
-      regionName: "서울",
-      menuName: "버거",
-      serviceInfo: "test",
-      reviewSpan: 5,
-      heartStore: false,
-      useInfo: "test",
-      saleInfo: "saleInfo",
-      placeInfo: "test",
-      address: "address",
-      sponInfo: "test",
-      reviewCount: 0,
-      submitReview: false,
-    },
-  ]);
+  const [storeInfo, setStoreInfo] = useState([]);
+
+
+  useEffect(() => {
+    const fetchStoreInfo = async () => {
+      try {
+        const response = await axios.get("http://13.124.232.198/stores/1");
+        const fetchedStoreInfo = response.data.result;
+        setStoreInfo(fetchedStoreInfo);
+      } catch (error) {
+        console.error("Error fetching StoreInfo:", error);
+      }
+    }
+    fetchStoreInfo();
+  },[])
+
+
 
   // 모달창 열기
   const handleOpenModal = () => {
@@ -72,11 +68,14 @@ function Store() {
       {/* 양쪽을 포함하는 div 설정 */}
       <main className="flex">
         {/* 왼쪽 상점 관련 안내 */}
-        <StoreLeftSection />
+        <StoreLeftSection
+          storeInfo={storeInfo}
+        />
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
           login={login}
+          storeInfo={storeInfo}
           handleToggleHeart={handleToggleHeart}
           isLiked={isLiked}
           isCouponUsed={isCouponUsed}
@@ -96,12 +95,12 @@ function Store() {
   );
 }
 
-const StoreLeftSection = () => {
+const StoreLeftSection = ({storeInfo}) => {
   return (
     <div className="w-1/2 mt-9 pr-14 border-r-2 border-[#f5f5f5] break-words">
       <div className="w-full overflow-hidden mb-16 v">
         <img
-          src={storeFoodImage}
+          src={storeInfo.storeImage}
           alt="매장 음식 이미지"
           className="w-full rounded-3xl object-cover"
         />
@@ -162,11 +161,12 @@ const StoreLeftSection = () => {
           </div>
           <div className="ml-4 text-lg">
             <ul>
-              <li>영업시간: 11:00~22:00</li>
+              {storeInfo.saleInfo}
+              {/* <li>영업시간: </li>
               <li>또또가 쿠폰 이용 가능: 평일</li>
               <li>휴무일:</li>
               <br />
-              <li>대기 인원이 많은 식당으로 예약 방문 필수입니다.</li>
+              <li>대기 인원이 많은 식당으로 예약 방문 필수입니다.</li> */}
             </ul>
           </div>
         </section>
@@ -179,10 +179,10 @@ const StoreLeftSection = () => {
           <div className="ml-4 text-lg">
             <ul className="mb-4">
               <li>
-                서울 강북구 한천로139나길 20 1층/ 수유역 8번 출구에서 250m
+                {storeInfo.address}/{storeInfo.placeInfo}
               </li>
             </ul>
-            <img src={storeMapImage} alt="" />
+            <img src={storeMapImage} alt="가게 지도 위치" />
           </div>
         </section>
 
@@ -231,42 +231,52 @@ const StoreLeftSection = () => {
 
 const StoreRightSection = ({
   login,
+  storeInfo,
   handleToggleHeart,
   isLiked,
   isCouponUsed,
   handleOpenModal,
 }) => {
+
+  // 현재 날짜를 나타내는 새 Date 객체 생성
+  const now = new Date();
+
+  // 현재 날짜에 5일 추가
+  now.setDate(now.getDate() + storeInfo.reviewSpan);
+
+  const expirationPeriod = now.toISOString().split("T")[0];
+
   return (
     <div className="w-1/2 pl-16">
       <div className="mt-14 w-full sticky top-10">
         {/* 데이터를 받아와야하니 props로 변경하기? */}
-        <div className="text-3xl font-semibold mb-5">
-          [강북] 또먹고싶어 곱창
-        </div>
-        <div className="text-2xl font-normal	">
-          또먹고싶어 곱창을 리뷰하고 주먹밥+캔음료 받으세요!
-        </div>
+        <div className="text-3xl font-semibold mb-5">{storeInfo.title}</div>
+        <div className="text-2xl font-normal	">{storeInfo.subTitle}</div>
         <ul className="flex h-24 items-center border-b">
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
-            서울
+            {storeInfo.regionName}
           </li>
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
-            한식
+            {storeInfo.menuName}
           </li>
         </ul>
         <div className="flex py-8 border-b text-lg">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             제공내역
           </div>
-          <div className="text-[#404040]">
-            주먹밥1 , 캔음료 1(사이다, 콜라 중 택 1)
-          </div>
+          <div className="text-[#404040]">{storeInfo.serviceInfo}</div>
         </div>
         <div className="flex py-8 border-b text-lg">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
-          <div className="text-[#404040]">리뷰 게시일 기준 60일 이상</div>
+          {isCouponUsed ? (
+            <div className="text-[#404040]">{expirationPeriod} 까지 사용 가능합니다!</div>
+          ) : (
+            <div className="text-[#404040]">
+              리뷰 게시일 기준 {storeInfo.reviewSpan}일 이상
+            </div>
+          )}
         </div>
 
         {login ? (
