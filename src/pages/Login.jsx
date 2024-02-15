@@ -11,9 +11,12 @@ export const Login = () => {
     // 서버에서 클라이언트 ID 가져오기
     const fetchNaverClientId = async () => {
       try {
-        const response = await fetch("서버에서_클라이언트_ID를_가져올_API_URL");
-        const data = await response.json();
-
+        const response = await fetch(`${baseurl}/api/v1/auth/oauth2/naver`);
+        const responseBody = await response.text(); // text로
+    
+        // console.log("서버 응답 전체:", responseBody); 
+    
+        const data = JSON.parse(responseBody); // JSON으로 파싱
         setNaverClientId(data.clientId);
       } catch (error) {
         console.error("클라이언트 ID를 가져오면서 오류 발생:", error);
@@ -23,16 +26,16 @@ export const Login = () => {
     fetchNaverClientId();
   }, []);
 
-  // 네이버 로그인 성공 후의 처리
+  // 네이버 로그인 성공 후 처리
   const onSuccessNaverLogin = async (naverUser) => {
     // 네이버 로그인 성공 시
     console.log("네이버 로그인 성공!", naverUser);
 
     try {
-      // 네이버에서 제공하는 사용자 액세스 토큰 얻기
+      // 액세스 토큰 얻기
       const naverAccessToken = naverUser.accessToken;
 
-      // 서버로 인증된 요청 보내기
+      // 서버로 요청 보내기
       await sendAuthenticatedRequest(naverAccessToken);
 
       // 리다이렉트
@@ -52,7 +55,7 @@ export const Login = () => {
       const response = await fetch(
         "http://localhost:3000/auth/oauth-response/",
         {
-          method: "GET", // 또는 다른 HTTP 메서드
+          method: "GET",
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
