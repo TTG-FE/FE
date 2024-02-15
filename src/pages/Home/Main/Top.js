@@ -25,7 +25,7 @@ const Top = ({ top15 }) => {
         {/* md를 기준으로 hidden처리를 하여 데스크탑용 UI를 분리 */}
         <ul className="flex-wrap justify-between hidden md:flex">
           {top15.map((item, rank) => (
-            <li className="w-[18%] mb-16" key={item.id}>
+            <li className="w-[18%] mb-16" key={item.storeId}>
               <Top15Card item={item} rank={rank} />
             </li>
           ))}
