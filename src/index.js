@@ -3,8 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+// import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+// TODO: axios의 base URL을 추가
+// axios.defaults.baseURL = ""
+// TODO: axios의 headers 추가
+// axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
 root.render(
   <React.StrictMode>
     <App />

@@ -96,7 +96,10 @@ const MenuSelector = ({ handleClose }) => {
       <ul className="flex flex-wrap">
         {menus.map((menu) => (
           <li to="/menu" key={menu.id} className="w-1/4 px-8 py-5">
-            <Link className="w-full target" to={`/menu/${menu.id}`}>
+            <Link
+              className="w-full target"
+              to={`/menu/${menu.id}/${menu.label.replace(/\//g, "-")}`}
+            >
               <figure
                 className="pb-[100%] h-0 bg-center bg-no-repeat bg-cover shrink-0 target"
                 style={{ backgroundImage: `url(${menu.img})` }}
@@ -204,11 +207,16 @@ const RegionSelector = ({ handleClose }) => {
               <ul className="flex flex-wrap w-4/5">
                 {city.towns.map((town, id) => (
                   <li
-                    key={id}
+                    key={id + 1}
                     to="/region"
                     className="w-1/4 p-2 text-sm text-[#00000080]"
                   >
-                    <Link className="target" to={`/region/${city.id}/${id}`}>
+                    <Link
+                      className="target"
+                      to={`/region/${city.id}/${city.label}/${
+                        id + 1
+                      }/${town.replace(/\//g, "-")}`}
+                    >
                       {town}
                     </Link>
                   </li>

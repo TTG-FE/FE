@@ -6,12 +6,10 @@ import { ModalContext } from "../contexts/ModalContextProvider";
 const Navbar = () => {
   const { isLogin, logout } = useContext(LoginContext);
   const { openRegionModal, openMenuModal } = useContext(ModalContext);
-  const navigate = useNavigate();
 
   /** 로그아웃 버튼을 누르면 로그아웃 로직을 수행 */
   const handleLogout = () => {
     logout();
-    navigate("/", { replace: true });
   };
   return (
     // 780px 부터 보이도록 설정
