@@ -2,118 +2,108 @@ import { useParams } from "react-router";
 import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
 
-const Menu = ({ selectModal, setSelectModal }) => {
-  const { menu_id } = useParams(); // 파라미터로 넘어오는 메뉴 아이디
+const Menu = () => {
+  const { menu_id, menu_label } = useParams(); // 파라미터로 넘어오는 메뉴 아이디
 
   // 상점 리스트 객체
-  const restaurants = [
+  const stores = [
     {
-      id: 1,
-      text: "[성신여대입구] 귀여운 용용이",
-      menu: "용용이 파스타 + 음료 1용용이 파스타 + 음료 1용용이 파스타 + 음료 1용용이 파스타 + 음료 1용용이 파스타 + 음료 1",
+      storeId: 1,
+      storeTitle: "[성진이",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 2,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 2,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 3,
-      text: "[성신여",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 3,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 4,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 4,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 5,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 5,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
     {
-      id: 6,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 6,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
     {
-      id: 7,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 7,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 8,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 8,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 9,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 9,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 10,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 10,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 11,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 11,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 12,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 12,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: true,
     },
     {
-      id: 13,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 13,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
+      heartStore: false,
     },
     {
-      id: 14,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
+      storeId: 14,
+      storeTitle: "[성",
+      serviceInfo: "용용이 파스타 + 음료 1",
       reviewCount: 654,
-    },
-    {
-      id: 15,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-    },
-    {
-      id: 16,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-    },
-    {
-      id: 17,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-    },
-    {
-      id: 18,
-      text: "[성신여대입구] 귀여운 용용이 소시지 볼 사람? 이거 진짜 귀엽고 맛있음",
-      menu: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
+      heartStore: true,
     },
   ];
 
@@ -127,8 +117,10 @@ const Menu = ({ selectModal, setSelectModal }) => {
         <div className="flex items-center justify-between px-8 py-16">
           <div>
             <div className="mb-4 text-2xl font-semibold">
-              메뉴 &gt;{" "}
-              <span className="border-b-4 border-custom-yellow">전체</span>
+              메뉴&gt;{" "}
+              <span className="border-b-4 border-custom-yellow">
+                {menu_label}
+              </span>
             </div>
             <p className="text-sm font-normal text-custom-gray-100">
               전국 각지의 또또가 상점을 만나보세요!
@@ -138,8 +130,8 @@ const Menu = ({ selectModal, setSelectModal }) => {
 
         {/* 상점 카드 리스트 */}
         <ul className="flex flex-wrap ">
-          {restaurants.map((item) => (
-            <li className="w-1/5 p-4" key={item.id}>
+          {stores.map((item) => (
+            <li className="w-1/5 p-4" key={item.storeId}>
               <StoreCard item={item} />
             </li>
           ))}

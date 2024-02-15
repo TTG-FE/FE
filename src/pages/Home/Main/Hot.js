@@ -4,24 +4,7 @@ import ttgArrow from "./../../../assets/images/ttg-arrow.png";
 import channelIcon from "./../../../assets/images/channelIcon.png";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
 
-const Hot = () => {
-  const hotRestarants = [
-    {
-      id: 1,
-      text: "연어 무게",
-      free: "펩",
-    },
-    {
-      id: 2,
-      text: "칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요칼로리 폭탄 초코 빙수 먹고 불안해진 다이어터에게 한 줄기의 희망같은 샐러드를 드려요",
-      free: "펩시 제로 콜라 1개 + 연어 100g 추가추가추가추가추가하하하",
-    },
-    {
-      id: 3,
-      text: "용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?용왕님 육지에 올라갔더니 저희 식구들이 가지런히 놓여있는게 아니겠어요?",
-      free: "뭐라뭐라뭐라",
-    },
-  ];
+const Hot = ({ hotStores }) => {
   return (
     <div className="md:mb-16 ">
       {/* 구분선 */}
@@ -53,10 +36,10 @@ const Hot = () => {
         {/* 카드 리스트 */}
         <div className="z-10 w-full pl-4 overflow-hidden overflow-x-auto md:pl-0 scrollbar-hide">
           <ul className="flex w-full py-6 m-2 space-x-3 ">
-            {hotRestarants.map((item) => (
+            {hotStores.map((item) => (
               <li
                 className="w-[65%] lg:shrink shrink-0 xl:w-1/3 sm:w-[40%] md:w-[45%]"
-                key={item.id}
+                key={item.storeId}
               >
                 <HotCard item={item} />
               </li>
@@ -71,22 +54,23 @@ const Hot = () => {
 /** Hot 한 상점 카드 */
 const HotCard = ({ item }) => {
   const { isLogin } = useContext(LoginContext);
-  const [isLiked, setIsLiked] = useState(false); // 현재 상점의 관심 여부를 나타낸다.
+  const [isLiked, setIsLiked] = useState(item.isHeartStore); // 현재 상점의 관심 여부를 나타낸다.
 
   /** 'handleLikeClick' 함수는 하트 아이콘을 클릭했을 때 호출되며
    * 'isLiked' 상태를 반전시켜 관심 상점 상태를 나타낸다.
    */
   const handleLikeClick = () => {
     setIsLiked((prev) => !prev);
+    // TODO: 하트 등록과 해제를 관리하는 훅 만들기
   };
 
   return (
     <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0 hover:shadow-custom-box-shadow-pink">
       <div className="flex flex-col h-full p-2 md:p-3">
-        {/* 카드 이미지 */}
+        {/* 메뉴 이미지 */}
         <figure
           className="relative pb-[60%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-4"
-          style={{ backgroundImage: `url()` }}
+          style={{ backgroundImage: `url(${item.storeImage})` }}
         >
           <button className="absolute top-2 right-2" onClick={handleLikeClick}>
             {isLogin && (
@@ -98,13 +82,13 @@ const HotCard = ({ item }) => {
           </button>
         </figure>
         <div className="flex flex-col space-y-2 grow">
-          {/* 텍스트 */}
+          {/* 제목 */}
           <p className="text-sm font-semibold leading-2 sm:text-base text-custom-gray-100 line-clamp-2 grow">
-            {item.text}
+            {item.storeTitle}
           </p>
-          {/* 메뉴 */}
+          {/* 서비스 정보 */}
           <p className="text-[0.625rem] sm:text-sm text-custom-pink line-clamp-1">
-            {item.free}
+            {item.serviceInfo}
           </p>
         </div>
       </div>
