@@ -103,48 +103,6 @@ const Coupon = () => {
     });
   };
 
-  // // 모달창 상태
-  // const [modalStates, setModalStates] = useState([
-  //   { isCouponModalOpen: false },
-  //   { isCouponModalOpen: false },
-  //   { isCouponModalOpen: false },
-  //   { isCouponModalOpen: false },
-  // ]);
-
-  // // 모달창 열기
-  // const handleOpenModal = (modalName, couponIndex) => {
-  //   setModalStates((prevStates) => {
-  //     const newStates = [...prevStates];
-  //     newStates[couponIndex][modalName] = true;
-  //     return newStates;
-  //   });
-  // };
-
-  // // 모달창 닫기
-  // const handleCloseModal = (couponIndex) => {
-  //   setModalStates((prevStates) => {
-  //     const newStates = [...prevStates];
-  //     newStates[couponIndex] = {
-  //       isCouponModalOpen: false,
-  //     };
-  //     return newStates;
-  //   });
-  // };
-
-  // // 쿠폰 카드를 렌더링하는 공통 함수
-  // const renderCouponCards = () => {
-  //   return coupons.map((coupon, index) => (
-  //     <CouponCard
-  //       key={coupon.id}
-  //       couponData={coupon}
-  //       handleCouponUsed={() => handleCouponUsed(coupon.id)}
-  //       handleOpenModal={(modalName) => handleOpenModal(modalName, index)}
-  //       handleCloseModal={() => handleCloseModal(index)}
-  //       modalStates={modalStates[index]}
-  //     />
-  //   ));
-  // };
-
   // 모달창 열기
   const handleOpenModal = (couponId) => {
     setActiveModalCouponId(couponId);
@@ -238,10 +196,6 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     // 검색 폼 컴포넌트
-    // <form className="flex w-[300px]" onSubmit={(e) => {
-    //   e.preventDefault();
-    //   handleSearch();
-    // }}>
     <form className="flex w-[300px]" onSubmit={handleSearch}>
       {/* 입력창 */}
       <input
