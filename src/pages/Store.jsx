@@ -6,11 +6,15 @@ import storeFoodImage from "../assets/store-food.jpg";
 import { ReactComponent as HeartIcon } from "../assets/storeHeartIcon.svg";
 import storeMapImage from "../assets/store-map.jpg";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
+const SERVER_URL = "http://13.124.232.198";
+
 function Store() {
+  const { store_id } = useParams();
+
   const [login, setLogin] = useState(!false);
 
   // 모달창의 상태
@@ -26,21 +30,18 @@ function Store() {
 
   const [storeInfo, setStoreInfo] = useState([]);
 
-
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        const response = await axios.get("http://13.124.232.198/stores/1");
+        const response = await axios.get(`${SERVER_URL}/stores/${store_id}`);
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
       }
-    }
+    };
     fetchStoreInfo();
-  },[])
-
-
+  }, []);
 
   // 모달창 열기
   const handleOpenModal = () => {
@@ -68,9 +69,7 @@ function Store() {
       {/* 양쪽을 포함하는 div 설정 */}
       <main className="flex">
         {/* 왼쪽 상점 관련 안내 */}
-        <StoreLeftSection
-          storeInfo={storeInfo}
-        />
+        <StoreLeftSection storeInfo={storeInfo} />
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
@@ -193,7 +192,8 @@ const StoreLeftSection = ({storeInfo}) => {
           </div>
           <div className="ml-4 text-lg">
             <ol className="ml-4 list-decimal">
-              <li>블로그 포스팅 발행 시 협찬문구 작성법</li>
+              {storeInfo.sponInfo}
+              {/* <li>블로그 포스팅 발행 시 협찬문구 작성법</li>
               <ul className="mb-4 list-disc">
                 <li>
                   상세설명 url :
@@ -220,7 +220,7 @@ const StoreLeftSection = ({storeInfo}) => {
                     무제한 사용 가능)
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </ol>
           </div>
         </section>
@@ -242,7 +242,7 @@ const StoreRightSection = ({
   const now = new Date();
 
   // 현재 날짜에 5일 추가
-  now.setDate(now.getDate() + storeInfo.reviewSpan);
+  now.setDate(now.getDate() + 5);
 
   const expirationPeriod = now.toISOString().split("T")[0];
 
@@ -250,13 +250,21 @@ const StoreRightSection = ({
     <div className="w-1/2 pl-16">
       <div className="mt-14 w-full sticky top-10">
         {/* 데이터를 받아와야하니 props로 변경하기? */}
-        <div className="text-3xl font-semibold mb-5">{storeInfo.title}</div>
-        <div className="text-2xl font-normal	">{storeInfo.subTitle}</div>
+        <div className="text-3xl font-semibold mb-5">
+          {/* [강북] 또먹고싶어 곱창 */}
+          {storeInfo.title}
+        </div>
+        <div className="text-2xl font-normal	">
+          {/* 또먹고싶어 곱창을 리뷰하고 주먹밥+캔음료 받으세요! */}
+          {storeInfo.name} 리뷰하고 {storeInfo.subTitle}
+        </div>
         <ul className="flex h-24 items-center border-b">
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
+            {/* 서울 */}
             {storeInfo.regionName}
           </li>
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
+            {/* 한식 */}
             {storeInfo.menuName}
           </li>
         </ul>
@@ -264,16 +272,22 @@ const StoreRightSection = ({
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             제공내역
           </div>
-          <div className="text-[#404040]">{storeInfo.serviceInfo}</div>
+          <div className="text-[#404040]">
+            {/* 주먹밥1 , 캔음료 1(사이다,콜라 중 택 1) */}
+            {storeInfo.serviceInfo}
+          </div>
         </div>
         <div className="flex py-8 border-b text-lg">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
           {isCouponUsed ? (
-            <div className="text-[#404040]">{expirationPeriod} 까지 사용 가능합니다!</div>
+            <div className="text-[#404040]">
+              {expirationPeriod} 까지 사용 가능합니다!
+            </div>
           ) : (
             <div className="text-[#404040]">
+              {/* 리뷰 게시일 기준 60일 이상  */}
               리뷰 게시일 기준 {storeInfo.reviewSpan}일 이상
             </div>
           )}
