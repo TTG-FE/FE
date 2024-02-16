@@ -23,7 +23,7 @@ const Review = ({ homeReviews }) => {
               key={item.reviewId}
               className="w-[40%] md:w-1/3 shrink-0 xl:w-1/5 xl:shrink lg:w-1/4 "
             >
-              <ReviewCard review={item} />
+              <ReviewCard item={item} />
             </li>
           ))}
         </ul>
@@ -45,10 +45,10 @@ const ReviewCard = ({ item }) => {
             {/* 작성자 */}
             <figure
               className="w-5 h-5 mr-2 bg-gray-200 bg-center bg-no-repeat bg-cover rounded-full sm:w-8 sm:h-8 shrink-0"
-              style={{ backgroundImage: `url(${BakeryImg})` }}
+              style={{ backgroundImage: `url(${item.profileImage})` }}
             ></figure>
             <p className="text-[#9F9F9F] text-[0.625rem] md:text-base truncate">
-              {item.reviewAuthor}
+              {item.nickname}
             </p>
           </div>
           {/* 리뷰 제목 */}
@@ -58,7 +58,7 @@ const ReviewCard = ({ item }) => {
 
           {/* 상점명 */}
           <p className="text-custom-pink line-clamp-1 sm:text-sm text-[0.625rem]">
-            {item.reviewStore}
+            {item.storeName}
           </p>
         </div>
       </div>

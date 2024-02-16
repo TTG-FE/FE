@@ -1,111 +1,53 @@
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import { useParams } from "react-router";
+import axios from "axios";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
+import { LoginContext } from "../../contexts/LoginContextProvider";
 
 const Menu = () => {
   const { menu_id, menu_label } = useParams(); // 파라미터로 넘어오는 메뉴 아이디
+  const { token } = useContext(LoginContext);
+  const [stores, setStores] = useState([]); // 상점 데이터
+  const [isLoading, setLoading] = useState(false); // 로딩 여부
+  const [lastPage, setLastPage] = useState(false); // 마지막 페이지 여부
 
-  // 상점 리스트 객체
-  const stores = [
-    {
-      storeId: 1,
-      storeTitle: "[성진이",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
+  useEffect(() => {
+    setStores([]); // 데이터 초기화
+    setLastPage(false);
+  }, [menu_id]);
+
+  // 검색 키워드를 기반으로 api 호출
+  const fetchData = useCallback(
+    async (page) => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `/stores/menu-categories?menuId=${menu_id}&page=${page}&size=20`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        setStores((prev) => [...prev, ...response.data.result.content]);
+        // 마지막 페이지라면 true 로 변경
+        if (response.data.result.last) {
+          setLastPage(true);
+        }
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     },
-    {
-      storeId: 2,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 3,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 4,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 5,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: true,
-    },
-    {
-      storeId: 6,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: true,
-    },
-    {
-      storeId: 7,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 8,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 9,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 10,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 11,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 12,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: true,
-    },
-    {
-      storeId: 13,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: false,
-    },
-    {
-      storeId: 14,
-      storeTitle: "[성",
-      serviceInfo: "용용이 파스타 + 음료 1",
-      reviewCount: 654,
-      heartStore: true,
-    },
-  ];
+    [menu_id, token]
+  );
+
+  const { pageEndRef } = useInfiniteScroll(
+    !lastPage && menu_id ? fetchData : () => {},
+    menu_id
+  );
 
   return (
     /* 전체 페이지 크기 설정 */
@@ -137,7 +79,7 @@ const Menu = () => {
           ))}
         </ul>
         {/* infiniteScroll 감지할 요소 */}
-        <div className="p-6"></div>
+        <div className="p-6" ref={pageEndRef}></div>
       </div>
     </div>
   );

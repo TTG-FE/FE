@@ -21,12 +21,12 @@ const HeartButton = ({ like, id }) => {
       if (!isCliked) return;
       // 하트 등록하는 경우
       if (isLiked) {
-        const response = await axios
+        axios
           .post(`/stores/${id}/heart`)
           .catch((error) => console.log("하트 등록 실패!"));
       } else {
         // 하트 해제하는 경우
-        const response = await axios
+        axios
           .delete(`/stores/${id}/heart`)
           .catch((error) => console.log("하트 해제 실패!"));
       }
