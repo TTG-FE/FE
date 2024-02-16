@@ -13,7 +13,7 @@ const Navbar = () => {
   };
   return (
     // 780px 부터 보이도록 설정
-    <div className="justify-between hidden w-full h-16 lg:px-16 md:px-6 md: md:flex shadow-custom-button-shadow">
+    <div className="justify-between hidden w-full h-16 lg:px-16 md:px-6 md: md:flex shadow-custom-button-shadow z-50">
       {/* 좌측영역: 이용가이드 및 상점, 메뉴 선택을 위한 네비게이션 */}
       <div className="flex items-center space-x-7">
         <CustomNavLink to="/user-guide">이용가이드</CustomNavLink>

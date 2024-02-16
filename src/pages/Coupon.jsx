@@ -85,12 +85,10 @@ const Coupon = () => {
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       const token =
-        "naver_AAAAOIOXjfzp-hTjCVP9ZkoxUnkLy7wvJQVQoa0Vt8DHhMpRpyGyUsdxX4nyzOcz90mP8JOTy9IZvNVSwFj5uFozrU0";
+        "naver_AAAAOJJBFFgk1BwHCxhj3pZbwGSHmqQ4cvc_PVbBpTGxJUDsU2TKWZzdKOs4O3lx7m-yJC70jKgZ_kNVne-Xg4LDyAY";
       try {
         const response = await axios.get(`coupons`, {
           headers: {

@@ -65,7 +65,7 @@ const CouponCard = ({
         {/* 쿠폰 왼쪽 다운로드 영역*/}
         <div className="relative z-0">
           <div
-            className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 overflow-hidden ${
+            className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 ${
               couponData.useYn === "Y" ? "bg-custom-gray-300" : "bg-custom-pink"
             }`}
           >
@@ -391,7 +391,7 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
 
-            <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
+            <CouponSemicircleUI_Desktop borderColor={`custom-pink`}/>
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
@@ -536,10 +536,10 @@ const CouponSemicircleUI_Desktop = ({ borderColor }) => {
   return (
     <>
       <div
-        className={`absolute w-14 h-14 bg-white rounded-full top-[306px] left-[-28px] border-4 border-${borderColor}`}
+        className={`absolute w-14 h-14 bg-white rounded-full top-[308px] left-[-20px] border-4 border-${borderColor}`}
       ></div>
       <div
-        className={`absolute w-14 h-14 bg-white rounded-full top-[306px] right-[-28px] border-4 border-${borderColor}`}
+        className={`absolute w-14 h-14 bg-white rounded-full top-[308px] right-[-20px] border-4 border-${borderColor}`}
       ></div>
     </>
   );
@@ -548,10 +548,10 @@ const CouponSemicircleUI_Mobile = ({ borderColor }) => {
   return (
     <>
       <div
-        className={`absolute w-10 h-10 bg-white rounded-full top-[200px] left-[-20px] border-4 border-${borderColor}`}
+        className={`absolute w-10 h-10 bg-white rounded-full top-[204px] left-[-15px] border-4 border-${borderColor}`}
       ></div>
       <div
-        className={`absolute w-10 h-10 bg-white rounded-full top-[200px] right-[-20px] border-4 border-${borderColor}`}
+        className={`absolute w-10 h-10 bg-white rounded-full top-[204px] right-[-15px] border-4 border-${borderColor}`}
       ></div>
     </>
   );
