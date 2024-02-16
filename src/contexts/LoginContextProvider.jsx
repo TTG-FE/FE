@@ -16,7 +16,7 @@ const LoginContextProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ isLogin, logout }}>
+    <LoginContext.Provider value={{ isLogin, logout, token}}>
       {children}
     </LoginContext.Provider>
   );
