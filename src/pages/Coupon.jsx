@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Asset
 import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
@@ -7,80 +7,100 @@ import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 import CouponCard from "../components/CouponCard";
 import { Link } from "react-router-dom";
 import GoToLogin from "../components/GoToLogin";
+import axios from "axios";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
   const [login, setLogin] = useState(false);
-  const [coupons, setCoupons] = useState([
-    {
-      id: 21,
-      name: "[성수] 베리베리스트로베리케이크 전문점",
-      subtitle: "닐라닐라바닐라 조각케이크 무료증정",
-      useYn: "N",
-      qrCode:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/fe8b6765-7b92-4ea7-87ca-79cb74e7a59fimage.jpeg",
-      storeImage:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d394c8b1-a4e2-4793-8bcf-84210f7256cd%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
-      startDate: "2024-02-04",
-      endDate: "2024-02-04",
-    },
-    {
-      id: 22,
-      name: "name",
-      subtitle: "subTitle2",
-      useYn: "N",
-      qrCode:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/3896a88d-09b8-40a9-966c-c715fdfd0ec4image.jpeg",
-      storeImage:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d5c859a4-9614-4e14-a9f1-2b35f143f27a%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
-      startDate: "2024-02-04",
-      endDate: "2024-02-04",
-    },
-    {
-      id: 23,
-      name: "name",
-      subtitle: "subTitle3",
-      useYn: "N",
-      qrCode:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
-      storeImage:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
-      startDate: "2024-02-04",
-      endDate: "2024-02-04",
-    },
-    {
-      id: 24,
-      name: "name",
-      subtitle: "subTitle3",
-      useYn: "N",
-      qrCode:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
-      storeImage:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
-      startDate: "2024-02-04",
-      endDate: "2024-02-04",
-    },
-    {
-      id: 25,
-      name: "name",
-      subtitle: "subTitle3",
-      useYn: "N",
-      qrCode:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
-      storeImage:
-        "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
-      startDate: "2024-02-04",
-      endDate: "2024-02-04",
-    },
-  ]);
+  // const [coupons, setCoupons] = useState([
+  //   {
+  //     id: 21,
+  //     name: "[성수] 베리베리스트로베리케이크 전문점",
+  //     subtitle: "닐라닐라바닐라 조각케이크 무료증정",
+  //     useYn: "N",
+  //     qrCode:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/fe8b6765-7b92-4ea7-87ca-79cb74e7a59fimage.jpeg",
+  //     storeImage:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d394c8b1-a4e2-4793-8bcf-84210f7256cd%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+  //     startDate: "2024-02-04",
+  //     endDate: "2024-02-04",
+  //   },
+  //   {
+  //     id: 22,
+  //     name: "name",
+  //     subtitle: "subTitle2",
+  //     useYn: "N",
+  //     qrCode:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/3896a88d-09b8-40a9-966c-c715fdfd0ec4image.jpeg",
+  //     storeImage:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/d5c859a4-9614-4e14-a9f1-2b35f143f27a%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+  //     startDate: "2024-02-04",
+  //     endDate: "2024-02-04",
+  //   },
+  //   {
+  //     id: 23,
+  //     name: "name",
+  //     subtitle: "subTitle3",
+  //     useYn: "N",
+  //     qrCode:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+  //     storeImage:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+  //     startDate: "2024-02-04",
+  //     endDate: "2024-02-04",
+  //   },
+  //   {
+  //     id: 24,
+  //     name: "name",
+  //     subtitle: "subTitle3",
+  //     useYn: "N",
+  //     qrCode:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+  //     storeImage:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+  //     startDate: "2024-02-04",
+  //     endDate: "2024-02-04",
+  //   },
+  //   {
+  //     id: 25,
+  //     name: "name",
+  //     subtitle: "subTitle3",
+  //     useYn: "N",
+  //     qrCode:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/qrImage/50bfe1ad-4450-4c4d-b695-af3226e4e3a6image.jpeg",
+  //     storeImage:
+  //       "https://ttottoga.s3.ap-northeast-2.amazonaws.com/storeImage/04782f11-8f1a-4444-ab0e-7557bb09cb4f%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-04-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%206.49.57.png",
+  //     startDate: "2024-02-04",
+  //     endDate: "2024-02-04",
+  //   },
+  // ]);
 
   // 검색 처리
+  
+  const [coupons, setCoupons] = useState([]);
+  
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredCoupons = coupons.filter((coupon) =>
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  useEffect(() => {
+    const fetchData = async() => {
+      try {
+        const response = await axios.get(`coupons`, {
+          headers: {
+            Authorization: `Bearer naver_AAAAOJaIpGiVkvC1JKm0PdXytCINA7n7rmt5U1_X3HLy7RePUxQ5mDHA74aUEMBKwRBzlnip12GVmmM6K1oQxFlO9IM`,
+          }
+        });
+        setCoupons(response.data.result);
+      } catch (error) {
+        console.error("Error fetching StoreInfo:", error);
+      }
+    }
+    fetchData();
+  }, [])
+  
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
     // 해당 쿠폰을 사용했다고 true로 변경

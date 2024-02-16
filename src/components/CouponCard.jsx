@@ -56,7 +56,7 @@ const CouponCard = ({
     }
   }, [isModalOpen]);
 
-  console.log(modalsOpen);
+  // console.log(modalsOpen);
 
   return (
     <>
@@ -72,7 +72,6 @@ const CouponCard = ({
             <button
               className="text-[8px]"
               onClick={() => {
-                // handleOpenModal("isCouponModalOpen");
                 handleOpenModal();
               }}
               disabled={couponData.useYn === "Y"}
@@ -82,7 +81,6 @@ const CouponCard = ({
                   fill={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
                   stroke={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
                 />
-                {/* <img src={phoneDownloadIcon} alt="" /> */}
               </div>
               <p className="text-white">다운로드</p>
             </button>
@@ -124,7 +122,7 @@ const CouponCard = ({
               </p>
               <p
                 className={`text-[10px]  ${
-                  couponData.useYn === "Y" ? "text-custom-gray-200" : ""
+                  couponData.useYn === "Y" ? "text-custom-gray-200" : null
                 }`}
               >
                 {`${couponData.startDate} ~ ${couponData.endDate}`}
@@ -142,7 +140,7 @@ const CouponCard = ({
           {/* 이미지 */}
           <img
             src={couponData.storeImage}
-            alt=""
+            alt="상점 이미지"
             className="mr-12 rounded-lg"
           />
           {/* 내용 전체 크기 설정 */}
@@ -191,9 +189,7 @@ const CouponCard = ({
               <button
                 className="w-40 h-40 bg-white rounded-full flex items-center justify-center"
                 onClick={() => {
-                  // handleOpenModal("isCouponModalOpen");
                   handleOpenModal();
-                  // console.log("isModalOpen", isModalOpen);
                 }}
                 disabled={couponData.useYn === "Y"}
               >
@@ -203,9 +199,7 @@ const CouponCard = ({
             <button
               className="text-white"
               onClick={() => {
-                // handleOpenModal("isCouponModalOpen");
                 handleOpenModal();
-                console.log("isModalOpen", isModalOpen);
               }}
               disabled={couponData.useYn === "Y"}
             >
@@ -230,7 +224,7 @@ const CouponCard = ({
               </div>
               <img
                 src={couponData.storeImage}
-                alt=""
+                alt="상점 이미지"
                 className="mb-8 w-[228px] h-[141px] rounded-lg"
               />
             </div>
@@ -251,8 +245,6 @@ const CouponCard = ({
               <button
                 className="h-8 w-full rounded bg-custom-pink text-white text-xs"
                 onClick={() => {
-                  // handleCloseModal();
-                  // handleOpenModal("isCouponInfoModalOpen");
                   openSpecificModal("modal2");
                 }}
               >
@@ -275,7 +267,7 @@ const CouponCard = ({
                 <img
                   className={`${isCheck ? "w-40 h-40" : "w-28 h-28"}`}
                   src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
-                  alt=""
+                  alt="QR코드 이미지"
                 />
               </div>
             </div>
@@ -312,9 +304,6 @@ const CouponCard = ({
                   }`}
                   onClick={() => {
                     if (isCheck) {
-                      // isCheck가 true일 때만 클릭 이벤트 처리
-                      // handleCloseModal();
-                      // handleOpenModal("isCouponDownloadModalOpen");
                       openSpecificModal("modal3");
                     }
                   }}
@@ -341,7 +330,7 @@ const CouponCard = ({
               </div>
               <img
                 src={couponData.storeImage}
-                alt=""
+                alt="상점 이미지"
                 className="mb-8 w-[228px] h-[141px] grayscale"
               />
               <div className="w-[115px] h-[115px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
@@ -364,12 +353,12 @@ const CouponCard = ({
               <h3 className="text-[10px] mb-2.5 text-custom-orange">
                 {couponData.subtitle}
               </h3>
-              <h4 className="text-[9px] mb-1">기한: {couponData.startDate}</h4>
+              <h4 className="text-[9px] mb-1">
+                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+              </h4>
               <button
                 className="h-8 w-full rounded bg-[#B2B2B2] text-white text-xs"
                 onClick={() => {
-                  // handleCloseModal();
-                  // handleCouponUsed(couponData.id);
                   closeAllModals();
                   handleCouponUsed(couponData.id);
                 }}
@@ -394,7 +383,7 @@ const CouponCard = ({
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img
                 src={couponData.storeImage}
-                alt=""
+                alt="상점 이미지"
                 className="mt-5 mb-11 rounded-xl"
               />
             </div>
@@ -417,11 +406,6 @@ const CouponCard = ({
                   className="w-full h-9 rounded bg-custom-pink text-white text-xs"
                   onClick={() => {
                     openSpecificModal("modal2"); // 'modal2' 문자열을 인자로 전달
-                    // console.log("test", modalsOpen);
-                    // handleCloseModal();
-
-                    // handleOpenModal("isCouponInfoModalOpen");
-                    // handleOpenModal();
                   }}
                 >
                   직원확인
@@ -443,7 +427,7 @@ const CouponCard = ({
                 <img
                   className={isCheck ? "w-64" : null}
                   src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
-                  alt=""
+                  alt="QR코드 이미지"
                 />
               </div>
             </div>
@@ -483,10 +467,7 @@ const CouponCard = ({
                   }`}
                   onClick={() => {
                     if (isCheck) {
-                      // isCheck가 true일 때만 클릭 이벤트 처리
-                      // handleCloseModal();
                       openSpecificModal("modal3");
-                      // handleOpenModal("isCouponDownloadModalOpen");
                     }
                   }}
                   disabled={!isCheck}
@@ -509,7 +490,7 @@ const CouponCard = ({
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img
                 src={couponData.storeImage}
-                alt=""
+                alt="상점 이미지"
                 className="mt-5 mb-11 grayscale rounded-xl"
               />
               <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
@@ -529,12 +510,12 @@ const CouponCard = ({
                 <h3 className="text-sm mb-2.5 text-custom-orange">
                   {couponData.subtitle}
                 </h3>
-                <h4 className="text-xs mb-5">기한: {couponData.startDate}</h4>
+                <h4 className="text-xs mb-5">
+                  기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+                </h4>
                 <button
                   className="w-full h-9 rounded bg-[#B2B2B2] text-white text-xs"
                   onClick={() => {
-                    // handleCloseModal();
-                    // openSpecificModal();
                     closeAllModals();
                     handleCouponUsed(couponData.id);
                   }}
