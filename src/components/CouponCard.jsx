@@ -27,7 +27,6 @@ const CouponCard = ({
 
   // 특정 모달을 제외하고 모두 닫는 함수
   const openSpecificModal = (modalName) => {
-    // console.log("closing modal");
     setModalsOpen({
       modal1: false,
       modal2: false,
@@ -43,6 +42,7 @@ const CouponCard = ({
       modal3: false,
     });
     handleCloseModal();
+    setIsCheck(false);
   };
 
   // 이거 때문에 화면이 작아질때 쿠폰이 다시 보이는 버그 발생함 -> 어떻게
@@ -56,7 +56,7 @@ const CouponCard = ({
     }
   }, [isModalOpen]);
 
-  console.log(modalsOpen);
+  // console.log(modalsOpen);
 
   return (
     <>
@@ -72,7 +72,6 @@ const CouponCard = ({
             <button
               className="text-[8px]"
               onClick={() => {
-                // handleOpenModal("isCouponModalOpen");
                 handleOpenModal();
               }}
               disabled={couponData.useYn === "Y"}
@@ -82,7 +81,6 @@ const CouponCard = ({
                   fill={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
                   stroke={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
                 />
-                {/* <img src={phoneDownloadIcon} alt="" /> */}
               </div>
               <p className="text-white">다운로드</p>
             </button>
@@ -124,7 +122,7 @@ const CouponCard = ({
               </p>
               <p
                 className={`text-[10px]  ${
-                  couponData.useYn === "Y" ? "text-custom-gray-200" : ""
+                  couponData.useYn === "Y" ? "text-custom-gray-200" : null
                 }`}
               >
                 {`${couponData.startDate} ~ ${couponData.endDate}`}
@@ -135,6 +133,167 @@ const CouponCard = ({
       </main>
       {/* //모바일 쿠폰 영역 끝 */}
 
+      {/* 모바일 모달 */}
+      <div className="md:hidden">
+        {/* 1번째 모달 */}
+        <Modal
+          isOpen={modalsOpen.modal1}
+          onClose={closeAllModals}
+          isCoupon={true}
+        >
+          <div className="px-6 py-5 w-[278px] h-full">
+            <div className="h-[200px]">
+              <div className="text-center mb-3 text-custom-gray-200">
+                쿠폰 정보
+              </div>
+              <img
+                src={couponData.storeImage}
+                alt="상점 이미지"
+                className="mb-8 w-[228px] h-[141px] rounded-lg"
+              />
+            </div>
+
+            {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
+            {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
+            <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
+
+            {/* 쿠폰 실선 밑 영역 */}
+            <div className="border-dashed border-t-2 border-custom-pink text-center">
+              <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
+              <h3 className="text-[10px] mb-2.5 text-custom-orange">
+                {couponData.subtitle}
+              </h3>
+              <h4 className="text-[9px] mb-1">
+                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+              </h4>
+              <button
+                className="h-8 w-full rounded bg-custom-pink text-white text-xs"
+                onClick={() => {
+                  openSpecificModal("modal2");
+                }}
+              >
+                직원확인
+              </button>
+            </div>
+          </div>
+        </Modal>
+
+        {/* 2번째 모달 */}
+        <Modal
+          isOpen={modalsOpen.modal2}
+          onClose={closeAllModals}
+          isCoupon={true}
+        >
+          <div className="px-6 py-5 w-[278px] h-full">
+            <div className="h-[200px]">
+              <div className="text-center text-custom-gray-200">직원 확인</div>
+              <div className="flex justify-center items-center h-5/6">
+                <img
+                  className={`${isCheck ? "w-40 h-40" : "w-28 h-28"}`}
+                  src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
+                  alt="QR코드 이미지"
+                />
+              </div>
+            </div>
+
+            {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
+            <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
+
+            <div className="border-dashed border-t-2 border-custom-pink">
+              {/* 대쉬바 밑에 내용 전체 div */}
+              <div className="pt-3 h-[133px] flex flex-col justify-between">
+                <div className="flex items-center mb-1">
+                  <button
+                    className="mr-1 "
+                    onClick={() => {
+                      setIsCheck(!isCheck);
+                    }}
+                  >
+                    <CheckIcon isCheck={isCheck} />
+                  </button>
+                  <p className="text-[9px] text-black">
+                    해당 쿠폰의 상점 직원이 맞습니다. (필수)
+                  </p>
+                </div>
+                <div className="text-[#FF0000] text-[9px] mb-3">
+                  <p>※ 발급 정보는 마이페이지에서 수정가능합니다.</p>
+                  <p>※ 쿠폰 발급 이후 발급 정보 수정이 불가합니다.</p>
+                  <p>※ 본인 이외에 쿠폰 발급은 불가합니다.</p>
+                </div>
+                <button
+                  className={`w-full h-8 rounded  text-white text-xs ${
+                    isCheck
+                      ? "bg-custom-pink"
+                      : "bg-[#B2B2B2] cursor-not-allowed"
+                  }`}
+                  onClick={() => {
+                    if (isCheck) {
+                      openSpecificModal("modal3");
+                    }
+                  }}
+                  disabled={!isCheck}
+                >
+                  사용하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+
+        {/* 3번째 모달창 */}
+        <Modal
+          isOpen={modalsOpen.modal3}
+          onClose={closeAllModals}
+          isCoupon={true}
+          isLast={true}
+        >
+          <div className="px-6 py-5 w-[278px] h-full">
+            <div className="h-[200px]">
+              <div className="text-center mb-3 text-custom-gray-200">
+                쿠폰 정보
+              </div>
+              <img
+                src={couponData.storeImage}
+                alt="상점 이미지"
+                className="mb-8 w-[228px] h-[141px] grayscale"
+              />
+              <div className="w-[115px] h-[115px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
+                <p className="text-custom-pink text-2xl font-semibold">
+                  사용
+                  <br />
+                  완료
+                </p>
+              </div>
+            </div>
+
+            {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
+            {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
+
+            <CouponSemicircleUI_Mobile borderColor={`custom-gray-400`} />
+
+            {/* 쿠폰 실선 밑 영역 */}
+            <div className="border-dashed border-t-2 border-[#B2B2B2] text-center">
+              <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
+              <h3 className="text-[10px] mb-2.5 text-custom-orange">
+                {couponData.subtitle}
+              </h3>
+              <h4 className="text-[9px] mb-1">
+                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+              </h4>
+              <button
+                className="h-8 w-full rounded bg-[#B2B2B2] text-white text-xs"
+                onClick={() => {
+                  closeAllModals();
+                  handleCouponUsed(couponData.id);
+                }}
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        </Modal>
+      </div>
+
       {/* 데스크탑 쿠폰 */}
       <main className="h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
         {/* 쿠폰 이미지 및 상세 내용 */}
@@ -142,7 +301,7 @@ const CouponCard = ({
           {/* 이미지 */}
           <img
             src={couponData.storeImage}
-            alt=""
+            alt="상점 이미지"
             className="mr-12 rounded-lg"
           />
           {/* 내용 전체 크기 설정 */}
@@ -191,9 +350,7 @@ const CouponCard = ({
               <button
                 className="w-40 h-40 bg-white rounded-full flex items-center justify-center"
                 onClick={() => {
-                  // handleOpenModal("isCouponModalOpen");
                   handleOpenModal();
-                  // console.log("isModalOpen", isModalOpen);
                 }}
                 disabled={couponData.useYn === "Y"}
               >
@@ -203,9 +360,7 @@ const CouponCard = ({
             <button
               className="text-white"
               onClick={() => {
-                // handleOpenModal("isCouponModalOpen");
                 handleOpenModal();
-                console.log("isModalOpen", isModalOpen);
               }}
               disabled={couponData.useYn === "Y"}
             >
@@ -214,172 +369,6 @@ const CouponCard = ({
           </div>
         </div>
       </main>
-
-      {/* 모바일 모달 */}
-      <div className="md:hidden">
-        {/* 1번째 모달 */}
-        <Modal
-          isOpen={modalsOpen.modal1}
-          onClose={closeAllModals}
-          isCoupon={true}
-        >
-          <div className="px-6 py-5 w-[278px] h-full">
-            <div className="h-[200px]">
-              <div className="text-center mb-3 text-custom-gray-200">
-                쿠폰 정보
-              </div>
-              <img
-                src={couponData.storeImage}
-                alt=""
-                className="mb-8 w-[228px] h-[141px] rounded-lg"
-              />
-            </div>
-
-            {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
-
-            {/* 쿠폰 실선 밑 영역 */}
-            <div className="border-dashed border-t-2 border-custom-pink text-center">
-              <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
-              <h3 className="text-[10px] mb-2.5 text-custom-orange">
-                {couponData.subtitle}
-              </h3>
-              <h4 className="text-[9px] mb-1">
-                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
-              </h4>
-              <button
-                className="h-8 w-full rounded bg-custom-pink text-white text-xs"
-                onClick={() => {
-                  // handleCloseModal();
-                  // handleOpenModal("isCouponInfoModalOpen");
-                  openSpecificModal("modal2");
-                }}
-              >
-                직원확인
-              </button>
-            </div>
-          </div>
-        </Modal>
-
-        {/* 2번째 모달 */}
-        <Modal
-          isOpen={modalsOpen.modal2}
-          onClose={closeAllModals}
-          isCoupon={true}
-        >
-          <div className="px-6 py-5 w-[278px] h-full">
-            <div className="h-[200px]">
-              <div className="text-center text-custom-gray-200">직원 확인</div>
-              <div className="flex justify-center items-center h-5/6">
-                <img
-                  className={`${isCheck ? "w-40 h-40" : "w-28 h-28"}`}
-                  src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
-                  alt=""
-                />
-              </div>
-            </div>
-
-            {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
-
-            <div className="border-dashed border-t-2 border-custom-pink">
-              {/* 대쉬바 밑에 내용 전체 div */}
-              <div className="pt-3 h-[133px] flex flex-col justify-between">
-                <div className="flex items-center mb-1">
-                  <button
-                    className="mr-1 "
-                    onClick={() => {
-                      setIsCheck(!isCheck);
-                    }}
-                  >
-                    <CheckIcon isCheck={isCheck} />
-                  </button>
-                  <p className="text-[9px] text-black">
-                    해당 쿠폰의 상점 직원이 맞습니다. (필수)
-                  </p>
-                </div>
-                <div className="text-[#FF0000] text-[9px] mb-3">
-                  <p>※ 발급 정보는 마이페이지에서 수정가능합니다.</p>
-                  <p>※ 쿠폰 발급 이후 발급 정보 수정이 불가합니다.</p>
-                  <p>※ 본인 이외에 쿠폰 발급은 불가합니다.</p>
-                </div>
-                <button
-                  className={`w-full h-8 rounded  text-white text-xs ${
-                    isCheck
-                      ? "bg-custom-pink"
-                      : "bg-[#B2B2B2] cursor-not-allowed"
-                  }`}
-                  onClick={() => {
-                    if (isCheck) {
-                      // isCheck가 true일 때만 클릭 이벤트 처리
-                      // handleCloseModal();
-                      // handleOpenModal("isCouponDownloadModalOpen");
-                      openSpecificModal("modal3");
-                    }
-                  }}
-                  disabled={!isCheck}
-                >
-                  사용하기
-                </button>
-              </div>
-            </div>
-          </div>
-        </Modal>
-
-        {/* 3번째 모달창 */}
-        <Modal
-          isOpen={modalsOpen.modal3}
-          onClose={closeAllModals}
-          isCoupon={true}
-          isLast={true}
-        >
-          <div className="px-6 py-5 w-[278px] h-full">
-            <div className="h-[200px]">
-              <div className="text-center mb-3 text-custom-gray-200">
-                쿠폰 정보
-              </div>
-              <img
-                src={couponData.storeImage}
-                alt=""
-                className="mb-8 w-[228px] h-[141px] grayscale"
-              />
-              <div className="w-[115px] h-[115px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
-                <p className="text-custom-pink text-2xl font-semibold">
-                  사용
-                  <br />
-                  완료
-                </p>
-              </div>
-            </div>
-
-            {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-
-            <CouponSemicircleUI_Mobile borderColor={`custom-gray-400`} />
-
-            {/* 쿠폰 실선 밑 영역 */}
-            <div className="border-dashed border-t-2 border-[#B2B2B2] text-center">
-              <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
-              <h3 className="text-[10px] mb-2.5 text-custom-orange">
-                {couponData.subtitle}
-              </h3>
-              <h4 className="text-[9px] mb-1">기한: {couponData.startDate}</h4>
-              <button
-                className="h-8 w-full rounded bg-[#B2B2B2] text-white text-xs"
-                onClick={() => {
-                  // handleCloseModal();
-                  // handleCouponUsed(couponData.id);
-                  closeAllModals();
-                  handleCouponUsed(couponData.id);
-                }}
-              >
-                닫기
-              </button>
-            </div>
-          </div>
-        </Modal>
-      </div>
 
       {/* 데스크탑 모달 */}
       <div className="hidden md:block">
@@ -394,7 +383,7 @@ const CouponCard = ({
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img
                 src={couponData.storeImage}
-                alt=""
+                alt="상점 이미지"
                 className="mt-5 mb-11 rounded-xl"
               />
             </div>
@@ -417,11 +406,6 @@ const CouponCard = ({
                   className="w-full h-9 rounded bg-custom-pink text-white text-xs"
                   onClick={() => {
                     openSpecificModal("modal2"); // 'modal2' 문자열을 인자로 전달
-                    // console.log("test", modalsOpen);
-                    // handleCloseModal();
-
-                    // handleOpenModal("isCouponInfoModalOpen");
-                    // handleOpenModal();
                   }}
                 >
                   직원확인
@@ -443,7 +427,7 @@ const CouponCard = ({
                 <img
                   className={isCheck ? "w-64" : null}
                   src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
-                  alt=""
+                  alt="QR코드 이미지"
                 />
               </div>
             </div>
@@ -483,10 +467,7 @@ const CouponCard = ({
                   }`}
                   onClick={() => {
                     if (isCheck) {
-                      // isCheck가 true일 때만 클릭 이벤트 처리
-                      // handleCloseModal();
                       openSpecificModal("modal3");
-                      // handleOpenModal("isCouponDownloadModalOpen");
                     }
                   }}
                   disabled={!isCheck}
@@ -509,7 +490,7 @@ const CouponCard = ({
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img
                 src={couponData.storeImage}
-                alt=""
+                alt="상점 이미지"
                 className="mt-5 mb-11 grayscale rounded-xl"
               />
               <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
@@ -529,12 +510,12 @@ const CouponCard = ({
                 <h3 className="text-sm mb-2.5 text-custom-orange">
                   {couponData.subtitle}
                 </h3>
-                <h4 className="text-xs mb-5">기한: {couponData.startDate}</h4>
+                <h4 className="text-xs mb-5">
+                  기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+                </h4>
                 <button
                   className="w-full h-9 rounded bg-[#B2B2B2] text-white text-xs"
                   onClick={() => {
-                    // handleCloseModal();
-                    // openSpecificModal();
                     closeAllModals();
                     handleCouponUsed(couponData.id);
                   }}
