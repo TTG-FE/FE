@@ -27,7 +27,6 @@ const CouponCard = ({
 
   // 특정 모달을 제외하고 모두 닫는 함수
   const openSpecificModal = (modalName) => {
-    // console.log("closing modal");
     setModalsOpen({
       modal1: false,
       modal2: false,
@@ -43,6 +42,7 @@ const CouponCard = ({
       modal3: false,
     });
     handleCloseModal();
+    setIsCheck(false);
   };
 
   // 이거 때문에 화면이 작아질때 쿠폰이 다시 보이는 버그 발생함 -> 어떻게
@@ -132,82 +132,6 @@ const CouponCard = ({
         </div>
       </main>
       {/* //모바일 쿠폰 영역 끝 */}
-
-      {/* 데스크탑 쿠폰 */}
-      <main className="h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
-        {/* 쿠폰 이미지 및 상세 내용 */}
-        <div className="flex basis-3/4 pl-7 py-6 h-full">
-          {/* 이미지 */}
-          <img
-            src={couponData.storeImage}
-            alt="상점 이미지"
-            className="mr-12 rounded-lg"
-          />
-          {/* 내용 전체 크기 설정 */}
-          <div className=" pt-11 pb-7 truncate">
-            <h2 className="text-3xl	font-medium	mb-4 text-ellipsis overflow-hidden">
-              {couponData.name}
-            </h2>
-            <h3 className="text-[#FF7A00] mb-14 text-ellipsis overflow-hidden">
-              {couponData.subtitle}
-            </h3>
-            <div className="flex items-center">
-              <p
-                className={`px-5 py-2.5 rounded-3xl	text-white mr-5 ${
-                  couponData.useYn === "Y"
-                    ? "bg-custom-gray-200"
-                    : "bg-custom-pink"
-                }`}
-              >
-                {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
-              </p>
-              <p className="text-ellipsis overflow-hidden">
-                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* 쿠픈 다운로드 */}
-        <div
-          className={`relative basis-1/4 rounded-r-lg h-full overflow-hidden ${
-            couponData.useYn === "Y"
-              ? "bg-custom-gray-200"
-              : "bg-custom-gradation-180"
-          }`}
-        >
-          {/* 쿠폰 디자인 */}
-          {/* %로 하고싶은데 맞추기 번거로움 */}
-          <div className="absolute top-[15px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
-          <div className="absolute top-[69px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
-          <div className="absolute top-[123px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
-          <div className="absolute top-[177px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
-          <div className="absolute top-[231px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
-
-          {/* 다운로드 */}
-          <div className="h-full flex flex-col items-center justify-center ml-5">
-            <div className="flex items-center justify-center mb-3.5">
-              <button
-                className="w-40 h-40 bg-white rounded-full flex items-center justify-center"
-                onClick={() => {
-                  handleOpenModal();
-                }}
-                disabled={couponData.useYn === "Y"}
-              >
-                <DownloadIcon isCoupon={couponData.useYn === "Y"} />
-              </button>
-            </div>
-            <button
-              className="text-white"
-              onClick={() => {
-                handleOpenModal();
-              }}
-              disabled={couponData.useYn === "Y"}
-            >
-              Download
-            </button>
-          </div>
-        </div>
-      </main>
 
       {/* 모바일 모달 */}
       <div className="md:hidden">
@@ -369,6 +293,82 @@ const CouponCard = ({
           </div>
         </Modal>
       </div>
+
+      {/* 데스크탑 쿠폰 */}
+      <main className="h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
+        {/* 쿠폰 이미지 및 상세 내용 */}
+        <div className="flex basis-3/4 pl-7 py-6 h-full">
+          {/* 이미지 */}
+          <img
+            src={couponData.storeImage}
+            alt="상점 이미지"
+            className="mr-12 rounded-lg"
+          />
+          {/* 내용 전체 크기 설정 */}
+          <div className=" pt-11 pb-7 truncate">
+            <h2 className="text-3xl	font-medium	mb-4 text-ellipsis overflow-hidden">
+              {couponData.name}
+            </h2>
+            <h3 className="text-[#FF7A00] mb-14 text-ellipsis overflow-hidden">
+              {couponData.subtitle}
+            </h3>
+            <div className="flex items-center">
+              <p
+                className={`px-5 py-2.5 rounded-3xl	text-white mr-5 ${
+                  couponData.useYn === "Y"
+                    ? "bg-custom-gray-200"
+                    : "bg-custom-pink"
+                }`}
+              >
+                {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
+              </p>
+              <p className="text-ellipsis overflow-hidden">
+                기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
+              </p>
+            </div>
+          </div>
+        </div>
+        {/* 쿠픈 다운로드 */}
+        <div
+          className={`relative basis-1/4 rounded-r-lg h-full overflow-hidden ${
+            couponData.useYn === "Y"
+              ? "bg-custom-gray-200"
+              : "bg-custom-gradation-180"
+          }`}
+        >
+          {/* 쿠폰 디자인 */}
+          {/* %로 하고싶은데 맞추기 번거로움 */}
+          <div className="absolute top-[15px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
+          <div className="absolute top-[69px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
+          <div className="absolute top-[123px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
+          <div className="absolute top-[177px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
+          <div className="absolute top-[231px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
+
+          {/* 다운로드 */}
+          <div className="h-full flex flex-col items-center justify-center ml-5">
+            <div className="flex items-center justify-center mb-3.5">
+              <button
+                className="w-40 h-40 bg-white rounded-full flex items-center justify-center"
+                onClick={() => {
+                  handleOpenModal();
+                }}
+                disabled={couponData.useYn === "Y"}
+              >
+                <DownloadIcon isCoupon={couponData.useYn === "Y"} />
+              </button>
+            </div>
+            <button
+              className="text-white"
+              onClick={() => {
+                handleOpenModal();
+              }}
+              disabled={couponData.useYn === "Y"}
+            >
+              Download
+            </button>
+          </div>
+        </div>
+      </main>
 
       {/* 데스크탑 모달 */}
       <div className="hidden md:block">

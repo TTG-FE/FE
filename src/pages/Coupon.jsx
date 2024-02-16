@@ -85,13 +85,17 @@ const Coupon = () => {
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
+
   useEffect(() => {
-    const fetchData = async() => {
+    const fetchData = async () => {
+      const token =
+        "naver_AAAAOIOXjfzp-hTjCVP9ZkoxUnkLy7wvJQVQoa0Vt8DHhMpRpyGyUsdxX4nyzOcz90mP8JOTy9IZvNVSwFj5uFozrU0";
       try {
         const response = await axios.get(`coupons`, {
           headers: {
-            Authorization: `Bearer naver_AAAAOJaIpGiVkvC1JKm0PdXytCINA7n7rmt5U1_X3HLy7RePUxQ5mDHA74aUEMBKwRBzlnip12GVmmM6K1oQxFlO9IM`,
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         setCoupons(response.data.result);
       } catch (error) {
@@ -133,12 +137,8 @@ const Coupon = () => {
     setActiveModalCouponId(null);
   };
 
-  
-
   // 현재 열린 모달의 쿠폰 ID 상태
   const [activeModalCouponId, setActiveModalCouponId] = useState(null);
-
-console.log(activeModalCouponId);
 
   const renderCouponCards = (coupons) => {
     return coupons.map((coupon) => (
