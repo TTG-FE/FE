@@ -22,7 +22,7 @@ const StoreCard = ({ item }) => {
         </p>
         {/* 서비스 메뉴 */}
         <p className="mb-6 text-xs font-semibold text-custom-pink line-clamp-1">
-          {item.storeId}
+          {item.serviceInfo}
         </p>
         {/* 또또가 리뷰 참여 횟수 */}
         <p className="text-xs text-custom-gray-200 ">

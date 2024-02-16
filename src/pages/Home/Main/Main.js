@@ -9,7 +9,7 @@ const Main = () => {
   const [hotStores, setHotStores] = useState([]); // hot
   const [homeReviews, setHomeReviews] = useState([]); // review
   const [error, setError] = useState(null); // 에러 여부
-  const [isLoding, setLoading] = useState(true); //
+  const [isLoading, setLoading] = useState(true); //
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,16 +42,21 @@ const Main = () => {
   return (
     /* 전체 페이지 크기 설정 */
     <div className="">
-      <div>
-        {/* TOP 15 또또가 */}
-        <Top top15={top15} />
-        {/* Hot */}
-        <Hot hotStores={hotStores} />
-        {/* 또또가 리뷰 */}
-        <Review homeReviews={homeReviews} />
-        {/* 배너 */}
-        <Banner />
-      </div>
+      {isLoading ? (
+        // TODO: 로딩중 아이콘으로 변경예정
+        <div>로딩중</div>
+      ) : (
+        <div>
+          {/* TOP 15 또또가 */}
+          <Top top15={top15} />
+          {/* Hot */}
+          <Hot hotStores={hotStores} />
+          {/* 또또가 리뷰 */}
+          <Review homeReviews={homeReviews} />
+          {/* 배너 */}
+          <Banner />
+        </div>
+      )}
     </div>
   );
 };
