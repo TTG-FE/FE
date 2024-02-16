@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const useInfiniteScroll = (fetchData) => {
+const useInfiniteScroll = (fetchData, keyword) => {
   const pageEndRef = useRef(null);
-  const [page, setPage] = useState(0); // 페이지 수
+  const [page, setPage] = useState(-1); // 페이지 수
+  const [word, setWord] = useState(keyword); // 키워드
 
   useEffect(() => {
     // IntersectionObserver를 사용하여 페이지 끝에 도달할 때마다 fetchData를 호출
@@ -24,16 +25,19 @@ const useInfiniteScroll = (fetchData) => {
         observer.unobserve(pageEndRef.current); // 옵저버 제거
       }
     };
-  }, []);
+  }, [keyword]);
 
   useEffect(() => {
-    if (page === 0) return;
-    fetchData(page);
-  }, [page, fetchData]);
+    setPage(-1); // 키워드가 변경될 때마다 페이지 초기화
+    setWord(keyword); // 키워드 업데이트
+  }, [keyword]);
 
-  return {
-    pageEndRef,
-  };
+  useEffect(() => {
+    if (page === -1) return;
+    fetchData(page);
+  }, [page]);
+
+  return { pageEndRef };
 };
 
 export default useInfiniteScroll;

@@ -27,7 +27,7 @@ const CouponCard = ({
 
   // 특정 모달을 제외하고 모두 닫는 함수
   const openSpecificModal = (modalName) => {
-    console.log("closing modal");
+    // console.log("closing modal");
     setModalsOpen({
       modal1: false,
       modal2: false,
@@ -55,8 +55,6 @@ const CouponCard = ({
       }));
     }
   }, [isModalOpen]);
-
-  // console.log("modalsOpen", modalsOpen);
 
   console.log(modalsOpen);
 

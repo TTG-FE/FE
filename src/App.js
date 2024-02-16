@@ -32,7 +32,7 @@ function App() {
               {/* 라우트를 정의한 부분 */}
               <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/store" element={<Store />} />
+                <Route path="/store/:store_id" element={<Store />} />
                 <Route path="/coupon" element={<Coupon />} />
                 <Route path="/region" element={<Region />} />
                 <Route path="/menu" element={<Menu />} />
