@@ -21,7 +21,7 @@ const Heart = () => {
         console.log("token: ", token);
         const response = await axios.get(`/stores/heart?page=${page}&size=20`, {
           headers: {
-            Authorization: `Bearer kakao_KBnq1u9JZ01eRCxkEBHALh3y58oL7nVXZUkKPXMXAAABja_-YzdAPV-WDrAHcw`,
+            Authorization: token,
           },
         });
         setStores((prev) => [...prev, ...response.data.result.content]);

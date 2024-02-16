@@ -4,7 +4,7 @@ import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
 const HeartButton = ({ like, id }) => {
-  const { isLogin } = useContext(LoginContext);
+  const { isLogin, token } = useContext(LoginContext);
   const [isLiked, setIsLiked] = useState(like); // 관심 상점 여부
   const [isCliked, setCliked] = useState(false); // 맨 처음에 useEffect 내에서 api 호출을 하지 않기 위해 사용
 
@@ -22,12 +22,20 @@ const HeartButton = ({ like, id }) => {
       // 하트 등록하는 경우
       if (isLiked) {
         axios
-          .post(`/stores/${id}/heart`)
+          .post(`/stores/${id}/heart`, null, {
+            headers: {
+              Authorization: token,
+            },
+          })
           .catch((error) => console.log("하트 등록 실패!"));
       } else {
         // 하트 해제하는 경우
         axios
-          .delete(`/stores/${id}/heart`)
+          .delete(`/stores/${id}/heart`, {
+            headers: {
+              Authorization: token,
+            },
+          })
           .catch((error) => console.log("하트 해제 실패!"));
       }
     };
