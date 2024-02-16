@@ -1,44 +1,79 @@
 import React, { useEffect, useState } from "react";
 import NaverLogin from "react-naver-login";
+import KakaoLogin from "react-kakao-login";
 import LoginImage from "../assets/loginimage.png";
+import { useNavigate } from "react-router-dom";
+
+const baseurl = "http://localhost:3000";
+
+const sendAuthenticatedRequest = async (accessToken, navigate, endpoint) => {
+  try {
+    const response = await fetch(`${baseurl}${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await response.json();
+    console.log("서버 응답:", data);
+  } catch (error) {
+    console.error("요청 중 오류 발생:", error);
+  }
+};
 
 export const Login = () => {
   const [naverClientId, setNaverClientId] = useState("");
-  const baseurl = "http://localhost:3000";
   const naverCallbackUrl = `${baseurl}/api/v1/auth/oauth2/naver`;
+  const navigate = useNavigate();
+
+  const kakaoClientId = "KAKAO_CLIENT_ID";
+  // const kakaoCallbackUrl = "KAKAO_CALLBACK_URL";
 
   useEffect(() => {
     // 서버에서 클라이언트 ID 가져오기
     const fetchNaverClientId = async () => {
       try {
-        const response = await fetch("서버에서_클라이언트_ID를_가져올_API_URL");
-        const data = await response.json();
-
+        const response = await fetch(`${baseurl}/api/v1/auth/oauth2/naver`);
+        console.log("서버 응답:", response);  // 추가한 로그
+    
+        if (!response.ok) {
+          console.error("서버 응답이 실패했습니다.", response.statusText);
+          return;
+        }
+    
+        const contentType = response.headers.get("content-type");
+        console.log("Content-Type:", contentType);  // 추가한 로그
+    
+        if (!contentType || !contentType.includes("application/json")) {
+          console.error("서버 응답이 올바른 JSON 형식이 아닙니다.");
+          return;
+        }
+    
+        const data = await response.json(); // JSON으로 파싱
+        console.log("JSON 데이터:", data);  // 추가한 로그
         setNaverClientId(data.clientId);
       } catch (error) {
         console.error("클라이언트 ID를 가져오면서 오류 발생:", error);
       }
     };
+    
+    
+    
 
     fetchNaverClientId();
   }, []);
 
-  // 네이버 로그인 성공 후의 처리
-  const onSuccessNaverLogin = async (naverUser) => {
-    // 네이버 로그인 성공 시
-    console.log("네이버 로그인 성공!", naverUser);
-
+  const handleNaverLogin = (naverUser) => {
+    console.log("네이버 로그인 성공", naverUser);
     try {
-      // 네이버에서 제공하는 사용자 액세스 토큰 얻기
-      const naverAccessToken = naverUser.accessToken;
-
-      // 서버로 인증된 요청 보내기
-      await sendAuthenticatedRequest(naverAccessToken);
-
-      // 리다이렉트
-      window.location.href = naverCallbackUrl;
+      navigate(`/api/v1/auth/oauth2/naver?code=${naverUser.code}`);
+      sendAuthenticatedRequest(
+        naverUser.accessToken,
+        navigate,
+        "/auth/oauth-response/"
+      );
     } catch (error) {
-      console.error("액세스 토큰을 이용한 서버 요청 중 오류 발생:", error);
+      console.error("네이버 로그인 중 오류 발생:", error);
     }
   };
 
@@ -47,23 +82,38 @@ export const Login = () => {
     console.error("네이버 로그인 실패!", result);
   };
 
-  const sendAuthenticatedRequest = async (accessToken) => {
+  const handleKakaoLogin = (kakaoUser) => {
+    console.log("KakaoTalk login success!", kakaoUser);
     try {
-      const response = await fetch(
-        "http://localhost:3000/auth/oauth-response/",
-        {
-          method: "GET", // 또는 다른 HTTP 메서드
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+      navigate(
+        `/auth/oauth-response/?kakaoToken=${kakaoUser.response.access_token}`
       );
-      const data = await response.json();
-      console.log("서버 응답:", data);
+      sendAuthenticatedRequest(
+        kakaoUser.response.access_token,
+        navigate,
+        "/auth/oauth-response/"
+      );
     } catch (error) {
-      console.error("요청 중 오류 발생:", error);
+      console.error("카카오 로그인 중 오류 발생:", error);
     }
   };
+  // const onSuccessKakaoLogin = (kakaoUser) => {
+  //   // 카카오 로그인 성공 시
+  //   console.log("KakaoTalk login success!", kakaoUser);
+
+  //   try {
+  //     // 리다이렉트
+  //     window.location.href = `${baseurl}/auth/oauth-response/?kakaoToken=${kakaoUser.response.access_token}`;
+  //   } catch (error) {
+  //     console.error("카카오 로그인 중 오류 발생:", error);
+  //   }
+  // };
+
+  const onFailureKakaoLogin = (result) => {
+    // 카카오 로그인 실패 시
+    console.error("KakaoTalk login failure!", result);
+  };
+
   return (
     <div className="flex items-center h-screen ">
       <div className="hidden sm:block mr-[7.69rem] ml-[15.81rem]">
@@ -88,11 +138,7 @@ export const Login = () => {
         <NaverLogin
           clientId={naverClientId}
           callbackUrl={naverCallbackUrl}
-          onSuccess={(naverUser) => {
-            onSuccessNaverLogin(naverUser);
-            // 네이버 로그인 성공 시, 저장된 accessToken을 사용하여 인증된 요청 보내기
-            sendAuthenticatedRequest(naverUser.accessToken);
-          }}
+          onSuccess={handleNaverLogin}
           onFailure={onFailureNaverLogin}
           render={(props) => (
             <button
@@ -116,6 +162,36 @@ export const Login = () => {
 
               <span className="sm:text-[1.5625rem]  font-medium flex items-center justify-center font=['Inter']  text-[#FFF]">
                 네이버 로그인
+              </span>
+            </button>
+          )}
+        />
+        <KakaoLogin
+          token={kakaoClientId}
+          onSuccess={handleKakaoLogin}
+          onFail={onFailureKakaoLogin}
+          render={(props) => (
+            <button
+              className="flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
+              onClick={props.onClick}
+            >
+              <svg
+                style={{ marginRight: "5.44rem" }}
+                className="ml-[3rem]"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21.9594 7C13.7059 7 7 12.425 7 19.075C7 23.275 9.75115 26.95 13.7059 29.225L12.6742 35L19.0363 30.8C19.896 30.975 20.9277 30.975 21.7874 30.975C30.0408 30.975 36.7468 25.55 36.7468 18.9C36.9187 12.425 30.2128 7 21.9594 7Z"
+                  fill="#341C15"
+                />
+              </svg>
+
+              <span className="sm:text-[1.5625rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
+                카카오톡 로그인
               </span>
             </button>
           )}

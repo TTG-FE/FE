@@ -9,7 +9,7 @@ import UserGuide from "./pages/Home/UserGuide";
 import Header from "./pages/Header";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
-import { useState } from "react";
+//import { useState } from "react";
 import Coupon from "./pages/Coupon";
 import Heart from "./pages/Home/Heart";
 import Search from "./pages/Home/Search";
@@ -17,6 +17,7 @@ import MyPage from "./pages/MyPage";
 import { Login } from "./pages/Login";
 import LoginContextProvider from "./contexts/LoginContextProvider"; // LoginContextProvider
 import ModalContextProvider from "./contexts/ModalContextProvider"; // SelectModalProvider
+import OAuthResponse from "./pages/OAuthResponse";
 
 function App() {
   // LoginContext, ModalcontextProvider 추가
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/heart" element={<Heart />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/oauth-response" element={<OAuthResponse />} />
                 <Route path="/menu/:menu_id/:menu_label" element={<Menu />} />
                 <Route
                   path="/region/:city_id/:city_label/:town_id/:town_label"
