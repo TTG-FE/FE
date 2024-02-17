@@ -1,18 +1,35 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const OngoingReview = () => {
-  const [reviewData, setReviewData] = useState(null);
+  const [reviewData, setReviewData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
     const fetchReviewData = async () => {
-      try {
-        const response = await fetch("/members/profile");
-        const result = await response.json();
+      const token =
+        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
 
+      try {
+        const response = await axios.get("members/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = response.data;
+        // console.log(response);
+        // console.log(response.data);
+        // console.log(response.data.result);
+        const fetchResult = response.data.result;
+        setReviewData(fetchResult);
+        console.log(reviewData);
         if (result.isSuccess) {
-          setReviewData(result.result.reviewDtos.filter((review) => review.status === "SUCCESS"));
+          setReviewData(
+            result.result.reviewDtos.filter(
+              (review) => review.status === "SUCCESS"
+            )
+          );
         } else {
           setError(result.message);
         }
@@ -29,7 +46,11 @@ const OngoingReview = () => {
   }
 
   if (!reviewData || reviewData.length === 0) {
-    return <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">신청한 리뷰가 없어요.</div>;
+    return (
+      <div className="text-[#898989] text-[1.125rem] text-center font-['Inter'] font-semibold">
+        신청한 리뷰가 없어요.
+      </div>
+    );
   }
 
   return (
@@ -48,10 +69,10 @@ const OngoingReview = () => {
             {review.storeDto.name}
           </div>
           <div className="mb-[0.58rem] text-[#FF0069] truncate text-sm">
-            {review.couponDto.content}
+            {review.storeDto.couponDto.content}
           </div>
           <div className="text-[0.8125rem] text-custom-gray-200 ">
-            신청일자: {review.apply_date}
+            신청일자: {review.applyDate}
           </div>
         </div>
       ))}

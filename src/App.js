@@ -17,7 +17,6 @@ import MyPage from "./pages/MyPage";
 import { Login } from "./pages/Login";
 import LoginContextProvider from "./contexts/LoginContextProvider"; // LoginContextProvider
 import ModalContextProvider from "./contexts/ModalContextProvider"; // SelectModalProvider
-import OAuthResponse from "./pages/OAuthResponse";
 
 function App() {
   // LoginContext, ModalcontextProvider 추가
@@ -40,7 +39,6 @@ function App() {
                 <Route path="/heart" element={<Heart />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/oauth-response" element={<OAuthResponse />} />
                 <Route path="/menu/:menu_id/:menu_label" element={<Menu />} />
                 <Route
                   path="/region/:city_id/:city_label/:town_id/:town_label"

@@ -8,7 +8,7 @@ const LoginContextProvider = ({ children }) => {
   // !참고사항: context api는 새로고침 시 저장소가 초기화된다. 따라서 로그인 정보는 다른 저장소를 이용하고 context에서는 그 저장소에서 불러온 데이터를 저장하는 역할로 구현할 예정입니다!
   const [isLogin, setLogin] = useState(true);
   const [token, setToken] = useState(
-    `Bearer kakao_KBnq1u9JZ01eRCxkEBHALh3y58oL7nVXZUkKPXMXAAABja_-YzdAPV-WDrAHcw`
+    `Bearer naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA`
   );
   const logout = () => {
     setLogin(false);

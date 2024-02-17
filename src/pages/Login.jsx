@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginImage from "../assets/loginimage.png";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const expiresIn = 1 * 60;
+    const expirationTime = new Date().getTime() + expiresIn * 1000;
+
+    localStorage.setItem("tokenExpiration", expirationTime);
+
+    const tokenExpirationTimer = setTimeout(() => {
+      handleLogout();
+    }, expiresIn * 1000);
+
+    return () => clearTimeout(tokenExpirationTimer);
+  }, []);
+
+  const handleLogout = () => {
+    const token = localStorage.getItem("token");
+    const expirationTime = localStorage.getItem("tokenExpiration");
+
+    if (token && expirationTime) {
+      // 토큰 만료 시 자동 로그아웃
+      const currentTime = new Date().getTime();
+      if (currentTime > Number(expirationTime)) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiration");
+        navigate("/login"); 
+      } else {
+        navigate("/");
+      }
+    }
+  };
 
   const handleCustomNaverLogin = () => {
     const popupUrl = `http://13.124.232.198/api/v1/auth/oauth2/naver`;
@@ -15,8 +46,6 @@ export const Login = () => {
     const popupOptions = `width=600,height=800`;
     window.open(popupUrl, "카카오 로그인", popupOptions);
   };
-
-  
 
   return (
     <div className="flex items-center h-screen ">
