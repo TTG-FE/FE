@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 // Asset
 import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
@@ -8,10 +8,12 @@ import CouponCard from "../components/CouponCard";
 import { Link } from "react-router-dom";
 import GoToLogin from "../components/GoToLogin";
 import axios from "axios";
+import { LoginContext } from "../contexts/LoginContextProvider";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
-  const [login, setLogin] = useState(false);
+  const { isLogin,token } = useContext(LoginContext);
+  const [login, setLogin] = useState(isLogin);
   // const [coupons, setCoupons] = useState([
   //   {
   //     id: 21,
@@ -76,33 +78,37 @@ const Coupon = () => {
   // ]);
 
   // 검색 처리
-  
-  const [coupons, setCoupons] = useState([]);
-  
+
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [coupons, setCoupons] = useState([]);
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        // const token =
+        //   "naver_AAAAOJJBFFgk1BwHCxhj3pZbwGSHmqQ4cvc_PVbBpTGxJUDsU2TKWZzdKOs4O3lx7m-yJC70jKgZ_kNVne-Xg4LDyAY";
+        try {
+          if (isLogin) {
+             const response = await axios.get(`coupons`, {
+               headers: {
+                 Authorization: `${token}`,
+               },
+             });
+            setCoupons(response.data.result);
+            console.log(coupons)
+          }
+        } catch (error) {
+          console.error("Error fetching StoreInfo:", error);
+        }
+      };
+      fetchData();
+    }, []);
 
   const filteredCoupons = coupons.filter((coupon) =>
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token =
-        "naver_AAAAOJJBFFgk1BwHCxhj3pZbwGSHmqQ4cvc_PVbBpTGxJUDsU2TKWZzdKOs4O3lx7m-yJC70jKgZ_kNVne-Xg4LDyAY";
-      try {
-        const response = await axios.get(`coupons`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setCoupons(response.data.result);
-      } catch (error) {
-        console.error("Error fetching StoreInfo:", error);
-      }
-    }
-    fetchData();
-  }, [])
-  
+
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
     // 해당 쿠폰을 사용했다고 true로 변경
