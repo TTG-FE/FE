@@ -26,41 +26,70 @@ export const Login = () => {
   const naverCallbackUrl = `${baseurl}/api/v1/auth/oauth2/naver`;
   const navigate = useNavigate();
 
-  const kakaoClientId = "KAKAO_CLIENT_ID";
+  const [kakaoClientId, setKakaoClientId] = useState("");
+
   // const kakaoCallbackUrl = "KAKAO_CALLBACK_URL";
 
   useEffect(() => {
-    // 서버에서 클라이언트 ID 가져오기
+    // 네이버 클라이언트 ID 가져오기
     const fetchNaverClientId = async () => {
       try {
         const response = await fetch(`${baseurl}/api/v1/auth/oauth2/naver`);
-        console.log("서버 응답:", response);  // 추가한 로그
-    
+        console.log("서버 응답:", response); 
+
         if (!response.ok) {
           console.error("서버 응답이 실패했습니다.", response.statusText);
           return;
         }
-    
+
         const contentType = response.headers.get("content-type");
-        console.log("Content-Type:", contentType);  // 추가한 로그
-    
+        console.log("Content-Type:", contentType); 
+
         if (!contentType || !contentType.includes("application/json")) {
           console.error("서버 응답이 올바른 JSON 형식이 아닙니다.");
           return;
         }
-    
+
         const data = await response.json(); // JSON으로 파싱
-        console.log("JSON 데이터:", data);  // 추가한 로그
+        console.log("JSON 데이터:", data); 
         setNaverClientId(data.clientId);
       } catch (error) {
         console.error("클라이언트 ID를 가져오면서 오류 발생:", error);
       }
     };
-    
-    
-    
 
     fetchNaverClientId();
+  }, []);
+
+  useEffect(() => {
+    // 카카오 클라이언트 ID 가져오기
+    const fetchKakaoClientId = async () => {
+      try {
+        const response = await fetch(`${baseurl}/api/v1/auth/oauth2/kakao`);
+        console.log("서버 응답:", response);
+
+        if (!response.ok) {
+          console.error("서버 응답이 실패했습니다.", response.statusText);
+          return;
+        }
+
+        const contentType = response.headers.get("content-type");
+        console.log("Content-Type:", contentType);
+
+        if (!contentType || !contentType.includes("application/json")) {
+          console.error("서버 응답이 올바른 JSON 형식이 아닙니다.");
+          return;
+        }
+
+        const data = await response.json();
+        console.log("JSON 데이터:", data);
+        setKakaoClientId(data.clientId);
+      } catch (error) {
+        console.error("클라이언트 ID를 가져오면서 오류 발생:", error);
+      }
+    };
+
+    fetchKakaoClientId();
   }, []);
 
   const handleNaverLogin = (naverUser) => {
