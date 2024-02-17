@@ -9,7 +9,6 @@ import { ReactComponent as PhoneArrowLeftIcon } from "./../assets/phone_Arrow_ri
 import { ReactComponent as RightArrow } from "./../assets/images/rightArrow.svg";
 import { ReactComponent as LoginIcon } from "./../assets/images/loginIcon.svg";
 import { LoginContext } from "./../contexts/LoginContextProvider";
-
 /** Header */
 const Header = () => {
   const location = useLocation();
