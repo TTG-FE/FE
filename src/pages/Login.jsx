@@ -1,93 +1,17 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import NaverLogin from "react-naver-login";
-import KakaoLogin from "react-kakao-login";
+import React from "react";
 import LoginImage from "../assets/loginimage.png";
-import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../contexts/LoginContextProvider";
-
-const baseurl = "http://localhost:3000";
-
-// 콜백 페이지의 스크립트 예시
-document.addEventListener("DOMContentLoaded", function () {
-  // 현재 페이지의 URL을 파싱
-  const pathArray = window.location.pathname.split("/");
-  // 토큰 값이 URL의 마지막 부분에 있다고 가정
-  const token = pathArray[pathArray.length - 1];
-
-  if (token.startsWith("naver_") || token.startsWith("kakao_")) {
-    // 토큰을 로컬 스토리지에 저장
-    localStorage.setItem("oauthToken", token);
-    // 팝업 창을 닫음
-    window.close();
-  }
-  // 팝업 창을 닫음
-  window.close();
-});
-
-const sendAuthenticatedRequest = async (accessToken, navigate, endpoint) => {
-  try {
-    const response = await fetch(`${baseurl}${endpoint}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const data = await response.json();
-    console.log("서버 응답:", data);
-  } catch (error) {
-    console.error("요청 중 오류 발생:", error);
-  }
-};
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const [tokenTest, setToken] = useState();
-
-  if (tokenTest) {
-    navigate("/");
-  }
-
-  const { loginSuccess } = useContext(LoginContext);
-
-  // 로그인 페이지 또는 컴포넌트
   const handleCustomNaverLogin = () => {
-    // 팝업 열기
-    const popup = window.open(
-      `http://13.124.232.198/api/v1/auth/oauth2/naver`,
-      "네이버 로그인",
-      "width=600,height=800"
-    );
-
-    // 팝업 창 닫힘 감지
-    const checkPopupClosed = setInterval(() => {
-      if (popup.closed) {
-        clearInterval(checkPopupClosed);
-        // 팝업이 닫혔다면 로컬 스토리지에서 토큰 확인
-        const token = localStorage.getItem("oauthToken");
-        setToken(token);
-        loginSuccess(token);
-      }
-    }, 500); // 500ms마다 확인
+    const popupUrl = `http://13.124.232.198/api/v1/auth/oauth2/naver`;
+    const popupOptions = `width=600,height=800`;
+    window.open(popupUrl, "네이버 로그인", popupOptions);
   };
 
-  const handleCustomKaKaoLogin = () => {
-    // 팝업 열기
-    const popup = window.open(
-      `http://13.124.232.198/api/v1/auth/oauth2/kakao`,
-      "네이버 로그인",
-      "width=600,height=800"
-    );
-
-    // 팝업 창 닫힘 감지
-    const checkPopupClosed = setInterval(() => {
-      if (popup.closed) {
-        clearInterval(checkPopupClosed);
-        // 팝업이 닫혔다면 로컬 스토리지에서 토큰 확인
-        const token = localStorage.getItem("oauthToken");
-        setToken(token);
-        loginSuccess(token);
-      }
-    }, 500); // 500ms마다 확인
+  const handleCustomKakaoLogin = () => {
+    const popupUrl = `http://13.124.232.198/api/v1/auth/oauth2/kakao`;
+    const popupOptions = `width=600,height=800`;
+    window.open(popupUrl, "카카오 로그인", popupOptions);
   };
 
   return (
@@ -111,7 +35,6 @@ export const Login = () => {
           간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
         </div>
 
-        {/* 네이버 로그인 */}
         <button
           className=" mb-[1.19rem]  flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
           onClick={handleCustomNaverLogin}
@@ -136,11 +59,9 @@ export const Login = () => {
           </span>
         </button>
 
-
-        {/* 카카오 로그인 */}
         <button
           className="flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
-          onClick={handleCustomKaKaoLogin}
+          onClick={handleCustomKakaoLogin}
         >
           <svg
             style={{ marginRight: "5.44rem" }}
