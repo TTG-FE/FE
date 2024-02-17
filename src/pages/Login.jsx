@@ -2,8 +2,6 @@ import React from "react";
 import LoginImage from "../assets/loginimage.png";
 
 export const Login = () => {
-
-
   const handleCustomNaverLogin = () => {
     const popupUrl = `http://13.124.232.198/api/v1/auth/oauth2/naver`;
     const popupOptions = `width=600,height=800`;
@@ -15,8 +13,6 @@ export const Login = () => {
     const popupOptions = `width=600,height=800`;
     window.open(popupUrl, "카카오 로그인", popupOptions);
   };
-
-  
 
   return (
     <div className="flex items-center h-screen ">

@@ -8,7 +8,7 @@ export const FinishReview = () => {
   useEffect(() => {
     const fetchReviewData = async () => {
       const token =
-        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
+        "naver_AAAAO9ruzBlAThPrxZmibfCeJJwvVxeWHDDkESUzkaJp7jWdPdQb5BKk23VD_AhYdk_3Jt2ztTYtqw1ur5TId0hMhcE";
 
       try {
         const response = await axios.get("members/profile", {
