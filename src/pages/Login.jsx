@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.close();
   }
   // 팝업 창을 닫음
-  // window.close();
 });
 
 export const Login = () => {
@@ -86,7 +85,7 @@ export const Login = () => {
         />
       </div>
 
-      <div className="mx-auto p-4 sm:p-0 ">
+      <div className="p-4 mx-auto sm:p-0 ">
         <div className=" mr-[31.75rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
           간편 로그인 후 <br />
           이용 가능합니다.
@@ -120,7 +119,6 @@ export const Login = () => {
             네이버 로그인
           </span>
         </button>
-
 
         {/* 카카오 로그인 */}
         <button

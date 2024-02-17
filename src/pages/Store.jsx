@@ -116,11 +116,11 @@ function Store() {
 const StoreLeftSection = ({ storeInfo }) => {
   return (
     <div className="w-1/2 mt-9 pr-14 border-r-2 border-[#f5f5f5] break-words">
-      <div className="w-full overflow-hidden mb-16 v">
+      <div className="w-full mb-16 overflow-hidden v">
         <img
           src={storeInfo.storeImage}
           alt="매장 음식 이미지"
-          className="w-full rounded-3xl object-cover"
+          className="object-cover w-full rounded-3xl"
         />
       </div>
       {/* 안내 문구들 */}
@@ -132,7 +132,7 @@ const StoreLeftSection = ({ storeInfo }) => {
           </div>
           <div className="ml-4 text-lg">
             또또가 블로그 리뷰 선정 안내
-            <ol className="list-decimal ml-4 ">
+            <ol className="ml-4 list-decimal ">
               <li>성의 없는 리뷰는 또또가 대상에서 제외됩니다.</li>
               <ul className="list-disc">
                 <li>진심이 느껴지지 않는 리뷰,</li>
@@ -268,17 +268,17 @@ const StoreRightSection = ({
 
   return (
     <div className="w-1/2 pl-16">
-      <div className="mt-14 w-full sticky top-10">
+      <div className="sticky w-full mt-14 top-10">
         {/* 데이터를 받아와야하니 props로 변경하기? */}
-        <div className="text-3xl font-semibold mb-5">
+        <div className="mb-5 text-3xl font-semibold">
           {/* [강북] 또먹고싶어 곱창 */}
           {storeInfo.title}
         </div>
-        <div className="text-2xl font-normal	">
+        <div className="text-2xl font-normal ">
           {/* 또먹고싶어 곱창을 리뷰하고 주먹밥+캔음료 받으세요! */}
           {storeInfo.name} 리뷰하고 {storeInfo.subTitle}
         </div>
-        <ul className="flex h-24 items-center border-b">
+        <ul className="flex items-center h-24 border-b">
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
             {/* 서울 */}
             {storeInfo.regionName}
@@ -288,7 +288,7 @@ const StoreRightSection = ({
             {storeInfo.menuName}
           </li>
         </ul>
-        <div className="flex py-8 border-b text-lg">
+        <div className="flex py-8 text-lg border-b">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             제공내역
           </div>
@@ -297,7 +297,7 @@ const StoreRightSection = ({
             {storeInfo.serviceInfo}
           </div>
         </div>
-        <div className="flex py-8 border-b text-lg">
+        <div className="flex py-8 text-lg border-b">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
@@ -322,12 +322,17 @@ const StoreRightSection = ({
 
               {/* 하트아이콘 */}
               <div className="flex">
-                <HeartButton like={storeInfo.heartStore} id={id} />
+                <HeartButton
+                  like={storeInfo.heartStore}
+                  id={id}
+                  borderColor={"rgba(0, 0, 0, 0.3)"}
+                  w={"27px"}
+                  h={"25px"}
+                />
               </div>
               {/* <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
                   stroke={isLiked ? "#FF0069" : "rgba(0, 0, 0, 0.3)"}
-                  // strokeOpacity={isLiked ? "1" : "0.3"}
                   fill={isLiked ? "#FF0069" : "none"}
                 />
               </button> */}
@@ -371,7 +376,7 @@ const StoreModal = ({
 }) => {
   return (
     <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-      <div className="px-12 py-7 text-lg">
+      <div className="px-12 text-lg py-7">
         <div className="text-2xl mb-9">내 리뷰 등록</div>
         <input
           type="text"

@@ -27,11 +27,16 @@ const LoginContextProvider = ({ children }) => {
 
   // 로그인 상태 업데이트 함수
   const loginSuccess = (token) => {
+    const expiresIn = 1 * 60; // 토큰의 만료 60분
+    const expirationTime = new Date().getTime() + expiresIn * 1000;
     localStorage.setItem("oauthToken", token); // 토큰을 로컬 스토리지에 저장
+    localStorage.setItem("tokenExpiration", expirationTime);
     setToken(`Bearer ${token}`);
     setLogin(true); // 로그인 상태를 true로 설정
   };
 
+  // 자동 로그아웃 함수
+  const autoLogout = () => {};
   return (
     <LoginContext.Provider value={{ isLogin, logout, token, loginSuccess }}>
       {children}
