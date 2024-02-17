@@ -12,6 +12,8 @@ import { LoginContext } from "./../contexts/LoginContextProvider";
 /** Header */
 const Header = () => {
   const location = useLocation();
+  const { autoLogout } = useContext(LoginContext);
+  autoLogout();
 
   return (
     <>

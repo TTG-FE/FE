@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginContext = createContext(); // LoginContext 생성
 
@@ -10,21 +11,52 @@ const LoginContextProvider = ({ children }) => {
   const [isLogin, setLogin] = useState(false);
   const [token, setToken] = useState(null);
 
+  const navigate = useNavigate();
+
   const logout = () => {
     setLogin(false);
     setToken(null);
     localStorage.removeItem("oauthToken");
+    localStorage.removeItem("tokenExpiration");
   };
 
   // 로그인 상태 업데이트 함수
   const loginSuccess = (token) => {
     localStorage.setItem("oauthToken", token); // 토큰을 로컬 스토리지에 저장
+
+    const expiresIn = 1 * 60; // 토큰의 만료 60분
+    const expirationTime = new Date().getTime() + expiresIn * 1000;
+    localStorage.setItem("tokenExpiration", expirationTime);
+
     setToken(`Bearer ${token}`);
     setLogin(true); // 로그인 상태를 true로 설정
   };
 
+  const autoLogout = () => {
+    const token = localStorage.getItem("oauthToken");
+    const expirationTime = localStorage.getItem("tokenExpiration");
+
+    if (token && expirationTime) {
+      const currentTime = new Date().getTime();
+      if (currentTime > Number(expirationTime)) {
+        // 토큰 만료 시 자동 로그아웃
+        localStorage.removeItem("oauthToken");
+        localStorage.removeItem("tokenExpiration");
+        setLogin(false);
+        setToken(null);
+        // navigate("/login", { replace: true }); // 로그인 페이지로 이동 // 이거 왜 오류남?
+      } else {
+        // 중복로그인을 피하기 위해, 토큰 유효한 경우 로그인 페이지로 이동하지 않음
+        console.log("아님");
+        // navigate("/", { replace: true });
+      }
+    }
+  };
+
   return (
-    <LoginContext.Provider value={{ isLogin, logout, token, loginSuccess }}>
+    <LoginContext.Provider
+      value={{ isLogin, logout, token, loginSuccess, autoLogout }}
+    >
       {children}
     </LoginContext.Provider>
   );
