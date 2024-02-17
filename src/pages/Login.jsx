@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useRef, useState } from "react";
 import NaverLogin from "react-naver-login";
 import KakaoLogin from "react-kakao-login";
@@ -90,27 +89,6 @@ export const Login = () => {
       }
     }, 500); // 500ms마다 확인
   };
-=======
-import React from "react";
-import LoginImage from "../assets/loginimage.png";
-
-export const Login = () => {
-
-
-  const handleCustomNaverLogin = () => {
-    const popupUrl = `http://13.124.232.198/api/v1/auth/oauth2/naver`;
-    const popupOptions = `width=600,height=800`;
-    window.open(popupUrl, "네이버 로그인", popupOptions);
-  };
-
-  const handleCustomKakaoLogin = () => {
-    const popupUrl = `http://13.124.232.198/api/v1/auth/oauth2/kakao`;
-    const popupOptions = `width=600,height=800`;
-    window.open(popupUrl, "카카오 로그인", popupOptions);
-  };
-
-  
->>>>>>> 84a9a9c6c0e6ade83ea22b0932cfe150597a4457
 
   return (
     <div className="flex items-center h-screen ">
@@ -133,10 +111,7 @@ export const Login = () => {
           간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
         </div>
 
-<<<<<<< HEAD
         {/* 네이버 로그인 */}
-=======
->>>>>>> 84a9a9c6c0e6ade83ea22b0932cfe150597a4457
         <button
           className=" mb-[1.19rem]  flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
           onClick={handleCustomNaverLogin}
@@ -161,17 +136,11 @@ export const Login = () => {
           </span>
         </button>
 
-<<<<<<< HEAD
 
         {/* 카카오 로그인 */}
         <button
           className="flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
           onClick={handleCustomKaKaoLogin}
-=======
-        <button
-          className="flex items-center bg-[#FFD600] rounded-md  sm:h-[4.125rem] sm:w-[32.0625rem] w-[28rem] h-[3rem]"
-          onClick={handleCustomKakaoLogin}
->>>>>>> 84a9a9c6c0e6ade83ea22b0932cfe150597a4457
         >
           <svg
             style={{ marginRight: "5.44rem" }}
