@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "../components/Modal";
 
 // ASSETS
@@ -7,13 +7,17 @@ import { ReactComponent as HeartIcon } from "../assets/storeHeartIcon.svg";
 import storeMapImage from "../assets/store-map.jpg";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import HeartButton from "../components/HeartButton";
+import { LoginContext } from "../contexts/LoginContextProvider";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
 function Store() {
   const { store_id } = useParams();
 
-  const [login, setLogin] = useState(!false);
+  const { isLogin } = useContext(LoginContext);
+
+  const [login, setLogin] = useState(isLogin);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,11 +35,10 @@ function Store() {
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        const response = await axios.get(
-          `stores/${store_id}`
-        );
+        const response = await axios.get(`stores/${store_id}`);
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
+        console.log(response);
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
       }
@@ -43,8 +46,7 @@ function Store() {
     fetchStoreInfo();
   }, []);
 
-
-  // const url = 
+  // const url =
 
   // axios
   //   .post(url, data, {
@@ -89,6 +91,7 @@ function Store() {
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
+          id={store_id}
           login={login}
           storeInfo={storeInfo}
           handleToggleHeart={handleToggleHeart}
@@ -110,7 +113,7 @@ function Store() {
   );
 }
 
-const StoreLeftSection = ({storeInfo}) => {
+const StoreLeftSection = ({ storeInfo }) => {
   return (
     <div className="w-1/2 mt-9 pr-14 border-r-2 border-[#f5f5f5] break-words">
       <div className="w-full overflow-hidden mb-16 v">
@@ -246,6 +249,7 @@ const StoreLeftSection = ({storeInfo}) => {
 };
 
 const StoreRightSection = ({
+  id,
   login,
   storeInfo,
   handleToggleHeart,
@@ -253,7 +257,6 @@ const StoreRightSection = ({
   isCouponUsed,
   handleOpenModal,
 }) => {
-
   // 현재 날짜를 나타내는 새 Date 객체 생성
   const now = new Date();
 
@@ -261,6 +264,7 @@ const StoreRightSection = ({
   now.setDate(now.getDate() + 5);
 
   const expirationPeriod = now.toISOString().split("T")[0];
+  console.log(storeInfo)
 
   return (
     <div className="w-1/2 pl-16">
@@ -315,13 +319,18 @@ const StoreRightSection = ({
               <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
                 관심상점
               </div>
-              <button onClick={handleToggleHeart} className="flex">
+
+              {/* 하트아이콘 */}
+              <div className="flex">
+                <HeartButton like={storeInfo.heartStore} id={id} />
+              </div>
+              {/* <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
-                  stroke={isLiked ? "#FF0069" : "black"}
-                  strokeOpacity={isLiked ? "1" : "0.3"}
+                  stroke={isLiked ? "#FF0069" : "rgba(0, 0, 0, 0.3)"}
+                  // strokeOpacity={isLiked ? "1" : "0.3"}
                   fill={isLiked ? "#FF0069" : "none"}
                 />
-              </button>
+              </button> */}
             </div>
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${

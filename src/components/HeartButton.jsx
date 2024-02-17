@@ -8,6 +8,7 @@ const HeartButton = ({ like, id }) => {
   const [isLiked, setIsLiked] = useState(like); // 관심 상점 여부
   const [isCliked, setCliked] = useState(false); // 맨 처음에 useEffect 내에서 api 호출을 하지 않기 위해 사용
   console.log("Heart 값: ", like);
+  console.log("id: ", id);
 
   /** 하트 버튼을 누를 때마다 실행되는 함수 */
   const handleLikeClick = (e) => {
