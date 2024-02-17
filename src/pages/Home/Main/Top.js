@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
+import HeartButton from "../../../components/HeartButton";
 
 /** Top 15 또또가 */
 const Top = ({ top15 }) => {
@@ -52,18 +53,12 @@ const Top = ({ top15 }) => {
 /** TOP15 카드 */
 const Top15Card = ({ item, rank }) => {
   const { isLogin } = useContext(LoginContext);
-  const [isLiked, setIsLiked] = useState(item.isHeartStore); // 현재 상점의 관심 여부를 나타낸다.
-
-  /** 'handleLikeClick' 함수는 하트 아이콘을 클릭했을 때 호출되며
-   * 'isLiked' 상태를 반전시켜 관심 상점 상태를 나타낸다.
-   */
-  const handleLikeClick = () => {
-    setIsLiked((prev) => !prev);
-    // TODO: 하트 등록과 해제를 관리하는 훅 만들기
-  };
 
   return (
-    <Link className="flex flex-col h-full rounded hover:shadow-custom-box-shadow-pink">
+    <Link
+      className="flex flex-col h-full rounded hover:shadow-custom-box-shadow-pink"
+      to={`/store/${item.storeId}`}
+    >
       {/* 메뉴 이미지 */}
       <figure
         className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
@@ -73,15 +68,10 @@ const Top15Card = ({ item, rank }) => {
         <div className="absolute flex items-center justify-center w-8 h-8 text-xs text-white left-4 bg-custom-pink">
           {rank + 1}위
         </div>
-        {/* 하트 아이콘 */}
-        <button className="absolute top-2 right-2" onClick={handleLikeClick}>
-          {isLogin && (
-            <HeartIcon
-              stroke={isLiked ? "#FF0069" : "white"}
-              fill={isLiked ? "#FF0069" : "none"}
-            />
-          )}
-        </button>
+        {/* 하트아이콘 */}
+        <div className="absolute top-2 right-2">
+          <HeartButton like={item.isHeartStore} id={item.storeId} />
+        </div>
       </figure>
       <div className="flex flex-col grow">
         {/* 제목 */}

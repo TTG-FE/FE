@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export const FinishReview = () => {
   const [reviewData, setReviewData] = useState(null);
@@ -6,10 +7,23 @@ export const FinishReview = () => {
 
   useEffect(() => {
     const fetchReviewData = async () => {
-      try {
-        const response = await fetch("/members/profile");
-        const result = await response.json();
+      const token =
+        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
 
+      try {
+        const response = await axios.get("members/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = response.data;
+        // console.log(response);
+        // console.log(response.data);
+        // console.log(response.data.result);
+        const fetchResult = response.data.result;
+        setReviewData(fetchResult);
+        console.log(reviewData);
         if (result.isSuccess) {
           setReviewData(
             result.result.reviewDtos.filter(

@@ -18,7 +18,7 @@ const Menu = () => {
     setLastPage(false);
   }, [menu_id]);
 
-  // 검색 키워드를 기반으로 api 호출
+  // 메뉴 키워드를 기반으로 api 호출
   const fetchData = useCallback(
     async (page) => {
       setLoading(true);

@@ -13,6 +13,7 @@ const Heart = () => {
   const [isLoading, setLoading] = useState(false); // 로딩 여부
   const [lastPage, setLastPage] = useState(false); // 마지막 페이지 여부
 
+  console.log(token);
   // 관심상점 api 호출
   const fetchData = useCallback(
     async (page) => {
@@ -21,7 +22,7 @@ const Heart = () => {
         console.log("token: ", token);
         const response = await axios.get(`/stores/heart?page=${page}&size=20`, {
           headers: {
-            Authorization: `Bearer kakao_KBnq1u9JZ01eRCxkEBHALh3y58oL7nVXZUkKPXMXAAABja_-YzdAPV-WDrAHcw`,
+            Authorization: token,
           },
         });
         setStores((prev) => [...prev, ...response.data.result.content]);

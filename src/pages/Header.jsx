@@ -9,7 +9,6 @@ import { ReactComponent as PhoneArrowLeftIcon } from "./../assets/phone_Arrow_ri
 import { ReactComponent as RightArrow } from "./../assets/images/rightArrow.svg";
 import { ReactComponent as LoginIcon } from "./../assets/images/loginIcon.svg";
 import { LoginContext } from "./../contexts/LoginContextProvider";
-
 /** Header */
 const Header = () => {
   const location = useLocation();
@@ -42,7 +41,7 @@ const DesktopHeader = () => {
   };
   return (
     //780px 이상일 때 보여지도록 설정
-    <div className="justify-between hidden h-40 md:px-6 lg:p-12 md:flex z-20">
+    <div className="z-20 justify-between hidden h-40 md:px-6 lg:p-12 md:flex">
       {/* 좌측영역: 로고, 검색창 */}
       <div className="flex items-center">
         {/* 로고 */}

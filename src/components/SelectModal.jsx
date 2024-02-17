@@ -42,7 +42,7 @@ const SelectModal = () => {
         <div
           id="wrapper"
           className={
-            "absolute inset-0 bg-custom-gray-300 bg-opacity-25 backdrop-blur-xl flex justify-center z-50"
+            "absolute inset-0 bg-custom-gray-300 bg-opacity-25 backdrop-blur-xl flex justify-center z-50 min-h-screen"
           }
           onClick={handleClose}
         >

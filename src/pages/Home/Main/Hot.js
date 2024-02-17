@@ -3,6 +3,7 @@ import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.
 import ttgArrow from "./../../../assets/images/ttg-arrow.png";
 import channelIcon from "./../../../assets/images/channelIcon.png";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
+import HeartButton from "../../../components/HeartButton";
 
 const Hot = ({ hotStores }) => {
   return (
@@ -54,15 +55,6 @@ const Hot = ({ hotStores }) => {
 /** Hot 한 상점 카드 */
 const HotCard = ({ item }) => {
   const { isLogin } = useContext(LoginContext);
-  const [isLiked, setIsLiked] = useState(item.isHeartStore); // 현재 상점의 관심 여부를 나타낸다.
-
-  /** 'handleLikeClick' 함수는 하트 아이콘을 클릭했을 때 호출되며
-   * 'isLiked' 상태를 반전시켜 관심 상점 상태를 나타낸다.
-   */
-  const handleLikeClick = () => {
-    setIsLiked((prev) => !prev);
-    // TODO: 하트 등록과 해제를 관리하는 훅 만들기
-  };
 
   return (
     <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0 hover:shadow-custom-box-shadow-pink">
@@ -72,14 +64,10 @@ const HotCard = ({ item }) => {
           className="relative pb-[60%] h-0 bg-cover bg-no-repeat bg-center rounded-xl bg-gray-200 mb-4"
           style={{ backgroundImage: `url(${item.storeImage})` }}
         >
-          <button className="absolute top-2 right-2" onClick={handleLikeClick}>
-            {isLogin && (
-              <HeartIcon
-                stroke={isLiked ? "#FF0069" : "white"}
-                fill={isLiked ? "#FF0069" : "none"}
-              />
-            )}
-          </button>
+          {/* 하트아이콘 */}
+          <div className="absolute top-2 right-2">
+            <HeartButton like={item.isHeartStore} id={item.storeId} />
+          </div>
         </figure>
         <div className="flex flex-col space-y-2 grow">
           {/* 제목 */}
