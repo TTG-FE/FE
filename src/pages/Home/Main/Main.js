@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Top from "./Top";
 import Hot from "./Hot";
 import Review from "./Review";
 import Banner from "./Banner";
+import { LoginContext } from "../../../contexts/LoginContextProvider";
 const Main = () => {
+  const { token } = useContext(LoginContext);
   const [top15, setTop15] = useState([]); // top15
   const [hotStores, setHotStores] = useState([]); // hot
   const [homeReviews, setHomeReviews] = useState([]); // review
@@ -15,7 +17,11 @@ const Main = () => {
     const fetchData = async () => {
       // 메인페이지 데이터 가져오기
       try {
-        const response = await axios.get("/stores/home");
+        const response = await axios.get("/stores/home", {
+          headers: {
+            Authorization: token,
+          },
+        });
         const { top15, hotStores, homeReviews } = response.data.result;
         setTop15(top15);
         setHotStores(hotStores);
@@ -28,7 +34,7 @@ const Main = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [token]);
 
   // TODO: 에러 처리하는 방식 변경
   if (error) {
