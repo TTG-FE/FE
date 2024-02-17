@@ -24,7 +24,7 @@ const StoreCard = ({ item }) => {
         {/* 하트아이콘 */}
         <div className="absolute top-2 right-2">
           <HeartButton
-            like={item.isHeartStore}
+            like={item.heartStore}
             id={item.storeId}
             borderColor={"white"}
             w={"22px"}

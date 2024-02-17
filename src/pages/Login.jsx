@@ -65,6 +65,7 @@ export const Login = () => {
         const token = localStorage.getItem("oauthToken");
         setToken(token);
         loginSuccess(token);
+        console.log("token", token);
       }
     }, 500); // 500ms마다 확인
   };
