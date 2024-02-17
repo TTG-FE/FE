@@ -10,8 +10,6 @@ import { Link, useParams } from "react-router-dom";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
-const SERVER_URL = "http://13.124.232.198";
-
 function Store() {
   const { store_id } = useParams();
 
@@ -33,7 +31,9 @@ function Store() {
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        const response = await axios.get(`${SERVER_URL}/stores/${store_id}`);
+        const response = await axios.get(
+          `stores/${store_id}`
+        );
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
       } catch (error) {
@@ -42,6 +42,22 @@ function Store() {
     };
     fetchStoreInfo();
   }, []);
+
+
+  // const url = 
+
+  // axios
+  //   .post(url, data, {
+  //     headers: {
+  //       Authorization: `Bearer YOUR_TOKEN_HERE`,
+  //     },
+  //   })
+  //   .then((response) => {
+  //     console.log(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 
   // 모달창 열기
   const handleOpenModal = () => {
