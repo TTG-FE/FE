@@ -10,6 +10,15 @@ const LoginContextProvider = ({ children }) => {
   const [isLogin, setLogin] = useState(false);
   const [token, setToken] = useState(null);
 
+  useEffect(() => {
+    // 컴포넌트 마운트 시 localStorage에서 토큰 확인
+    const storedToken = localStorage.getItem("oauthToken");
+    if (storedToken) {
+      setToken(`Bearer ${storedToken}`);
+      setLogin(true);
+    }
+  }, []);
+
   const logout = () => {
     setLogin(false);
     setToken(null);

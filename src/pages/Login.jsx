@@ -23,21 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // 팝업 창을 닫음
 });
 
-const sendAuthenticatedRequest = async (accessToken, navigate, endpoint) => {
-  try {
-    const response = await fetch(`${baseurl}${endpoint}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const data = await response.json();
-    console.log("서버 응답:", data);
-  } catch (error) {
-    console.error("요청 중 오류 발생:", error);
-  }
-};
-
 export const Login = () => {
   const navigate = useNavigate();
   const [tokenTest, setToken] = useState();
