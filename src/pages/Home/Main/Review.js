@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BakeryImg from "./../../../assets/bakery.png";
 const Review = ({ homeReviews }) => {
   return (
@@ -33,8 +33,18 @@ const Review = ({ homeReviews }) => {
 };
 
 const ReviewCard = ({ item }) => {
+  const handleReviewClick = () => {
+    // 리뷰 링크로 새 창 열기
+    const absoluteLink = "http://" + item.reviewLink;
+    window.open(absoluteLink, "_blank");
+  };
+
   return (
-    <div className="h-full p-1 rounded-lg cursor-pointer w-border shadow-custom-box-shadow sm:p-2 hover:shadow-custom-box-shadow-pink">
+    // 누르면 item.reviewLink로 이동하는 로직 추가해줘라잉
+    <div
+      className="h-full p-1 rounded-lg cursor-pointer w-border shadow-custom-box-shadow sm:p-2 hover:shadow-custom-box-shadow-pink"
+      onClick={handleReviewClick}
+    >
       <div className="flex flex-col h-full">
         <figure
           className="pb-[80%] h-0 bg-cover bg-no-repeat bg-center rounded-lg bg-gray-200 md:mb-4 mb-2"

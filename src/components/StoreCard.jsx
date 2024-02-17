@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { LoginContext } from "../contexts/LoginContextProvider";
-import HeartButton from "./HeartIcon";
+import HeartButton from "./HeartButton";
 /** 지역별 상점 및 메뉴별 상점의 카드 */
 const StoreCard = ({ item }) => {
   const { isLogin } = useContext(LoginContext);
@@ -13,7 +13,9 @@ const StoreCard = ({ item }) => {
         style={{ backgroundImage: `url(${item.storeImage})` }}
       >
         {/* 하트아이콘 */}
-        <HeartButton like={item.heartStore} id={item.storeId} />
+        <div className="absolute top-2 right-2">
+          <HeartButton like={item.heartStore} id={item.storeId} />
+        </div>
       </figure>
       <div className="flex flex-col grow">
         {/* 제목 */}
