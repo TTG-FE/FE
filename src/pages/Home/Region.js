@@ -24,12 +24,12 @@ const Region = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `/stores/region-categories?regionId=${city_id}&page=${page}&size=20`
-          // {
-          //   headers: {
-          //     Authorization: token,
-          //   },
-          // }
+          `/stores/region-categories?regionId=${city_id}&page=${page}&size=20`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
         setStores((prev) => [...prev, ...response.data.result.content]);
         // 마지막 페이지라면 true 로 변경
