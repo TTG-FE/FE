@@ -3,15 +3,15 @@ import axios from "axios";
 import { ReactComponent as HeartIcon } from "./../assets/images/heartIcon.svg";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
-const HeartButton = ({ like, id }) => {
+const HeartButton = ({ like, id, borderColor, w, h }) => {
   const { isLogin, token } = useContext(LoginContext);
   const [isLiked, setIsLiked] = useState(like); // 관심 상점 여부
   const [isCliked, setCliked] = useState(false); // 맨 처음에 useEffect 내에서 api 호출을 하지 않기 위해 사용
-  console.log("Heart 값: ", like);
 
   /** 하트 버튼을 누를 때마다 실행되는 함수 */
   const handleLikeClick = (e) => {
-    e.preventDefault(); // 이벤트 버블링 방지 (하트가 눌렸을 때 카드 링크도 이동하는 문제 해결!)
+    e.preventDefault(); // 이벤트 버블링 방지
+    e.stopPropagation(); // 이벤트 전파 막기
     setIsLiked((prev) => !prev);
     setCliked(true);
   };
@@ -49,8 +49,10 @@ const HeartButton = ({ like, id }) => {
       {isLogin && (
         <button onClick={handleLikeClick}>
           <HeartIcon
-            stroke={isLiked ? "#FF0069" : "white"}
+            stroke={isLiked ? "#FF0069" : `${borderColor}`}
             fill={isLiked ? "#FF0069" : "none"}
+            width={w}
+            height={h}
           />
         </button>
       )}

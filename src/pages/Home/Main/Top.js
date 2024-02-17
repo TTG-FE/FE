@@ -70,7 +70,13 @@ const Top15Card = ({ item, rank }) => {
         </div>
         {/* 하트아이콘 */}
         <div className="absolute top-2 right-2">
-          <HeartButton like={item.isHeartStore} id={item.storeId} />
+          <HeartButton
+            like={item.isHeartStore}
+            id={item.storeId}
+            borderColor={"white"}
+            w={"22px"}
+            h={"22px"}
+          />
         </div>
       </figure>
       <div className="flex flex-col grow">
