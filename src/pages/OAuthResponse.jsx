@@ -1,23 +1,20 @@
-// OAuthResponse.js
-
 import React, { useEffect } from "react";
-import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const OAuthResponse = () => {
-  const [, setCookie] = useCookies(["accessToken"]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
-    if (params.accessToken) {
-      // 쿠키에 액세스 토큰 설정
-      setCookie("accessToken", params.accessToken, { path: "/" });
+    if (params.code) {
+      console.log("Received code:", params.code);
     }
 
     // 리다이렉트
-    window.location.href = `http://localhost:3000/api/v1/auth/oauth2/naver`;
-  }, [setCookie]);
+    navigate("http://localhost:3000");
+  }, [navigate]);
 
   return (
     <div>
