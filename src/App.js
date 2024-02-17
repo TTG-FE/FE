@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
 
 // PAGES
 import Store from "./pages/Store";

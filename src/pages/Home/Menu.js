@@ -17,7 +17,6 @@ const Menu = () => {
     setStores([]); // 데이터 초기화
     setLastPage(false);
   }, [menu_id]);
-  console.log(token);
 
   // 메뉴 키워드를 기반으로 api 호출
   const fetchData = useCallback(
