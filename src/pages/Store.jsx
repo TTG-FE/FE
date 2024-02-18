@@ -15,14 +15,14 @@ import { LoginContext } from "../contexts/LoginContextProvider";
 function Store() {
   const { store_id } = useParams();
 
-  const { isLogin } = useContext(LoginContext);
+  const { isLogin, token } = useContext(LoginContext);
+  console.log(token);
+  console.log(store_id);
 
   const [login, setLogin] = useState(isLogin);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // 현재 상점의 관심 여부
-  const [isLiked, setIsLiked] = useState(false);
 
   // 리뷰 등록 이메일 유효성 검사
   const [reviewUrl, setReviewUrl] = useState("");
@@ -35,10 +35,9 @@ function Store() {
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        const response = await axios.get(`stores/${store_id}`);
+        const response = await axios.get(`/stores/${store_id}`);
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
-        console.log(response);
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
       }
@@ -46,20 +45,31 @@ function Store() {
     fetchStoreInfo();
   }, []);
 
-  // const url =
+  const postDataWithFormData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("reviewLink", "www.google.com");
+      const response = await axios.post(
+        `stores/${store_id}/reviews`,
+        formData,
+        {
+          headers: {
+            // 'Content-Type':'application/json',
+            Authorization: token,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error("Error postDataWithFormData", error);
 
-  // axios
-  //   .post(url, data, {
-  //     headers: {
-  //       Authorization: `Bearer YOUR_TOKEN_HERE`,
-  //     },
-  //   })
-  //   .then((response) => {
-  //     console.log(response.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
+      // 서버로부터의 응답이 있는지 확인하고, 해당 응답에서 'message' 필드 출력
+      if (error.response && error.response.data) {
+        // error.response.data에는 서버 응답의 바디가 포함되어 있음
+        console.error("Server Response:", error.response.data.message); // '지정된 리뷰의 개수를 초과했습니다.' 메시지 출력
+      }
+    }
+  };
 
   // 모달창 열기
   const handleOpenModal = () => {
@@ -68,12 +78,8 @@ function Store() {
 
   // 모달창 닫기
   const handleCloseModal = () => {
+    postDataWithFormData();
     setIsModalOpen(false);
-  };
-
-  // 하트 이벤트
-  const handleToggleHeart = () => {
-    setIsLiked((prev) => !prev);
   };
 
   // 리뷰 페이지 주소 입력 시 상태 업데이트
@@ -94,8 +100,6 @@ function Store() {
           id={store_id}
           login={login}
           storeInfo={storeInfo}
-          handleToggleHeart={handleToggleHeart}
-          isLiked={isLiked}
           isCouponUsed={isCouponUsed}
           handleOpenModal={handleOpenModal}
         />
@@ -252,8 +256,6 @@ const StoreRightSection = ({
   id,
   login,
   storeInfo,
-  handleToggleHeart,
-  isLiked,
   isCouponUsed,
   handleOpenModal,
 }) => {
@@ -264,7 +266,6 @@ const StoreRightSection = ({
   now.setDate(now.getDate() + 5);
 
   const expirationPeriod = now.toISOString().split("T")[0];
-  console.log(storeInfo)
 
   return (
     <div className="w-1/2 pl-16">

@@ -12,7 +12,7 @@ import { LoginContext } from "../contexts/LoginContextProvider";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
-  const { isLogin,token } = useContext(LoginContext);
+  const { isLogin, token } = useContext(LoginContext);
   const [login, setLogin] = useState(isLogin);
   // const [coupons, setCoupons] = useState([
   //   {
@@ -82,54 +82,77 @@ const Coupon = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [coupons, setCoupons] = useState([]);
-    
-    useEffect(() => {
-      const fetchData = async () => {
-        // const token =
-        //   "naver_AAAAOJJBFFgk1BwHCxhj3pZbwGSHmqQ4cvc_PVbBpTGxJUDsU2TKWZzdKOs4O3lx7m-yJC70jKgZ_kNVne-Xg4LDyAY";
-        try {
-          if (isLogin) {
-             const response = await axios.get(`coupons`, {
-               headers: {
-                 Authorization: `${token}`,
-               },
-             });
-            setCoupons(response.data.result);
-            console.log(coupons)
-          }
-        } catch (error) {
-          console.error("Error fetching StoreInfo:", error);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (isLogin) {
+          const response = await axios.get(`coupons`, {
+            headers: {
+              Authorization: token,
+            },
+          });
+          setCoupons(response.data.result);
         }
-      };
-      fetchData();
-    }, []);
+      } catch (error) {
+        console.error("Error fetching StoreInfo:", error);
+      }
+    };
+    fetchData();
+  }, [isLogin]);
+
 
   const filteredCoupons = coupons.filter((coupon) =>
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
   // 사용한 쿠폰 처리
   const handleCouponUsed = (couponId) => {
-    // 해당 쿠폰을 사용했다고 true로 변경
-    setCoupons((prevCoupons) => {
-      const updatedCoupons = prevCoupons.map((coupon) =>
-        coupon.id === couponId ? { ...coupon, useYn: "Y" } : coupon
-      );
+     // 서버에 쿠폰 사용 정보 업데이트
+    putCouponUsed(couponId)
+      .then(() => {
+        // 서버 업데이트 성공 후 클라이언트 상태 업데이트
+        // 해당 쿠폰을 사용했다고 true로 변경
+        setCoupons((prevCoupons) => {
+          const updatedCoupons = prevCoupons.map((coupon) =>
+            coupon.id === couponId ? { ...coupon, useYn: "Y" } : coupon
+          );
 
-      // 사용한 쿠폰을 배열의 끝으로 이동
-      const usedCouponIndex = updatedCoupons.findIndex(
-        (coupon) => coupon.id === couponId && coupon.useYn
-      );
+          // 사용한 쿠폰을 배열의 끝으로 이동
+          const usedCouponIndex = updatedCoupons.findIndex(
+            (coupon) => coupon.id === couponId && coupon.useYn === "Y"
+          );
 
-      if (usedCouponIndex !== -1) {
-        const usedCoupon = updatedCoupons.splice(usedCouponIndex, 1)[0];
-        updatedCoupons.push(usedCoupon);
-      }
+          if (usedCouponIndex !== -1) {
+            const usedCoupon = updatedCoupons.splice(usedCouponIndex, 1)[0];
+            updatedCoupons.push(usedCoupon);
+          }
 
-      return updatedCoupons;
-    });
+          return updatedCoupons;
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating coupon status:", error);
+      });
   };
+
+  // put 호출
+   const putCouponUsed = async (couponId) => {
+     try {
+       if (isLogin) {
+         const response = await axios.put(`coupons/${couponId}/check`, null, {
+           headers: {
+             Authorization: token,
+           },
+         });
+         console.log(response.data);
+         console.log("put 성공");
+         console.log(couponId);
+       }
+     } catch (error) {
+       console.error("Error fetching StoreInfo:", error);
+     }
+   };
 
   // 모달창 열기
   const handleOpenModal = (couponId) => {
