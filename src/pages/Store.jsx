@@ -279,17 +279,17 @@ const StoreRightSection = ({
           {/* 또먹고싶어 곱창을 리뷰하고 주먹밥+캔음료 받으세요! */}
           {storeInfo.name} 리뷰하고 {storeInfo.subTitle}
         </div>
-        <ul className="flex items-center h-24 border-b">
+        <ul className="flex h-24 items-center border-b">
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
             {/* 서울 */}
             {storeInfo.regionName}
           </li>
-          <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
+          <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5   ">
             {/* 한식 */}
             {storeInfo.menuName}
           </li>
         </ul>
-        <div className="flex py-8 text-lg border-b">
+        <div className="flex py-8 border-b text-lg">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             제공내역
           </div>
@@ -298,7 +298,7 @@ const StoreRightSection = ({
             {storeInfo.serviceInfo}
           </div>
         </div>
-        <div className="flex py-8 text-lg border-b">
+        <div className="flex py-8 border-b text-lg">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
@@ -318,26 +318,16 @@ const StoreRightSection = ({
         {login ? (
           <>
             <div className="flex py-8 border-b">
-              <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
+              <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
                 관심상점
               </div>
-
-              {/* 하트아이콘 */}
-              <div className="flex">
-                <HeartButton
-                  like={storeInfo.heartStore}
-                  id={id}
-                  borderColor={"rgba(0, 0, 0, 0.3)"}
-                  w={"27px"}
-                  h={"25px"}
-                />
-              </div>
-              {/* <button onClick={handleToggleHeart} className="flex">
+              <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
-                  stroke={isLiked ? "#FF0069" : "rgba(0, 0, 0, 0.3)"}
+                  stroke={isLiked ? "#FF0069" : "black"}
+                  strokeOpacity={isLiked ? "1" : "0.3"}
                   fill={isLiked ? "#FF0069" : "none"}
                 />
-              </button> */}
+              </button>
             </div>
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${

@@ -20,6 +20,14 @@ const LoginContextProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("oauthToken");
+    if (storedToken) {
+      setToken("Bearer ${storedToken}");
+      setLogin(true);
+    }
+  }, []);
+
   const logout = () => {
     setLogin(false);
     setToken(null);

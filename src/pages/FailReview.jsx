@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { LoginContext } from "../contexts/LoginContextProvider";
+
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const FailReview = () => {
   const [reviewData, setReviewData] = useState(null);
   const [error, setError] = useState(null);
+  const { token } = useContext(LoginContext);
 
   useEffect(() => {
     const fetchReviewData = async () => {
-      const token =
-        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
+      // const token =
+      //   "naver_AAAAPH44OZx46Q9m_c1a99N3AMfbiDr1GriLr2nBBc3nwwO29fMGCm4pCP8i35QmYPnz6TepZriTu7-_Sa4ttvuXHlE";
 
       try {
         const response = await axios.get("members/profile", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
           },
         });
 
@@ -24,11 +27,11 @@ const FailReview = () => {
         console.log(response.data.result);
         const fetchResult = response.data.result;
         setReviewData(fetchResult);
-        console.log(reviewData);
+        //console.log(reviewData);
         if (result.isSuccess) {
           setReviewData(
             result.result.reviewDtos.filter(
-              (review) => review.status === "SUCCESS"
+              (review) => review.status === "FAIL"
             )
           );
         } else {

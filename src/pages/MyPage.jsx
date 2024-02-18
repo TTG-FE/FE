@@ -1,46 +1,62 @@
-import React, { useRef,useEffect, useState } from "react";
-import doraImage from "../assets/dora.png";
+import React, { useContext, useRef, useEffect, useState } from "react";
+import basicProfile from "../assets/basicprofile.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
 import FailReview from "./FailReview";
+import { LoginContext } from "../contexts/LoginContextProvider";
+
 import axios from "axios";
+// import { LoginContext } from "../contexts/LoginContextProvider";
+import GoToLogin from "../components/GoToLogin";
 
 export const MyPage = () => {
-
-
   const ongoingRef = useRef(null);
   const rejectedRef = useRef(null);
   const completedRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(null);
-  const [reviewData, setReviewData] = useState([]);
+  const [reviewData, setReviewData] = useState({
+    memberId: null,
+    nickname: null,
+    benefitCount: null,
+  });
   const [error, setError] = useState(null);
+
+  const { isLogin, token } = useContext(LoginContext);
+  // const { isLogin } = useContext(LoginContext);
+  //console.log(token);
 
   useEffect(() => {
     const fetchReviewData = async () => {
-      const token =
-        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
+      // const token =
+      //   "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
         const response = await axios.get("members/profile", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
+            // Authorization: `Bearer ${token}`,
           },
         });
 
         const result = response.data;
-        // console.log(response);
-        // console.log(response.data);
-        // console.log(response.data.result);
-        const fetchResult = response.data.result;
-        setReviewData(fetchResult);
-        console.log(reviewData);
+
         if (result.isSuccess) {
-          setReviewData(
-            result.result.reviewDtos.filter(
-              (review) => review.status === "SUCCESS"
-            )
-          );
+          const { memberId, nickname, benefitCount, profile_image } =
+            result.result.member;
+
+          //console.log(nickname);
+          // console.log(benefitCount);
+          // console.log(profile_image);
+
+          setReviewData({
+            memberId,
+            nickname,
+            benefitCount,
+            profile_image,
+          });
+
+          setSelectedImage(profile_image || basicProfile);
         } else {
           setError(result.message);
         }
@@ -51,7 +67,7 @@ export const MyPage = () => {
 
     fetchReviewData();
   }, []);
-  
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -60,34 +76,39 @@ export const MyPage = () => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  if (!isLogin) {
+    return <GoToLogin />;
+  }
   // 프로필 사진 변경
-  const handleImageChange = async (event) => {
-    const file = event.target.files[0];
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+
     if (file) {
       try {
         const formData = new FormData();
-        formData.append("profile_image", file);
-
-        const response = await fetch("/members/profile/image", {
-          method: "POST",
-          body: formData,
+        formData.append("profileImage", file);
+        const response = await axios.post("members/profile/image", formData, {
+          headers: {
+            Authorization: token,
+            "Content-Type": "multipart/form-data",
+          },
         });
 
-        const result = await response.json();
-
+        const result = response.data;
+        console.log(result);
         if (result.isSuccess) {
-          setSelectedImage(URL.createObjectURL(file));
+          // 이미지 업로드 성공 시 프로필 사진 업데이트
+          setReviewData((prevData) => ({
+            ...prevData,
+            profile_image: result.profile_image,
+          }));
+          console.log(result.profile_image);
+          setSelectedImage(result.profile_image || basicProfile);
         } else {
-          if (result.code === "MEMBER4001") {
-            console.error("사용자가 없습니다.");
-          } else if (result.code === "S34001") {
-            console.error("파일 업로드에 실패했습니다.");
-          } else {
-            console.error("알 수 없는 오류:", result.message);
-          }
+          setError(result.message);
         }
       } catch (error) {
-        console.error("API 호출 중 오류 발생:", error);
+        setError("프로필 사진 업로드 오류");
       }
     }
   };
@@ -136,7 +157,7 @@ export const MyPage = () => {
           <div className="rounded-full overflow-hidden">
             <img
               className="w-[10.6875rem] h-[10.6875rem] object-cover"
-              src={selectedImage || doraImage}
+              src={selectedImage || basicProfile}
               alt="프로필 사진"
             />
           </div>
@@ -183,7 +204,7 @@ export const MyPage = () => {
                 fontFamily: "Inter",
               }}
             >
-              도라도라영어나라노랑이보라님
+              {reviewData.nickname}님
             </div>
           </div>
           <div className=" w-[35.8125rem] h-[5.5rem] flex items-center bg-[#FFEDED] rounded-[0.9375rem] gap-x-[5.56rem]">
@@ -199,7 +220,9 @@ export const MyPage = () => {
               {" "}
               지금까지 또또가로 혜택받은 횟수
             </div>
-            <div className="text-[#FF0069]  text-2xl font-semibold ">17회</div>
+            <div className="text-[#FF0069]  text-2xl font-semibold ">
+              {reviewData.benefitCount}회
+            </div>
           </div>
         </div>
 
