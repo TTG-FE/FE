@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import NaverLogin from "react-naver-login";
-import KakaoLogin from "react-kakao-login";
+import React, { useContext, useState } from "react";
 import LoginImage from "../assets/loginimage.png";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
-const baseurl = "http://localhost:3000";
 
 // 콜백 페이지의 스크립트 예시
 document.addEventListener("DOMContentLoaded", function () {
@@ -20,10 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // 팝업 창을 닫음
     window.close();
   }
-  // 팝업 창을 닫음
+
 });
 
+
+
 export const Login = () => {
+
+  
   const navigate = useNavigate();
   const [tokenTest, setToken] = useState();
 

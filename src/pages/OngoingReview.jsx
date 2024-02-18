@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+// import { LoginContext } from "../contexts/LoginContextProvider";
+
 import axios from "axios";
 
 const OngoingReview = () => {
-  const [reviewData, setReviewData] = useState([]);
+  const [reviewData, setReviewData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchReviewData = async () => {
       const token =
-        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
+        "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
         const response = await axios.get("members/profile", {
@@ -20,14 +22,14 @@ const OngoingReview = () => {
         const result = response.data;
         // console.log(response);
         // console.log(response.data);
-        // console.log(response.data.result);
+        console.log(response.data.result);
         const fetchResult = response.data.result;
         setReviewData(fetchResult);
-        console.log(reviewData);
+        //console.log(reviewData);
         if (result.isSuccess) {
           setReviewData(
             result.result.reviewDtos.filter(
-              (review) => review.status === "SUCCESS"
+              (review) => review.status === "SUBSCRIPTION"
             )
           );
         } else {
@@ -37,7 +39,6 @@ const OngoingReview = () => {
         setError("API 호출 오류");
       }
     };
-
     fetchReviewData();
   }, []);
 
@@ -47,12 +48,11 @@ const OngoingReview = () => {
 
   if (!reviewData || reviewData.length === 0) {
     return (
-      <div className="text-[#898989] text-[1.125rem] text-center font-['Inter'] font-semibold">
-        신청한 리뷰가 없어요.
+      <div className="text-[#898989] text=[1.125rem] text-center font-['Inter'] font-semibold">
+        아직 신청한 리뷰가 없어요.
       </div>
     );
   }
-
   return (
     <div className="flex space-x-[1.12rem] font-inter">
       {reviewData.map((review) => (

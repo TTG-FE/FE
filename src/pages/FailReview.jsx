@@ -9,7 +9,7 @@ const FailReview = () => {
   useEffect(() => {
     const fetchReviewData = async () => {
       const token =
-        "naver_AAAAO6jH0LVSEjsLLPyr5_cXHRCtIS7iRplINNn4iO-dOUnQrJ3kc7mmU3NW8z80UE7zJVkYRMAZAsfo2HIC99ssweA";
+        "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
         const response = await axios.get("members/profile", {
@@ -24,11 +24,11 @@ const FailReview = () => {
         console.log(response.data.result);
         const fetchResult = response.data.result;
         setReviewData(fetchResult);
-        console.log(reviewData);
+        //console.log(reviewData);
         if (result.isSuccess) {
           setReviewData(
             result.result.reviewDtos.filter(
-              (review) => review.status === "SUCCESS"
+              (review) => review.status === "FAIL"
             )
           );
         } else {
