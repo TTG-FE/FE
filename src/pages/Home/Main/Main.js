@@ -5,6 +5,8 @@ import Hot from "./Hot";
 import Review from "./Review";
 import Banner from "./Banner";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
+import { ReactComponent as LoadingIcon } from "../../../assets/images/loadingIcon.svg";
+import test from "../../../assets/images/Test.png";
 const Main = () => {
   const { token, isLogin } = useContext(LoginContext);
   const [top15, setTop15] = useState([]); // top15
@@ -49,24 +51,24 @@ const Main = () => {
     );
   }
 
-  return (
+  return isLoading ? (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <img className="animate-spin w-14 h-14" src={test} alt="로딩중" />
+    </div>
+  ) : (
     /* 전체 페이지 크기 설정 */
-    <div className="">
-      {isLoading ? (
-        // TODO: 로딩중 아이콘으로 변경예정
-        <></>
-      ) : (
-        <div>
-          {/* TOP 15 또또가 */}
-          <Top top15={top15} />
-          {/* Hot */}
-          <Hot hotStores={hotStores} />
-          {/* 또또가 리뷰 */}
-          <Review homeReviews={homeReviews} />
-          {/* 배너 */}
-          <Banner />
-        </div>
-      )}
+
+    <div>
+      <div>
+        {/* TOP 15 또또가 */}
+        <Top top15={top15} />
+        {/* Hot */}
+        <Hot hotStores={hotStores} />
+        {/* 또또가 리뷰 */}
+        <Review homeReviews={homeReviews} />
+        {/* 배너 */}
+        <Banner />
+      </div>
     </div>
   );
 };
