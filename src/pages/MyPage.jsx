@@ -116,10 +116,10 @@ export const MyPage = () => {
           // 이미지 업로드 성공 시 프로필 사진 업데이트
           setReviewData((prevData) => ({
             ...prevData,
-            profile_image: result.profile_image,
+            profile_image: result.profileImage,
           }));
-          console.log(result.profile_image);
-          setSelectedImage(result.profile_image || basicProfile);
+          console.log(result.result.profileImage);
+          setSelectedImage(result.result.profileImage || basicProfile);
         } else {
           setError(result.message);
         }
