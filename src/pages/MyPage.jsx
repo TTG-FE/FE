@@ -33,33 +33,34 @@ export const MyPage = () => {
       //   "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
-        const response = await axios.get("members/profile", {
-          headers: {
-            Authorization: token,
-            // Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const result = response.data;
-
-        if (result.isSuccess) {
-          const { memberId, nickname, benefitCount, profile_image } =
-            result.result.member;
-
-          //console.log(nickname);
-          // console.log(benefitCount);
-          // console.log(profile_image);
-
-          setReviewData({
-            memberId,
-            nickname,
-            benefitCount,
-            profile_image,
+        if (isLogin) {
+          const response = await axios.get("members/profile", {
+            headers: {
+              Authorization: token,
+              // Authorization: `Bearer ${token}`,
+            },
           });
+          const result = response.data;
+          if (result.isSuccess) {
+            const { memberId, nickname, benefitCount, profile_image } =
+              result.result.member;
 
-          setSelectedImage(profile_image || basicProfile);
-        } else {
-          setError(result.message);
+            //console.log(nickname);
+            // console.log(benefitCount);
+            // console.log(profile_image);
+
+            setReviewData({
+              memberId,
+              nickname,
+              benefitCount,
+              profile_image,
+            });
+            console.log("reviewData",reviewData);
+
+            setSelectedImage(profile_image || basicProfile);
+          } else {
+            setError(result.message);
+          }
         }
       } catch (error) {
         setError("API 호출 오류");
