@@ -1,7 +1,4 @@
-import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
-import { LoginContext } from "../../../contexts/LoginContextProvider";
 import HeartButton from "../../../components/HeartButton";
 
 /** Top 15 또또가 */
@@ -52,20 +49,18 @@ const Top = ({ top15 }) => {
 
 /** TOP15 카드 */
 const Top15Card = ({ item, rank }) => {
-  const { isLogin } = useContext(LoginContext);
-
   return (
     <Link
-      className="flex flex-col h-full rounded hover:shadow-custom-box-shadow-pink"
+      className="flex flex-col h-full rounded "
       to={`/store/${item.storeId}`}
     >
       {/* 메뉴 이미지 */}
       <figure
-        className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2"
+        className="pb-[75%] bg-center bg-no-repeat bg-cover bg-gray-200 rounded relative mb-2 md:hover:shadow-custom-box-shadow-pink"
         style={{ backgroundImage: `url(${item.storeImage})` }}
       >
         {/* 등수 */}
-        <div className="absolute flex items-center justify-center w-8 h-8 text-xs text-white left-4 bg-custom-pink">
+        <div className="absolute flex items-center justify-center w-8 h-8 text-xs font-semibold text-white left-4 bg-custom-pink">
           {rank + 1}위
         </div>
         {/* 하트아이콘 */}
