@@ -12,6 +12,7 @@ const Region = () => {
   const [stores, setStores] = useState([]); // 상점 데이터
   const [lastPage, setLastPage] = useState(false); // 마지막 페이지 여부
   const { isLogin } = useContext(LoginContext);
+  const [isLoading, setLoading] = useState(false); // 로딩 여부
 
   useEffect(() => {
     setStores([]); // 데이터 초기화
@@ -30,6 +31,7 @@ const Region = () => {
         config.headers.Authorization = token;
       }
       try {
+        setLoading(true);
         const response = await axios.get(
           `/stores/region-categories?regionId=${city_id}&page=${page}&size=20`,
           config
@@ -41,6 +43,7 @@ const Region = () => {
         }
       } catch (error) {
       } finally {
+        setLoading(false); // 로딩 완료
       }
     },
     [city_id, token, isLogin]
