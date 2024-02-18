@@ -96,7 +96,7 @@ function Store() {
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
           id={store_id}
-          login={isLogin}
+          isLogin={isLogin}
           storeInfo={storeInfo}
           isCouponUsed={isCouponUsed}
           handleOpenModal={handleOpenModal}
