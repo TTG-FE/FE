@@ -115,12 +115,12 @@ const Coupon = () => {
         // 해당 쿠폰을 사용했다고 true로 변경
         setCoupons((prevCoupons) => {
           const updatedCoupons = prevCoupons.map((coupon) =>
-            coupon.id === couponId ? { ...coupon, useYn: "Y" } : coupon
+            coupon.id === couponId ? { ...coupon, useYn: "N" } : coupon
           );
 
           // 사용한 쿠폰을 배열의 끝으로 이동
           const usedCouponIndex = updatedCoupons.findIndex(
-            (coupon) => coupon.id === couponId && coupon.useYn === "Y"
+            (coupon) => coupon.id === couponId && coupon.useYn === "N"
           );
 
           if (usedCouponIndex !== -1) {

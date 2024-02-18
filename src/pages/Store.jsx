@@ -263,7 +263,7 @@ const StoreRightSection = ({
   const now = new Date();
 
   // 현재 날짜에 5일 추가
-  now.setDate(now.getDate() + 5);
+  now.setDate(now.getDate() + 30);
 
   const expirationPeriod = now.toISOString().split("T")[0];
 
@@ -302,7 +302,8 @@ const StoreRightSection = ({
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
-          {isCouponUsed ? (
+          {/* {isCouponUsed ? ( */}
+          {storeInfo.submitReview ? (
             <div className="text-[#404040]">
               {expirationPeriod} 까지 사용 가능합니다!
             </div>
@@ -340,13 +341,18 @@ const StoreRightSection = ({
             </div>
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${
-                isCouponUsed ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
+                isCouponUsed
+                  ? // storeInfo.submitReview
+                    "bg-[#D9D9D9] text-[#545454]"
+                  : "bg-[#FF0069]"
               }`}
               onClick={handleOpenModal}
               disabled={isCouponUsed}
+              // disabled={storeInfo.submitReview}
             >
               {isCouponUsed
-                ? "또또가 신청 완료!"
+                ? // storeInfo.submitReview
+                  "또또가 신청 완료!"
                 : "리뷰 등록하고 또또가 쿠폰 받기"}
             </button>
           </>
