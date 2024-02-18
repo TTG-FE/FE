@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { LoginContext } from "../contexts/LoginContextProvider";
+
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const FailReview = () => {
   const [reviewData, setReviewData] = useState(null);
   const [error, setError] = useState(null);
+  const { token } = useContext(LoginContext);
 
   useEffect(() => {
     const fetchReviewData = async () => {
-      const token =
-        "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
+      // const token =
+      //   "naver_AAAAPH44OZx46Q9m_c1a99N3AMfbiDr1GriLr2nBBc3nwwO29fMGCm4pCP8i35QmYPnz6TepZriTu7-_Sa4ttvuXHlE";
 
       try {
         const response = await axios.get("members/profile", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
           },
         });
 

@@ -9,7 +9,6 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import HeartButton from "../components/HeartButton";
 import { LoginContext } from "../contexts/LoginContextProvider";
-import HeartButton from "../components/HeartButton";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
