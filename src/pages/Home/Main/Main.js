@@ -5,7 +5,6 @@ import Hot from "./Hot";
 import Review from "./Review";
 import Banner from "./Banner";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
-import { ReactComponent as LoadingIcon } from "../../../assets/images/loadingIcon.svg";
 import test from "../../../assets/images/Test.png";
 const Main = () => {
   const { token, isLogin } = useContext(LoginContext);

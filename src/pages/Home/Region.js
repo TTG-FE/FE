@@ -6,13 +6,55 @@ import StoreCard from "../../components/StoreCard";
 import SelectModal from "../../components/SelectModal";
 import { LoginContext } from "../../contexts/LoginContextProvider";
 
+// 지역 코드 테이블
+const RegionTable = {
+  "강남-논현": 8,
+  "강동-천호": 9,
+  "강서-목동": 10,
+  "건대-왕십리": 11,
+  "관악-신림": 12,
+  "교대-사당": 13,
+  "노원-강북": 14,
+  "명동-이태원": 15,
+  "삼성-선릉": 16,
+  "송파-잠실": 17,
+  "수유-동대문": 18,
+  "신촌-이대": 19,
+  "압구정-신사": 20,
+  "여의도-영등포": 21,
+  "종로-대학로": 22,
+  "홍대-마포": 23,
+  "일산-파주": 24,
+  "용인-분당-수원": 25,
+  "인천-부천": 26,
+  "남양주-구리-하남": 27,
+  "안양-안산-광명": 28,
+  대전: 29,
+  춘천: 30,
+  대구: 31,
+  경북: 32,
+  부산: 33,
+  경남: 34,
+  광주: 35,
+  전라: 36,
+  강원: 37,
+  제주: 38,
+  전체: {
+    서울: 1,
+    "경기-인천": 2,
+    "대전-충청": 3,
+    "대구-경북": 4,
+    "부산-경남": 5,
+    "광주-전라": 6,
+    다른지역: 7,
+  },
+};
 const Region = () => {
   const { city_id, town_id, city_label, town_label } = useParams();
   const { token } = useContext(LoginContext);
   const [stores, setStores] = useState([]); // 상점 데이터
   const [lastPage, setLastPage] = useState(false); // 마지막 페이지 여부
   const { isLogin } = useContext(LoginContext);
-  const [isLoading, setLoading] = useState(false); // 로딩 여부
 
   useEffect(() => {
     setStores([]); // 데이터 초기화
@@ -30,10 +72,17 @@ const Region = () => {
       if (isLogin) {
         config.headers.Authorization = token;
       }
+      // 지역 테이블에서 코드 가져오기
+      let region_id;
+      if (town_label === "전체") {
+        region_id = Number(RegionTable[town_label][city_label]);
+      } else {
+        region_id = Number(RegionTable[town_label]);
+      }
+
       try {
-        setLoading(true);
         const response = await axios.get(
-          `/stores/region-categories?regionId=${city_id}&page=${page}&size=20`,
+          `/stores/region-categories?regionId=${region_id}&page=${page}&size=20`,
           config
         );
         setStores((prev) => [...prev, ...response.data.result.content]);
@@ -43,7 +92,6 @@ const Region = () => {
         }
       } catch (error) {
       } finally {
-        setLoading(false); // 로딩 완료
       }
     },
     [city_id, token, isLogin]
@@ -62,16 +110,20 @@ const Region = () => {
         {/* 상점 필터명 */}
         <div className="flex items-center justify-between px-8 py-16">
           <div>
-            <div className="mb-4 text-2xl font-semibold">
-              지역 &gt; <span className="">{city_label} </span>
-              &gt;{" "}
-              <span className="border-b-4 border-custom-yellow">
-                {town_label}
-              </span>
-            </div>
-            <p className="text-sm font-normal text-custom-gray-100">
-              전국 각지의 또또가 상점을 만나보세요!
-            </p>
+            {city_id && (
+              <>
+                <div className="mb-4 text-2xl font-semibold">
+                  지역 &gt; <span className="">{city_label} </span>
+                  &gt;{" "}
+                  <span className="border-b-4 border-custom-yellow">
+                    {town_label}
+                  </span>
+                </div>
+                <p className="text-sm font-normal text-custom-gray-100">
+                  전국 각지의 또또가 상점을 만나보세요!
+                </p>
+              </>
+            )}
           </div>
         </div>
 
