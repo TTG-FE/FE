@@ -13,7 +13,6 @@ import { LoginContext } from "../contexts/LoginContextProvider";
 const Coupon = () => {
   // 쿠폰 사용 여부
   const { isLogin, token } = useContext(LoginContext);
-  const [login, setLogin] = useState(isLogin);
   // const [coupons, setCoupons] = useState([
   //   {
   //     id: 21,
@@ -99,7 +98,7 @@ const Coupon = () => {
       }
     };
     fetchData();
-  }, [isLogin]);
+  }, []);
 
 
   const filteredCoupons = coupons.filter((coupon) =>
@@ -145,7 +144,6 @@ const Coupon = () => {
              Authorization: token,
            },
          });
-         console.log(response.data);
          console.log("put 성공");
          console.log(couponId);
        }
@@ -187,10 +185,10 @@ const Coupon = () => {
         <div className="md:hidden">
           <MobileCouponSection
             coupons={filteredCoupons}
-            login={login}
+            isLogin={isLogin}
             setSearchTerm={setSearchTerm}
           >
-            {login ? renderCouponCards(filteredCoupons) : <GoToLogin />}
+            {isLogin ? renderCouponCards(filteredCoupons) : <GoToLogin />}
           </MobileCouponSection>
         </div>
 
@@ -198,14 +196,14 @@ const Coupon = () => {
         <div className="hidden md:block">
           <DesktopCouponSection
             coupons={filteredCoupons}
-            login={login}
-            onToggleLogin={() => {
-              setLogin(!login);
-              handleCloseModal();
-            }}
+            isLogin={isLogin}
+            // onToggleLogin={() => {
+            //   setLogin(!login);
+            //   handleCloseModal();
+            // }}
             setSearchTerm={setSearchTerm}
           >
-            {login ? renderCouponCards(filteredCoupons) : <GoToLogin />}
+            {isLogin ? renderCouponCards(filteredCoupons) : <GoToLogin />}
           </DesktopCouponSection>
         </div>
       </div>
@@ -275,7 +273,7 @@ const SearchBar = ({ onSearch }) => {
 
 const DesktopCouponSection = ({
   coupons,
-  login,
+  isLogin,
   onToggleLogin,
   setSearchTerm,
   children,
@@ -293,20 +291,20 @@ const DesktopCouponSection = ({
             쿠폰함
           </div>
           {/* {login ? <SearchBar /> : null} */}
-          {login ? <SearchBar onSearch={setSearchTerm} /> : null}
+          {isLogin ? <SearchBar onSearch={setSearchTerm} /> : null}
         </div>
 
         {/* 쿠폰 영역 전체 패딩*/}
         <div
           className={`text-xl ${
-            coupons.length === 0 || !login
+            coupons.length === 0 || !isLogin
               ? "flex flex-col justify-center items-center h-[600px]"
               : "pt-9"
           }`}
         >
           {/* 각 쿠폰들*/}
 
-          {login ? (
+          {isLogin ? (
             coupons.length === 0 ? (
               <p className="text-custom-gray-200 text-lg font-normal">
                 또또가 리뷰를 등록하고 쿠폰을 받아보세요.
@@ -323,13 +321,13 @@ const DesktopCouponSection = ({
   );
 };
 
-const MobileCouponSection = ({ coupons, login, setSearchTerm, children }) => {
+const MobileCouponSection = ({ coupons, isLogin, setSearchTerm, children }) => {
   return (
     <>
       {/* 쿠폰함 타이틀 헤더 영역 */}
       {/* <MobileHeader title={"쿠폰함"} /> */}
       <div className="md:hidden h-full pb-20">
-        {login ? (
+        {isLogin ? (
           <div className="pt-8">
             {/* 검색 영역 */}
             <div className="flex justify-center mb-10">

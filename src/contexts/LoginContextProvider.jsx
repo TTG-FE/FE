@@ -20,19 +20,19 @@ const LoginContextProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem("oauthToken");
-    if (storedToken) {
-      setToken("Bearer ${storedToken}");
-      setLogin(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem("oauthToken");
+  //   if (storedToken) {
+  //     setToken("Bearer ${storedToken}");
+  //     setLogin(true);
+  //   }
+  // }, []);
 
   const logout = () => {
-    setLogin(false);
-    setToken(null);
     localStorage.removeItem("oauthToken");
     localStorage.removeItem("tokenExpiration");
+    setLogin(false);
+    setToken(null);
   };
 
   // 로그인 상태 업데이트 함수

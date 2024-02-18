@@ -16,10 +16,6 @@ function Store() {
   const { store_id } = useParams();
 
   const { isLogin, token } = useContext(LoginContext);
-  console.log(token);
-  console.log(store_id);
-
-  const [login, setLogin] = useState(isLogin);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,6 +56,7 @@ function Store() {
         }
       );
       console.log(response);
+      console.log("리뷰 요청 성공");
     } catch (error) {
       console.error("Error postDataWithFormData", error);
 
@@ -78,7 +75,6 @@ function Store() {
 
   // 모달창 닫기
   const handleCloseModal = () => {
-    postDataWithFormData();
     setIsModalOpen(false);
   };
 
@@ -98,7 +94,7 @@ function Store() {
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
           id={store_id}
-          login={login}
+          isLogin={isLogin}
           storeInfo={storeInfo}
           isCouponUsed={isCouponUsed}
           handleOpenModal={handleOpenModal}
@@ -112,6 +108,7 @@ function Store() {
         handleReviewUrlChange={handleReviewUrlChange}
         reviewUrl={reviewUrl}
         setIsCouponUsed={setIsCouponUsed}
+        postDataWithFormData={postDataWithFormData}
       />
     </div>
   );
@@ -254,7 +251,7 @@ const StoreLeftSection = ({ storeInfo }) => {
 
 const StoreRightSection = ({
   id,
-  login,
+  isLogin,
   storeInfo,
   isCouponUsed,
   handleOpenModal,
@@ -315,7 +312,7 @@ const StoreRightSection = ({
           )}
         </div>
 
-        {login ? (
+        {isLogin ? (
           <>
             <div className="flex py-8 border-b">
               <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
@@ -380,6 +377,7 @@ const StoreModal = ({
   handleReviewUrlChange,
   reviewUrl,
   setIsCouponUsed,
+  postDataWithFormData,
 }) => {
   return (
     <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -427,6 +425,7 @@ const StoreModal = ({
           }
           onClick={() => {
             setIsCouponUsed(true);
+            postDataWithFormData();
             handleCloseModal();
           }}
         >
