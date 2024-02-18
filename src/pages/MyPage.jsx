@@ -1,12 +1,13 @@
-import React, { useRef, useEffect, useState, useContext } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import basicProfile from "../assets/basicprofile.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
 import FailReview from "./FailReview";
+import { LoginContext } from "../contexts/LoginContextProvider";
+
 import axios from "axios";
 // import { LoginContext } from "../contexts/LoginContextProvider";
 import GoToLogin from "../components/GoToLogin";
-import { LoginContext } from "../contexts/LoginContextProvider";
 
 export const MyPage = () => {
   const ongoingRef = useRef(null);
@@ -21,35 +22,41 @@ export const MyPage = () => {
   });
   const [error, setError] = useState(null);
 
-  // const { isLogin, token } = useContext(LoginContext);
-  const { isLogin } = useContext(LoginContext);
+  const { isLogin, token } = useContext(LoginContext);
+  // const { isLogin } = useContext(LoginContext);
   //console.log(token);
 
   useEffect(() => {
     const fetchReviewData = async () => {
-      const token =
-        "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
+      // const token =
+      //   "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
         const response = await axios.get("members/profile", {
           headers: {
-            // Authorization: token,
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
+            // Authorization: `Bearer ${token}`,
           },
         });
 
         const result = response.data;
 
         if (result.isSuccess) {
-          const { memberId, nickname, benefitCount } = result.result.member;
+          const { memberId, nickname, benefitCount, profile_image } =
+            result.result.member;
+
           //console.log(nickname);
-          //console.log(benefitCount);
+          // console.log(benefitCount);
+          // console.log(profile_image);
 
           setReviewData({
             memberId,
             nickname,
             benefitCount,
+            profile_image,
           });
+
+          setSelectedImage(profile_image || basicProfile);
         } else {
           setError(result.message);
         }
@@ -73,6 +80,38 @@ export const MyPage = () => {
     return <GoToLogin />;
   }
   // 프로필 사진 변경
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append("profileImage", file);
+        const response = await axios.post("members/profile/image", formData, {
+          headers: {
+            Authorization: token,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        const result = response.data;
+        console.log(result);
+        if (result.isSuccess) {
+          // 이미지 업로드 성공 시 프로필 사진 업데이트
+          setReviewData((prevData) => ({
+            ...prevData,
+            profile_image: result.profile_image,
+          }));
+          console.log(result.profile_image);
+          setSelectedImage(result.profile_image || basicProfile);
+        } else {
+          setError(result.message);
+        }
+      } catch (error) {
+        setError("프로필 사진 업로드 오류");
+      }
+    }
+  };
 
   const handleClick = () => {
     document.getElementById("profileImageInput").click();
@@ -127,7 +166,7 @@ export const MyPage = () => {
             id="profileImageInput"
             accept="image/*"
             style={{ display: "none" }}
-            // onChange={handleImageChange}
+            onChange={handleImageChange}
           />
           <div
             className="text-[1.28rem] text-[#000000]/50 mt-[0.88rem] cursor-pointer"

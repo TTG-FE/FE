@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { LoginContext } from "../contexts/LoginContextProvider";
 
 export const FinishReview = () => {
   const [reviewData, setReviewData] = useState(null);
   const [error, setError] = useState(null);
+  const { token } = useContext(LoginContext);
 
   useEffect(() => {
     const fetchReviewData = async () => {
-      const token =
-        "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
+      // const token =
+      //   "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
         const response = await axios.get("members/profile", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
           },
         });
 
