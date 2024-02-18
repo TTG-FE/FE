@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback, useContext, useEffect } from "react";
 import axios from "axios";
 import StoreCard from "../../components/StoreCard";
 import GoToLogin from "../../components/GoToLogin";
@@ -11,6 +11,10 @@ const Heart = () => {
   const [stores, setStores] = useState([]); // 상점 데이터
   const [lastPage, setLastPage] = useState(false); // 마지막 페이지 여부
 
+  useEffect(() => {
+    setStores([]);
+    setLastPage(false);
+  }, []);
   // 관심상점 api 호출
   const fetchData = useCallback(
     async (page) => {

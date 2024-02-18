@@ -136,7 +136,7 @@ export const MyPage = () => {
     setSelectedMenu(menu);
   };
   return (
-    <div className="grid place-items-center relative">
+    <div className="relative grid place-items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1920 378"
@@ -170,7 +170,7 @@ export const MyPage = () => {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="rounded-full overflow-hidden">
+          <div className="overflow-hidden rounded-full">
             <img
               className="w-[10.6875rem] h-[10.6875rem] object-cover"
               src={selectedImage || basicProfile}
