@@ -17,8 +17,6 @@ function Store() {
 
   const { isLogin, token } = useContext(LoginContext);
 
-  const [login, setLogin] = useState(false);
-
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -58,6 +56,7 @@ function Store() {
         }
       );
       console.log(response);
+      console.log("리뷰 요청 성공");
     } catch (error) {
       console.error("Error postDataWithFormData", error);
 

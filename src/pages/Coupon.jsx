@@ -13,7 +13,6 @@ import { LoginContext } from "../contexts/LoginContextProvider";
 const Coupon = () => {
   // 쿠폰 사용 여부
   const { isLogin, token } = useContext(LoginContext);
-  // const [login, setLogin] = useState(isLogin);
   // const [coupons, setCoupons] = useState([
   //   {
   //     id: 21,
@@ -99,7 +98,7 @@ const Coupon = () => {
       }
     };
     fetchData();
-  }, [isLogin]);
+  }, []);
 
 
   const filteredCoupons = coupons.filter((coupon) =>
@@ -186,7 +185,7 @@ const Coupon = () => {
         <div className="md:hidden">
           <MobileCouponSection
             coupons={filteredCoupons}
-            login={isLogin}
+            isLogin={isLogin}
             setSearchTerm={setSearchTerm}
           >
             {isLogin ? renderCouponCards(filteredCoupons) : <GoToLogin />}
@@ -197,7 +196,7 @@ const Coupon = () => {
         <div className="hidden md:block">
           <DesktopCouponSection
             coupons={filteredCoupons}
-            login={isLogin}
+            isLogin={isLogin}
             // onToggleLogin={() => {
             //   setLogin(!login);
             //   handleCloseModal();
