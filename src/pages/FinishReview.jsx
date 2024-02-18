@@ -56,11 +56,14 @@ export const FinishReview = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
+    <div className="grid grid-cols-1 gap-4 mb-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {reviewData.map((review) => (
         <div
-          className="rounded-[0.19538rem]  p-[0.44rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]"
+          className="rounded-[0.19538rem]  p-[0.44rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)] cursor-pointer"
           key={review.reviewId}
+          onClick={() => {
+            window.open(`http://${review.reviewLink}`, "_blank");
+          }}
         >
           <div
             className="rounded-[0.19538rem]  mb-[0.95rem] w-[13.36881rem] p-[0.44rem] h-[11.23306rem] bg-[#FFEDED]"
