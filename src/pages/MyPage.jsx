@@ -67,7 +67,7 @@ export const MyPage = () => {
     };
 
     fetchReviewData();
-  }, []);
+  }, [isLogin]);
 
   if (error) {
     return <div>{error}</div>;
