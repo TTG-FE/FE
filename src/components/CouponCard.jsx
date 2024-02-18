@@ -66,7 +66,7 @@ const CouponCard = ({
         <div className="relative z-0">
           <div
             className={`rounded-l-lg h-full w-16 flex flex-col items-center justify-center pl-4 pr-[18px] basis-1/4 ${
-              couponData.useYn === "Y" ? "bg-custom-gray-300" : "bg-custom-pink"
+              couponData.useYn === "N" ? "bg-custom-gray-300" : "bg-custom-pink"
             }`}
           >
             <button
@@ -74,18 +74,18 @@ const CouponCard = ({
               onClick={() => {
                 handleOpenModal();
               }}
-              disabled={couponData.useYn === "Y"}
+              disabled={couponData.useYn === "N"}
             >
               <div className="w-9 h-9 bg-white rounded-full mb-1.5 flex justify-center items-center">
                 <PhoneDownloadIcon
-                  fill={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
-                  stroke={`${couponData.useYn === "Y" ? "#B3B3B3" : "#FF0068"}`}
+                  fill={`${couponData.useYn === "N" ? "#B3B3B3" : "#FF0068"}`}
+                  stroke={`${couponData.useYn === "N" ? "#B3B3B3" : "#FF0068"}`}
                 />
               </div>
               <p className="text-white">다운로드</p>
             </button>
             <HorizontalCircleIcon
-              fill={couponData.useYn === "Y" ? "white" : "#FFF2F2"}
+              fill={couponData.useYn === "N" ? "white" : "#FFF2F2"}
               className="absolute top-3 right-[-6px]"
             />
           </div>
@@ -94,7 +94,7 @@ const CouponCard = ({
         {/* 쿠폰 오른쪽 내용 영역 */}
         <div
           className={`py-6 pl-6 pr-2  w-full ${
-            couponData.useYn === "Y" ? "bg-white" : "bg-[#FFF2F2]"
+            couponData.useYn === "N" ? "bg-white" : "bg-[#FFF2F2]"
           }`}
         >
           <div className="flex flex-col justify-around h-full">
@@ -102,7 +102,7 @@ const CouponCard = ({
             <h1>{couponData.name}</h1>
             <p
               className={`text-[10px]  ${
-                couponData.useYn === "Y"
+                couponData.useYn === "N"
                   ? "text-custom-gray-200"
                   : "text-custom-pink"
               }`}
@@ -113,16 +113,16 @@ const CouponCard = ({
             <div className="flex flex-row items-center">
               <p
                 className={`text-[8px] rounded-lg text-white px-2 py-0.5 mr-2 ${
-                  couponData.useYn === "Y"
+                  couponData.useYn === "N"
                     ? "bg-custom-gray-300"
                     : "bg-custom-pink"
                 }`}
               >
-                {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
+                {couponData.useYn === "N" ? "사용완료" : "사용가능"}
               </p>
               <p
                 className={`text-[10px]  ${
-                  couponData.useYn === "Y" ? "text-custom-gray-200" : null
+                  couponData.useYn === "N" ? "text-custom-gray-200" : null
                 }`}
               >
                 {`${couponData.startDate} ~ ${couponData.endDate}`}
@@ -302,7 +302,7 @@ const CouponCard = ({
           <img
             src={couponData.storeImage}
             alt="상점 이미지"
-            className="mr-12 rounded-lg"
+            className="mr-12 rounded-lg w-96"
           />
           {/* 내용 전체 크기 설정 */}
           <div className="truncate  pt-11 pb-7">
@@ -315,12 +315,12 @@ const CouponCard = ({
             <div className="flex items-center">
               <p
                 className={`px-5 py-2.5 rounded-3xl	text-white mr-5 ${
-                  couponData.useYn === "Y"
+                  couponData.useYn === "N"
                     ? "bg-custom-gray-200"
                     : "bg-custom-pink"
                 }`}
               >
-                {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
+                {couponData.useYn === "N" ? "사용완료" : "사용가능"}
               </p>
               <p className="overflow-hidden text-ellipsis">
                 기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
@@ -331,7 +331,7 @@ const CouponCard = ({
         {/* 쿠픈 다운로드 */}
         <div
           className={`relative basis-1/4 rounded-r-lg h-full overflow-hidden ${
-            couponData.useYn === "Y"
+            couponData.useYn === "N"
               ? "bg-custom-gray-200"
               : "bg-custom-gradation-180"
           }`}
@@ -352,9 +352,9 @@ const CouponCard = ({
                 onClick={() => {
                   handleOpenModal();
                 }}
-                disabled={couponData.useYn === "Y"}
+                disabled={couponData.useYn === "N"}
               >
-                <DownloadIcon isCoupon={couponData.useYn === "Y"} />
+                <DownloadIcon isCoupon={couponData.useYn === "N"} />
               </button>
             </div>
             <button
@@ -362,7 +362,7 @@ const CouponCard = ({
               onClick={() => {
                 handleOpenModal();
               }}
-              disabled={couponData.useYn === "Y"}
+              disabled={couponData.useYn === "N"}
             >
               Download
             </button>
@@ -384,7 +384,7 @@ const CouponCard = ({
               <img
                 src={couponData.storeImage}
                 alt="상점 이미지"
-                className="mt-5 mb-11 rounded-xl"
+                className="mt-5 mb-11 rounded-xl h-52"
               />
             </div>
 
@@ -491,7 +491,7 @@ const CouponCard = ({
               <img
                 src={couponData.storeImage}
                 alt="상점 이미지"
-                className="mt-5 mb-11 grayscale rounded-xl"
+                className="mt-5 mb-11 grayscale rounded-xl h-52"
               />
               <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
                 <p className="text-4xl font-bold text-custom-pink">

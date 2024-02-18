@@ -15,14 +15,14 @@ import { LoginContext } from "../contexts/LoginContextProvider";
 function Store() {
   const { store_id } = useParams();
 
-  const { isLogin } = useContext(LoginContext);
+  const { isLogin, token } = useContext(LoginContext);
+  console.log(token);
+  console.log(store_id);
 
   const [login, setLogin] = useState(isLogin);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // 현재 상점의 관심 여부
-  const [isLiked, setIsLiked] = useState(false);
 
   // 리뷰 등록 이메일 유효성 검사
   const [reviewUrl, setReviewUrl] = useState("");
@@ -35,10 +35,9 @@ function Store() {
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        const response = await axios.get(`stores/${store_id}`);
+        const response = await axios.get(`/stores/${store_id}`);
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
-        console.log(response);
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
       }
@@ -46,20 +45,31 @@ function Store() {
     fetchStoreInfo();
   }, []);
 
-  // const url =
+  const postDataWithFormData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("reviewLink", "www.google.com");
+      const response = await axios.post(
+        `stores/${store_id}/reviews`,
+        formData,
+        {
+          headers: {
+            // 'Content-Type':'application/json',
+            Authorization: token,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error("Error postDataWithFormData", error);
 
-  // axios
-  //   .post(url, data, {
-  //     headers: {
-  //       Authorization: `Bearer YOUR_TOKEN_HERE`,
-  //     },
-  //   })
-  //   .then((response) => {
-  //     console.log(response.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
+      // 서버로부터의 응답이 있는지 확인하고, 해당 응답에서 'message' 필드 출력
+      if (error.response && error.response.data) {
+        // error.response.data에는 서버 응답의 바디가 포함되어 있음
+        console.error("Server Response:", error.response.data.message); // '지정된 리뷰의 개수를 초과했습니다.' 메시지 출력
+      }
+    }
+  };
 
   // 모달창 열기
   const handleOpenModal = () => {
@@ -68,12 +78,8 @@ function Store() {
 
   // 모달창 닫기
   const handleCloseModal = () => {
+    postDataWithFormData();
     setIsModalOpen(false);
-  };
-
-  // 하트 이벤트
-  const handleToggleHeart = () => {
-    setIsLiked((prev) => !prev);
   };
 
   // 리뷰 페이지 주소 입력 시 상태 업데이트
@@ -94,8 +100,6 @@ function Store() {
           id={store_id}
           login={login}
           storeInfo={storeInfo}
-          handleToggleHeart={handleToggleHeart}
-          isLiked={isLiked}
           isCouponUsed={isCouponUsed}
           handleOpenModal={handleOpenModal}
         />
@@ -120,7 +124,7 @@ const StoreLeftSection = ({ storeInfo }) => {
         <img
           src={storeInfo.storeImage}
           alt="매장 음식 이미지"
-          className="object-cover w-full rounded-3xl"
+          className="object-cover w-[860px] rounded-3xl h-[600px]"
         />
       </div>
       {/* 안내 문구들 */}
@@ -252,8 +256,6 @@ const StoreRightSection = ({
   id,
   login,
   storeInfo,
-  handleToggleHeart,
-  isLiked,
   isCouponUsed,
   handleOpenModal,
 }) => {
@@ -261,10 +263,9 @@ const StoreRightSection = ({
   const now = new Date();
 
   // 현재 날짜에 5일 추가
-  now.setDate(now.getDate() + 5);
+  now.setDate(now.getDate() + 30);
 
   const expirationPeriod = now.toISOString().split("T")[0];
-  console.log(storeInfo)
 
   return (
     <div className="w-1/2 pl-16">
@@ -302,6 +303,7 @@ const StoreRightSection = ({
             또또가 기간
           </div>
           {isCouponUsed ? (
+            // storeInfo.submitReview
             <div className="text-[#404040]">
               {expirationPeriod} 까지 사용 가능합니다!
             </div>
@@ -319,23 +321,38 @@ const StoreRightSection = ({
               <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
                 관심상점
               </div>
-              <button onClick={handleToggleHeart} className="flex">
+              {/* 하트아이콘 */}
+              <div className="flex">
+                <HeartButton
+                  like={storeInfo.heartStore}
+                  id={id}
+                  borderColor={"rgba(0, 0, 0, 0.3)"}
+                  w={"27px"}
+                  h={"25px"}
+                />
+              </div>
+              {/* <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
                   stroke={isLiked ? "#FF0069" : "black"}
                   strokeOpacity={isLiked ? "1" : "0.3"}
                   fill={isLiked ? "#FF0069" : "none"}
                 />
-              </button>
+              </button> */}
             </div>
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${
-                isCouponUsed ? "bg-[#D9D9D9] text-[#545454]" : "bg-[#FF0069]"
+                isCouponUsed
+                  ? // storeInfo.submitReview
+                    "bg-[#D9D9D9] text-[#545454]"
+                  : "bg-[#FF0069]"
               }`}
               onClick={handleOpenModal}
               disabled={isCouponUsed}
+              // disabled={storeInfo.submitReview}
             >
               {isCouponUsed
-                ? "또또가 신청 완료!"
+                ? // storeInfo.submitReview
+                  "또또가 신청 완료!"
                 : "리뷰 등록하고 또또가 쿠폰 받기"}
             </button>
           </>
