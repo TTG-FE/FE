@@ -9,13 +9,15 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import HeartButton from "../components/HeartButton";
 import { LoginContext } from "../contexts/LoginContextProvider";
+import test from "../assets/images/Test.png";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
 function Store() {
   const { store_id } = useParams();
-
   const { isLogin, token } = useContext(LoginContext);
+
+  const [isLoading, setLoading] = useState(true); // 로딩 여부
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,19 +26,25 @@ function Store() {
   const [reviewUrl, setReviewUrl] = useState("");
 
   // 쿠폰 발행 여부
-  const [isCouponUsed, setIsCouponUsed] = useState(false);
+  // const [isCouponUsed, setIsCouponUsed] = useState(false);
 
   const [storeInfo, setStoreInfo] = useState([]);
 
   useEffect(() => {
     const fetchStoreInfo = async () => {
       try {
-        const response = await axios.get(`/stores/${store_id}`);
+        const response = await axios.get(`/stores/${store_id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
-        console.log(fetchedStoreInfo);
+        // console.log("상점 페이지 GET 요청 성공");
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchStoreInfo();
@@ -56,8 +64,7 @@ function Store() {
           },
         }
       );
-      console.log(response);
-      console.log("리뷰 요청 성공");
+      // console.log("상점페이지 리뷰 POST 요청 성공");
     } catch (error) {
       console.error("Error postDataWithFormData", error);
 
@@ -84,7 +91,11 @@ function Store() {
     setReviewUrl(event.target.value);
   };
 
-  return (
+  return isLoading ? (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <img className="animate-spin w-14 h-14" src={test} alt="로딩중" />
+    </div>
+  ) : (
     /* 전체 페이지 크기 설정 */
     <div className={`w-xl px-36 font-inter relative`}>
       {/* 양쪽을 포함하는 div 설정 */}
@@ -97,7 +108,7 @@ function Store() {
           id={store_id}
           isLogin={isLogin}
           storeInfo={storeInfo}
-          isCouponUsed={isCouponUsed}
+          isCouponUsed={storeInfo.submitReview}
           handleOpenModal={handleOpenModal}
         />
       </main>
@@ -108,7 +119,7 @@ function Store() {
         handleCloseModal={handleCloseModal}
         handleReviewUrlChange={handleReviewUrlChange}
         reviewUrl={reviewUrl}
-        setIsCouponUsed={setIsCouponUsed}
+        setIsCouponUsed={storeInfo.submitReview}
         postDataWithFormData={postDataWithFormData}
       />
     </div>
