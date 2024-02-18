@@ -124,7 +124,7 @@ const StoreLeftSection = ({ storeInfo }) => {
         <img
           src={storeInfo.storeImage}
           alt="매장 음식 이미지"
-          className="object-cover w-[855px] rounded-3xl h-[600px]"
+          className="object-cover w-[860px] rounded-3xl h-[600px]"
         />
       </div>
       {/* 안내 문구들 */}
@@ -321,13 +321,23 @@ const StoreRightSection = ({
               <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
                 관심상점
               </div>
-              <button onClick={handleToggleHeart} className="flex">
+              {/* 하트아이콘 */}
+              <div className="flex">
+                <HeartButton
+                  like={storeInfo.heartStore}
+                  id={id}
+                  borderColor={"rgba(0, 0, 0, 0.3)"}
+                  w={"27px"}
+                  h={"25px"}
+                />
+              </div>
+              {/* <button onClick={handleToggleHeart} className="flex">
                 <HeartIcon
                   stroke={isLiked ? "#FF0069" : "black"}
                   strokeOpacity={isLiked ? "1" : "0.3"}
                   fill={isLiked ? "#FF0069" : "none"}
                 />
-              </button>
+              </button> */}
             </div>
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${
