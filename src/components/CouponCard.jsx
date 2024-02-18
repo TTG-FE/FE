@@ -149,13 +149,13 @@ const CouponCard = ({
               <img
                 src={couponData.storeImage}
                 alt="상점 이미지"
-                className="mb-8 w-[228px] h-[141px] rounded-lg"
+                className="mb-8 w-[228px] h-[141px] rounded-lg object-cover"
               />
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
+            <CouponSemicircleUI_Mobile />
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="text-center border-t-2 border-dashed border-custom-pink">
@@ -197,7 +197,7 @@ const CouponCard = ({
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
+            <CouponSemicircleUI_Mobile />
 
             <div className="border-t-2 border-dashed border-custom-pink">
               {/* 대쉬바 밑에 내용 전체 div */}
@@ -255,7 +255,7 @@ const CouponCard = ({
               <img
                 src={couponData.storeImage}
                 alt="상점 이미지"
-                className="mb-8 w-[228px] h-[141px] grayscale"
+                className="mb-8 w-[228px] h-[141px] grayscale rounded-lg object-cover"
               />
               <div className="w-[115px] h-[115px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
                 <p className="text-2xl font-semibold text-custom-pink">
@@ -269,7 +269,7 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
 
-            <CouponSemicircleUI_Mobile borderColor={`custom-gray-400`} />
+            <CouponSemicircleUI_Mobile isLast={true} />
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="border-dashed border-t-2 border-[#B2B2B2] text-center">
@@ -302,7 +302,7 @@ const CouponCard = ({
           <img
             src={couponData.storeImage}
             alt="상점 이미지"
-            className="mr-12 rounded-lg w-96"
+            className="mr-12 rounded-lg w-96 object-cover"
           />
           {/* 내용 전체 크기 설정 */}
           <div className="truncate  pt-11 pb-7">
@@ -379,19 +379,19 @@ const CouponCard = ({
           isCoupon={true}
         >
           <div className="px-9 py-8 w-[408px] h-full">
-            <div className="h-[300px]">
+            <div className="h-[300px] flex flex-col ">
               <div className="text-center text-custom-gray-200">쿠폰 정보</div>
               <img
                 src={couponData.storeImage}
                 alt="상점 이미지"
-                className="mt-5 mb-11 rounded-xl h-52"
+                className="mt-5 mb-11 rounded-xl h-52 object-cover"
               />
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
 
-            <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
+            <CouponSemicircleUI_Desktop />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 text-center border-t-2 border-dashed border-custom-pink">
@@ -433,7 +433,7 @@ const CouponCard = ({
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
+            <CouponSemicircleUI_Desktop />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-t-2 border-dashed border-custom-pink ">
@@ -491,7 +491,7 @@ const CouponCard = ({
               <img
                 src={couponData.storeImage}
                 alt="상점 이미지"
-                className="mt-5 mb-11 grayscale rounded-xl h-52"
+                className="mt-5 mb-11 grayscale rounded-xl h-52 w-full object-cover"
               />
               <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
                 <p className="text-4xl font-bold text-custom-pink">
@@ -502,7 +502,7 @@ const CouponCard = ({
               </div>
             </div>
 
-            <CouponSemicircleUI_Desktop borderColor={`custom-gray-400`} />
+            <CouponSemicircleUI_Desktop isLast={true} />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-[#B2B2B2] text-center">
@@ -532,26 +532,34 @@ const CouponCard = ({
   );
 };
 
-const CouponSemicircleUI_Desktop = ({ borderColor }) => {
+const CouponSemicircleUI_Desktop = ({ isLast }) => {
   return (
     <>
       <div
-        className={`absolute w-14 h-14 bg-white rounded-full top-[308px] left-[-20px] border-4 border-${borderColor}`}
+        className={`absolute w-14 h-14 bg-white rounded-full top-[308px] left-[-20px] border-4 ${
+          isLast ? "border-gray-300" : "border-custom-pink"
+        }`}
       ></div>
       <div
-        className={`absolute w-14 h-14 bg-white rounded-full top-[308px] right-[-20px] border-4 border-${borderColor}`}
+        className={`absolute w-14 h-14 bg-white rounded-full top-[308px] right-[-20px] border-4 ${
+          isLast ? "border-gray-300" : "border-custom-pink"
+        }`}
       ></div>
     </>
   );
 };
-const CouponSemicircleUI_Mobile = ({ borderColor }) => {
+const CouponSemicircleUI_Mobile = ({ isLast }) => {
   return (
     <>
       <div
-        className={`absolute w-10 h-10 bg-white rounded-full top-[204px] left-[-15px] border-4 border-${borderColor}`}
+        className={`absolute w-10 h-10 bg-white rounded-full top-[204px] left-[-15px] border-4 ${
+          isLast ? "border-gray-300" : "border-custom-pink"
+        }`}
       ></div>
       <div
-        className={`absolute w-10 h-10 bg-white rounded-full top-[204px] right-[-15px] border-4 border-${borderColor}`}
+        className={`absolute w-10 h-10 bg-white rounded-full top-[204px] right-[-15px] border-4 ${
+          isLast ? "border-gray-300" : "border-custom-pink"
+        }`}
       ></div>
     </>
   );
