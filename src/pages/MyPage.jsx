@@ -77,7 +77,22 @@ export const MyPage = () => {
   };
 
   if (!isLogin) {
-    return <GoToLogin />;
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+          background: "rgba(255, 255, 255, 0.9)",
+          padding: "20px",
+          zIndex: "999",
+        }}
+      >
+        <GoToLogin />
+      </div>
+    );
   }
   // 프로필 사진 변경
   const handleImageChange = async (e) => {
