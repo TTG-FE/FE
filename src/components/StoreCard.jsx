@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../contexts/LoginContextProvider";
 import HeartButton from "./HeartButton";
 /** 지역별 상점 및 메뉴별 상점의 카드 */
 const StoreCard = ({ item }) => {
-  const { isLogin } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleClick = (id) => {

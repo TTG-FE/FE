@@ -13,7 +13,8 @@ import { LoginContext } from "./../contexts/LoginContextProvider";
 const Header = () => {
   const location = useLocation();
   const { autoLogout } = useContext(LoginContext);
-  autoLogout();
+
+  autoLogout(); // 1시간 지나면 자동로그아웃
 
   return (
     <>
