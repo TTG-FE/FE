@@ -98,7 +98,7 @@ const Coupon = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [isLogin]);
 
 
   const filteredCoupons = coupons.filter((coupon) =>
