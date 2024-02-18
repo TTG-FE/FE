@@ -76,7 +76,6 @@ function Store() {
 
   // 모달창 닫기
   const handleCloseModal = () => {
-    postDataWithFormData();
     setIsModalOpen(false);
   };
 
@@ -110,6 +109,7 @@ function Store() {
         handleReviewUrlChange={handleReviewUrlChange}
         reviewUrl={reviewUrl}
         setIsCouponUsed={setIsCouponUsed}
+        postDataWithFormData={postDataWithFormData}
       />
     </div>
   );
@@ -378,6 +378,7 @@ const StoreModal = ({
   handleReviewUrlChange,
   reviewUrl,
   setIsCouponUsed,
+  postDataWithFormData,
 }) => {
   return (
     <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -425,6 +426,7 @@ const StoreModal = ({
           }
           onClick={() => {
             setIsCouponUsed(true);
+            postDataWithFormData();
             handleCloseModal();
           }}
         >
