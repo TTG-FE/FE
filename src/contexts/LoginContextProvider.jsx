@@ -39,7 +39,13 @@ const LoginContextProvider = ({ children }) => {
   const loginSuccess = (token) => {
     localStorage.setItem("oauthToken", token); // 토큰을 로컬 스토리지에 저장
 
-    const expiresIn = 60 * 60;
+    let expiresIn; // 토큰 유효시간
+    if (token.startsWith("naver_")) {
+      expiresIn = 60 * 60; // 네이버는 1시간
+    } else {
+      expiresIn = 60 * 60 * 6; // 카카오는 6시간
+    }
+
     const expirationTime = new Date().getTime() + expiresIn * 1000; // 1000이 1초
     localStorage.setItem("tokenExpiration", expirationTime);
 
