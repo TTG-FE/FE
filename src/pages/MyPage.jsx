@@ -33,33 +33,33 @@ export const MyPage = () => {
       //   "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
-        const response = await axios.get("members/profile", {
-          headers: {
-            Authorization: token,
-            // Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const result = response.data;
-
-        if (result.isSuccess) {
-          const { memberId, nickname, benefitCount, profile_image } =
-            result.result.member;
-
-          //console.log(nickname);
-          // console.log(benefitCount);
-          // console.log(profile_image);
-
-          setReviewData({
-            memberId,
-            nickname,
-            benefitCount,
-            profile_image,
+        if (isLogin) {
+          const response = await axios.get("members/profile", {
+            headers: {
+              Authorization: token,
+              // Authorization: `Bearer ${token}`,
+            },
           });
+          const result = response.data;
+          if (result.isSuccess) {
+            const { memberId, nickname, benefitCount, profile_image } =
+              result.result.member;
 
-          setSelectedImage(profile_image || basicProfile);
-        } else {
-          setError(result.message);
+            //console.log(nickname);
+            // console.log(benefitCount);
+            // console.log(profile_image);
+
+            setReviewData({
+              memberId,
+              nickname,
+              benefitCount,
+              profile_image,
+            });
+
+            setSelectedImage(profile_image || basicProfile);
+          } else {
+            setError(result.message);
+          }
         }
       } catch (error) {
         setError("API 호출 오류");
@@ -136,7 +136,7 @@ export const MyPage = () => {
     setSelectedMenu(menu);
   };
   return (
-    <div className="grid place-items-center relative">
+    <div className="relative grid place-items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1920 378"
@@ -170,7 +170,7 @@ export const MyPage = () => {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="rounded-full overflow-hidden">
+          <div className="overflow-hidden rounded-full">
             <img
               className="w-[10.6875rem] h-[10.6875rem] object-cover"
               src={selectedImage || basicProfile}
