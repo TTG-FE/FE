@@ -62,15 +62,19 @@ const Menu = () => {
         {/* 상점 필터명 */}
         <div className="flex items-center justify-between px-8 py-16">
           <div>
-            <div className="mb-4 text-2xl font-semibold">
-              메뉴&gt;{" "}
-              <span className="border-b-4 border-custom-yellow">
-                {menu_label}
-              </span>
-            </div>
-            <p className="text-sm font-normal text-custom-gray-100">
-              전국 각지의 또또가 상점을 만나보세요!
-            </p>
+            {menu_id && (
+              <>
+                <div className="mb-4 text-2xl font-semibold">
+                  메뉴&gt;{" "}
+                  <span className="border-b-4 border-custom-yellow">
+                    {menu_label}
+                  </span>
+                </div>
+                <p className="text-sm font-normal text-custom-gray-100">
+                  전국 각지의 또또가 상점을 만나보세요!
+                </p>
+              </>
+            )}
           </div>
         </div>
 

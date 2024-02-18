@@ -59,7 +59,7 @@ const Heart = () => {
       {isLogin ? (
         <>
           {stores.length === 0 ? (
-            <div className="text-lg font-normal text-center text-custom-gray-200">
+            <div className="absolute inset-0 flex items-center justify-center text-lg font-normal text-custom-gray-200 ">
               또또가 관심상점을 등록하고 쿠폰을 받아보세요.
             </div>
           ) : (
