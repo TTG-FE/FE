@@ -147,17 +147,17 @@ const MobileMainPageHeader = () => {
 
   return (
     <div>
-      <div className="px-6 md:hidden ">
+      <div className="px-6 md:hidden">
         {/* 로그인 UI*/}
         <div className="flex justify-between my-11">
           <div className="flex flex-col mr-2 space-y-2">
             <p className="text-xl font-semibold line-clamp-1">
               {isLogin
-                ? "안녕하세요 산책왕자 강형욱님22222222"
+                ? "안녕하세요 또또가 입니다!"
                 : "로그인 후 이용하실 수 있습니다."}
             </p>
             <p className="text-xs opacity-60">
-              오늘도 또또가에서 혜택을 받아보세요.
+              오늘도 또또가에서 혜택을 받아보세요!
             </p>
           </div>
           {/* 로그인 페이지로 이동하는 버튼 */}
@@ -176,7 +176,7 @@ const MobileMainPageHeader = () => {
         </div>
 
         {/* 쿠폰함 UI*/}
-        <div className="my-11">
+        <div className="mt-11">
           <div className="relative flex items-center w-full px-3 text-white h-28 rounded-xl bg-custom-gradation-180-2">
             <div className="w-1.5 h-20 bg-white rounded-full mix-blend-soft-light"></div>
             <div className="flex flex-col p-4">

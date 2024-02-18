@@ -22,7 +22,7 @@ const LoginContextProvider = ({ children }) => {
   const loginSuccess = (token) => {
     localStorage.setItem("oauthToken", token); // 토큰을 로컬 스토리지에 저장
 
-    const expiresIn = 1 * 60;
+    const expiresIn = 1 * 60 * 60;
     const expirationTime = new Date().getTime() + expiresIn * 1000; // 1분 후로 설정
     localStorage.setItem("tokenExpiration", expirationTime);
 
