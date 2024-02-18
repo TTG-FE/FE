@@ -16,10 +16,8 @@ function Store() {
   const { store_id } = useParams();
 
   const { isLogin, token } = useContext(LoginContext);
-  console.log(token);
-  console.log(store_id);
 
-  const [login, setLogin] = useState(isLogin);
+  const [login, setLogin] = useState(false);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -98,7 +96,7 @@ function Store() {
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
           id={store_id}
-          login={login}
+          login={isLogin}
           storeInfo={storeInfo}
           isCouponUsed={isCouponUsed}
           handleOpenModal={handleOpenModal}
@@ -254,7 +252,7 @@ const StoreLeftSection = ({ storeInfo }) => {
 
 const StoreRightSection = ({
   id,
-  login,
+  isLogin,
   storeInfo,
   isCouponUsed,
   handleOpenModal,
@@ -315,7 +313,7 @@ const StoreRightSection = ({
           )}
         </div>
 
-        {login ? (
+        {isLogin ? (
           <>
             <div className="flex py-8 border-b">
               <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
