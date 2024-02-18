@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from "react";
 import basicProfile from "../assets/basicprofile.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
+import ScreenReview from "./ScreenReview";
 import FailReview from "./FailReview";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
@@ -339,12 +340,15 @@ export const MyPage = () => {
             </div>
           </div>
 
-          <OngoingReview />
+          {selectedMenu === "신청" && <OngoingReview />}
+          {selectedMenu === "리뷰 유지 기간" && <ScreenReview />}
+          {selectedMenu === "쿠폰 발급 완료" && <FinishReview />}
           <div ref={rejectedRef}>
             <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
               탈락된 리뷰
             </div>
           </div>
+
           <FailReview />
 
           <div ref={completedRef}>
