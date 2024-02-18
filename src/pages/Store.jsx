@@ -124,7 +124,7 @@ const StoreLeftSection = ({ storeInfo }) => {
         <img
           src={storeInfo.storeImage}
           alt="매장 음식 이미지"
-          className="object-cover w-full rounded-3xl"
+          className="object-cover w-[855px] rounded-3xl h-[600px]"
         />
       </div>
       {/* 안내 문구들 */}
@@ -302,8 +302,8 @@ const StoreRightSection = ({
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
-          {/* {isCouponUsed ? ( */}
-          {storeInfo.submitReview ? (
+          {isCouponUsed ? (
+            // storeInfo.submitReview
             <div className="text-[#404040]">
               {expirationPeriod} 까지 사용 가능합니다!
             </div>
