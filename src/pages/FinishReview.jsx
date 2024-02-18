@@ -8,7 +8,7 @@ export const FinishReview = () => {
   useEffect(() => {
     const fetchReviewData = async () => {
       const token =
-        "naver_AAAAO9ruzBlAThPrxZmibfCeJJwvVxeWHDDkESUzkaJp7jWdPdQb5BKk23VD_AhYdk_3Jt2ztTYtqw1ur5TId0hMhcE";
+        "kakao_MeB5ybynas8oyEN4kHB3dvvjO3f7PeQhyasKKwynAAABjbpzqNsp9hBbJybEWQ";
 
       try {
         const response = await axios.get("members/profile", {
@@ -20,10 +20,10 @@ export const FinishReview = () => {
         const result = response.data;
         // console.log(response);
         // console.log(response.data);
-        // console.log(response.data.result);
+        console.log(response.data.result);
         const fetchResult = response.data.result;
         setReviewData(fetchResult);
-        console.log(reviewData);
+        //console.log(reviewData);
         if (result.isSuccess) {
           setReviewData(
             result.result.reviewDtos.filter(
@@ -54,11 +54,14 @@ export const FinishReview = () => {
   }
 
   return (
-    <div className="w-[14.4125rem] h-[20.1875rem] mb-[8.65rem] p-[0.44rem] rounded-[0.19538rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
       {reviewData.map((review) => (
-        <div key={review.reviewId}>
+        <div
+          className="rounded-[0.19538rem]  p-[0.44rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)]"
+          key={review.reviewId}
+        >
           <div
-            className="rounded-[0.19538rem] mb-[0.95rem] w-[13.36881rem] h-[11.23306rem] bg-[#FFEDED]"
+            className="rounded-[0.19538rem]  mb-[0.95rem] w-[13.36881rem] p-[0.44rem] h-[11.23306rem] bg-[#FFEDED]"
             style={{
               backgroundImage: `url(${review.storeDto.image})`,
               backgroundSize: "cover",
