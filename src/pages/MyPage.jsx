@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from "react";
 import basicProfile from "../assets/basicprofile.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
+import ScreenReview from "./ScreenReview";
 import FailReview from "./FailReview";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
@@ -77,7 +78,22 @@ export const MyPage = () => {
   };
 
   if (!isLogin) {
-    return <GoToLogin />;
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+          background: "rgba(255, 255, 255, 0.9)",
+          padding: "20px",
+          zIndex: "999",
+        }}
+      >
+        <GoToLogin />
+      </div>
+    );
   }
   // 프로필 사진 변경
   const handleImageChange = async (e) => {
@@ -100,10 +116,10 @@ export const MyPage = () => {
           // 이미지 업로드 성공 시 프로필 사진 업데이트
           setReviewData((prevData) => ({
             ...prevData,
-            profile_image: result.profile_image,
+            profile_image: result.profileImage,
           }));
-          console.log(result.profile_image);
-          setSelectedImage(result.profile_image || basicProfile);
+          console.log(result.result.profileImage);
+          setSelectedImage(result.result.profileImage || basicProfile);
         } else {
           setError(result.message);
         }
@@ -324,12 +340,15 @@ export const MyPage = () => {
             </div>
           </div>
 
-          <OngoingReview />
+          {selectedMenu === "신청" && <OngoingReview />}
+          {selectedMenu === "리뷰 유지 기간" && <ScreenReview />}
+          {selectedMenu === "쿠폰 발급 완료" && <FinishReview />}
           <div ref={rejectedRef}>
             <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">
               탈락된 리뷰
             </div>
           </div>
+
           <FailReview />
 
           <div ref={completedRef}>

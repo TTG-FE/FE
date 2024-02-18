@@ -11,7 +11,7 @@ const StoreCard = ({ item }) => {
 
   return (
     <div
-      className="flex flex-col h-full p-4 transition-all rounded-2xl shadow-custom-box-shadow hover:shadow-custom-box-shadow-pink"
+      className="flex flex-col h-full p-4 transition-all cursor-pointer rounded-2xl shadow-custom-box-shadow hover:shadow-custom-box-shadow-pink"
       onClick={() => handleClick(item.storeId)}
     >
       {/* 카드 이미지 */}

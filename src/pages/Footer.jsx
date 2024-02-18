@@ -21,10 +21,8 @@ const Footer = () => {
             ></div>
             {/* 로고 옆 텍스트 */}
             <div className="mr-4 space-y-2 shrink-0">
-              <p className="text-3xl font-semibold opacity-60 text-custom-gray-100">
-                또또가
-              </p>
-              <p className="text-sm font-bold opacity-60 text-custom-gray-100">
+              <p className="text-3xl font-black text-[#9F9F9F]">또또가</p>
+              <p className="text-sm font-bold text-[#9F9F9F]">
                 또 가고싶은 곳만 리뷰한다
               </p>
             </div>

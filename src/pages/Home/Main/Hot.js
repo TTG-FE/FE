@@ -1,11 +1,14 @@
-import { useState, useContext } from "react";
-import { ReactComponent as HeartIcon } from "./../../../assets/images/heartIcon.svg";
 import ttgArrow from "./../../../assets/images/ttg-arrow.png";
 import channelIcon from "./../../../assets/images/channelIcon.png";
-import { LoginContext } from "../../../contexts/LoginContextProvider";
 import HeartButton from "../../../components/HeartButton";
 
 const Hot = ({ hotStores }) => {
+  const handleChannelClick = () => {
+    // 리뷰 링크로 새 창 열기
+    const absoluteLink =
+      "https://accounts.kakao.com/login/?continue=https%3A%2F%2Fpf.kakao.com%2F_tktBG%2Ffriend#login";
+    window.open(absoluteLink, "_blank");
+  };
   return (
     <div className="md:mb-16 ">
       {/* 구분선 */}
@@ -31,7 +34,10 @@ const Hot = ({ hotStores }) => {
           style={{ backgroundImage: `url(${ttgArrow})` }}
         ></figure>
         {/* 채널톡 버튼 */}
-        <button className="fixed z-50 flex items-center justify-center  rounded-full right-3 top-[46.5rem] w-11 h-11 md:hidden">
+        <button
+          className="fixed z-50 flex items-center justify-center  rounded-full right-3 top-[46.5rem] w-11 h-11 md:hidden "
+          onClick={handleChannelClick}
+        >
           <img src={channelIcon} alt="ch" />
         </button>
         {/* 카드 리스트 */}
@@ -54,10 +60,8 @@ const Hot = ({ hotStores }) => {
 
 /** Hot 한 상점 카드 */
 const HotCard = ({ item }) => {
-  const { isLogin } = useContext(LoginContext);
-
   return (
-    <div className="h-full bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0 hover:shadow-custom-box-shadow-pink">
+    <div className="h-full mr-2 bg-white border cursor-pointer rounded-2xl border-custom-pink md:border-0">
       <div className="flex flex-col h-full p-2 md:p-3">
         {/* 메뉴 이미지 */}
         <figure
