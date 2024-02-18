@@ -145,7 +145,13 @@ const Coupon = () => {
             isLogin={isLogin}
             setSearchTerm={setSearchTerm}
           >
-            {isLogin ? renderCouponCards(filteredCoupons) : <GoToLogin />}
+            {isLogin ? (
+              renderCouponCards(filteredCoupons)
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <GoToLogin />
+              </div>
+            )}
           </DesktopCouponSection>
         </div>
       </div>
@@ -243,7 +249,7 @@ const DesktopCouponSection = ({
         <div
           className={`text-xl ${
             coupons.length === 0 || !isLogin
-              ? "flex flex-col justify-center items-center h-[600px]"
+              ? "absolute inset-0 flex items-center justify-center"
               : "pt-9"
           }`}
         >
