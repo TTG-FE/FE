@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "../components/Modal";
 
 // ASSETS
@@ -8,13 +8,17 @@ import storeMapImage from "../assets/store-map.jpg";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import HeartButton from "../components/HeartButton";
+import { LoginContext } from "../contexts/LoginContextProvider";
+import HeartButton from "../components/HeartButton";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
 function Store() {
   const { store_id } = useParams();
 
-  const [login, setLogin] = useState(!false);
+  const { isLogin } = useContext(LoginContext);
+
+  const [login, setLogin] = useState(isLogin);
 
   // 모달창의 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +39,7 @@ function Store() {
         const response = await axios.get(`stores/${store_id}`);
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
+        console.log(response);
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
       }
@@ -87,6 +92,7 @@ function Store() {
 
         {/* 오른쪽 상점 쿠폰 관련 안내 */}
         <StoreRightSection
+          id={store_id}
           login={login}
           storeInfo={storeInfo}
           handleToggleHeart={handleToggleHeart}
@@ -244,6 +250,7 @@ const StoreLeftSection = ({ storeInfo }) => {
 };
 
 const StoreRightSection = ({
+  id,
   login,
   storeInfo,
   handleToggleHeart,
@@ -258,6 +265,7 @@ const StoreRightSection = ({
   now.setDate(now.getDate() + 5);
 
   const expirationPeriod = now.toISOString().split("T")[0];
+  console.log(storeInfo)
 
   return (
     <div className="w-1/2 pl-16">
@@ -271,8 +279,8 @@ const StoreRightSection = ({
           {/* 또먹고싶어 곱창을 리뷰하고 주먹밥+캔음료 받으세요! */}
           {storeInfo.name} 리뷰하고 {storeInfo.subTitle}
         </div>
-        <ul className="flex items-center h-24 border-b">
-          <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5   ">
+        <ul className="flex h-24 items-center border-b">
+          <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
             {/* 서울 */}
             {storeInfo.regionName}
           </li>
@@ -281,8 +289,8 @@ const StoreRightSection = ({
             {storeInfo.menuName}
           </li>
         </ul>
-        <div className="flex py-8 text-lg border-b">
-          <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
+        <div className="flex py-8 border-b text-lg">
+          <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             제공내역
           </div>
           <div className="text-[#404040]">
@@ -290,8 +298,8 @@ const StoreRightSection = ({
             {storeInfo.serviceInfo}
           </div>
         </div>
-        <div className="flex py-8 text-lg border-b">
-          <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
+        <div className="flex py-8 border-b text-lg">
+          <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
           {isCouponUsed ? (
@@ -312,13 +320,13 @@ const StoreRightSection = ({
               <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold   ">
                 관심상점
               </div>
-              {/* 하트아이콘 */}
-              <div className="flex">
-                <HeartButton
-                  like={storeInfo.heartStore}
-                  id={storeInfo.storeId}
+              <button onClick={handleToggleHeart} className="flex">
+                <HeartIcon
+                  stroke={isLiked ? "#FF0069" : "black"}
+                  strokeOpacity={isLiked ? "1" : "0.3"}
+                  fill={isLiked ? "#FF0069" : "none"}
                 />
-              </div>
+              </button>
             </div>
             <button
               className={` w-full h-14 mt-8 text-white rounded text-xl ${

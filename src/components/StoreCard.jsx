@@ -1,12 +1,19 @@
-import React, { useState, useContext } from "react";
-import { LoginContext } from "../contexts/LoginContextProvider";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import HeartButton from "./HeartButton";
 /** 지역별 상점 및 메뉴별 상점의 카드 */
 const StoreCard = ({ item }) => {
-  const { isLogin } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  const handleClick = (id) => {
+    navigate(`/store/${id}`);
+  };
 
   return (
-    <div className="flex flex-col h-full p-4 transition-all rounded-2xl shadow-custom-box-shadow hover:shadow-custom-box-shadow-pink">
+    <div
+      className="flex flex-col h-full p-4 transition-all rounded-2xl shadow-custom-box-shadow hover:shadow-custom-box-shadow-pink"
+      onClick={() => handleClick(item.storeId)}
+    >
       {/* 카드 이미지 */}
       <figure
         className="pb-[75%] h-0 bg-cover bg-no-repeat bg-center rounded-lg mb-4 bg-gray-200 relative"
@@ -14,7 +21,13 @@ const StoreCard = ({ item }) => {
       >
         {/* 하트아이콘 */}
         <div className="absolute top-2 right-2">
-          <HeartButton like={item.heartStore} id={item.storeId} />
+          <HeartButton
+            like={item.heartStore}
+            id={item.storeId}
+            borderColor={"white"}
+            w={"22px"}
+            h={"22px"}
+          />
         </div>
       </figure>
       <div className="flex flex-col grow">

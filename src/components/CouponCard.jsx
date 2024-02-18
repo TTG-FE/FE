@@ -61,7 +61,7 @@ const CouponCard = ({
   return (
     <>
       {/* 모바일 쿠폰 영역 */}
-      <main className="ml-7 h-40 shadow-lg flex flex-row break-words mb-6 md:hidden font-inter rounded-l-lg">
+      <main className="flex flex-row h-40 mb-6 break-words rounded-l-lg shadow-lg ml-7 md:hidden font-inter">
         {/* 쿠폰 왼쪽 다운로드 영역*/}
         <div className="relative z-0">
           <div
@@ -97,7 +97,7 @@ const CouponCard = ({
             couponData.useYn === "Y" ? "bg-white" : "bg-[#FFF2F2]"
           }`}
         >
-          <div className="flex flex-col h-full justify-around">
+          <div className="flex flex-col justify-around h-full">
             {/* <h1>[성수] 베리베리 스트로베리 케이크 전문점</h1> */}
             <h1>{couponData.name}</h1>
             <p
@@ -143,7 +143,7 @@ const CouponCard = ({
         >
           <div className="px-6 py-5 w-[278px] h-full">
             <div className="h-[200px]">
-              <div className="text-center mb-3 text-custom-gray-200">
+              <div className="mb-3 text-center text-custom-gray-200">
                 쿠폰 정보
               </div>
               <img
@@ -158,7 +158,7 @@ const CouponCard = ({
             <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
 
             {/* 쿠폰 실선 밑 영역 */}
-            <div className="border-dashed border-t-2 border-custom-pink text-center">
+            <div className="text-center border-t-2 border-dashed border-custom-pink">
               <h2 className="text-xs mt-8 mb-2.5">{couponData.name}</h2>
               <h3 className="text-[10px] mb-2.5 text-custom-orange">
                 {couponData.subtitle}
@@ -167,7 +167,7 @@ const CouponCard = ({
                 기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
               </h4>
               <button
-                className="h-8 w-full rounded bg-custom-pink text-white text-xs"
+                className="w-full h-8 text-xs text-white rounded bg-custom-pink"
                 onClick={() => {
                   openSpecificModal("modal2");
                 }}
@@ -187,7 +187,7 @@ const CouponCard = ({
           <div className="px-6 py-5 w-[278px] h-full">
             <div className="h-[200px]">
               <div className="text-center text-custom-gray-200">직원 확인</div>
-              <div className="flex justify-center items-center h-5/6">
+              <div className="flex items-center justify-center h-5/6">
                 <img
                   className={`${isCheck ? "w-40 h-40" : "w-28 h-28"}`}
                   src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
@@ -199,7 +199,7 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             <CouponSemicircleUI_Mobile borderColor={`custom-pink`} />
 
-            <div className="border-dashed border-t-2 border-custom-pink">
+            <div className="border-t-2 border-dashed border-custom-pink">
               {/* 대쉬바 밑에 내용 전체 div */}
               <div className="pt-3 h-[133px] flex flex-col justify-between">
                 <div className="flex items-center mb-1">
@@ -249,7 +249,7 @@ const CouponCard = ({
         >
           <div className="px-6 py-5 w-[278px] h-full">
             <div className="h-[200px]">
-              <div className="text-center mb-3 text-custom-gray-200">
+              <div className="mb-3 text-center text-custom-gray-200">
                 쿠폰 정보
               </div>
               <img
@@ -258,7 +258,7 @@ const CouponCard = ({
                 className="mb-8 w-[228px] h-[141px] grayscale"
               />
               <div className="w-[115px] h-[115px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
-                <p className="text-custom-pink text-2xl font-semibold">
+                <p className="text-2xl font-semibold text-custom-pink">
                   사용
                   <br />
                   완료
@@ -295,9 +295,9 @@ const CouponCard = ({
       </div>
 
       {/* 데스크탑 쿠폰 */}
-      <main className="h-72 shadow-custom-box-shadow rounded-lg mb-8 w-full hidden md:flex">
+      <main className="hidden w-full mb-8 rounded-lg h-72 shadow-custom-box-shadow md:flex">
         {/* 쿠폰 이미지 및 상세 내용 */}
-        <div className="flex basis-3/4 pl-7 py-6 h-full">
+        <div className="flex h-full py-6 basis-3/4 pl-7">
           {/* 이미지 */}
           <img
             src={couponData.storeImage}
@@ -305,8 +305,8 @@ const CouponCard = ({
             className="mr-12 rounded-lg"
           />
           {/* 내용 전체 크기 설정 */}
-          <div className=" pt-11 pb-7 truncate">
-            <h2 className="text-3xl	font-medium	mb-4 text-ellipsis overflow-hidden">
+          <div className="truncate  pt-11 pb-7">
+            <h2 className="mb-4 overflow-hidden text-3xl font-medium text-ellipsis">
               {couponData.name}
             </h2>
             <h3 className="text-[#FF7A00] mb-14 text-ellipsis overflow-hidden">
@@ -322,7 +322,7 @@ const CouponCard = ({
               >
                 {couponData.useYn === "Y" ? "사용완료" : "사용가능"}
               </p>
-              <p className="text-ellipsis overflow-hidden">
+              <p className="overflow-hidden text-ellipsis">
                 기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
               </p>
             </div>
@@ -345,10 +345,10 @@ const CouponCard = ({
           <div className="absolute top-[231px] left-[-20px] h-10 w-10 bg-white rounded-full"></div>
 
           {/* 다운로드 */}
-          <div className="h-full flex flex-col items-center justify-center ml-5">
+          <div className="flex flex-col items-center justify-center h-full ml-5">
             <div className="flex items-center justify-center mb-3.5">
               <button
-                className="w-40 h-40 bg-white rounded-full flex items-center justify-center"
+                className="flex items-center justify-center w-40 h-40 bg-white rounded-full"
                 onClick={() => {
                   handleOpenModal();
                 }}
@@ -391,19 +391,19 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
 
-            <CouponSemicircleUI_Desktop borderColor={`custom-pink`}/>
+            <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
 
             <section className="flex flex-col items-center">
-              <div className="w-11/12 border-dashed border-t-2 border-custom-pink text-center">
+              <div className="w-11/12 text-center border-t-2 border-dashed border-custom-pink">
                 <h2 className="text-base mt-12 mb-2.5">{couponData.name}</h2>
                 <h3 className="text-sm mb-2.5 text-custom-orange">
                   {couponData.subtitle}
                 </h3>
-                <h4 className="text-xs mb-5">
+                <h4 className="mb-5 text-xs">
                   기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
                 </h4>
                 <button
-                  className="w-full h-9 rounded bg-custom-pink text-white text-xs"
+                  className="w-full text-xs text-white rounded h-9 bg-custom-pink"
                   onClick={() => {
                     openSpecificModal("modal2"); // 'modal2' 문자열을 인자로 전달
                   }}
@@ -423,7 +423,7 @@ const CouponCard = ({
           <div className="px-9 py-8 w-[408px] h-full">
             <div className="h-[300px]">
               <div className="text-center text-custom-gray-200">직원 확인</div>
-              <div className="flex justify-center items-center h-5/6">
+              <div className="flex items-center justify-center h-5/6">
                 <img
                   className={isCheck ? "w-64" : null}
                   src={isCheck ? couponData.qrCode : EmployeeVerificationIcon}
@@ -436,10 +436,10 @@ const CouponCard = ({
             <CouponSemicircleUI_Desktop borderColor={`custom-pink`} />
 
             <section className="flex flex-col items-center">
-              <div className="w-11/12 border-dashed border-t-2 border-custom-pink ">
+              <div className="w-11/12 border-t-2 border-dashed border-custom-pink ">
                 {/* 대쉬바 밑에 내용 전체 div */}
                 <div className="mb-7">
-                  <div className="mt-9 mb-2 flex items-center">
+                  <div className="flex items-center mb-2 mt-9">
                     <button
                       className="mr-1"
                       onClick={() => {
@@ -494,7 +494,7 @@ const CouponCard = ({
                 className="mt-5 mb-11 grayscale rounded-xl"
               />
               <div className="w-[160px] h-[160px] text-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-custom-pink rounded-full flex flex-col items-center justify-center bg-white/75">
-                <p className="text-custom-pink text-4xl font-bold">
+                <p className="text-4xl font-bold text-custom-pink">
                   사용
                   <br />
                   완료
@@ -510,7 +510,7 @@ const CouponCard = ({
                 <h3 className="text-sm mb-2.5 text-custom-orange">
                   {couponData.subtitle}
                 </h3>
-                <h4 className="text-xs mb-5">
+                <h4 className="mb-5 text-xs">
                   기한: {`${couponData.startDate} ~ ${couponData.endDate}`}
                 </h4>
                 <button
