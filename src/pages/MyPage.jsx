@@ -55,7 +55,6 @@ export const MyPage = () => {
               benefitCount,
               profile_image,
             });
-            console.log("reviewData",reviewData);
 
             setSelectedImage(profile_image || basicProfile);
           } else {
@@ -68,7 +67,7 @@ export const MyPage = () => {
     };
 
     fetchReviewData();
-  }, []);
+  }, [isLogin]);
 
   if (error) {
     return <div>{error}</div>;

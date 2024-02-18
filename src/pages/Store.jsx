@@ -34,6 +34,7 @@ function Store() {
         const response = await axios.get(`/stores/${store_id}`);
         const fetchedStoreInfo = response.data.result;
         setStoreInfo(fetchedStoreInfo);
+        console.log(fetchedStoreInfo);
       } catch (error) {
         console.error("Error fetching StoreInfo:", error);
       }
