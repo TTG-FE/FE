@@ -10,8 +10,8 @@ const Region = () => {
   const { city_id, town_id, city_label, town_label } = useParams();
   const { token } = useContext(LoginContext);
   const [stores, setStores] = useState([]); // 상점 데이터
-  const [isLoading, setLoading] = useState(false); // 로딩 여부
   const [lastPage, setLastPage] = useState(false); // 마지막 페이지 여부
+  const { isLogin } = useContext(LoginContext);
 
   useEffect(() => {
     setStores([]); // 데이터 초기화
@@ -21,15 +21,18 @@ const Region = () => {
   // 메뉴 키워드를 기반으로 api 호출
   const fetchData = useCallback(
     async (page) => {
-      setLoading(true);
+      // 로그인 여부에 따라 조건부 헤더 설정
+      const config = {
+        headers: {},
+      };
+
+      if (isLogin) {
+        config.headers.Authorization = token;
+      }
       try {
         const response = await axios.get(
           `/stores/region-categories?regionId=${city_id}&page=${page}&size=20`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
+          config
         );
         setStores((prev) => [...prev, ...response.data.result.content]);
         // 마지막 페이지라면 true 로 변경
@@ -38,10 +41,9 @@ const Region = () => {
         }
       } catch (error) {
       } finally {
-        setLoading(false);
       }
     },
-    [city_id, token]
+    [city_id, token, isLogin]
   );
 
   const { pageEndRef } = useInfiniteScroll(

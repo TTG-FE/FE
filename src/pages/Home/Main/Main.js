@@ -6,35 +6,39 @@ import Review from "./Review";
 import Banner from "./Banner";
 import { LoginContext } from "../../../contexts/LoginContextProvider";
 const Main = () => {
-  const { token } = useContext(LoginContext);
+  const { token, isLogin } = useContext(LoginContext);
   const [top15, setTop15] = useState([]); // top15
   const [hotStores, setHotStores] = useState([]); // hot
   const [homeReviews, setHomeReviews] = useState([]); // review
   const [error, setError] = useState(null); // 에러 여부
-  const [isLoading, setLoading] = useState(true); //
+  const [isLoading, setLoading] = useState(true); // 로딩 여부
 
   useEffect(() => {
     const fetchData = async () => {
+      // 로그인 여부에 따라 조건부 헤더 설정
+      const config = {
+        headers: {},
+      };
+
+      if (isLogin) {
+        config.headers.Authorization = token;
+      }
+
       // 메인페이지 데이터 가져오기
       try {
-        const response = await axios.get("/stores/home", {
-          headers: {
-            Authorization: token,
-          },
-        });
+        const response = await axios.get("/stores/home", config);
         const { top15, hotStores, homeReviews } = response.data.result;
         setTop15(top15);
         setHotStores(hotStores);
         setHomeReviews(homeReviews);
       } catch (e) {
-        console.log("error", e);
         setError(e); // 에러 처리
       } finally {
         setLoading(false); // 로딩 완료
       }
     };
     fetchData();
-  }, [token]);
+  }, [token, isLogin]);
 
   // TODO: 에러 처리하는 방식 변경
   if (error) {
@@ -50,7 +54,7 @@ const Main = () => {
     <div className="">
       {isLoading ? (
         // TODO: 로딩중 아이콘으로 변경예정
-        <div>로딩중</div>
+        <></>
       ) : (
         <div>
           {/* TOP 15 또또가 */}

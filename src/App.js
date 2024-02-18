@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useEffect } from "react";
 
 // PAGES
 import Store from "./pages/Store";
@@ -20,7 +19,6 @@ import LoginContextProvider from "./contexts/LoginContextProvider"; // LoginCont
 import ModalContextProvider from "./contexts/ModalContextProvider"; // SelectModalProvider
 
 function App() {
-  
   // LoginContext, ModalcontextProvider 추가
   return (
     <BrowserRouter>
