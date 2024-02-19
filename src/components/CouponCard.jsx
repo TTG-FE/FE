@@ -302,7 +302,7 @@ const CouponCard = ({
           <img
             src={couponData.storeImage}
             alt="상점 이미지"
-            className="mr-12 rounded-lg w-96 object-cover"
+            className="mr-12 rounded-lg w-96 object-cover shrink-0"
           />
           {/* 내용 전체 크기 설정 */}
           <div className="truncate  pt-11 pb-7">
