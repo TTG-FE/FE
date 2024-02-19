@@ -53,7 +53,7 @@ function Store() {
   const postDataWithFormData = async () => {
     try {
       const formData = new FormData();
-      formData.append("reviewLink", "www.google.com");
+      formData.append("reviewLink", `${reviewUrl}`);
       const response = await axios.post(
         `stores/${store_id}/reviews`,
         formData,

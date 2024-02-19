@@ -62,7 +62,7 @@ export const FinishReview = () => {
           className="rounded-[0.19538rem]  p-[0.44rem] shadow-[0_0_6.253px_0_rgba(0,0,0,0.25)] cursor-pointer"
           key={review.reviewId}
           onClick={() => {
-            window.open(`http://${review.reviewLink}`, "_blank");
+            window.open(`${review.reviewLink}`, "_blank");
           }}
         >
           <div
