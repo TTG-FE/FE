@@ -57,6 +57,7 @@ export const MyPage = () => {
             });
 
             setSelectedImage(profile_image || basicProfile);
+            console.log(profile_image);
           } else {
             setError(result.message);
           }
