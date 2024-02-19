@@ -35,7 +35,7 @@ const Hot = ({ hotStores }) => {
         ></figure>
         {/* 채널톡 버튼 */}
         <button
-          className="fixed z-50 flex items-center justify-center  rounded-full right-3 top-[46.5rem] w-11 h-11 md:hidden "
+          className="fixed z-50 flex items-center justify-center  rounded-full right-3 top-[35.5rem] w-11 h-11 md:hidden opacity-70"
           onClick={handleChannelClick}
         >
           <img src={channelIcon} alt="ch" />

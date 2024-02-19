@@ -26,7 +26,7 @@ function Store() {
   const [reviewUrl, setReviewUrl] = useState("");
 
   // 쿠폰 발행 여부
-  // const [isCouponUsed, setIsCouponUsed] = useState(false);
+  const [isCouponUsed, setIsCouponUsed] = useState(false);
 
   const [storeInfo, setStoreInfo] = useState([]);
 
@@ -288,7 +288,7 @@ const StoreRightSection = ({
           {/* 또먹고싶어 곱창을 리뷰하고 주먹밥+캔음료 받으세요! */}
           {storeInfo.name} 리뷰하고 {storeInfo.subTitle}
         </div>
-        <ul className="flex h-24 items-center border-b">
+        <ul className="flex items-center h-24 border-b">
           <li className="w-32 h-9 text-base text-center text-[#FF0069] leading-8  bg-[#FFEDED] rounded-lg mr-2.5	">
             {/* 서울 */}
             {storeInfo.regionName}
@@ -298,7 +298,7 @@ const StoreRightSection = ({
             {storeInfo.menuName}
           </li>
         </ul>
-        <div className="flex py-8 border-b text-lg">
+        <div className="flex py-8 text-lg border-b">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             제공내역
           </div>
@@ -307,7 +307,7 @@ const StoreRightSection = ({
             {storeInfo.serviceInfo}
           </div>
         </div>
-        <div className="flex py-8 border-b text-lg">
+        <div className="flex py-8 text-lg border-b">
           <div className="text-lg text-[#000000] opacity-30 w-1/4 font-semibold	">
             또또가 기간
           </div>
