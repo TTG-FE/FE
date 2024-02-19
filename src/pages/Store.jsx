@@ -48,7 +48,7 @@ function Store() {
       }
     };
     fetchStoreInfo();
-  }, []);
+  }, [storeInfo]);
 
   const postDataWithFormData = async () => {
     try {
@@ -119,7 +119,7 @@ function Store() {
         handleCloseModal={handleCloseModal}
         handleReviewUrlChange={handleReviewUrlChange}
         reviewUrl={reviewUrl}
-        setIsCouponUsed={storeInfo.submitReview}
+        // setIsCouponUsed={s}
         postDataWithFormData={postDataWithFormData}
       />
     </div>
@@ -388,7 +388,7 @@ const StoreModal = ({
   handleCloseModal,
   handleReviewUrlChange,
   reviewUrl,
-  setIsCouponUsed,
+  // setIsCouponUsed,
   postDataWithFormData,
 }) => {
   return (
@@ -436,7 +436,7 @@ const StoreModal = ({
             )
           }
           onClick={() => {
-            setIsCouponUsed(true);
+            // setIsCouponUsed(true);
             postDataWithFormData();
             handleCloseModal();
           }}

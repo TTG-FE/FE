@@ -23,60 +23,117 @@ const Coupon = () => {
 
   const [coupons, setCoupons] = useState([]); // 쿠폰 데이터 저장
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (isLogin) {
-          const response = await axios.get(`coupons`, {
-            headers: {
-              Authorization: token,
-            },
-          });
-          setCoupons(response.data.result);
-          // console.log("쿠폰 GET 요청 성공");
-        }
-      } catch (error) {
-        console.error("Error fetching StoreInfo:", error);
-      } finally {
-        setLoading(false);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       if (isLogin) {
+  //         const response = await axios.get(`coupons`, {
+  //           headers: {
+  //             Authorization: token,
+  //           },
+  //         });
+  //         setCoupons(response.data.result);
+  //         // console.log("쿠폰 GET 요청 성공");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching StoreInfo:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [isLogin, coupons]);
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      if (isLogin) {
+        const response = await axios.get(`coupons`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        // 쿠폰 데이터를 받아온 후 정렬
+        const sortedCoupons = response.data.result.sort((a, b) => {
+          if (a.useYn === "Y" && b.useYn === "N") {
+            return -1; // 'Y'를 가진 쿠폰을 앞으로
+          } else if (a.useYn === "N" && b.useYn === "Y") {
+            return 1; // 'N'을 가진 쿠폰을 뒤로
+          }
+          return 0; // 순서 변경 없음
+        });
+        setCoupons(sortedCoupons);
       }
-    };
-    fetchData();
-  }, [isLogin]);
+    } catch (error) {
+      console.error("Error fetching StoreInfo:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchData();
+}, [isLogin]);
+
 
   const filteredCoupons = coupons.filter((coupon) =>
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // 사용한 쿠폰 처리
+  console.log(coupons)
+  // // 사용한 쿠폰 처리
+  // const handleCouponUsed = (couponId) => {
+  //   // 서버에 쿠폰 사용 정보 업데이트
+  //   putCouponUsed(couponId)
+  //     .then(() => {
+  //       // 서버 업데이트 성공 후 클라이언트 상태 업데이트
+  //       // 해당 쿠폰을 사용했다고 true로 변경
+  //       setCoupons((prevCoupons) => {
+  //         const updatedCoupons = prevCoupons.map((coupon) =>
+  //           coupon.id === couponId ? { ...coupon, useYn: "N" } : coupon
+  //         );
+
+  //         // 사용한 쿠폰을 배열의 끝으로 이동
+  //         const usedCouponIndex = updatedCoupons.findIndex(
+  //           (coupon) => coupon.id === couponId && coupon.useYn === "N"
+  //         );
+
+  //         if (usedCouponIndex !== -1) {
+  //           const usedCoupon = updatedCoupons.splice(usedCouponIndex, 1)[0];
+  //           updatedCoupons.push(usedCoupon);
+  //         }
+
+  //         return updatedCoupons;
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error updating coupon status:", error);
+  //     });
+  // };
+
   const handleCouponUsed = (couponId) => {
-    // 서버에 쿠폰 사용 정보 업데이트
     putCouponUsed(couponId)
       .then(() => {
-        // 서버 업데이트 성공 후 클라이언트 상태 업데이트
-        // 해당 쿠폰을 사용했다고 true로 변경
         setCoupons((prevCoupons) => {
-          const updatedCoupons = prevCoupons.map((coupon) =>
-            coupon.id === couponId ? { ...coupon, useYn: "N" } : coupon
-          );
+          // 사용되지 않은 쿠폰과 사용된 쿠폰을 분리합니다.
+          const unusedCoupons = [];
+          const usedCoupons = [];
 
-          // 사용한 쿠폰을 배열의 끝으로 이동
-          const usedCouponIndex = updatedCoupons.findIndex(
-            (coupon) => coupon.id === couponId && coupon.useYn === "N"
-          );
-
-          if (usedCouponIndex !== -1) {
-            const usedCoupon = updatedCoupons.splice(usedCouponIndex, 1)[0];
-            updatedCoupons.push(usedCoupon);
+          for (const coupon of prevCoupons) {
+            if (coupon.id === couponId) {
+              usedCoupons.push({ ...coupon, useYn: "N" });
+            } else {
+              unusedCoupons.push(coupon);
+            }
           }
 
-          return updatedCoupons;
+          // 두 배열을 연결하여 새 배열을 생성합니다.
+          return [...unusedCoupons, ...usedCoupons];
         });
       })
       .catch((error) => {
         console.error("Error updating coupon status:", error);
       });
   };
+
 
   // put 호출
   const putCouponUsed = async (couponId) => {
