@@ -42,7 +42,7 @@ export const MyPage = () => {
           });
           const result = response.data;
           if (result.isSuccess) {
-            const { memberId, nickname, benefitCount, profile_image } =
+            const { memberId, nickname, benefitCount, profileImage } =
               result.result.member;
 
             //console.log(nickname);
@@ -53,9 +53,10 @@ export const MyPage = () => {
               memberId,
               nickname,
               benefitCount,
-              profile_image,
+              profileImage,
             });
 
+            setSelectedImage(profileImage || basicProfile);
             setSelectedImage(profile_image || basicProfile);
             console.log(profile_image);
           } else {
