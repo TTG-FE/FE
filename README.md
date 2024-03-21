@@ -30,3 +30,66 @@
 ### 숭/임지수
 - 로그인
 - 마이페이지 화면
+
+
+# 커밋 컨벤션
+<table>
+  <tbody>
+    <tr>
+      <th>Tag Name</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>Feat</td>
+      <td>새로운 기능 추가</td>
+    </tr>
+    <tr>
+      <td>Fix</td>
+      <td>버그 수정</td>
+    </tr>
+    <tr>
+      <td>Docs</td>
+      <td>문서 수정</td>
+    </tr>
+    <tr>
+      <td>Style</td>
+      <td>코드 포맷 변경, 세미 콜론 누락, 코드 수정 없는 경우</td>
+    </tr>
+    <tr>
+      <td>Refactor</td>
+      <td>코드 리팩토링</td>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td>테스트 코드, 리팩토링 테스트 코드 추가</td>
+    </tr>
+    <tr>
+      <td>Chore</td>
+      <td>소스 코드 건들지 않는 작업</td>
+    </tr>
+    <tr>
+      <td>Design</td>
+      <td>UI 디자인 변경</td>
+    </tr>
+    <tr>
+      <td>Comment</td>
+      <td>주석 추가/변경</td>
+    </tr>
+    <tr>
+      <td>Rename</td>
+      <td>파일명 혹은 폴더명 수정</td>
+    </tr>
+    <tr>
+      <td>Remove</td>
+      <td>파일 혹은 코드 제거</td>
+    </tr>
+    <tr>
+      <td>!Breaking Change</td>
+      <td>기존 기능에 영향을 주는 변경</td>
+    </tr>
+    <tr>
+      <td>!HotFix</td>
+      <td>긴급한 버그 수정</td>
+    </tr>
+  </tbody>
+</table>
