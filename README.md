@@ -31,7 +31,75 @@
 - 로그인
 - 마이페이지 화면
 
+### 사용 기술
+- React
+- Tailwind.css
+- Context API
+- Axios
 
+# 프로젝트 구조
+```
+FE
+├─ .env
+├─ .git
+├─ .gitignore
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ index.html
+│  ├─ manifest.json
+│  └─ robots.txt
+├─ README.md
+├─ src
+│  ├─ App.js
+│  ├─ App.test.js
+│  ├─ assets
+│  ├─ components
+│  │  ├─ CheckIcon.jsx
+│  │  ├─ CouponCard.jsx
+│  │  ├─ DownloadIcon.jsx
+│  │  ├─ GoToLogin.jsx
+│  │  ├─ HeartButton.jsx
+│  │  ├─ Modal.jsx
+│  │  ├─ SelectModal.jsx
+│  │  └─ StoreCard.jsx
+│  ├─ contexts
+│  │  ├─ LoginContextProvider.jsx
+│  │  └─ ModalContextProvider.jsx
+│  ├─ hooks
+│  │  └─ useInfiniteScroll.jsx
+│  ├─ index.js
+│  ├─ pages
+│  │  ├─ Coupon.jsx
+│  │  ├─ FailReview.jsx
+│  │  ├─ FinishReview.jsx
+│  │  ├─ Footer.jsx
+│  │  ├─ Header.jsx
+│  │  ├─ Home
+│  │  │  ├─ Heart.js
+│  │  │  ├─ Main
+│  │  │  │  ├─ Banner.js
+│  │  │  │  ├─ Hot.js
+│  │  │  │  ├─ Main.js
+│  │  │  │  ├─ Review.js
+│  │  │  │  └─ Top.js
+│  │  │  ├─ Menu.js
+│  │  │  ├─ Region.js
+│  │  │  ├─ Search.js
+│  │  │  └─ UserGuide.js
+│  │  ├─ Login.jsx
+│  │  ├─ MyPage.jsx
+│  │  ├─ Navbar.jsx
+│  │  ├─ OngoingReview.jsx
+│  │  ├─ ScreenReview.jsx
+│  │  └─ Store.jsx
+│  ├─ reportWebVitals.js
+│  ├─ setupTests.js
+│  └─ styles
+│     └─ index.css
+└─ tailwind.config.js
+
+```
 # 커밋 컨벤션
 <table>
   <tbody>
