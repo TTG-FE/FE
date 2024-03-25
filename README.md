@@ -100,6 +100,35 @@ FE
 └─ tailwind.config.js
 
 ```
+
+# 프레임워크 및 라이브러리
+```
+"dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.7",
+    "cors": "^2.8.5",
+    "react": "^18.2.0",
+    "react-cookie": "^7.0.2",
+    "react-dom": "^18.2.0",
+    "react-kakao-login": "^2.1.1",
+    "react-naver-login": "^0.1.4",
+    "react-router-dom": "^6.22.0",
+    "react-scripts": "^5.0.1",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "web-vitals": "^2.1.4"
+  },
+"devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
+    "source-map-loader": "^5.0.0",
+    "tailwindcss": "^3.4.1"
+  }
+
+```
+
 # 커밋 컨벤션
 <table>
   <tbody>
