@@ -42,7 +42,7 @@ const ScreenReview = () => {
       }
     };
     fetchReviewData();
-  }, []);
+  }, [token]);
 
   if (error) {
     return <div>{error}</div>;

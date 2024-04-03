@@ -5,7 +5,6 @@ import { ReactComponent as SearchIcon } from "./../assets/searchIcon.svg";
 
 // Component
 import CouponCard from "../components/CouponCard";
-import { Link } from "react-router-dom";
 import GoToLogin from "../components/GoToLogin";
 import axios from "axios";
 import { LoginContext } from "../contexts/LoginContextProvider";
@@ -71,7 +70,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, [isLogin]);
+}, [isLogin,token]);
 
 
   const filteredCoupons = coupons.filter((coupon) =>
@@ -139,7 +138,7 @@ useEffect(() => {
   const putCouponUsed = async (couponId) => {
     try {
       if (isLogin) {
-        const response = await axios.put(`coupons/${couponId}/check`, null, {
+        await axios.put(`coupons/${couponId}/check`, null, {
           headers: {
             Authorization: token,
           },
