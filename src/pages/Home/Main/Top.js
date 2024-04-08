@@ -4,11 +4,11 @@ import HeartButton from "../../../components/HeartButton";
 /** Top 15 또또가 */
 const Top = ({ top15 }) => {
   return (
-    <div className="my-16">
+    <div className="max-w-screen-xl mx-auto my-16">
       {/* 구분선 */}
       <div className="h-px mx-6 bg-black md:hidden opacity-10"></div>
       {/* 제목 텍스트*/}
-      <div className="px-6 pt-10 pb-6 md:py-6 lg:px-16">
+      <div className="pt-10 pb-6 md:py-6">
         <p className="text-base font-semibold text-black md:text-2xl">
           TOP 15 또또가
         </p>
@@ -18,7 +18,7 @@ const Top = ({ top15 }) => {
       </div>
 
       {/* TOP15 카드 리스트 */}
-      <div className="w-full px-6 lg:px-16">
+      <div className="w-full ">
         {/* 데스크탑: 768px 이상일 때 보이도록 설정 */}
         {/* md를 기준으로 hidden처리를 하여 데스크탑용 UI를 분리 */}
         <ul className="flex-wrap justify-between hidden md:flex">

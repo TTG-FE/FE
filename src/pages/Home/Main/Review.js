@@ -1,10 +1,10 @@
 const Review = ({ homeReviews }) => {
   return (
-    <div className="mb-16">
+    <div className="max-w-screen-xl mx-auto mb-16">
       {/* 구분선 */}
       <div className="h-px mx-6 bg-black md:hidden opacity-10"></div>
       {/* 제목 텍스트 */}
-      <div className="px-6 pt-10 pb-6 md:py-6 lg:px-16">
+      <div className="pt-10 pb-6 md:py-6 ">
         <p className="text-base font-semibold text-black md:text-2xl">
           또또가 리뷰
         </p>
@@ -14,8 +14,8 @@ const Review = ({ homeReviews }) => {
       </div>
 
       {/* 카드 리스트 */}
-      <div className="w-full py-5 pl-4 overflow-hidden overflow-x-auto scrollbar-hide lg:px-16 ">
-        <ul className="flex w-full m-2 space-x-4">
+      <div className="w-full py-5 overflow-hidden overflow-x-auto scrollbar-hide ">
+        <ul className="flex w-full space-x-4">
           {homeReviews.map((item) => (
             <li
               key={item.reviewId}
