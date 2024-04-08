@@ -7,7 +7,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import HeartButton from "../components/HeartButton";
 import { LoginContext } from "../contexts/LoginContextProvider";
-import test from "../assets/images/Test.png";
+import loading from "../assets/images/loading.png";
 
 // 60px -> 14rem = 56px 로 함 15가 없더라
 
@@ -46,22 +46,18 @@ function Store() {
       }
     };
     fetchStoreInfo();
-  }, [store_id,token]);
+  }, [store_id, token]);
 
   const postDataWithFormData = async () => {
     try {
       const formData = new FormData();
       formData.append("reviewLink", reviewUrl);
-      await axios.post(
-        `stores/${store_id}/reviews`,
-        formData,
-        {
-          headers: {
-            // 'Content-Type':'application/json',
-            Authorization: token,
-          },
-        }
-      );
+      await axios.post(`stores/${store_id}/reviews`, formData, {
+        headers: {
+          // 'Content-Type':'application/json',
+          Authorization: token,
+        },
+      });
       // console.log("상점페이지 리뷰 POST 요청 성공");
     } catch (error) {
       console.error("Error postDataWithFormData", error);

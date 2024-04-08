@@ -8,7 +8,7 @@ import CouponCard from "../components/CouponCard";
 import GoToLogin from "../components/GoToLogin";
 import axios from "axios";
 import { LoginContext } from "../contexts/LoginContextProvider";
-import test from "../assets/images/Test.png";
+import loading from "../assets/images/loading.png";
 
 const Coupon = () => {
   // 쿠폰 사용 여부
@@ -43,41 +43,40 @@ const Coupon = () => {
   //   fetchData();
   // }, [isLogin, coupons]);
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      if (isLogin) {
-        const response = await axios.get(`coupons`, {
-          headers: {
-            Authorization: token,
-          },
-        });
-        // 쿠폰 데이터를 받아온 후 정렬
-        const sortedCoupons = response.data.result.sort((a, b) => {
-          if (a.useYn === "Y" && b.useYn === "N") {
-            return -1; // 'Y'를 가진 쿠폰을 앞으로
-          } else if (a.useYn === "N" && b.useYn === "Y") {
-            return 1; // 'N'을 가진 쿠폰을 뒤로
-          }
-          return 0; // 순서 변경 없음
-        });
-        setCoupons(sortedCoupons);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (isLogin) {
+          const response = await axios.get(`coupons`, {
+            headers: {
+              Authorization: token,
+            },
+          });
+          // 쿠폰 데이터를 받아온 후 정렬
+          const sortedCoupons = response.data.result.sort((a, b) => {
+            if (a.useYn === "Y" && b.useYn === "N") {
+              return -1; // 'Y'를 가진 쿠폰을 앞으로
+            } else if (a.useYn === "N" && b.useYn === "Y") {
+              return 1; // 'N'을 가진 쿠폰을 뒤로
+            }
+            return 0; // 순서 변경 없음
+          });
+          setCoupons(sortedCoupons);
+        }
+      } catch (error) {
+        console.error("Error fetching StoreInfo:", error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching StoreInfo:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchData();
-}, [isLogin,token]);
-
+    };
+    fetchData();
+  }, [isLogin, token]);
 
   const filteredCoupons = coupons.filter((coupon) =>
     coupon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log(coupons)
+  console.log(coupons);
   // // 사용한 쿠폰 처리
   // const handleCouponUsed = (couponId) => {
   //   // 서버에 쿠폰 사용 정보 업데이트
@@ -133,7 +132,6 @@ useEffect(() => {
       });
   };
 
-
   // put 호출
   const putCouponUsed = async (couponId) => {
     try {
@@ -178,7 +176,7 @@ useEffect(() => {
 
   return isLoading ? (
     <div className="absolute inset-0 flex items-center justify-center">
-      <img className="animate-spin w-14 h-14" src={test} alt="로딩중" />
+      <img className="animate-spin w-14 h-14" src={loading} alt="로딩중" />
     </div>
   ) : (
     <>
@@ -260,12 +258,12 @@ const SearchBar = ({ onSearch }) => {
         onKeyDown={handleKeyPress}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="flex-1 text-xs border-b outline-none ps-2 h-6 focus:border-custom-pink"
+        className="flex-1 h-6 text-xs border-b outline-none ps-2 focus:border-custom-pink"
       />
       {/* 검색버튼 */}
       <button
         type="submit"
-        className="outline-none relative"
+        className="relative outline-none"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onClick={(e) => handleKeyPress(e)}
@@ -289,7 +287,7 @@ const DesktopCouponSection = ({
   return (
     <>
       {/* 전체 페이지 설정 */}
-      <div className="px-24 pt-16 pb-8 font-inter hidden md:block flow-grow">
+      <div className="hidden px-24 pt-16 pb-8 font-inter md:block flow-grow">
         {/* 쿠폰함 및 검색창 */}
         <div className="flex items-end mb-7">
           <div
@@ -313,7 +311,7 @@ const DesktopCouponSection = ({
 
           {isLogin ? (
             coupons.length === 0 ? (
-              <p className="text-custom-gray-200 text-lg font-normal">
+              <p className="text-lg font-normal text-custom-gray-200">
                 또또가 리뷰를 등록하고 쿠폰을 받아보세요.
               </p>
             ) : (
@@ -333,7 +331,7 @@ const MobileCouponSection = ({ coupons, isLogin, setSearchTerm, children }) => {
     <>
       {/* 쿠폰함 타이틀 헤더 영역 */}
       {/* <MobileHeader title={"쿠폰함"} /> */}
-      <div className="md:hidden h-full pb-20">
+      <div className="h-full pb-20 md:hidden">
         {isLogin ? (
           <div className="pt-8">
             {/* 검색 영역 */}
