@@ -81,7 +81,7 @@ export const Login = () => {
         />
       </div>
 
-      <div className="sm:p-4 mx-auto sm:p-0 ">
+      <div className="mx-auto sm:p-4 sm:p-0 ">
         <div className=" mr-[31.75rem] ml-[1.75rem] sm:ml-[0rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
           간편 로그인 후 <br />
           이용 가능합니다.
@@ -93,12 +93,11 @@ export const Login = () => {
 
         {/* 네이버 로그인 */}
         <button
-          className=" mb-[1.19rem] ml-[1.69rem] sm:ml-[0rem]  flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          className=" mb-[1.19rem] ml-[1.69rem] sm:ml-[0rem]  flex items-center bg-[#03C75A] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
           onClick={handleCustomNaverLogin}
         >
           <svg
             className="sm:ml-[3rem] sm:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] sm:w-[2.625rem] sm:h-[2.5625rem] w-[1.72869rem] h-[1.6875rem]"
-            
             viewBox="0 0 42 41"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +114,7 @@ export const Login = () => {
 
         {/* 카카오 로그인 */}
         <button
-          className="flex items-center bg-[#FFD600] rounded-md ml-[1.69rem] sm:ml-[0rem]  sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          className="flex items-center bg-[#FFE500] rounded-md ml-[1.69rem] sm:ml-[0rem]  sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
           onClick={handleCustomKaKaoLogin}
         >
           <svg
