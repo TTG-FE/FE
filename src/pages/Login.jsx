@@ -81,15 +81,13 @@ export const Login = () => {
         />
       </div>
 
-      <div className="sm:p-4 mx-auto sm:p-0 ">
-        <div className=" mr-[31.75rem] ml-[1.75rem] sm:ml-[0rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
-          간편 로그인 후 <br />
-          이용 가능합니다.
+      <div className="sm:p-4 sm:p-0 ">
+        <div className=" ml-[1.75rem] sm:mb-[3.88rem] sm:ml-[0.62rem] sm:text-[3rem] text-[1.5rem] font-semibold mb-[5rem]">
+          대학생 식비고민 <br />
+          또또가로 해결하세요!
         </div>
 
-        <div className="mr-[19.38rem] ml-[1.75rem] sm:ml-[0rem]  whitespace-nowrap w-[32.125rem] h-[1.3125rem] sm:text-[1.125rem]  text-[0.6875rem] text-gray-700 mb-[3.245rem] opacity-50">
-          간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
-        </div>
+        
 
         {/* 네이버 로그인 */}
         <button
