@@ -38,7 +38,8 @@
 - Axios
 
 # 기술 스택 및 구조
-![stack](https://github.com/Ttottoga/FE/assets/101373627/a4e1fbf1-7404-434c-b1a1-e346b60b0909)
+![stack](https://github.com/Ttottoga/FE/assets/101373627/ecebcea9-ee92-4dc6-8c03-ec72557079fa)
+
 
 
 # 프로젝트 구조
