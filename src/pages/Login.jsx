@@ -81,24 +81,19 @@ export const Login = () => {
         />
       </div>
 
-      <div className="sm:p-4 mx-auto sm:p-0 ">
-        <div className=" mr-[31.75rem] ml-[1.75rem] sm:ml-[0rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
-          간편 로그인 후 <br />
-          이용 가능합니다.
-        </div>
-
-        <div className="mr-[19.38rem] ml-[1.75rem] sm:ml-[0rem]  whitespace-nowrap w-[32.125rem] h-[1.3125rem] sm:text-[1.125rem]  text-[0.6875rem] text-gray-700 mb-[3.245rem] opacity-50">
-          간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
+      <div className="desktop:p-4 desktop:p-0 ">
+        <div className=" ml-[1.75rem] desktop:mb-[3.88rem] desktop:ml-[0.62rem] desktop:text-[3rem] text-[1.5rem] font-semibold mb-[5rem]">
+          대학생 식비고민 <br />
+          또또가로 해결하세요!
         </div>
 
         {/* 네이버 로그인 */}
         <button
-          className=" mb-[1.19rem] ml-[1.69rem] sm:ml-[0rem]  flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          className=" mb-[1.19rem] ml-[1.69rem] desktop:ml-[0rem]  flex items-center bg-[#03C75A] rounded-md desktop:h-[4.125rem] desktop:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
           onClick={handleCustomNaverLogin}
         >
           <svg
-            className="sm:ml-[3rem] sm:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] sm:w-[2.625rem] sm:h-[2.5625rem] w-[1.72869rem] h-[1.6875rem]"
-            
+            className="desktop:ml-[3rem] desktop:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] desktop:w-[2.625rem] desktop:h-[2.5625rem] w-[1.72869rem] h-[1.6875rem]"
             viewBox="0 0 42 41"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -108,18 +103,18 @@ export const Login = () => {
               fill="white"
             />
           </svg>
-          <span className="sm:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter']  text-[#FFF]">
+          <span className="desktop:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter']  text-[#FFF]">
             네이버 로그인
           </span>
         </button>
 
         {/* 카카오 로그인 */}
         <button
-          className="flex items-center bg-[#FFD600] rounded-md ml-[1.69rem] sm:ml-[0rem]  sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          className="flex items-center bg-[#FFE500] rounded-md ml-[1.69rem] sm:ml-[0rem]  desktop:h-[4.125rem] desktop:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
           onClick={handleCustomKaKaoLogin}
         >
           <svg
-            className="sm:ml-[3rem] sm:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] sm:w-[2.625rem] sm:h-[2.5625rem] w-[1.6875rem] h-[1.6875rem]"
+            className="desktop:ml-[3rem] desktop:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] desktop:w-[2.625rem] desktop:h-[2.5625rem] w-[1.6875rem] h-[1.6875rem]"
             width="42"
             height="42"
             viewBox="0 0 42 42"
@@ -131,7 +126,7 @@ export const Login = () => {
               fill="#341C15"
             />
           </svg>
-          <span className="sm:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
+          <span className="desktop:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
             카카오톡 로그인
           </span>
         </button>
