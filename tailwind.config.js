@@ -28,6 +28,10 @@ module.exports = {
         "custom-box-shadow-pink": "0px 0px 10px 0px #FF0069",
         "custom-button-shadow": "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
       },
+      screens: {
+        tablet: "480px",
+        desktop: "1280px",
+      },
     },
   },
   plugins: ["./src/styles/index.css", require("tailwind-scrollbar-hide")], // 'index.css'에 @layer utilities로 선언된 클래스를 사용할 수 있도록 설정
