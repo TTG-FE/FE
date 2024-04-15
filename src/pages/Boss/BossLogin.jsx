@@ -1,27 +1,57 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+// import { LoginContext } from "../../contexts/LoginContextProvider";
+
 import LoginImage from "../../assets/loginimage.png";
+// // 콜백 페이지의 스크립트 예시
+// document.addEventListener("DOMContentLoaded", function () {
+//   // 현재 페이지의 URL을 파싱
+//   const pathArray = window.location.pathname.split("/");
+//   // 토큰 값이 URL의 마지막 부분에 있다고 가정
+//   const token = pathArray[pathArray.length - 1];
+
+//   if (token.startsWith("kakao_")) {
+//     // 토큰을 로컬 스토리지에 저장
+//     localStorage.setItem("oauthToken", token);
+//     // 팝업 창을 닫음
+//     window.close();
+//   }
+// });
 
 export const BossLogin = () => {
+  const navigate = useNavigate();
+  // const [tokenTest, setToken] = useState();
+
+  // if (tokenTest) {
+  //   navigate("/boss-login-success");
+  // }
+
   const handleCustomKaKaoLogin = () => {
-    // 팝업 열기
-    const popup = window.open(
-      `http://13.124.232.198/api/v1/auth/oauth2/kakao`,
-      "네이버 로그인",
-      "width=600,height=800",
-    );
+    navigate("/boss-login-success");
+    //    팝업 열기
+    //   const popup = window.open(
+    //     `http://13.124.232.198/api/v1/auth/oauth2/kakao`,
+    //     "카카오 로그인",
+    //     "width=600,height=800",
+    //   );
 
-    // 팝업 창 닫힘 감지
-    const checkPopupClosed = setInterval(() => {
-      if (popup.closed) {
-        clearInterval(checkPopupClosed);
-        // 팝업이 닫혔다면 로컬 스토리지에서 토큰 확인
-        const token = localStorage.getItem("oauthToken");
-        setToken(token);
-        loginSuccess(token);
-      }
-    }, 500); // 500ms마다 확인
+    //   // 팝업 창 닫힘 감지
+    //   const checkPopupClosed = setInterval(() => {
+    //     if (popup.closed) {
+    //       clearInterval(checkPopupClosed);
+    //       // 팝업이 닫혔다면 로컬 스토리지에서 토큰 확인
+    //       const token = localStorage.getItem("oauthToken");
+    //       setToken(token);
+    //       loginSuccess(token);
+    //     }
+    //   }, 500); // 500ms마다 확인
+    // };
+    // const loginSuccess = (token) => {
+    //   if (token) {
+    //     // 토큰이 있는 경우 BossLoginSuccess 페이지로 이동
+    //     window.location.href = "/boss-login-success";
+    //   }
   };
-
   return (
     <div className="flex items-center h-screen ">
       {" "}
@@ -33,7 +63,7 @@ export const BossLogin = () => {
           style={{ maxWidth: "100%", height: "auto" }}
         />
       </div>
-      <div className="desktop:p-4 mx-auto desktop:p-0 ">
+      <div className="p-4 mx-auto ">
         <div className="ml-[0rem] text-[2.25rem] font-semibold mb-[3.19rem]">
           대학가 맛집 리뷰 마케팅은 <br />
           또또가X 에서!
