@@ -29,7 +29,7 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "next/babel",
+      "next",
       "next/core-web-vitals"
     ]
   },
