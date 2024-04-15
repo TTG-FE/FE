@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from "react";
 import basicProfile from "../assets/basicprofile.png";
 import FinishReview from "./FinishReview";
 import OngoingReview from "./OngoingReview";
-import ScreenReview from "./ScreenReview";
+
 import FailReview from "./FailReview";
 import { LoginContext } from "../contexts/LoginContextProvider";
 
@@ -57,6 +57,8 @@ export const MyPage = () => {
             });
 
             setSelectedImage(profileImage || basicProfile);
+            setSelectedImage(profileImage || basicProfile);
+            console.log(profileImage);
           } else {
             setError(result.message);
           }
@@ -289,35 +291,16 @@ export const MyPage = () => {
             </div>
           </div>
 
-          <div className="flex items-center mb-[0.94rem]  pt-[1.06rem] pb-[1.25rem] border-[#545454] border-b w-[74.625rem] pl-[8.44rem] pr-[8.44rem]">
+          <div className="flex items-center mb-[0.94rem]  pt-[1.06rem] pb-[1.25rem] border-[#545454] border-b w-[74.625rem] pl-[27.81rem] pr-[5.19rem]">
             <div
               onClick={() => handleMenuClick("신청")}
-              className={`w-[3.5625rem] mr-[11.06rem] cursor-pointer ${
+              className={`w-[2rem] mr-[11.06rem] cursor-pointer ${
                 selectedMenu === "신청" && "font-semibold"
               }`}
             >
               신청
             </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="15"
-              viewBox="0 0 8 15"
-              fill="none"
-            >
-              <path
-                d="M0.214986 13.7353C0.146313 13.8069 0.0926256 13.891 0.0569897 13.983C0.0213542 14.075 0.00446749 14.173 0.00729465 14.2715C0.0101218 14.3699 0.0326076 14.4668 0.0734677 14.5566C0.114328 14.6465 0.172762 14.7276 0.245434 14.7952C0.318106 14.8628 0.403594 14.9157 0.497014 14.9508C0.590435 14.9859 0.689959 15.0025 0.789906 14.9997C0.889853 14.9969 0.988264 14.9748 1.07952 14.9345C1.17078 14.8943 1.25309 14.8368 1.32177 14.7652L7.79193 8.01916C7.92555 7.87999 8 7.69573 8 7.50421C8 7.31269 7.92555 7.12843 7.79193 6.98926L1.32177 0.242474C1.25355 0.169346 1.17125 0.110293 1.07966 0.0687494C0.988064 0.0272055 0.889002 0.00399685 0.788224 0.000471115C0.687446 -0.00305462 0.58696 0.0131741 0.492605 0.0482121C0.39825 0.083251 0.311904 0.136401 0.238585 0.204577C0.165267 0.272753 0.106435 0.354595 0.0655088 0.44535C0.0245819 0.536104 0.00237608 0.633962 0.000180721 0.733238C-0.00201511 0.832515 0.0158429 0.931232 0.0527186 1.02365C0.0895939 1.11608 0.144751 1.20036 0.214986 1.27162L6.1919 7.50421L0.214986 13.7353Z"
-                fill="#545454"
-              />
-            </svg>
-            <div
-              onClick={() => handleMenuClick("리뷰 유지 기간")}
-              className={`mr-[9.44rem] font-['Inter'] flex-shrink-0 ml-[9.44rem] cursor-pointer ${
-                selectedMenu === "리뷰 유지 기간" && "font-semibold"
-              }`}
-            >
-              리뷰 유지 기간
-            </div>
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="8"
@@ -341,7 +324,6 @@ export const MyPage = () => {
           </div>
 
           {selectedMenu === "신청" && <OngoingReview />}
-          {selectedMenu === "리뷰 유지 기간" && <ScreenReview />}
           {selectedMenu === "쿠폰 발급 완료" && <FinishReview />}
           <div ref={rejectedRef}>
             <div className="w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem] mb-[1.56rem] text=[1.25rem] font-semibold">

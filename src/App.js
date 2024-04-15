@@ -17,6 +17,8 @@ import MyPage from "./pages/MyPage";
 import { Login } from "./pages/Login";
 import LoginContextProvider from "./contexts/LoginContextProvider"; // LoginContextProvider
 import ModalContextProvider from "./contexts/ModalContextProvider"; // SelectModalProvider
+import { BossHeader } from "./pages/Boss/BossHeader";
+import { BossLogin } from "./pages/Boss/BossLogin";
 
 function App() {
   // LoginContext, ModalcontextProvider 추가
@@ -25,27 +27,49 @@ function App() {
       <LoginContextProvider>
         <ModalContextProvider>
           <div className="flex flex-col min-h-screen font-inter ">
-            <Header />
-            <Navbar />
             <section className="relative flex-grow">
               {/* 라우트를 정의한 부분 */}
               <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/store/:store_id" element={<Store />} />
-                <Route path="/coupon" element={<Coupon />} />
-                <Route path="/region" element={<Region />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/user-guide" element={<UserGuide />} />
-                <Route path="/heart" element={<Heart />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/menu/:menu_id/:menu_label" element={<Menu />} />
                 <Route
-                  path="/region/:city_id/:city_label/:town_id/:town_label"
-                  element={<Region />}
+                  path="/boss-login"
+                  element={
+                    <>
+                      <BossHeader />
+                      <BossLogin />
+                    </>
+                  }
                 />
-                <Route path="/search/:keyword" element={<Search />} />
-                {/* 추가하는 모든 페이지는 여기에 넣어주세요! */}
+                <Route
+                  path="*"
+                  element={
+                    <>
+                      {" "}
+                      <Header />
+                      <Navbar />
+                      <Routes>
+                        <Route path="/" element={<Main />} />
+                        <Route path="/store/:store_id" element={<Store />} />
+                        <Route path="/coupon" element={<Coupon />} />
+                        <Route path="/region" element={<Region />} />
+                        <Route path="/menu" element={<Menu />} />
+                        <Route path="/user-guide" element={<UserGuide />} />
+                        <Route path="/heart" element={<Heart />} />
+                        <Route path="/mypage" element={<MyPage />} />
+                        <Route path="/login" element={<Login />} />
+
+                        <Route
+                          path="/menu/:menu_id/:menu_label"
+                          element={<Menu />}
+                        />
+                        <Route
+                          path="/region/:city_id/:city_label/:town_id/:town_label"
+                          element={<Region />}
+                        />
+                        <Route path="/search/:keyword" element={<Search />} />
+                      </Routes>
+                    </>
+                  }
+                />
               </Routes>
             </section>
             <Footer />

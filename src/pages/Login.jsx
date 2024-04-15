@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import LoginImage from "../assets/loginimage.png";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../contexts/LoginContextProvider";
+import bossLoginLogo from "../assets/사장님 로그인 로고.png";
 
 // 콜백 페이지의 스크립트 예시
 document.addEventListener("DOMContentLoaded", function () {
@@ -34,7 +35,7 @@ export const Login = () => {
     const popup = window.open(
       `http://13.124.232.198/api/v1/auth/oauth2/naver`,
       "네이버 로그인",
-      "width=600,height=800"
+      "width=600,height=800",
     );
 
     // 팝업 창 닫힘 감지
@@ -55,7 +56,7 @@ export const Login = () => {
     const popup = window.open(
       `http://13.124.232.198/api/v1/auth/oauth2/kakao`,
       "네이버 로그인",
-      "width=600,height=800"
+      "width=600,height=800",
     );
 
     // 팝업 창 닫힘 감지
@@ -70,9 +71,14 @@ export const Login = () => {
     }, 500); // 500ms마다 확인
   };
 
+  const handleBossLogin = () => {
+    // BossLogin 컴포넌트로 이동
+    navigate("/boss-login");
+  };
+
   return (
     <div className="flex items-center h-screen ">
-      <div className="hidden sm:block mr-[7.69rem] ml-[15.81rem]">
+      <div className="hidden desktop:block mr-[7.69rem] ml-[15.81rem]">
         <img
           src={LoginImage}
           alt="로그인 이미지"
@@ -81,45 +87,23 @@ export const Login = () => {
         />
       </div>
 
-      <div className="sm:p-4 mx-auto sm:p-0 ">
-        <div className=" mr-[31.75rem] ml-[1.75rem] sm:ml-[0rem] sm:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
+      <div className="desktop:p-4 mx-auto desktop:p-0 ">
+        <div className="mr-[31.75rem] ml-[1.75rem] desktop:ml-[0rem] desktop:text-[2.1875rem] text-[1.5rem] font-semibold mb-4">
           간편 로그인 후 <br />
           이용 가능합니다.
         </div>
 
-        <div className="mr-[19.38rem] ml-[1.75rem] sm:ml-[0rem]  whitespace-nowrap w-[32.125rem] h-[1.3125rem] sm:text-[1.125rem]  text-[0.6875rem] text-gray-700 mb-[3.245rem] opacity-50">
+        <div className="mr-[19.38rem] ml-[1.75rem] desktop:ml-[0rem]  whitespace-nowrap w-[32.125rem] h-[1.3125rem] desktop:text-[1.125rem]  text-[0.6875rem] text-gray-700 mb-[3.245rem] opacity-50">
           간편 로그인 정보는 또또가에 연동되어 더 빠르게 이용할 수 있어요!
         </div>
 
-        {/* 네이버 로그인 */}
-        <button
-          className=" mb-[1.19rem] ml-[1.69rem] sm:ml-[0rem]  flex items-center bg-[#57BC63] rounded-md sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
-          onClick={handleCustomNaverLogin}
-        >
-          <svg
-            className="sm:ml-[3rem] sm:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] sm:w-[2.625rem] sm:h-[2.5625rem] w-[1.72869rem] h-[1.6875rem]"
-            
-            viewBox="0 0 42 41"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M25.693 7.6875V20.7172L16.307 7.6875H6.23438V33.3125H16.307V20.5L25.693 33.3125H35.7656V7.6875H25.693Z"
-              fill="white"
-            />
-          </svg>
-          <span className="sm:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter']  text-[#FFF]">
-            네이버 로그인
-          </span>
-        </button>
-
         {/* 카카오 로그인 */}
         <button
-          className="flex items-center bg-[#FFD600] rounded-md ml-[1.69rem] sm:ml-[0rem]  sm:h-[4.125rem] sm:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          className="flex mb-[1.19rem] items-center bg-[#FFD600] rounded-md ml-[1.69rem] desktop:ml-[0rem]  desktop:h-[4.125rem] desktop:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
           onClick={handleCustomKaKaoLogin}
         >
           <svg
-            className="sm:ml-[3rem] sm:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] sm:w-[2.625rem] sm:h-[2.5625rem] w-[1.6875rem] h-[1.6875rem]"
+            className="desktop:ml-[3rem] desktop:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] desktop:w-[2.625rem] desktop:h-[2.5625rem] w-[1.6875rem] h-[1.6875rem]"
             width="42"
             height="42"
             viewBox="0 0 42 42"
@@ -131,8 +115,47 @@ export const Login = () => {
               fill="#341C15"
             />
           </svg>
-          <span className="sm:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
-            카카오톡 로그인
+          <span className="desktop:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter'] text-[#341C15]">
+            카카오 로그인
+          </span>
+        </button>
+        {/* 네이버 로그인 */}
+        <button
+          className=" mb-[1.19rem] ml-[1.69rem] desktop:ml-[0rem]  flex items-center bg-[#57BC63] rounded-md desktop:h-[4.125rem] desktop:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          onClick={handleCustomNaverLogin}
+        >
+          <svg
+            className="desktop:ml-[3rem] desktop:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] desktop:w-[2.625rem] desktop:h-[2.5625rem] w-[1.72869rem] h-[1.6875rem]"
+            viewBox="0 0 42 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M25.693 7.6875V20.7172L16.307 7.6875H6.23438V33.3125H16.307V20.5L25.693 33.3125H35.7656V7.6875H25.693Z"
+              fill="white"
+            />
+          </svg>
+          <span className="desktop:text-[1.5625rem] text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter']  text-[#FFF]">
+            네이버 로그인
+          </span>
+        </button>
+
+        <button
+          className="flex items-center  bg-[#ff2c95] rounded-md ml-[1.69rem] desktop:ml-[0rem]  desktop:h-[4.125rem] desktop:w-[32.0625rem] w-[19.1875rem] h-[2.63544rem]"
+          onClick={handleBossLogin}
+        >
+          <img
+            src={bossLoginLogo}
+            alt="사장님 로그인"
+            className="desktop:ml-[3rem] desktop:mr-[5.44rem] mr-[3.8rem] ml-[1.19rem] desktop:w-[2.625rem] desktop:h-[2.5625rem] w-[1.6875rem] h-[1.6875rem]"
+          />
+          <path
+            d="M21.9594 7C13.7059 7 7 12.425 7 19.075C7 23.275 9.75115 26.95 13.7059 29.225L12.6742 35L19.0363 30.8C19.896 30.975 20.9277 30.975 21.7874 30.975C30.0408 30.975 36.7468 25.55 36.7468 18.9C36.9187 12.425 30.2128 7 21.9594 7Z"
+            fill="#341C15"
+          />
+
+          <span className="desktop:text-[1.5625rem]  text-[ 0.99825rem] font-medium flex items-center justify-center font=['Inter'] text-[#FFF]">
+            사장님 로그인
           </span>
         </button>
       </div>
