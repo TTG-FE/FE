@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../contexts/LoginContextProvider";
-
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const OngoingReview = () => {
@@ -56,25 +56,28 @@ const OngoingReview = () => {
     );
   }
   return (
-    <div className="flex space-x-[1.12rem] font-inter">
+    <div>
       {reviewData.map((review) => (
-        <div key={review.reviewId} className="w-56">
-          <div
-            className="w-56rem h-56 rounded-[0.59481rem]"
-            style={{
-              backgroundImage: `url(${review.storeDto.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
-          <div className="text-[0.9375rem] text-custom-gray-100 font-bold truncate mt-2 mb-1">
-            {review.storeDto.name}
+        <div
+          key={review.reviewId}
+          className="flex justify-between border-b pb-[1rem] border-[#D9D9D9]"
+        >
+          <div>
+            <div className="mb-[1.44rem] font=['Inter'] text=[1.125rem]">
+              {review.storeDto.name}
+            </div>
+            <div className="text=[1rem] font=['Inter']">{review.reason}</div>
+            
           </div>
-          <div className="mb-[0.58rem] text-[#FF0069] truncate text-sm">
-            {review.storeDto.couponDto.content}
-          </div>
-          <div className="text-[0.8125rem] text-custom-gray-200 ">
-            신청일자: {review.applyDate}
+          <div>
+            <div className="text=[1rem] font=['Inter'] mb-[1.19rem]">
+              발급일자: {review.applyDate}
+            </div>
+            <Link to={`/store/${review.storeDto.couponDto.storeId}`}>
+              <button className="w-[9.8125rem] font=['Inter'] h-[2.4375rem] border rounded-[0.44rem] border-[#FF0069] text-[#FF0069]">
+                쿠폰 바로가기
+              </button>
+            </Link>
           </div>
         </div>
       ))}
