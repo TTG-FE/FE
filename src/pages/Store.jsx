@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Modal from "../components/Modal";
 
 // ASSETS
-import storeFoodImage from "../assets/store-food.jpg";
-import { ReactComponent as HeartIcon } from "../assets/storeHeartIcon.svg";
 import storeMapImage from "../assets/store-map.jpg";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -26,7 +24,7 @@ function Store() {
   const [reviewUrl, setReviewUrl] = useState("");
 
   // 쿠폰 발행 여부
-  const [isCouponUsed, setIsCouponUsed] = useState(false);
+  // const [isCouponUsed, setIsCouponUsed] = useState(false);
 
   const [storeInfo, setStoreInfo] = useState([]);
 
@@ -48,13 +46,13 @@ function Store() {
       }
     };
     fetchStoreInfo();
-  }, [storeInfo]);
+  }, [store_id,token]);
 
   const postDataWithFormData = async () => {
     try {
       const formData = new FormData();
-      formData.append("reviewLink", "www.google.com");
-      const response = await axios.post(
+      formData.append("reviewLink", reviewUrl);
+      await axios.post(
         `stores/${store_id}/reviews`,
         formData,
         {

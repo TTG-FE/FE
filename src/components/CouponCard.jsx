@@ -3,7 +3,7 @@ import Modal from "./Modal"; // Modal 컴포넌트 import
 import DownloadIcon from "./DownloadIcon"; // DownloadIcon 컴포넌트 import
 import CheckIcon from "./CheckIcon";
 import EmployeeVerificationIcon from "../assets/employeeVerification.svg";
-import QrCodeIcon from "../assets/qr-code-line.svg";
+// import QrCodeIcon from "../assets/qr-code-line.svg";
 import { ReactComponent as HorizontalCircleIcon } from "../assets/horizontalCircle.svg";
 import { ReactComponent as PhoneDownloadIcon } from "../assets/phone_downloadIcon.svg";
 
@@ -155,7 +155,7 @@ const CouponCard = ({
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
-            <CouponSemicircleUI_Mobile />
+            <CouponSemicircleUIMobile />
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="text-center border-t-2 border-dashed border-custom-pink">
@@ -197,7 +197,7 @@ const CouponCard = ({
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <CouponSemicircleUI_Mobile />
+            <CouponSemicircleUIMobile />
 
             <div className="border-t-2 border-dashed border-custom-pink">
               {/* 대쉬바 밑에 내용 전체 div */}
@@ -269,7 +269,7 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
 
-            <CouponSemicircleUI_Mobile isLast={true} />
+            <CouponSemicircleUIMobile isLast={true} />
 
             {/* 쿠폰 실선 밑 영역 */}
             <div className="border-dashed border-t-2 border-[#B2B2B2] text-center">
@@ -391,7 +391,7 @@ const CouponCard = ({
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
             {/* 흰색 아래 흰색을 덮어서 그위에 블러처리하면 안될려나? */}
 
-            <CouponSemicircleUI_Desktop />
+            <CouponSemicircleUIDesktop />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 text-center border-t-2 border-dashed border-custom-pink">
@@ -433,7 +433,7 @@ const CouponCard = ({
             </div>
 
             {/* 쿠폰 디자인 양쪽 원으로 파인 부분  */}
-            <CouponSemicircleUI_Desktop />
+            <CouponSemicircleUIDesktop />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-t-2 border-dashed border-custom-pink ">
@@ -502,7 +502,7 @@ const CouponCard = ({
               </div>
             </div>
 
-            <CouponSemicircleUI_Desktop isLast={true} />
+            <CouponSemicircleUIDesktop isLast={true} />
 
             <section className="flex flex-col items-center">
               <div className="w-11/12 border-dashed border-t-2 border-[#B2B2B2] text-center">
@@ -532,7 +532,7 @@ const CouponCard = ({
   );
 };
 
-const CouponSemicircleUI_Desktop = ({ isLast }) => {
+const CouponSemicircleUIDesktop = ({ isLast }) => {
   return (
     <>
       <div
@@ -548,7 +548,7 @@ const CouponSemicircleUI_Desktop = ({ isLast }) => {
     </>
   );
 };
-const CouponSemicircleUI_Mobile = ({ isLast }) => {
+const CouponSemicircleUIMobile = ({ isLast }) => {
   return (
     <>
       <div

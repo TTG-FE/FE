@@ -33,7 +33,7 @@ const Review = ({ homeReviews }) => {
 const ReviewCard = ({ item }) => {
   const handleReviewClick = () => {
     // 리뷰 링크로 새 창 열기
-    const absoluteLink = "http://" + item.reviewLink;
+    const absoluteLink = item.reviewLink;
     window.open(absoluteLink, "_blank");
   };
 

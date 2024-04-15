@@ -42,7 +42,7 @@ const OngoingReview = () => {
       }
     };
     fetchReviewData();
-  }, []);
+  }, [token]);
 
   if (error) {
     return <div>{error}</div>;
