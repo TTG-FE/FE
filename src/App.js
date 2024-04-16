@@ -20,7 +20,7 @@ import ModalContextProvider from "./contexts/ModalContextProvider"; // SelectMod
 import { BossHeader } from "./pages/Boss/BossHeader";
 import { BossLogin } from "./pages/Boss/BossLogin";
 import { BossLoginSuccess } from "./pages/Boss/BossLoginSuccess";
-
+import { BossMain } from "./pages/Boss/BossMain";
 function App() {
   // LoginContext, ModalcontextProvider 추가
   return (
@@ -46,6 +46,15 @@ function App() {
                     <>
                       <BossHeader />
                       <BossLoginSuccess />
+                    </>
+                  }
+                />
+                <Route
+                  path="/boss-main"
+                  element={
+                    <>
+                      <BossHeader />
+                      <BossMain />
                     </>
                   }
                 />
