@@ -111,7 +111,7 @@ export const BossMain = () => {
 
         <div className="mt-[3.31rem] ml-[9.5rem]">
           <div
-            className="flex w-[74.625rem] border-[#000000] mb-[2.38rem] border-b pb-[1rem]"
+            className="flex w-[74.625rem] border-[#000000] mb-[2.37rem] border-b pb-[1rem]"
             ref={ongoingRef}
           >
             <div className="mr-[1.94rem] text=[1.25rem] font-semibold">
@@ -123,6 +123,23 @@ export const BossMain = () => {
             </div>
           </div>
           {/* 심사 대기 중인 리뷰 컴포넌트 추가 */}
+          <div className="flex items-center border-b pb-[2.37rem] border-[#D9D9D9]">
+            <div className="bg-[#4545] ml-[0.75rem] w-[5.3125rem] h-[5.3125rem] rounded-full"></div>
+            <div className="ml-[1.62rem]">
+              <div className="mb-[0.63rem] font=['Inter'] text=[1rem]">
+                소중한 혜택 감사합니다.
+              </div>
+              <div className="text=[0.75rem] mb-[0.81rem] text-[#8F8F8F] font=['Inter']">
+                예지의 냠냠저장소
+              </div>
+              <div className="text-[0.71rem] text-[#FF0069]">7일전</div>
+            </div>
+            <div className="ml-[44.81rem]">
+              <button className="w-[9.8125rem] font=['Inter'] h-[2.5rem] border rounded-[0.44rem] bg-[#FF0069] text-[#fff]">
+                리뷰 심사하기
+              </button>
+            </div>
+          </div>
 
           <div
             className="flex w-[74.625rem] mt-[7.21rem] border-[#000000] border-b pb-[1rem]"
@@ -193,7 +210,7 @@ export const BossMain = () => {
           </div>
           {/* 우리가게 리뷰 컴포넌트 추가 */}
 
-          <div class="flex w-[23.21219rem] h-[8.75rem] items-center shadow-custom-box-shadow2">
+          <div class="flex w-[23.21219rem] h-[8.75rem] mb-[15.4rem] items-center shadow-custom-box-shadow2">
             <div className="bg-[#787] rounded-full w-[4.95988rem] ml-[1.52rem] h-[5.16731rem] mr-[1.52rem]"></div>
             <div>
               <div className="text-[1.125rem] mb-[1.1rem]">
