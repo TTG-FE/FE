@@ -1,11 +1,37 @@
 import React, { useState } from "react";
 import LoginImage from "../../assets/loginimage.png";
-
+import { useNavigate } from "react-router-dom";
 export const BossLoginSuccess = () => {
+  const [companyName, setCompanyName] = useState("");
+  const [businessNumber, setBusinessNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [region, setRegion] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const handleCheckboxClick = () => {
     setIsChecked((prevState) => !prevState);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (companyName && businessNumber && phoneNumber && region && isChecked) {
+      navigate("/boss-main");
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  // 모달 x 버튼 클릭
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // 모달 배경 클릭
+  const handleModalBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setShowModal(false);
+    }
   };
   return (
     <div className="flex items-center h-screen ">
@@ -23,11 +49,13 @@ export const BossLoginSuccess = () => {
         <div className="text-[1rem]">
           최초 1회만 작성하여 로그인 정보에 저장된다는 멘트 등등등
         </div>
-        <form className="">
+        <form onSubmit={handleFormSubmit}>
           <div className="mt-[1.46rem]">
             <input
               className="w-[29.9375rem] pl-[1.06rem] h-[4.04313rem] border-[#B3B3B3] border border-solid"
               type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
               placeholder="업체명"
               style={{
                 borderRadius: "0.625rem",
@@ -40,6 +68,8 @@ export const BossLoginSuccess = () => {
             <input
               className="w-[29.9375rem] pl-[1.06rem] h-[4.04313rem] border-[#B3B3B3] border border-solid"
               type="text"
+              value={businessNumber}
+              onChange={(e) => setBusinessNumber(e.target.value)}
               placeholder="사업자번호"
               style={{
                 borderRadius: "0.625rem",
@@ -52,6 +82,8 @@ export const BossLoginSuccess = () => {
             <input
               className="w-[29.9375rem] pl-[1.06rem] h-[4.04313rem] border-[#B3B3B3] border border-solid"
               type="tel"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="연락처"
               style={{
                 borderRadius: "0.625rem",
@@ -67,6 +99,8 @@ export const BossLoginSuccess = () => {
                 color: "#B3B3B3",
                 fontSize: "1rem",
               }}
+              value={region}
+              onChange={(e) => setRegion(e.target.value)} // 변경 시 상태 업데이트
             >
               <option value="" disabled hidden>
                 가게 운영 지역을 선택하세요
@@ -98,7 +132,7 @@ export const BossLoginSuccess = () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={isChecked ? "black" : "#B3B3B3"}
+              stroke={isChecked ? "#FF0069" : "#B3B3B3"}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -113,25 +147,84 @@ export const BossLoginSuccess = () => {
               개인정보 이용 약관에 동의합니다.
             </span>
           </div>
-          <button className=" w-[29.9375rem] h-[4.04313rem] border-none bg-[#D9D9D9] rounded-[0.625rem] text-[1rem] text-base opacity-50 font-semibold">
+          <button
+            type="submit"
+            // disabled={
+            //   !companyName ||
+            //   !businessNumber ||
+            //   !phoneNumber ||
+            //   !region ||
+            //   !isChecked
+            // }
+            className="w-[29.9375rem] h-[4.04313rem] border-none bg-[#D9D9D9] rounded-[0.625rem] text-[1rem] text-base opacity-50 font-semibold"
+          >
             완료
           </button>
-
-          <div class="relative inline-flex">
-            <svg
-              class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 412 232"
-            >
-              <path
-                d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                fill="#648299"
-                fill-rule="nonzero"
-              />
-            </svg>
-          </div>
         </form>
       </div>
+      {/* Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-gray-300 bg-opacity-50 backdrop-blur-[50px]"
+          onClick={handleModalBackgroundClick}
+        >
+          <div className="bg-white w-[39.6875rem] h-[20.0625rem] rounded-md relative">
+            <div
+              className="absolute top-0 right-0 m-4 cursor-pointer"
+              onClick={handleCloseModal}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="24"
+                viewBox="0 0 25 24"
+                fill="none"
+              >
+                <circle
+                  cx="12.6406"
+                  cy="12"
+                  r="9"
+                  fill="#7E869E"
+                  fill-opacity="0.25"
+                />
+                <path
+                  d="M9.64062 9L15.6406 15"
+                  stroke="#222222"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M15.6406 9L9.64062 15"
+                  stroke="#222222"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <div className="ml-[3.56rem]">
+              <h2 className="text-xl font-semibold mt-[3.87rem] text-[1rem] mb-[0.69rem] ">
+                확인된 정보가 없습니다.
+              </h2>
+              <p className="text-sm text-gray-500 mb-[3.69rem]">
+                작성하신 정보가 올바른지 확인해주세요.
+              </p>
+            </div>
+            <div>
+              <button
+                onClick={handleCloseModal}
+                className="w-[34.10406rem] ml-[2.56rem] h-[3.0625rem] bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-[1.125rem]"
+              >
+                닫기
+              </button>
+            </div>
+            <div>
+              <button className="w-[34.10406rem] ml-[2.56rem] h-[3.0625rem] text-[1rem] bg-[#FF0069] text-[#ffffff] mt-[0.44rem] rounded-md ml-[2.56rem]">
+                혹시 아직 또또가X와 제휴를 맺지 않은 가게인가요?
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
