@@ -27,6 +27,7 @@ module.exports = {
         "custom-box-shadow": "0px 0px 10px 0px rgba(0, 0, 0, 0.25)",
         "custom-box-shadow-pink": "0px 0px 10px 0px #FF0069",
         "custom-button-shadow": "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+        "custom-box-shadow2": "0px 0px 6.253px 0px rgba(0, 0, 0, 0.25)",
       },
       screens: {
         tablet: "480px",
