@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import arrowRightImg from "../assets/arrow_right_light.svg";
 
 const GoToLogin = () => {
@@ -40,6 +40,6 @@ const GoToLogin = () => {
       </div>
     </>
   );
-}
+};
 
-export default GoToLogin
+export default GoToLogin;

@@ -11,7 +11,7 @@ axios.defaults.baseURL = "http://13.124.232.198/";
 root.render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

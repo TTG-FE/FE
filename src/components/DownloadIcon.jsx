@@ -24,6 +24,6 @@ const DownloadIcon = ({ isCoupon }) => {
       </g>
     </svg>
   );
-}
+};
 
 export default DownloadIcon;
