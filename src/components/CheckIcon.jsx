@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import PropTypes from "prop-types";
 
 const CheckIcon = ({ isCheck }) => {
   // console.log(isCheck);
@@ -30,6 +31,8 @@ const CheckIcon = ({ isCheck }) => {
       </g>
     </svg>
   );
-}
-
-export default CheckIcon
+};
+CheckIcon.propTypes = {
+  isCheck: PropTypes.bool.isRequired,
+};
+export default CheckIcon;

@@ -13,7 +13,7 @@ const useInfiniteScroll = (fetchData, keyword) => {
           setPage((prev) => prev + 1); // 페이지 증가
         }
       },
-      { threshold: 1 }
+      { threshold: 1 },
     );
 
     if (pageEndRef.current) {
