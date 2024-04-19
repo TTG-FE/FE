@@ -81,9 +81,9 @@ export const FinishReview = () => {
           </div>
           <div
             style={{ fontSize: "0.62525rem" }}
-            className="text-[#FF0069] font=['Inter'] leading-[1.17238rem]"
+            className="text-[#FF0069] w-[7.0625rem] h-[1.45256rem] bg-[#FFE0E5] font=['Inter'] leading-[1.17238rem] "
           >
-            {review.storeDto.name}
+            {/* 학교 이름 넣기 */}
           </div>
         </div>
       ))}
