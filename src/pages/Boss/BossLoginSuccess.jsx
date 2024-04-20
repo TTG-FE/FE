@@ -5,9 +5,17 @@ export const BossLoginSuccess = () => {
   const [companyName, setCompanyName] = useState("");
   const [businessNumber, setBusinessNumber] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [region, setRegion] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("가게 운영 지역");
+  const options = [
+    "서울여대/과기대(공릉동)",
+    "광운대/인덕대(월계동)",
+    "덕성여대(쌍문동)",
+    "한국외대/경희대/시립대(이문동-회기동)",
+  ];
+
   const navigate = useNavigate();
   const handleCheckboxClick = () => {
     setIsChecked((prevState) => !prevState);
@@ -15,7 +23,13 @@ export const BossLoginSuccess = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (companyName && businessNumber && phoneNumber && region && isChecked) {
+    if (
+      companyName &&
+      businessNumber &&
+      phoneNumber &&
+      selectedOption &&
+      isChecked
+    ) {
       navigate("/boss-main");
     } else {
       setShowModal(true);
@@ -32,6 +46,15 @@ export const BossLoginSuccess = () => {
     if (e.target === e.currentTarget) {
       setShowModal(false);
     }
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsOpen(false);
   };
   return (
     <div className="flex items-center h-screen ">
@@ -92,39 +115,51 @@ export const BossLoginSuccess = () => {
               }}
             />
           </div>
-          <div className="mt-[1.46rem] relative">
-            <select
-              className="w-[29.9375rem]  pl-[1.06rem] pr-[2.5rem] h-[4.043rem] border-[#B3B3B3] border border-solid bg-white appearance-none rounded-[0.625rem] text-[#B3B3B3] text-base focus:outline-none "
+          <div className="relative">
+            <div
+              className="w-[29.9375rem] mt-[1.46rem] pl-[0.92rem] h-[4.043rem] border-[#B3B3B3] border border-solid flex items-center justify-between cursor-pointer"
+              onClick={toggleDropdown}
               style={{
+                borderRadius: "0.625rem",
                 color: "#B3B3B3",
                 fontSize: "1rem",
               }}
-              value={region}
-              onChange={(e) => setRegion(e.target.value)} // 변경 시 상태 업데이트
             >
-              <option value="" disabled hidden>
-                가게 운영 지역을 선택하세요
-              </option>
-              <option value="seoul-tech">서울여대/과기대</option>
-              <option value="kwu-induk">광운대/인덕대</option>
-              <option value="deokseong">덕성여대</option>
-              <option value="hu-ku-si">한국외대/경희대/시립대</option>
-            </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-[1.17rem]">
+              <span>{selectedOption}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
+                width="27"
                 height="29"
-                viewBox="0 0 20 29"
+                viewBox="0 0 27 29"
                 fill="none"
+                className="mr-[1.17rem]"
               >
                 <path
-                  d="M14.6132 17.8119C14.6705 17.872 14.7378 17.919 14.8114 17.9501C14.885 17.9813 14.9634 17.9961 15.0422 17.9936C15.1209 17.9911 15.1984 17.9715 15.2703 17.9357C15.3422 17.9 15.407 17.8488 15.4611 17.7852C15.5152 17.7217 15.5575 17.6469 15.5856 17.5651C15.6137 17.4834 15.627 17.3963 15.6248 17.3088C15.6225 17.2214 15.6048 17.1353 15.5726 17.0554C15.5404 16.9756 15.4944 16.9035 15.4372 16.8435L10.0403 11.1821C9.92899 11.0651 9.78159 11 9.62837 11C9.47515 11 9.32775 11.0651 9.21641 11.1821L3.81898 16.8435C3.76048 16.9031 3.71324 16.9752 3.68 17.0553C3.64676 17.1354 3.6282 17.2221 3.62538 17.3103C3.62256 17.3985 3.63554 17.4864 3.66357 17.569C3.6916 17.6515 3.73412 17.7271 3.78866 17.7912C3.8432 17.8554 3.90868 17.9069 3.98128 17.9427C4.05388 17.9785 4.13217 17.9979 4.21159 17.9998C4.29101 18.0018 4.36999 17.9861 4.44392 17.9539C4.51786 17.9216 4.58529 17.8733 4.6423 17.8119L9.62837 12.5821L14.6132 17.8119Z"
+                  d="M18.9882 17.8119C19.0455 17.872 19.1128 17.919 19.1864 17.9501C19.26 17.9813 19.3384 17.9961 19.4172 17.9936C19.4959 17.9911 19.5734 17.9715 19.6453 17.9357C19.7172 17.9 19.782 17.8488 19.8361 17.7852C19.8902 17.7217 19.9325 17.6469 19.9606 17.5651C19.9887 17.4834 20.002 17.3963 19.9998 17.3088C19.9975 17.2214 19.9798 17.1353 19.9476 17.0554C19.9154 16.9756 19.8694 16.9035 19.8122 16.8435L14.4153 11.1821C14.304 11.0651 14.1566 11 14.0034 11C13.8502 11 13.7027 11.0651 13.5914 11.1821L8.19398 16.8435C8.13548 16.9031 8.08824 16.9752 8.055 17.0553C8.02176 17.1354 8.0032 17.2221 8.00038 17.3103C7.99756 17.3985 8.01054 17.4864 8.03857 17.569C8.0666 17.6515 8.10912 17.7271 8.16366 17.7912C8.2182 17.8554 8.28368 17.9069 8.35628 17.9427C8.42888 17.9785 8.50717 17.9979 8.58659 17.9998C8.66601 18.0018 8.74499 17.9861 8.81892 17.9539C8.89286 17.9216 8.96029 17.8733 9.0173 17.8119L14.0034 12.5821L18.9882 17.8119Z"
                   fill="#FF0069"
                 />
               </svg>
             </div>
+            {isOpen && (
+              <div className="absolute w-[29.9375rem] mt-[0.27rem] bg-[#fff] border-[#B3B3B3] border rounded">
+                {options.map((option, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      borderRadius: "0.625rem",
+                      color: "rgba(84, 84, 84, 0.70)",
+                      fontSize: "1rem",
+                    }}
+                    className="py-[1.17rem] pl-[0.94rem] bg-[#fff] border-b  cursor-pointer"
+                    onClick={() => handleOptionClick(option)}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
+
           <div className="flex items-center mt-[1.21rem] mb-[1.17rem] ml-[0.31rem] mr-[0.37rem]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -149,14 +184,8 @@ export const BossLoginSuccess = () => {
           </div>
           <button
             type="submit"
-            // disabled={
-            //   !companyName ||
-            //   !businessNumber ||
-            //   !phoneNumber ||
-            //   !region ||
-            //   !isChecked
-            // }
-            className="w-[29.9375rem] h-[4.04313rem] border-none bg-[#D9D9D9] rounded-[0.625rem] text-[1rem] text-base opacity-50 font-semibold"
+            className={`w-[29.9375rem] h-[4.04313rem] border-none bg-[#D9D9D9] rounded-[0.625rem] text-[1rem] text-base font-semibold ${isOpen ? "hidden" : "block"}`}
+            style={{ zIndex: isOpen ? "-1" : "1" }}
           >
             완료
           </button>
