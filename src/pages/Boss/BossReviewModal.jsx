@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import ReviewRejectionModal from "./ReviewRejectionModal";
+import ReviewSuccessModal from "./ReviewSuccessModal";
 const ReviewModal = ({ showModal, handleCloseModal, handleReviewSubmit }) => {
   const [showRejectionModal, setShowRejectionModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleRejectReview = () => {
     setShowRejectionModal(true);
+  };
+  const handleSuccessReview = () => {
+    setShowSuccessModal(true);
   };
   return (
     <>
@@ -90,7 +95,7 @@ const ReviewModal = ({ showModal, handleCloseModal, handleReviewSubmit }) => {
               </button>
               <button
                 className="w-[21.10819rem] h-[4.125rem] bg-[#FFCED7] font-[1.125rem] rounded-md mx-2"
-                onClick={handleReviewSubmit}
+                onClick={handleSuccessReview}
               >
                 심사 승인
               </button>
@@ -101,6 +106,11 @@ const ReviewModal = ({ showModal, handleCloseModal, handleReviewSubmit }) => {
       <ReviewRejectionModal
         showModal={showRejectionModal}
         handleCloseModal={() => setShowRejectionModal(false)}
+        handleReviewSubmit={handleReviewSubmit}
+      />
+      <ReviewSuccessModal
+        showModal={showSuccessModal}
+        handleCloseModal={() => setShowSuccessModal(false)}
         handleReviewSubmit={handleReviewSubmit}
       />
     </>
