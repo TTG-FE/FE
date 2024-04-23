@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 
-const ReviewRejectionModal = ({
+const ReviewSuccessModal = ({
   showModal,
   handleCloseModal,
   handleReviewSubmit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] =
-    useState("리뷰 탈락 사유를 선택해주세요");
+  const [selectedOption, setSelectedOption] = useState(
+    "리뷰를 남겨주신 고객님께 감사인사를 남겨주세요"
+  );
   const options = [
-    "공개범위가 제한됨",
-    "악의적인 비난 및 욕설이 포함됨",
-    "자사 가게의 리뷰가 아님",
-    "작성한 이용안내 가이드에 맞지 않는 불성실한 페이지",
+    "찾아주셔서 감사합니다. 또 방문해주세요.",
+    "정성스러운 리뷰 감사합니다.",
+    "소중한 리뷰 감사합니다.",
+    "더 좋은 서비스로 보답하겠습니다. 감사합니다.",
   ];
 
   const toggleDropdown = () => {
@@ -70,7 +71,7 @@ const ReviewRejectionModal = ({
               </svg>
             </div>
             <div className="mt-[3.59rem] ml-[3.04rem] text-[1.5rem]">
-              리뷰 탈락 사유
+              리뷰 승인하기
             </div>
             <div className="relative">
               <div
@@ -111,10 +112,16 @@ const ReviewRejectionModal = ({
               <p>• 이외 문제사항이 있으시다면 고객센터로 문의에 남겨주세요.</p>
             </div>
             <div className="flex justify-center mt-[2rem]">
-              <button onClick={handleGoBack} className="w-[21.10819rem] h-[4.125rem] bg-[#D9D9D9] font-[1.125rem] rounded-md mx-2">
+              <button
+                onClick={handleGoBack}
+                className="w-[21.10819rem] h-[4.125rem] bg-[#D9D9D9] font-[1.125rem] rounded-md mx-2"
+              >
                 뒤로가기
               </button>
-              <button onClick={handleComplete} className="w-[21.10819rem] h-[4.125rem] bg-[#FF0069] font-[1.125rem] font-bold	 text-white rounded-md mx-2">
+              <button
+                onClick={handleComplete}
+                className="w-[21.10819rem] h-[4.125rem] bg-[#FF0069] font-[1.125rem] font-bold	 text-white rounded-md mx-2"
+              >
                 완료
               </button>
             </div>
@@ -125,4 +132,4 @@ const ReviewRejectionModal = ({
   );
 };
 
-export default ReviewRejectionModal;
+export default ReviewSuccessModal;
