@@ -147,10 +147,9 @@ export const BossLoginSuccess = () => {
                     key={index}
                     style={{
                       borderRadius: "0.625rem",
-                      color: "rgba(84, 84, 84, 0.70)",
                       fontSize: "1rem",
                     }}
-                    className="py-[1.17rem] pl-[0.94rem] bg-[#fff] border-b  cursor-pointer"
+                    className="py-[1.17rem] pl-[0.94rem] bg-[#fff] border-b  cursor-pointer  dropdown-option hover:text-[#fff] hover:bg-[#FF0069] "
                     onClick={() => handleOptionClick(option)}
                   >
                     {option}

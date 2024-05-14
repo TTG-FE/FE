@@ -96,7 +96,7 @@ const ReviewRejectionModal = ({
                   {options.map((option, index) => (
                     <div
                       key={index}
-                      className="py-[1.17rem] text-[1rem] pl-[1.75rem] border border-gray-300 cursor-pointer"
+                      className="py-[1.17rem] text-[1rem] pl-[1.75rem] border border-gray-300 cursor-pointer  dropdown-option hover:text-[#fff] hover:bg-[#FF0069]"
                       onClick={() => handleOptionClick(option)}
                     >
                       {option}

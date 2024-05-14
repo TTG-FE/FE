@@ -13,7 +13,7 @@ import LoginImage from "../../assets/loginimage.png";
 //   if (token.startsWith("kakao_")) {
 //     // 토큰을 로컬 스토리지에 저장
 //     localStorage.setItem("oauthToken", token);
-//     // 팝업 창을 닫음
+//     // 팝업 창 닫음
 //     window.close();
 //   }
 // });
