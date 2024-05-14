@@ -25,7 +25,7 @@ export const MyPage = () => {
 
   const { isLogin, token } = useContext(LoginContext);
   // const { isLogin } = useContext(LoginContext);
-  //console.log(token);
+  // console.log(token);
 
   useEffect(() => {
     const fetchReviewData = async () => {
