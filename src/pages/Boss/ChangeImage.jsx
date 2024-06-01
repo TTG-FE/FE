@@ -29,14 +29,34 @@ export const ChangeImage = ({ onClose }) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
+        onClose(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSave = () => {
-    // 파일 저장 로직 추가하기
+  const handleSave =  async() => {
     if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      try {
+        // api 바꾸기 !!!
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("파일 업로드 실패");
+        }
+
+        const result = await response.json();
+        console.log("파일 업로드 성공:", result);
+        onClose(); // 파일 업로드가 성공적으로 완료되면 닫기
+      } catch (error) {
+        console.error("파일 업로드 중 오류 발생:", error);
+      }
     }
   };
 
